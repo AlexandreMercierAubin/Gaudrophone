@@ -19,6 +19,8 @@ public class Gaudrophone {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        gaudrophone.gui.InstrumentWindow instrumentWindow = new gaudrophone.gui.InstrumentWindow();
+        instrumentWindow.setVisible(true);
     }
     
 }
