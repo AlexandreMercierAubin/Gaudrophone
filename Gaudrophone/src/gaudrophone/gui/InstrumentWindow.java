@@ -137,6 +137,11 @@ public class InstrumentWindow extends javax.swing.JFrame {
         menuAide.setText("?");
 
         miAPropos.setText("À propos");
+        miAPropos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAProposActionPerformed(evt);
+            }
+        });
         menuAide.add(miAPropos);
 
         miAide.setText("Aide");
@@ -182,9 +187,14 @@ public class InstrumentWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_miAjouterTouchesActionPerformed
 
     private void miAideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAideActionPerformed
-        gaudrophone.gui.HelpWindow helpWindow = new gaudrophone.gui.HelpWindow("\\base.txt");
+        gaudrophone.gui.HelpWindow helpWindow = new gaudrophone.gui.HelpWindow("Aide","\\base.txt","\\aide.txt");
         helpWindow.setVisible(true);
     }//GEN-LAST:event_miAideActionPerformed
+
+    private void miAProposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAProposActionPerformed
+        gaudrophone.gui.HelpWindow aboutWindow = new gaudrophone.gui.HelpWindow("À propos","\\base.txt","\\apropos.txt");
+        aboutWindow.setVisible(true);
+    }//GEN-LAST:event_miAProposActionPerformed
    
     
     private void setModePlay()

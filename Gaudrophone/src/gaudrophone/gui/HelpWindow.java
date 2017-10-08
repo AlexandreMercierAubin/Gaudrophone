@@ -3,40 +3,47 @@ import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-//import javax.swing.JScrollPane;
 
 public class HelpWindow extends javax.swing.JFrame {
 
     String m_filename;
-    public HelpWindow(String filename) {
+    public HelpWindow(String windowName,String filename, String... optionalFilenames) {
         initComponents();
-        this.setTitle("Aide");
-        m_filename=filename;
+        this.setTitle(windowName);
         
-        String strText="";
+        String strText = readFile(filename,"");
+        
+        for(int i=0;i<optionalFilenames.length;++i)
+        {
+            strText = readFile(optionalFilenames[i],strText);
+        }
+        
+        helpText.setText(strText);
+        helpText.setCaretPosition(helpText.getDocument().getLength());
+        helpText.setEditable(false);
+        helpText.setWrapStyleWord(true);
+        helpText.setLineWrap(true);
+    }
+    
+    String readFile(String filename, String initialText)
+    {
+        String strText=initialText;
         String filePath = new File("").getAbsolutePath();
-        try (BufferedReader bufferReader = new BufferedReader(new FileReader(filePath.concat(m_filename)))) 
+        try (BufferedReader bufferReader = new BufferedReader(new FileReader(filePath.concat(filename)))) 
         {
 
             String strCurrentLine;
 
             while ((strCurrentLine = bufferReader.readLine()) != null) 
             {
-                   strText+=strCurrentLine;
+                   strText+=strCurrentLine + "\r\n";
             }
 
         } catch (IOException e) 
         {
                 e.printStackTrace();
         }
-        //helpText=new JTextArea("Yolo");
-        helpText.setText(strText);
-        helpText.setCaretPosition(helpText.getDocument().getLength());
-        helpText.setEditable(false);
-        helpText.setWrapStyleWord(true);
-        helpText.setLineWrap(true);
-        //JScrollPane scroll= new JScrollPane(helpText);  
-        //add(scroll);
+        return strText;
     }
 
     
