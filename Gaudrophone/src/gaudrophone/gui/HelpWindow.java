@@ -1,7 +1,8 @@
 package gaudrophone.gui;
 import java.io.File;
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 public class HelpWindow extends javax.swing.JFrame {
@@ -29,7 +30,7 @@ public class HelpWindow extends javax.swing.JFrame {
     {
         String strText=initialText;
         String filePath = new File("").getAbsolutePath();
-        try (BufferedReader bufferReader = new BufferedReader(new FileReader(filePath.concat(filename)))) 
+        try (BufferedReader bufferReader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath.concat(filename)),"ISO-8859-1"))) 
         {
 
             String strCurrentLine;
