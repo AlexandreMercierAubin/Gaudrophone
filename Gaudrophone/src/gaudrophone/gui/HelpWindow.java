@@ -1,9 +1,5 @@
 package gaudrophone.gui;
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.FileInputStream;
-import java.io.IOException;
+import gaudrophone.Toolbox;
 
 public class HelpWindow extends javax.swing.JFrame {
 
@@ -12,11 +8,13 @@ public class HelpWindow extends javax.swing.JFrame {
         initComponents();
         this.setTitle(windowName);
         
-        String strText = readFile(filename,"");
+        Toolbox tool = new Toolbox();
+        
+        String strText = tool.readFile(filename,"");
         
         for(int i=0;i<optionalFilenames.length;++i)
         {
-            strText = readFile(optionalFilenames[i],strText);
+            strText = tool.readFile(optionalFilenames[i],strText);
         }
         
         helpText.setText(strText);
@@ -26,27 +24,7 @@ public class HelpWindow extends javax.swing.JFrame {
         helpText.setLineWrap(true);
     }
     
-    String readFile(String filename, String initialText)
-    {
-        String strText=initialText;
-        String filePath = new File("").getAbsolutePath();
-        try (BufferedReader bufferReader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath.concat(filename)),"ISO-8859-1"))) 
-        {
-
-            String strCurrentLine;
-
-            while ((strCurrentLine = bufferReader.readLine()) != null) 
-            {
-                   strText+=strCurrentLine + "\r\n";
-            }
-
-        } catch (IOException e) 
-        {
-                e.printStackTrace();
-        }
-        return strText;
-    }
-
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -57,6 +35,11 @@ public class HelpWindow extends javax.swing.JFrame {
         helpText = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         okButton.setText("Ok");
         okButton.addActionListener(new java.awt.event.ActionListener() {
@@ -95,11 +78,18 @@ public class HelpWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        // TODO add your handling code here:
+    private void close()
+    {
         setVisible(false);
         this.dispose();
+    }
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        close();
     }//GEN-LAST:event_okButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        close();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
