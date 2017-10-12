@@ -27,7 +27,7 @@ public class InstrumentWindow extends javax.swing.JFrame {
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        barreMenu = new javax.swing.JMenuBar();
         menuFichier = new javax.swing.JMenu();
         miImporter = new javax.swing.JMenuItem();
         miImporterChanson = new javax.swing.JMenuItem();
@@ -101,7 +101,7 @@ public class InstrumentWindow extends javax.swing.JFrame {
         miQuitter.setText("Quitter");
         menuFichier.add(miQuitter);
 
-        jMenuBar1.add(menuFichier);
+        barreMenu.add(menuFichier);
 
         menuMode.setText("Mode");
 
@@ -132,7 +132,7 @@ public class InstrumentWindow extends javax.swing.JFrame {
         });
         menuMode.add(miAjouterTouches);
 
-        jMenuBar1.add(menuMode);
+        barreMenu.add(menuMode);
 
         menuAide.setText("?");
 
@@ -152,9 +152,9 @@ public class InstrumentWindow extends javax.swing.JFrame {
         });
         menuAide.add(miAide);
 
-        jMenuBar1.add(menuAide);
+        barreMenu.add(menuAide);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(barreMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -258,7 +258,7 @@ public class InstrumentWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar barreMenu;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
