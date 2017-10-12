@@ -1,4 +1,5 @@
 package gaudrophone.gui;
+import gaudrophone.Toolbox;
 import javax.swing.*;
 
 public class InstrumentWindow extends javax.swing.JFrame {
@@ -17,6 +18,9 @@ public class InstrumentWindow extends javax.swing.JFrame {
         initComponents();
         initializeRadioButton();
         setModeAddKeys();
+        txtAide.setVisible(false);
+        btnOkAide.setVisible(false);
+        scrlAide.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -27,6 +31,9 @@ public class InstrumentWindow extends javax.swing.JFrame {
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        scrlAide = new javax.swing.JScrollPane();
+        txtAide = new javax.swing.JTextArea();
+        btnOkAide = new javax.swing.JButton();
         barreMenu = new javax.swing.JMenuBar();
         menuFichier = new javax.swing.JMenu();
         miImporter = new javax.swing.JMenuItem();
@@ -66,20 +73,35 @@ public class InstrumentWindow extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 612, Short.MAX_VALUE)
+            .addGap(0, 653, Short.MAX_VALUE)
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
+
+        txtAide.setColumns(20);
+        txtAide.setRows(5);
+        scrlAide.setViewportView(txtAide);
+
+        btnOkAide.setText("Ok");
+        btnOkAide.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkAideActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(scrlAide, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+            .addComponent(btnOkAide, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(scrlAide, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnOkAide))
         );
 
         jSplitPane1.setRightComponent(jPanel3);
@@ -187,15 +209,39 @@ public class InstrumentWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_miAjouterTouchesActionPerformed
 
     private void miAideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAideActionPerformed
-        gaudrophone.gui.HelpWindow helpWindow = new gaudrophone.gui.HelpWindow("Aide","\\base.txt","\\aide.txt");
-        helpWindow.setVisible(true);
+        helpMenu("Aide","\\base.txt","\\aide.txt");
     }//GEN-LAST:event_miAideActionPerformed
 
     private void miAProposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAProposActionPerformed
-        gaudrophone.gui.HelpWindow aboutWindow = new gaudrophone.gui.HelpWindow("À propos","\\base.txt","\\apropos.txt");
-        aboutWindow.setVisible(true);
+        helpMenu("À propos","\\base.txt","\\apropos.txt");
     }//GEN-LAST:event_miAProposActionPerformed
+
+    private void btnOkAideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkAideActionPerformed
+        txtAide.setVisible(false);
+        btnOkAide.setVisible(false);
+        scrlAide.setVisible(false);
+    }//GEN-LAST:event_btnOkAideActionPerformed
    
+    private void helpMenu(String filename, String... optionalFilenames)
+    {
+        Toolbox tool = new Toolbox();
+        
+        String strText = tool.readFile(filename,"");
+        
+        for(int i=0;i<optionalFilenames.length;++i)
+        {
+            strText = tool.readFile(optionalFilenames[i],strText);
+        }
+        
+        txtAide.setText(strText);
+        txtAide.setCaretPosition(txtAide.getDocument().getLength());
+        txtAide.setEditable(false);
+        txtAide.setWrapStyleWord(true);
+        txtAide.setLineWrap(true);
+        txtAide.setVisible(true);
+        btnOkAide.setVisible(true);
+        scrlAide.setVisible(true);
+    }
     
     private void setModePlay()
     {
@@ -259,6 +305,7 @@ public class InstrumentWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barreMenu;
+    private javax.swing.JButton btnOkAide;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -276,5 +323,7 @@ public class InstrumentWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem miImporterChanson;
     private javax.swing.JRadioButtonMenuItem miJouer;
     private javax.swing.JMenuItem miQuitter;
+    private javax.swing.JScrollPane scrlAide;
+    private javax.swing.JTextArea txtAide;
     // End of variables declaration//GEN-END:variables
 }
