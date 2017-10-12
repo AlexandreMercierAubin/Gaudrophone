@@ -14,12 +14,9 @@ package gaudrophone;
 
 public class Gaudrophone {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         // TODO code application logic here
-        gaudrophone.gui.InstrumentWindow instrumentWindow = new gaudrophone.gui.InstrumentWindow();
+        gaudrophone.Presentation.InstrumentWindow instrumentWindow = new gaudrophone.Presentation.InstrumentWindow();
         instrumentWindow.setVisible(true);
     }
     

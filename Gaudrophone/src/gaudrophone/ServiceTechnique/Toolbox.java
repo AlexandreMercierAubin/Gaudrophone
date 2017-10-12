@@ -1,5 +1,5 @@
 
-package gaudrophone;
+package gaudrophone.ServiceTechnique;
 
 import java.io.BufferedReader;
 import java.io.File;
