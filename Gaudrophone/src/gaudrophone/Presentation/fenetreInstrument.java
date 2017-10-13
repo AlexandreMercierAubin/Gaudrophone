@@ -1,5 +1,5 @@
 package gaudrophone.Presentation;
-import gaudrophone.ServiceTechnique.Outils;
+import gaudrophone.Domaine.Outils;
 import javax.swing.*;
 
 public class fenetreInstrument extends javax.swing.JFrame {
