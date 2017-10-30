@@ -1,14 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gaudrophone.Domaine;
+import gaudrophone.Domaine.Instrument.Son;
 
-/**
- *
- * @author Alex
- */
 public class Metronome {
+    Son son;
+    float frequence;
     
+    public Metronome(){}
+    
+    public Son getSon()
+    {
+        return son;
+    }
+    
+    public void setSon(Son valeur)
+    {
+        son = valeur;
+    }
+    
+    public float getFrequence() {
+        return frequence;
+    }
+
+    public void setFrequence(float frequence) {
+        this.frequence = frequence;
+    }
 }

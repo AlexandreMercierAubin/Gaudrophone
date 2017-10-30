@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gaudrophone.Domaine;
+import java.util.List;
+import gaudrophone.Domaine.Instrument.Touche;
 
-/**
- *
- * @author Alex
- */
 public class Boucle {
+    int index;
+    List<Touche> touches;
+    //List<long> temps;
+    
+    public Boucle(){}
+    
+    public void jouer(){}
+    
+    public void arreter(){}
+    
+    public void ajouterTouche(){}
     
 }

@@ -1,14 +1,61 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gaudrophone.Domaine.Instrument;
+import java.awt.geom.Point2D;
 
-/**
- *
- * @author Alex
- */
 public class Touche {
+    int index;
+    Point2D position;
+    String texteAffichage;
+    ApparenceTouche apparence;
+    Son son;
+    boolean surbrillance;
     
+    public Touche(){}
+    
+    public Point2D getPosition()
+    {
+        return position;
+    }
+    
+    public void setPosition(Point2D valeur)
+    {
+        position = valeur;
+    }
+    
+    public String getTexteAffichage()
+    {
+        return texteAffichage;
+    }
+    
+    public void setTexteAffichage(String valeur)
+    {
+        texteAffichage = valeur;
+    }
+    
+    public ApparenceTouche getApparence()
+    {
+        return apparence;
+    }
+    
+    public Son getSon()
+    {
+        return son;
+    }
+    
+    public void commencerJouer(){}
+    
+    public void arreterJouer(){}
+    
+    public void ImporterFichierAudio(){}
+    
+    public void enleverFichierAudio(){}
+    
+    public boolean getSurbrillance()
+    {
+        return surbrillance;
+    }
+    
+    public void setSurbrillance(boolean valeur)
+    {
+        surbrillance = valeur;
+    }
 }
