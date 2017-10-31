@@ -5,7 +5,7 @@ import gaudrophone.Domaine.Instrument.Touche;
 public class Boucle {
     int index;
     List<Touche> touches;
-    //List<long> temps;
+    List<Long> temps;
     
     public Boucle(){}
     

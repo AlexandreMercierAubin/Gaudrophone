@@ -33,7 +33,7 @@ public class ControleurInstrument {
     
     public void jouerPartition(){}
     
-    public Boucle getBoucle(int index) // penser modif d classe (void par Boucle)
+    public Boucle getBoucle(int index)
     {
         if(boucles.size()>index)
         {
@@ -58,7 +58,7 @@ public class ControleurInstrument {
     
     public void importerInstrument(){}
     
-    public void modifierModeVisuel(ModeVisuel modeVisuel){}// penser a modifier le d de classe (void() par void)
+    public void modifierModeVisuel(ModeVisuel modeVisuel){}
     
     public void genererInstrument(GenerateurInstrument generateurInstrument){}
 }
