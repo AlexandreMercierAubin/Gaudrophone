@@ -12,8 +12,6 @@ public class ApparenceTouche {
     Image imageFond;
     Dimension2D dimension;
     List<Bordure> bordures;
-    //largeurbordure a changer
-    //couleurbordure a changer
     
     public ApparenceTouche(){}
     
