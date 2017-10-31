@@ -1,12 +1,13 @@
 package gaudrophone.Domaine.Instrument;
 
+import gaudrophone.Domaine.Enums.Forme;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.geom.Dimension2D;
 import java.util.List;
 
 public class ApparenceTouche {
-    //Forme forme;
+    Forme forme;
     Color couleurFond;
     Image imageFond;
     Dimension2D dimension;
@@ -16,6 +17,15 @@ public class ApparenceTouche {
     
     public ApparenceTouche(){}
     
+    public Forme getForme()
+    {
+        return forme;
+    }
+    
+    public void setForme(Forme forme)
+    {
+        this.forme = forme;
+    }
     
     public Color getCouleurFond() {
         return couleurFond;

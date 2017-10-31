@@ -1,6 +1,8 @@
 package gaudrophone.Domaine;
+
 import gaudrophone.Domaine.Generateur.GenerateurInstrument;
 import gaudrophone.Domaine.Instrument.Instrument;
+import gaudrophone.Domaine.Enums.ModeVisuel;
 import java.util.List;
 import java.awt.geom.Point2D;
 
@@ -10,7 +12,7 @@ public class ControleurInstrument {
     List<Boucle> boucles;
     Partition partition;
     String cheminSauvegarde;
-    //ModeVisuel
+    ModeVisuel modeVisuel;
     boolean toucheEnDeplacement;
     
     public ControleurInstrument()
@@ -56,7 +58,7 @@ public class ControleurInstrument {
     
     public void importerInstrument(){}
     
-    public void modifierModeVisuel(/*modeVisuel*/){}// penser a modifier le d de classe (void() par void)
+    public void modifierModeVisuel(ModeVisuel modeVisuel){}// penser a modifier le d de classe (void() par void)
     
     public void genererInstrument(GenerateurInstrument generateurInstrument){}
 }

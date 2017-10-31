@@ -1,7 +1,9 @@
 package gaudrophone.Domaine.Instrument;
 
+import gaudrophone.Domaine.Enums.NomNote;
+
 public class Note extends Son {
-    //NomNote nom;
+    NomNote nom;
     int octave;
     
     public Note(){}
@@ -17,9 +19,15 @@ public class Note extends Son {
     @Override
     public void setFrequence(float valeur){}
     
-    //public NomNote getNom(){}
+    public NomNote getNom()
+    {
+        return nom;
+    }
     
-    //public NomNote setNom(){}
+    public void setNom(NomNote nom)
+    {
+        this.nom = nom;
+    }
     
     public int getOctave()
     {

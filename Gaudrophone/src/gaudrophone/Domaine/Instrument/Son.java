@@ -1,10 +1,11 @@
 package gaudrophone.Domaine.Instrument;
 
+import gaudrophone.Domaine.Enums.TypeSon;
 
 public abstract class Son {
     float frequence;
     int persistance;
-    //typeSon
+    TypeSon typeSon;
     
     public void commencerJouer()
     {
@@ -31,5 +32,8 @@ public abstract class Son {
         persistance=valeur;
     }
     
-    //public TypeSon getTypeSon(){}
+    public TypeSon getTypeSon()
+    {
+        return typeSon;
+    }
 }
