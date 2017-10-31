@@ -1,26 +1,32 @@
 package gaudrophone.Presentation;
+
+import gaudrophone.Domaine.ControleurInstrument;
+import gaudrophone.Domaine.Enums.ModeVisuel;
 import gaudrophone.Domaine.Outils;
 import javax.swing.*;
 
-public class fenetreInstrument extends javax.swing.JFrame {
-
-    private enum enumMode
-    {
-        Jouer,
-        Ajouter,
-        Editer
-    }
-    
+public class FenetreInstrument extends javax.swing.JFrame {
     ButtonGroup m_btnGroupeMode;
-    enumMode m_mode;
+    ControleurInstrument controleur;
+    PanneauAffichage panneauAffichage;
     
-    public fenetreInstrument() {
+    
+    public FenetreInstrument() {
         initComponents();
         initializeRadioButton();
-        setModeAddKeys();
+        
+        controleur = new ControleurInstrument();
+        panneauAffichage = new PanneauAffichage(this);
+        controleur.modifierModeVisuel(ModeVisuel.Ajouter);
+        
         txtAide.setVisible(false);
         btnOkAide.setVisible(false);
         scrlAide.setVisible(false);
+    }
+    
+    public ControleurInstrument getControleur()
+    {
+        return controleur;
     }
 
     @SuppressWarnings("unchecked")
@@ -197,15 +203,15 @@ public class fenetreInstrument extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miJouerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miJouerActionPerformed
-        setModePlay();
+        controleur.modifierModeVisuel(ModeVisuel.Jouer);
     }//GEN-LAST:event_miJouerActionPerformed
 
     private void miEditionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEditionActionPerformed
-        setModeEdition();
+        controleur.modifierModeVisuel(ModeVisuel.Editer);
     }//GEN-LAST:event_miEditionActionPerformed
 
     private void miAjouterTouchesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAjouterTouchesActionPerformed
-        setModeAddKeys();
+        controleur.modifierModeVisuel(ModeVisuel.Ajouter);
     }//GEN-LAST:event_miAjouterTouchesActionPerformed
 
     private void miAideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAideActionPerformed
@@ -242,25 +248,7 @@ public class fenetreInstrument extends javax.swing.JFrame {
         btnOkAide.setVisible(true);
         scrlAide.setVisible(true);
     }
-    
-    private void setModePlay()
-    {
-        m_mode=enumMode.Jouer;
-        this.setTitle("Gaudrophone - Jouer");
-    }
-    
-    private void setModeAddKeys()
-    {
-        m_mode=enumMode.Ajouter;
-        this.setTitle("Gaudrophone - Ajouter des touches");
-    }
-    
-    private void setModeEdition()
-    {
-        m_mode=enumMode.Editer;
-        this.setTitle("Gaudrophone - Édition");
-    }
-    
+        
     private void initializeRadioButton()
     {
         m_btnGroupeMode= new ButtonGroup();
@@ -285,21 +273,23 @@ public class fenetreInstrument extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fenetreInstrument.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FenetreInstrument.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fenetreInstrument.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FenetreInstrument.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fenetreInstrument.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FenetreInstrument.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fenetreInstrument.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FenetreInstrument.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fenetreInstrument().setVisible(true);
+                new FenetreInstrument().setVisible(true);
             }
         });
     }

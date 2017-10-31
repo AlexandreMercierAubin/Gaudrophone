@@ -15,7 +15,7 @@ package gaudrophone;
 public class Gaudrophone {
 
     public static void main(String[] args) {
-        gaudrophone.Presentation.fenetreInstrument instrumentWindow = new gaudrophone.Presentation.fenetreInstrument();
+        gaudrophone.Presentation.FenetreInstrument instrumentWindow = new gaudrophone.Presentation.FenetreInstrument();
         instrumentWindow.setVisible(true);
     }
     
