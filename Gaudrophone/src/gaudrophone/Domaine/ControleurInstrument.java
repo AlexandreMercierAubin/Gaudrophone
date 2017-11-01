@@ -58,7 +58,10 @@ public class ControleurInstrument {
     
     public void importerInstrument(){}
     
-    public void modifierModeVisuel(ModeVisuel modeVisuel){}
+    public void modifierModeVisuel(ModeVisuel modeVisuel)
+    {
+        this.modeVisuel = modeVisuel;
+    }
     
     public void genererInstrument(GenerateurInstrument generateurInstrument){}
 }

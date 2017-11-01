@@ -9,7 +9,13 @@ public class Touche {
     Son son;
     boolean surbrillance;
     
-    public Touche(){}
+    public Touche(int index)
+    {
+        this.index = index;
+        texteAffichage="";
+        apparence = new ApparenceTouche();
+        surbrillance = false;
+    }
     
     public Point2D getPosition()
     {
