@@ -17,7 +17,6 @@ public class Bordure {
     
     public void setCote(int valeur)
     {
-        //ajouter des validations si existe selon la forme
         cote = valeur;
     }
     
