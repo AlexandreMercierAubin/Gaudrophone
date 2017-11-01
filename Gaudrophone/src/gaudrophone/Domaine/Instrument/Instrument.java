@@ -7,8 +7,12 @@ public class Instrument {
     String nom;
     List<Touche> touches;
     int toucheSelectionee;
+    int cleeTouche;
     
-    public Instrument(){}
+    public Instrument()
+    {
+        cleeTouche=0;
+    }
     
     public javax.sound.midi.Instrument getTimbre()
     {
@@ -48,7 +52,15 @@ public class Instrument {
     
     public Touche ajouterTouche(Point2D position)
     {
-        //ajouter le contenu
+        //ajouter une nouvelle touche à la fin de la liste
+        touches.add(new Touche(cleeTouche));
+        ++cleeTouche;
+        
+        //inserer sa position et la selectionner
+        Touche toucheAjoutee = touches.get(touches.size()-1);
+        toucheAjoutee.setPosition(position);
+        toucheSelectionee=touches.size()-1;
+        
         return null;
     }
     
@@ -61,11 +73,16 @@ public class Instrument {
     public boolean selectionnerTouche(Point2D position)
     {
         //ajouter le contenu
+        toucheSelectionee=-1;
         return false;
     }
     
     public List<Touche> getTouches()
     {
         return touches;
+    }
+    
+    public int getToucheSelectionee() {
+        return toucheSelectionee;
     }
 }
