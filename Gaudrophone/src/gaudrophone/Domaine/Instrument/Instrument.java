@@ -1,6 +1,8 @@
 package gaudrophone.Domaine.Instrument;
 import java.util.List;
 import java.awt.geom.Point2D;
+import gaudrophone.Domaine.Outils;
+import java.awt.geom.Path2D;
 
 public class Instrument {
     javax.sound.midi.Instrument timbre;
@@ -61,6 +63,7 @@ public class Instrument {
         toucheAjoutee.setPosition(position);
         toucheSelectionee=touches.size()-1;
         
+        //ajouter les points dans Path2D selon la dim du constructeur********* faire ainsi dans setdim et dans setpos
         return null;
     }
     
@@ -73,6 +76,18 @@ public class Instrument {
     public boolean selectionnerTouche(Point2D position)
     {
         //ajouter le contenu
+        for(int i=0;i<touches.size();++i)
+        {
+            Touche touche=touches.get(i);
+            ApparenceTouche apparence= touche.getApparence();
+            Path2D coins=apparence.getCoins();
+            
+            if(coins.contains(position))
+            {
+                toucheSelectionee=i;
+                return true;
+            }
+        }
         toucheSelectionee=-1;
         return false;
     }

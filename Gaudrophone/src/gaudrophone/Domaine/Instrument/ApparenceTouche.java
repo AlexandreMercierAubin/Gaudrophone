@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.geom.Dimension2D;
 import java.awt.geom.Point2D;
 import java.util.List;
+import java.awt.geom.Path2D;
 
 public class ApparenceTouche {
     Forme forme;
@@ -14,7 +15,7 @@ public class ApparenceTouche {
     Image imageFond;
     Dimension2D dimension;
     List<Bordure> bordures;
-    List<Point2D> coins;
+    Path2D coins;
     
     public ApparenceTouche()
     {
@@ -63,11 +64,11 @@ public class ApparenceTouche {
         return bordures.get(index);
     }
     
-    public List<Point2D> getCoins() {
+    public Path2D  getCoins() {
         return coins;
     }
 
-    public void setCoins(List<Point2D> coins) {
+    public void setCoins(Path2D coins) {
         this.coins = coins;
     }
     
