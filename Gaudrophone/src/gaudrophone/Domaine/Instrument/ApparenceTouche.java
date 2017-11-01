@@ -4,6 +4,7 @@ import gaudrophone.Domaine.Enums.Forme;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.geom.Dimension2D;
+import java.awt.geom.Point2D;
 import java.util.List;
 
 public class ApparenceTouche {
@@ -12,6 +13,7 @@ public class ApparenceTouche {
     Image imageFond;
     Dimension2D dimension;
     List<Bordure> bordures;
+    List<Point2D> coins;
     
     public ApparenceTouche(){}
     
@@ -52,6 +54,14 @@ public class ApparenceTouche {
     public Bordure getBordure(int index)
     {
         return bordures.get(index);
+    }
+    
+    public List<Point2D> getCoins() {
+        return coins;
+    }
+
+    public void setCoins(List<Point2D> coins) {
+        this.coins = coins;
     }
     
 }
