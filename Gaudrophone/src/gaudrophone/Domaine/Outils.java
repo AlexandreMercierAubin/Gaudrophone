@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.Math;
 
 public class Outils {
     public String readFile(String strNomFichier, String strTexteInitial)
@@ -63,7 +64,41 @@ public class Outils {
     
     public Polygon calculerPolygone(int nbSommets, Point2D centrePoly, Dimension2D dimension)
     {
-        //ajouter calcul
-        return null;
+        if(nbSommets>0)
+        {
+            //la fonction prend les points en pixels pour son usage de polygone
+            double ecart = 360 / nbSommets;
+            int xPoly[]=new int[nbSommets];
+            int yPoly[]=new int[nbSommets];
+
+            //pour trouver tous les points
+            for (int i = 0; i < nbSommets; i++)
+            {
+                //Calcul d'un point selon le nombre de sommets 
+                //en pourcentage
+                double x = Math.cos(Math.toRadians(ecart*i));
+                double y = Math.sin(Math.toRadians(ecart*i));
+
+                //remise à l'échelle du point
+                x = (dimension.getWidth()/2)*x;
+                y = (dimension.getHeight()/2)*y;
+
+                //réajustement par rapport au point centre
+                x = centrePoly.getX()+x;
+                y = centrePoly.getY()+y;
+
+                //ajouter la valeur au tableau du Polygone
+                xPoly[i]=(int)Math.round(x);
+                yPoly[i]=(int)Math.round(y);
+
+            }
+
+            Polygon poly = new Polygon(xPoly, yPoly, nbSommets);
+            return poly;
+        }
+        else
+        {
+            return null;
+        }
     }
 }
