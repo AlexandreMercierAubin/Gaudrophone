@@ -71,27 +71,25 @@ public class Outils {
             int xPoly[]=new int[nbSommets];
             int yPoly[]=new int[nbSommets];
 
-            double rayon = 0.5;
-
             //pour trouver tous les points
             for (int i = 0; i < nbSommets; i++)
             {
                 //Calcul d'un point selon le nombre de sommets 
                 //en pourcentage
-                double x = 0.5 + rayon * Math.cos(Math.toRadians(ecart*i));
-                double y = 0.5 + rayon * Math.sin(Math.toRadians(ecart*i));
+                double x = Math.cos(Math.toRadians(ecart*i));
+                double y = Math.sin(Math.toRadians(ecart*i));
 
                 //remise à l'échelle du point
-                x = dimension.getWidth()/2;
-                y = dimension.getHeight()/2;
+                x = (dimension.getWidth()/2)*x;
+                y = (dimension.getHeight()/2)*y;
 
                 //réajustement par rapport au point centre
                 x = centrePoly.getX()+x;
                 y = centrePoly.getY()+y;
 
                 //ajouter la valeur au tableau du Polygone
-                xPoly[i]=(int)x;
-                yPoly[i]=(int)y;
+                xPoly[i]=(int)Math.round(x);
+                yPoly[i]=(int)Math.round(y);
 
             }
 
