@@ -1,5 +1,6 @@
 package gaudrophone.Presentation;
 
+import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.ControleurInstrument;
 import gaudrophone.Domaine.Enums.ModeVisuel;
 import gaudrophone.Domaine.Outils;
@@ -36,6 +37,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         scrlAide = new javax.swing.JScrollPane();
         txtAide = new javax.swing.JTextArea();
@@ -71,15 +73,28 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         jSplitPane1.setDividerLocation(700);
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 699, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(114, 114, 114)
+                .addComponent(jButton1)
+                .addContainerGap(512, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 653, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(143, 143, 143)
+                .addComponent(jButton1)
+                .addContainerGap(487, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -227,6 +242,14 @@ public class FenetreInstrument extends javax.swing.JFrame {
         btnOkAide.setVisible(false);
         scrlAide.setVisible(false);
     }//GEN-LAST:event_btnOkAideActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Outils outils = new Outils();
+        NomNote note = NomNote.Si;
+        int octave = 10;
+        int bob = outils.getMidiNoteNumber(note, octave);
+        javax.swing.JOptionPane.showMessageDialog(null, bob);
+    }//GEN-LAST:event_jButton1ActionPerformed
    
     private void afficherAider(String filename, String... optionalFilenames)
     {
@@ -297,6 +320,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barreMenu;
     private javax.swing.JButton btnOkAide;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

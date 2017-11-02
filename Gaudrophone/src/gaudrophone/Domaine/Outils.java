@@ -1,6 +1,7 @@
 
 package gaudrophone.Domaine;
 
+import gaudrophone.Domaine.Enums.NomNote;
 import java.awt.Polygon;
 import java.awt.geom.Dimension2D;
 import java.awt.geom.Point2D;
@@ -56,10 +57,14 @@ public class Outils {
         return null;
     }
     
-    public int getMidiNoteNumber(/*NomNote note,*/int octave)
+    public int getMidiNoteNumber(NomNote note, int octave)
     {
-        //ajouter code
-        return -1;
+        //Calcul du nombre de la note Midi
+        int midiOctave = octave * 12 ;
+        int numNote = note.getNumNote();
+        
+        int midiNote = midiOctave + numNote;
+        return midiNote;
     }
     
     public Polygon calculerPolygone(int nbSommets, Point2D centrePoly, Dimension2D dimension)
