@@ -1,10 +1,10 @@
 package gaudrophone.Domaine.Instrument;
 
+import gaudrophone.Domaine.Dimension2D;
 import gaudrophone.Domaine.Enums.Forme;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.geom.Dimension2D;
 import java.awt.geom.Point2D;
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class ApparenceTouche {
     {
         forme = Forme.Cercle;
         couleurFond = Color.BLACK;
-        dimension = new Dimension(1,1);
+        dimension = new Dimension2D(1,1);
         
     }
     
