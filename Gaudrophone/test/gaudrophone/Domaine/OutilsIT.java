@@ -5,6 +5,7 @@
  */
 package gaudrophone.Domaine;
 
+import gaudrophone.Domaine.Enums.NomNote;
 import java.awt.Dimension;
 import java.awt.Polygon;
 import java.awt.geom.Dimension2D;
@@ -121,20 +122,24 @@ public class OutilsIT {
 //        fail("The test case is a prototype.");
 //    }
 //
-//    /**
-//     * Test of getMidiNoteNumber method, of class Outils.
-//     */
-//    @Test
-//    public void testGetMidiNoteNumber() {
-//        System.out.println("getMidiNoteNumber");
-//        int octave = 0;
-//        Outils instance = new Outils();
-//        int expResult = 0;
-//        int result = instance.getMidiNoteNumber(octave);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of getMidiNoteNumber method, of class Outils.
+     */
+    @Test
+    public void testGetMidiNoteNumber() {
+        System.out.println("getMidiNoteNumber");
+        int octave = 5;
+        NomNote note = NomNote.Do;
+        Outils instance = new Outils();
+        int result = instance.getMidiNoteNumber(note, octave);
+        assertEquals(60, result);
+        
+        // test avec une autre note        
+        octave = 8;
+        note = NomNote.SolDiese;
+        result = instance.getMidiNoteNumber(note, octave);
+        assertEquals(104, result);            
+    }
 
     /**
      * Test of calculerPolygone method, of class Outils.
