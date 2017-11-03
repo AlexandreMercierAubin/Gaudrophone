@@ -5,8 +5,10 @@ import gaudrophone.Domaine.Dimension2D;
 import gaudrophone.Domaine.Enums.Forme;
 import gaudrophone.Domaine.Instrument.*;
 import gaudrophone.Domaine.Outils;
+import java.awt.BasicStroke;
 import java.awt.geom.Point2D;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class DessinateurInstrument {
     
     public void dessiner(Graphics g)
     {
+        Graphics2D g2 = (Graphics2D)g;
         List<Touche> touches = controleur.getInstrument().getTouches();
         
         for (Touche touche : touches)
@@ -31,22 +34,23 @@ public class DessinateurInstrument {
             Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), dimensionPanneau);
             Forme forme = apparence.getForme();
             
+            int x = 0;
+            int y = 0;
+            
             switch (forme)
             {
                 case Cercle:
-                    Bordure bordure0 = apparence.getBordure(0);
-                    if (bordure0 != null)
-                    {
-                        // Dessin d'un grand cercle qui servira de bordure principale au cerlce
-                        g.setColor(bordure0.getCouleur());
-                        Dimension2D dimensionBordure = Outils.conversionDimensionRelatifPixel(new Dimension2D(bordure0.getLargeur(), bordure0.getLargeur()), dimensionPanneau);
-                        Dimension2D dimensionTotale = new Dimension2D(dimension.getWidth() + dimensionBordure.getWidth() * 2, dimension.getHeight() + dimensionBordure.getHeight() * 2);
-                        g.fillOval((int)position.getX(), (int)position.getY(), (int)dimensionTotale.getWidth(), (int)dimensionTotale.getHeight());
-                    }
+                    // Dessin du cercle intérieur
+                    g2.setColor(apparence.getCouleurFond());
+                    x = (int)position.getX() - (int)dimension.getWidth() / 2;
+                    y = (int)position.getY() - (int)dimension.getHeight() / 2;
+                    g2.fillOval(x, y, (int)dimension.getWidth(), (int)dimension.getHeight());
                     
-                    // Dessin du cercle
-                    g.setColor(apparence.getCouleurFond());
-                    g.fillOval((int)position.getX(), (int)position.getY(), (int)dimension.getWidth(), (int)dimension.getHeight());
+                    // Dessin de la bordure
+                    Bordure bordure = apparence.getBordure(0);
+                    g2.setColor(bordure.getCouleur());
+                    g2.setStroke(new BasicStroke(bordure.getLargeur()));
+                    g2.drawOval(x, y, (int)dimension.getWidth(), (int)dimension.getHeight());
                     break;
                     
                 case Rectangle:
@@ -63,20 +67,25 @@ public class DessinateurInstrument {
             int premiereBordureTransversale = Outils.nbBordures(forme);
             Bordure bordureHorizontale = apparence.getBordure(premiereBordureTransversale);
             Bordure bordureVerticale = apparence.getBordure(premiereBordureTransversale + 1);
-            Dimension2D dimensionBordures = Outils.conversionDimensionRelatifPixel(new Dimension2D(bordureHorizontale.getLargeur(), bordureVerticale.getLargeur()), dimensionPanneau);
             
             if (bordureHorizontale != null)
             {
-                int x = (int)position.getX() - (int)dimension.getWidth() / 2;
-                int y = (int)position.getY() - (int)dimensionBordures.getHeight() / 2;
-                g.fillRect(x, y, (int)dimension.getWidth(), (int)dimensionBordures.getHeight());
+                g2.setColor(bordureHorizontale.getCouleur());
+                g2.setStroke(new BasicStroke(bordureHorizontale.getLargeur()));
+                int x1 = (int)position.getX() - (int)dimension.getWidth() / 2;
+                int x2 = (int)position.getX() + (int)dimension.getWidth() / 2;
+                y = (int)position.getY();
+                g2.drawLine(x1, y, x2, y);
             }
             
             if (bordureVerticale != null)
             {
-                int x = (int)position.getX() - (int)dimensionBordures.getWidth() / 2;
-                int y = (int)position.getY() - (int)dimension.getHeight() / 2;
-                g.fillRect(x, y, (int)dimensionBordures.getWidth(), (int)dimension.getHeight());
+                g2.setColor(bordureVerticale.getCouleur());
+                g2.setStroke(new BasicStroke(bordureVerticale.getLargeur()));
+                int y1 = (int)position.getY() - (int)dimension.getHeight() / 2;
+                int y2 = (int)position.getY() + (int)dimension.getHeight() / 2;
+                x = (int)position.getX();
+                g2.drawLine(x, y1, x, y2);
             }
         }
     }
