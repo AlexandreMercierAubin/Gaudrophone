@@ -9,7 +9,8 @@ import java.awt.BasicStroke;
 import java.awt.geom.Point2D;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
+import java.awt.Polygon;
+import java.awt.Rectangle;
 import java.util.List;
 
 public class DessinateurInstrument {
@@ -34,8 +35,8 @@ public class DessinateurInstrument {
             Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), dimensionPanneau);
             Forme forme = apparence.getForme();
             
-            int x = 0;
-            int y = 0;
+            int x, y;
+            Bordure bordure;
             
             switch (forme)
             {
@@ -47,14 +48,39 @@ public class DessinateurInstrument {
                     g2.fillOval(x, y, (int)dimension.getWidth(), (int)dimension.getHeight());
                     
                     // Dessin de la bordure
-                    Bordure bordure = apparence.getBordure(0);
-                    g2.setColor(bordure.getCouleur());
-                    g2.setStroke(new BasicStroke(bordure.getLargeur()));
-                    g2.drawOval(x, y, (int)dimension.getWidth(), (int)dimension.getHeight());
+                    bordure = apparence.getBordure(0);
+                    if (bordure != null)
+                    {
+                        g2.setColor(bordure.getCouleur());
+                        g2.setStroke(new BasicStroke(bordure.getLargeur()));
+                        g2.drawOval(x, y, (int)dimension.getWidth(), (int)dimension.getHeight());
+                    }
                     break;
                     
                 case Rectangle:
-                    // TO-DO
+                    // Dessin du rectangle intérieur
+                    g2.setColor(apparence.getCouleurFond());
+                    x = (int)position.getX() - (int)dimension.getWidth() / 2;
+                    y = (int)position.getY() - (int)dimension.getHeight() / 2;
+                    Rectangle rectangle = new Rectangle(x, y, (int)dimension.getWidth(), (int)dimension.getHeight());
+                    g2.fill(rectangle);
+                    
+                    // Dessin des bordures
+                    for (int i = 0; i < 4; i++)
+                    {
+                        bordure = apparence.getBordure(i);
+                        g2.setColor(bordure.getCouleur());
+                        g2.setStroke(new BasicStroke(bordure.getLargeur()));
+                        
+                        int x1, y1, x2, y2;
+                        
+                        x1 = i == 1 ? (int)rectangle.getMaxX() : (int)rectangle.getMinX();
+                        y1 = i == 2 ? (int)rectangle.getMaxY() : (int)rectangle.getMinY();
+                        x2 = i % 2 == 1 ? x1 : (int)rectangle.getMaxX();
+                        y2 = i % 2 == 0 ? y1 : (int)rectangle.getMaxY();
+                        
+                        g2.drawLine(x1, y1, x2, y2);
+                    }
                     break;
                     
                 // Triangle, pentagone, hexagone
