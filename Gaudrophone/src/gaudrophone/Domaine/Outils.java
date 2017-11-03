@@ -60,10 +60,11 @@ public class Outils {
     public int getMidiNoteNumber(NomNote note, int octave)
     {
         //Calcul du nombre de la note Midi
+        int midiNote;
         int midiOctave = octave * 12 ;
-        int numNote = note.getNumNote();
+        int numNote = note.getNumNote();        
         
-        int midiNote = midiOctave + numNote;
+        midiNote = midiOctave + numNote;
         return midiNote;
     }
     

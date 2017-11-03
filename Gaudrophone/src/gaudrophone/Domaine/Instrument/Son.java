@@ -3,10 +3,9 @@ package gaudrophone.Domaine.Instrument;
 public abstract class Son {
     float frequence;
     int persistance;
+    boolean jouerSon; 
     
-    public void commencerJouer()
-    {
-    }
+    public void commencerJouer(){}
     
     public void arreterJouer(){}
     

@@ -3,6 +3,8 @@ package gaudrophone.Presentation;
 import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.ControleurInstrument;
 import gaudrophone.Domaine.Enums.ModeVisuel;
+import gaudrophone.Domaine.Instrument.FichierAudio;
+import gaudrophone.Domaine.Instrument.Note;
 import gaudrophone.Domaine.Outils;
 import javax.swing.*;
 
@@ -38,6 +40,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         scrlAide = new javax.swing.JScrollPane();
         txtAide = new javax.swing.JTextArea();
@@ -74,9 +77,24 @@ public class FenetreInstrument extends javax.swing.JFrame {
         jSplitPane1.setDividerLocation(700);
 
         jButton1.setText("MyTestButton");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton1MouseReleased(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("MyTestButton");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -85,16 +103,23 @@ public class FenetreInstrument extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(jButton1)
-                .addContainerGap(486, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addComponent(jButton2)))
+                .addContainerGap(444, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(143, 143, 143)
                 .addComponent(jButton1)
-                .addContainerGap(487, Short.MAX_VALUE))
+                .addGap(42, 42, 42)
+                .addComponent(jButton2)
+                .addContainerGap(422, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -246,10 +271,36 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Outils outils = new Outils();
         NomNote note = NomNote.Si;
-        int octave = 10;
+        int octave = 8;
         int bob = outils.getMidiNoteNumber(note, octave);
-        javax.swing.JOptionPane.showMessageDialog(null, bob);
+        //javax.swing.JOptionPane.showMessageDialog(null, bob);
+        Note noteL = new Note();
+        noteL.setNom(note);
+        noteL.setOctave(octave);
+        noteL.commencerJouer();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+//        Outils outils = new Outils();
+//        NomNote note = NomNote.Si;
+//        int octave = 1;
+//        int bob = outils.getMidiNoteNumber(note, octave);
+//        //javax.swing.JOptionPane.showMessageDialog(null, bob);
+//        Note noteL = new Note();
+//        noteL.setNom(note);
+//        noteL.setOctave(octave);
+//        noteL.commencerJouer();
+        FichierAudio fichier = new FichierAudio();
+        fichier.commencerJouer();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
+        
+    }//GEN-LAST:event_jButton1MousePressed
+
+    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseReleased
    
     private void afficherAider(String filename, String... optionalFilenames)
     {
@@ -321,6 +372,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JMenuBar barreMenu;
     private javax.swing.JButton btnOkAide;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
