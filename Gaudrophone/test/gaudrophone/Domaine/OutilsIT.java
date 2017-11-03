@@ -5,9 +5,9 @@
  */
 package gaudrophone.Domaine;
 
+import gaudrophone.Domaine.Dimension2D;
 import java.awt.Dimension;
 import java.awt.Polygon;
-import java.awt.geom.Dimension2D;
 import java.awt.geom.Point2D;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -144,7 +144,7 @@ public class OutilsIT {
         System.out.println("calculerPolygone");
         int nbSommets = 4;
         Point2D.Double centrePoly = new Point2D.Double(0,0);
-        Dimension2D dimension = new Dimension(100,100);
+        Dimension2D dimension = new Dimension2D(100,100);
         Outils instance = new Outils();
         
         int[] xPoly= {50,0,-50,0};
