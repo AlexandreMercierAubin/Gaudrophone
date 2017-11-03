@@ -6,7 +6,7 @@ public abstract class Son {
     boolean jouerSon; 
     
     public void commencerJouer(){}
-    
+ 
     public void arreterJouer(){}
     
     public float getFrequence()
@@ -26,5 +26,13 @@ public abstract class Son {
     public void setPersistance(int valeur)
     {
         persistance=valeur;
+    }
+    
+       public boolean isJouerSon() {
+        return jouerSon;
+    }
+
+    public void setJouerSon(boolean jouerSon) {
+        this.jouerSon = jouerSon;
     }
 }

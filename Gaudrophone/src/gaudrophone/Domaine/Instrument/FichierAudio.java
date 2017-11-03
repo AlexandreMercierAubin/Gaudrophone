@@ -15,12 +15,8 @@ public class FichierAudio extends Son{
     public void commencerJouer()
     {
         try {
-            File f = new File("/Users/alexa/cartoon001.wav");
+            File f = new File("/Users/alexa/BIGSHAQ.wav");
             AudioInputStream aIS = AudioSystem.getAudioInputStream(f);
-            if (f.canRead())
-                System.out.println("  Readable");
-            else
-                System.out.println("  Not Readable");
             Clip clip = AudioSystem.getClip();
             clip.open(aIS);
             clip.start();

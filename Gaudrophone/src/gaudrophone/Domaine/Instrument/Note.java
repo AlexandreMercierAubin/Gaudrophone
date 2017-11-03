@@ -7,38 +7,34 @@ import javax.sound.midi.*;
 public class Note extends Son {
     NomNote nom;
     int octave;
+    Synthesizer synthesizer;
+    MidiChannel[] channels;
     
-    public Note(){}
+    public Note(){
+        try{
+            synthesizer = MidiSystem.getSynthesizer();
+        }
+        catch(Exception e){}
+        
+        }
     
     @Override
     public void commencerJouer()
     {
+        javax.sound.midi.Instrument instruments[], instr;
+        int noInstrument = 24;
         Outils outils = new Outils();
         int midiNoteNumber = outils.getMidiNoteNumber(nom, octave);
         try{
-        Synthesizer synthesizer = MidiSystem.getSynthesizer();
-        synthesizer.open();
-        javax.sound.midi.Instrument instruments[] = synthesizer.getLoadedInstruments();
-        synthesizer.loadInstrument(instruments[48]);
-        for (int i = 0; i<instruments.length; i++)
-        {
-            System.out.println(i + " " + instruments[i].getName());
             
-        }
-        System.out.println(instruments[43].getName());
-        
-        int persis = persistance;
+            synthesizer.open();
+            instruments = synthesizer.getLoadedInstruments();
+            instr = instruments[noInstrument];
+            Patch patch = instr.getPatch();
 
-        
-        MidiChannel[] channels = synthesizer.getChannels();
-        channels[octave].programChange(0, 48);
-
-        channels[octave].noteOn(midiNoteNumber, 100);
-        Thread.sleep(2000);
-        channels[octave].noteOff(midiNoteNumber);
-        
-
-        synthesizer.close();
+            channels = synthesizer.getChannels();
+            channels[0].programChange(patch.getBank(),patch.getProgram());
+            channels[0].noteOn(midiNoteNumber, 429);    
         }
         catch (Exception e)
         {
@@ -53,15 +49,10 @@ public class Note extends Son {
         Outils outils = new Outils();
         int midiNoteNumber = outils.getMidiNoteNumber(nom, octave);
         try{
-        Synthesizer synthesizer = MidiSystem.getSynthesizer();
-        synthesizer.open();
+            channels[0].allNotesOff();
+            channels[0].allSoundOff();
 
-        MidiChannel[] channels = synthesizer.getChannels();
-
-        channels[octave].noteOff(midiNoteNumber);
-        
-
-        synthesizer.close();
+            synthesizer.close();
         }
         catch (Exception e)
         {
@@ -69,7 +60,7 @@ public class Note extends Son {
         }
         //Ajouter code arreterJouer
     }
-    
+
     @Override
     
     public void setFrequence(float valeur){}

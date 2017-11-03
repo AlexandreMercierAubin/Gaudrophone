@@ -12,8 +12,10 @@ public class FenetreInstrument extends javax.swing.JFrame {
     ButtonGroup m_btnGroupeMode;
     ControleurInstrument controleur;
     PanneauAffichage panneauAffichage;
-    
-    
+    NomNote note = NomNote.Si;
+    int octave = 3; 
+    Note noteL = new Note();
+          
     public FenetreInstrument() {
         initComponents();
         initializeRadioButton();
@@ -25,6 +27,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
         txtAide.setVisible(false);
         btnOkAide.setVisible(false);
         scrlAide.setVisible(false);
+        
+        noteL.setNom(note);
+        noteL.setOctave(octave);
     }
     
     public ControleurInstrument getControleur()
@@ -78,6 +83,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         jButton1.setText("MyTestButton");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton1MousePressed(evt);
             }
@@ -269,38 +277,39 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOkAideActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Outils outils = new Outils();
-        NomNote note = NomNote.Si;
-        int octave = 8;
-        int bob = outils.getMidiNoteNumber(note, octave);
-        //javax.swing.JOptionPane.showMessageDialog(null, bob);
-        Note noteL = new Note();
-        noteL.setNom(note);
-        noteL.setOctave(octave);
-        noteL.commencerJouer();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        Outils outils = new Outils();
 //        NomNote note = NomNote.Si;
-//        int octave = 1;
-//        int bob = outils.getMidiNoteNumber(note, octave);
-//        //javax.swing.JOptionPane.showMessageDialog(null, bob);
+//        int octave = 3;
 //        Note noteL = new Note();
 //        noteL.setNom(note);
 //        noteL.setOctave(octave);
 //        noteL.commencerJouer();
-        FichierAudio fichier = new FichierAudio();
-        fichier.commencerJouer();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        NomNote note = NomNote.ReDiese;
+        int octave = 3;
+        Note noteL = new Note();
+        noteL.setNom(note);
+        noteL.setOctave(octave);
+        noteL.commencerJouer();
+//        FichierAudio fichier = new FichierAudio();
+//        fichier.commencerJouer();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
-        
+        System.out.println("commencerJouer");
+        noteL.commencerJouer();
     }//GEN-LAST:event_jButton1MousePressed
 
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
-        // TODO add your handling code here:
+        System.out.println("arreterJouer");
+        noteL.arreterJouer();
     }//GEN-LAST:event_jButton1MouseReleased
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        System.out.println("click");
+    }//GEN-LAST:event_jButton1MouseClicked
    
     private void afficherAider(String filename, String... optionalFilenames)
     {
