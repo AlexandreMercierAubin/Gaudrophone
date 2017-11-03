@@ -60,7 +60,10 @@ public class ApparenceTouche {
     
     public Bordure getBordure(int index)
     {
-        return bordures.get(index);
+        if (bordures.size() > index)
+            return bordures.get(index);
+        else
+            return null;
     }
     
     public List<Point2D> getCoins() {
