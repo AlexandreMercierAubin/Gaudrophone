@@ -72,12 +72,10 @@ public class DessinateurInstrument {
                         g2.setColor(bordure.getCouleur());
                         g2.setStroke(new BasicStroke(bordure.getLargeur()));
                         
-                        int x1, y1, x2, y2;
-                        
-                        x1 = i == 1 ? (int)rectangle.getMaxX() : (int)rectangle.getMinX();
-                        y1 = i == 2 ? (int)rectangle.getMaxY() : (int)rectangle.getMinY();
-                        x2 = i % 2 == 1 ? x1 : (int)rectangle.getMaxX();
-                        y2 = i % 2 == 0 ? y1 : (int)rectangle.getMaxY();
+                        int x1 = i == 1 ? (int)rectangle.getMaxX() : (int)rectangle.getMinX();
+                        int y1 = i == 2 ? (int)rectangle.getMaxY() : (int)rectangle.getMinY();
+                        int x2 = i % 2 == 1 ? x1 : (int)rectangle.getMaxX();
+                        int y2 = i % 2 == 0 ? y1 : (int)rectangle.getMaxY();
                         
                         g2.drawLine(x1, y1, x2, y2);
                     }
@@ -85,7 +83,36 @@ public class DessinateurInstrument {
                     
                 // Triangle, pentagone, hexagone
                 default:
-                    // TO-DO
+                    // Dessin du polygone intérieur
+                    int nbBordures = Outils.nbBordures(forme);
+                    Polygon polygone = Outils.calculerPolygone(nbBordures, position, dimension);
+                    g2.setColor(apparence.getCouleurFond());
+                    g2.fillPolygon(polygone);
+                    
+                    // Dessin des bordures
+                    for (int i = 0; i < nbBordures; i++)
+                    {
+                        int x1, y1, x2, y2;
+                        
+                        x1 = polygone.xpoints[i];
+                        y1 = polygone.ypoints[i];
+                        
+                        if (i == nbBordures - 1)
+                        {
+                            x2 = polygone.xpoints[0];
+                            y2 = polygone.ypoints[0];
+                        }
+                        else
+                        {
+                            x2 = polygone.xpoints[i + 1];
+                            y2 = polygone.ypoints[i + 1];
+                        }
+                        
+                        bordure = apparence.getBordure(i);
+                        g2.setColor(bordure.getCouleur());
+                        g2.setStroke(new BasicStroke(bordure.getLargeur()));
+                        g2.drawLine(x1, y1, x2, y2);
+                    }
                     break;
             }
             

@@ -30,7 +30,7 @@ public class Bordure {
         visible = valeur;
     }
     
-    public float getLargeur()
+    public int getLargeur()
     {
         return largeur;
     }
