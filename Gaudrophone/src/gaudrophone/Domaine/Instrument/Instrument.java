@@ -3,6 +3,7 @@ import java.util.List;
 import java.awt.geom.Point2D;
 import gaudrophone.Domaine.Outils;
 import java.awt.geom.Path2D;
+import java.awt.Polygon;
 
 public class Instrument {
     javax.sound.midi.Instrument timbre;
@@ -63,7 +64,11 @@ public class Instrument {
         toucheAjoutee.setPosition(position);
         toucheSelectionee=touches.size()-1;
         
-        //ajouter les points dans Path2D selon la dim du constructeur********* faire ainsi dans setdim et dans setpos
+        //ajouter les points dans Path2D selon la dim du constructeur d'apparence
+        ApparenceTouche apparence= toucheAjoutee.getApparence();
+        Polygon poly = Outils.calculerPolygone(36, position,apparence.getDimension());
+        apparence.getCoins().append(poly,true);
+        
         return null;
     }
     

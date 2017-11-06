@@ -2,13 +2,15 @@ package gaudrophone.Domaine.Instrument;
 
 import gaudrophone.Domaine.Dimension2D;
 import gaudrophone.Domaine.Enums.Forme;
+import gaudrophone.Domaine.Outils;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.geom.Dimension2D;
+import java.awt.Polygon;
 import java.awt.geom.Point2D;
 import java.util.List;
 import java.awt.geom.Path2D;
+
 
 public class ApparenceTouche {
     Forme forme;
@@ -22,7 +24,7 @@ public class ApparenceTouche {
     {
         forme = Forme.Cercle;
         couleurFond = Color.BLACK;
-        dimension = new Dimension(1,1);
+        dimension = new Dimension2D(1,1);
         
     }
     
@@ -56,8 +58,10 @@ public class ApparenceTouche {
         return dimension;
     }
 
-    public void setDimension(Dimension2D dimension) {
+    public void setDimension(Dimension2D dimension,Point2D position) {
         this.dimension = dimension;
+        Polygon poly = Outils.calculerPolygone(36, position,dimension);
+        coins.append(poly,true);
     }
     
     public Bordure getBordure(int index)
