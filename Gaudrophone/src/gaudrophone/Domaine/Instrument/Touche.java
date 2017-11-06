@@ -30,6 +30,7 @@ public class Touche {
         Polygon poly = Outils.calculerPolygone(36,
                                                position,
                                                apparence.getDimension());
+        apparence.getCoins().reset();
         apparence.getCoins().append(poly,true);
     }
     

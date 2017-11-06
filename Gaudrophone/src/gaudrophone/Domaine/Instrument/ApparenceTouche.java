@@ -61,6 +61,7 @@ public class ApparenceTouche {
     public void setDimension(Dimension2D dimension,Point2D position) {
         this.dimension = dimension;
         Polygon poly = Outils.calculerPolygone(36, position,dimension);
+        coins.reset();
         coins.append(poly,true);
     }
     

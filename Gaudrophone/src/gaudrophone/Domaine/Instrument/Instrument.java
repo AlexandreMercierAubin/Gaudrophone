@@ -67,6 +67,7 @@ public class Instrument {
         //ajouter les points dans Path2D selon la dim du constructeur d'apparence
         ApparenceTouche apparence= toucheAjoutee.getApparence();
         Polygon poly = Outils.calculerPolygone(36, position,apparence.getDimension());
+        apparence.getCoins().reset();
         apparence.getCoins().append(poly,true);
         
         return null;
