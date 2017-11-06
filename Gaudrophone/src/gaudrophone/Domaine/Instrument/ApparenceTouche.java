@@ -1,5 +1,6 @@
 package gaudrophone.Domaine.Instrument;
 
+import gaudrophone.Domaine.Dimension2D;
 import gaudrophone.Domaine.Enums.Forme;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -61,13 +62,16 @@ public class ApparenceTouche {
     
     public Bordure getBordure(int index)
     {
-        return bordures.get(index);
+        if (bordures.size() > index)
+            return bordures.get(index);
+        else
+            return null;
     }
     
+
     public Path2D  getCoins() {
         return coins;
     }
-
     public void setCoins(Path2D coins) {
         this.coins = coins;
     }
