@@ -22,6 +22,8 @@ public class PanneauAffichage extends JPanel {
     @Override
     protected void paintComponent(Graphics g)
     {
+        super.paintComponent(g);
+        
         Dimension size = getSize();
         Dimension2D taille = new Dimension2D(size.getWidth(), size.getHeight());
         DessinateurInstrument dessinateur = new DessinateurInstrument(fenetreInstrument.getControleur(), taille);
