@@ -1,6 +1,7 @@
 package gaudrophone.Presentation;
 
 import gaudrophone.Domaine.ControleurInstrument;
+import gaudrophone.Domaine.Dimension2D;
 import gaudrophone.Domaine.Enums.Forme;
 import gaudrophone.Domaine.Instrument.ApparenceTouche;
 import gaudrophone.Domaine.Instrument.Instrument;
@@ -108,17 +109,15 @@ public class FenetreTestDessin extends javax.swing.JFrame {
         for (int i = 0; i < 6; i++)
         {
             apparence0.getBordure(i).setCouleur(Color.blue);
-            apparence0.getBordure(i).setLargeur(3);
             apparence0.getBordure(i).setVisible(true);
         }
-        apparence0.getBordure(3).setLargeur(5);
+        apparence0.getBordure(3).setLargeur(0.005);
         
         apparence1.setForme(Forme.Pentagone);
         apparence1.setCouleurFond(Color.green);
         for (int i = 0; i < 7; i++)
         {
             apparence1.getBordure(i).setCouleur(Color.orange);
-            apparence1.getBordure(i).setLargeur(3);
             apparence1.getBordure(i).setVisible(true);
         }
         
@@ -127,16 +126,15 @@ public class FenetreTestDessin extends javax.swing.JFrame {
         for (int i = 0; i < 8; i++)
         {
             apparence2.getBordure(i).setCouleur(Color.pink);
-            apparence2.getBordure(i).setLargeur(3);
             apparence2.getBordure(i).setVisible(true);
         }
         
         apparence3.setForme(Forme.Cercle);
         apparence3.setCouleurFond(Color.black);
+        apparence3.setDimension(new Dimension2D(0.2, 0.05), new Point2D.Double(0.5, 0.5));
         for (int i = 0; i < 3; i++)
         {
             apparence3.getBordure(i).setCouleur(Color.white);
-            apparence3.getBordure(i).setLargeur(3);
             apparence3.getBordure(i).setVisible(true);
         }
         
@@ -145,7 +143,6 @@ public class FenetreTestDessin extends javax.swing.JFrame {
         for (int i = 0; i < 5; i++)
         {
             apparence4.getBordure(i).setCouleur(Color.yellow);
-            apparence4.getBordure(i).setLargeur(3);
             apparence4.getBordure(i).setVisible(true);
         }
     }
