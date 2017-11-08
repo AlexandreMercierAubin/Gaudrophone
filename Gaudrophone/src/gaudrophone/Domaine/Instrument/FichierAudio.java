@@ -11,4 +11,9 @@ public class FichierAudio extends Son{
     
     @Override
     public void arreterJouer(){}
+    
+    public String getChemin()
+    {
+        return chemin;
+    }
 }
