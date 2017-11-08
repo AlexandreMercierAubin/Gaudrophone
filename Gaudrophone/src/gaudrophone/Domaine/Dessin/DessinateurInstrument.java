@@ -52,7 +52,7 @@ public class DessinateurInstrument {
     private void dessinerCercle(Touche touche, Graphics2D g2)
     {
         ApparenceTouche apparence = touche.getApparence();
-        Point2D position = Outils.conversionPointRelatifPixel(touche.getPosition(), dimensionPanneau);
+        Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), dimensionPanneau);
         Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), dimensionPanneau);
         
         // Dessin du cercle intérieur
@@ -77,7 +77,7 @@ public class DessinateurInstrument {
     private void dessinerRectangle(Touche touche, Graphics2D g2)
     {
         ApparenceTouche apparence = touche.getApparence();
-        Point2D position = Outils.conversionPointRelatifPixel(touche.getPosition(), dimensionPanneau);
+        Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), dimensionPanneau);
         Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), dimensionPanneau);
         double minDimPanneau = Math.min(dimensionPanneau.getWidth(), dimensionPanneau.getHeight());
         
@@ -111,7 +111,7 @@ public class DessinateurInstrument {
     private void dessinerPolygone(Touche touche, Graphics2D g2)
     {
         ApparenceTouche apparence = touche.getApparence();
-        Point2D position = Outils.conversionPointRelatifPixel(touche.getPosition(), dimensionPanneau);
+        Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), dimensionPanneau);
         Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), dimensionPanneau);
         double minDimPanneau = Math.min(dimensionPanneau.getWidth(), dimensionPanneau.getHeight());
         
@@ -154,7 +154,7 @@ public class DessinateurInstrument {
     private void dessinerBorduresTransversales(Touche touche, Graphics2D g2)
     {
         ApparenceTouche apparence = touche.getApparence();
-        Point2D position = Outils.conversionPointRelatifPixel(touche.getPosition(), dimensionPanneau);
+        Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), dimensionPanneau);
         Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), dimensionPanneau);
         double minDimPanneau = Math.min(dimensionPanneau.getWidth(), dimensionPanneau.getHeight());
         

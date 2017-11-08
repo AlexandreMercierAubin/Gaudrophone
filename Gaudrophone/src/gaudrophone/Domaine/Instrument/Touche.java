@@ -5,7 +5,7 @@ import java.awt.geom.Point2D;
 
 public class Touche {
     int index;
-    Point2D position;
+    
     String texteAffichage;
     ApparenceTouche apparence;
     Son son;
@@ -17,21 +17,6 @@ public class Touche {
         texteAffichage="";
         apparence = new ApparenceTouche();
         surbrillance = false;
-    }
-    
-    public Point2D getPosition()
-    {
-        return position;
-    }
-    
-    public void setPosition(Point2D valeur)
-    {
-        position = valeur;
-        Polygon poly = Outils.calculerPolygone(36,
-                                               position,
-                                               apparence.getDimension());
-        apparence.getCoins().reset();
-        apparence.getCoins().append(poly,true);
     }
     
     public String getTexteAffichage()
