@@ -2,11 +2,16 @@ package gaudrophone.Domaine.Instrument;
 
 import gaudrophone.Domaine.Dimension2D;
 import gaudrophone.Domaine.Enums.Forme;
+import gaudrophone.Domaine.Outils;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Polygon;
 import java.awt.geom.Point2D;
 import java.util.List;
+import java.util.ArrayList;
+import java.awt.geom.Path2D;
+
 
 public class ApparenceTouche {
     Forme forme;
@@ -14,14 +19,14 @@ public class ApparenceTouche {
     Image imageFond;
     Dimension2D dimension;
     List<Bordure> bordures;
-    List<Point2D> coins;
+    Path2D coins;
     
     public ApparenceTouche()
     {
         forme = Forme.Cercle;
         couleurFond = Color.BLACK;
         dimension = new Dimension2D(1,1);
-        
+        bordures = new ArrayList<Bordure>();
     }
     
     public Forme getForme()
@@ -54,8 +59,11 @@ public class ApparenceTouche {
         return dimension;
     }
 
-    public void setDimension(Dimension2D dimension) {
+    public void setDimension(Dimension2D dimension,Point2D position) {
         this.dimension = dimension;
+        Polygon poly = Outils.calculerPolygone(36, position,dimension);
+        coins.reset();
+        coins.append(poly,true);
     }
     
     public Bordure getBordure(int index)
@@ -66,11 +74,11 @@ public class ApparenceTouche {
             return null;
     }
     
-    public List<Point2D> getCoins() {
+
+    public Path2D  getCoins() {
         return coins;
     }
-
-    public void setCoins(List<Point2D> coins) {
+    public void setCoins(Path2D coins) {
         this.coins = coins;
     }
     
