@@ -64,7 +64,7 @@ public class Instrument {
         
         //inserer sa position et la selectionner
         Touche toucheAjoutee = touches.get(touches.size()-1);
-        toucheAjoutee.setPosition(position);
+        toucheAjoutee.getApparence().setPosition(position);
         toucheSelectionee=touches.size()-1;
         
         //ajouter les points dans Path2D selon la dim du constructeur d'apparence
@@ -76,9 +76,8 @@ public class Instrument {
         return null;
     }
     
-    public List<Touche> rechercherTouche(String requete)
+    public void rechercherTouche(String requete)
     {   
-        List<Touche> retour= new ArrayList<Touche>();
         String[] mots= requete.split("\\s+");
         
         for(int j=0; j<touches.size();++j)
@@ -90,18 +89,39 @@ public class Instrument {
             String forme = apparence.forme.toString();
             String couleur = apparence.couleurFond.toString();
             
+            Son son = touche.getSon();
+            int instanceOfIndex=0;
+            String nomNote = "";
+            String octave = "";
+            String chemin = "";
+            
+            if(son instanceof Note)
+            {
+                nomNote = ((Note)son).getNom().toString();
+                octave += ((Note)son).getOctave();
+                instanceOfIndex=1;
+            }
+            else if(son instanceof FichierAudio)
+            {
+                chemin = ((FichierAudio)son).getChemin();
+                instanceOfIndex=2;
+            }
+            
             for(int i=0;i<mots.length;++i)
             {
                 if(texteAffichage.contains(mots[i])
                    || forme.contains(mots[i])
-                   || couleur.contains(mots[i]))
+                   || couleur.contains(mots[i])
+                   || instanceOfIndex==1&& nomNote.contains(mots[i])
+                   || instanceOfIndex==1&& octave.contains(mots[i])
+                   || instanceOfIndex==2&& chemin.contains(mots[i]))
                 {
-                    retour.add(touche);
+                    touche.setSurbrillance(true);
                 }
-
             }
+            
         }
-        return retour;
+        
     }
     
     public boolean selectionnerTouche(Point2D position)

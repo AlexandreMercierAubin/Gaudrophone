@@ -73,6 +73,18 @@ public class Outils {
         return new Dimension2D(largeur, hauteur);
     }
     
+    // Conversion d'une valeur seule de pixel à relatif
+    public static double conversionPixelRelatif(int valeurPixel, double dimensionPanneau)
+    {
+        return valeurPixel / dimensionPanneau;
+    }
+    
+    // Conversion d'une valeur seule de relatif à pixel
+    public static int conversionRelatifPixel(double valeurRelative, double dimensionPanneau)
+    {
+        return (int)(valeurRelative * dimensionPanneau);
+    }
+    
     public static int getMidiNoteNumber(/*NomNote note,*/int octave)
     {
         //ajouter code

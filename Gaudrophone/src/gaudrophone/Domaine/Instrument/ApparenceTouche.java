@@ -20,6 +20,22 @@ public class ApparenceTouche {
     Dimension2D dimension;
     List<Bordure> bordures;
     Path2D coins;
+    Point2D position;
+    
+    public Point2D getPosition()
+    {
+        return position;
+    }
+    
+    public void setPosition(Point2D valeur)
+    {
+        position = valeur;
+        Polygon poly = Outils.calculerPolygone(36,
+                                               position,
+                                               dimension);
+        coins.reset();
+        coins.append(poly,true);
+    }
     
     public ApparenceTouche()
     {
