@@ -27,6 +27,7 @@ public class ApparenceTouche {
         couleurFond = Color.BLACK;
         dimension = new Dimension2D(1,1);
         bordures = new ArrayList<Bordure>();
+        coins= new Path2D.Double();
     }
     
     public Forme getForme()

@@ -8,7 +8,10 @@ public class Bordure {
     int largeur;
     Color couleur;
     
-    public Bordure(){}
+    public Bordure()
+    {
+        couleur = Color.DARK_GRAY;
+    }
     
     public int getCote()
     {
