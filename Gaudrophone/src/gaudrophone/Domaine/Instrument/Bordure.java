@@ -11,6 +11,7 @@ public class Bordure {
     public Bordure()
     {
         couleur = Color.DARK_GRAY;
+        visible = true;
     }
     
     public int getCote()
