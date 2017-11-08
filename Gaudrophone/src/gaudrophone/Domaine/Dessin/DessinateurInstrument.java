@@ -22,6 +22,7 @@ public class DessinateurInstrument {
         this.dimensionPanneau = dimensionPanneau;
     }
     
+    // ************************************Largeur bordure = basé sur plus petite dimension panneau*******************************************
     public void dessiner(Graphics g)
     {
         Graphics2D g2 = (Graphics2D)g;
@@ -63,7 +64,7 @@ public class DessinateurInstrument {
 
         // Dessin de la bordure
         Bordure bordure = apparence.getBordure(0);
-        if (bordure != null)
+        if (bordure.getVisible())
         {
             g2.setColor(bordure.getCouleur());
             g2.setStroke(new BasicStroke(bordure.getLargeur()));
@@ -88,15 +89,18 @@ public class DessinateurInstrument {
         for (int i = 0; i < 4; i++)
         {
             Bordure bordure = apparence.getBordure(i);
-            g2.setColor(bordure.getCouleur());
-            g2.setStroke(new BasicStroke(bordure.getLargeur()));
+            if (bordure.getVisible())
+            {
+                g2.setColor(bordure.getCouleur());
+                g2.setStroke(new BasicStroke(bordure.getLargeur()));
 
-            int x1 = i == 1 ? (int)rectangle.getMaxX() : (int)rectangle.getMinX();
-            int y1 = i == 2 ? (int)rectangle.getMaxY() : (int)rectangle.getMinY();
-            int x2 = i % 2 == 1 ? x1 : (int)rectangle.getMaxX();
-            int y2 = i % 2 == 0 ? y1 : (int)rectangle.getMaxY();
+                int x1 = i == 1 ? (int)rectangle.getMaxX() : (int)rectangle.getMinX();
+                int y1 = i == 2 ? (int)rectangle.getMaxY() : (int)rectangle.getMinY();
+                int x2 = i % 2 == 1 ? x1 : (int)rectangle.getMaxX();
+                int y2 = i % 2 == 0 ? y1 : (int)rectangle.getMaxY();
 
-            g2.drawLine(x1, y1, x2, y2);
+                g2.drawLine(x1, y1, x2, y2);
+            }
         }
     }
     
@@ -115,26 +119,29 @@ public class DessinateurInstrument {
         // Dessin des bordures
         for (int i = 0; i < nbBordures; i++)
         {
-            int x1, y1, x2, y2;
-
-            x1 = polygone.xpoints[i];
-            y1 = polygone.ypoints[i];
-
-            if (i == nbBordures - 1)
-            {
-                x2 = polygone.xpoints[0];
-                y2 = polygone.ypoints[0];
-            }
-            else
-            {
-                x2 = polygone.xpoints[i + 1];
-                y2 = polygone.ypoints[i + 1];
-            }
-
             Bordure bordure = apparence.getBordure(i);
-            g2.setColor(bordure.getCouleur());
-            g2.setStroke(new BasicStroke(bordure.getLargeur()));
-            g2.drawLine(x1, y1, x2, y2);
+            if (bordure.getVisible())
+            {
+                int x1, y1, x2, y2;
+
+                x1 = polygone.xpoints[i];
+                y1 = polygone.ypoints[i];
+
+                if (i == nbBordures - 1)
+                {
+                    x2 = polygone.xpoints[0];
+                    y2 = polygone.ypoints[0];
+                }
+                else
+                {
+                    x2 = polygone.xpoints[i + 1];
+                    y2 = polygone.ypoints[i + 1];
+                }
+
+                g2.setColor(bordure.getCouleur());
+                g2.setStroke(new BasicStroke(bordure.getLargeur()));
+                g2.drawLine(x1, y1, x2, y2);
+            }
         }
     }
     
@@ -148,7 +155,7 @@ public class DessinateurInstrument {
         Bordure bordureHorizontale = apparence.getBordure(premiereBordureTransversale);
         Bordure bordureVerticale = apparence.getBordure(premiereBordureTransversale + 1);
 
-        if (bordureHorizontale != null)
+        if (bordureHorizontale.getVisible())
         {
             g2.setColor(bordureHorizontale.getCouleur());
             g2.setStroke(new BasicStroke(bordureHorizontale.getLargeur()));
@@ -158,7 +165,7 @@ public class DessinateurInstrument {
             g2.drawLine(x1, y, x2, y);
         }
 
-        if (bordureVerticale != null)
+        if (bordureVerticale.getVisible())
         {
             g2.setColor(bordureVerticale.getCouleur());
             g2.setStroke(new BasicStroke(bordureVerticale.getLargeur()));

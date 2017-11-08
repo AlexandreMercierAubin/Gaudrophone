@@ -18,6 +18,8 @@ public class ControleurInstrument {
     
     public ControleurInstrument()
     {
+        instrument = new Instrument();
+        metronome = new Metronome();
         toucheEnDeplacement = false;
         modeVisuel=ModeVisuel.Ajouter;
     }

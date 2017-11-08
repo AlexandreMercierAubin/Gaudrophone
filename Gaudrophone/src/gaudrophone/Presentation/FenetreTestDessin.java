@@ -1,7 +1,10 @@
 package gaudrophone.Presentation;
 
 import gaudrophone.Domaine.ControleurInstrument;
+import gaudrophone.Domaine.Enums.Forme;
+import gaudrophone.Domaine.Instrument.ApparenceTouche;
 import gaudrophone.Domaine.Instrument.Instrument;
+import java.awt.Color;
 import java.awt.geom.Point2D;
 
 public class FenetreTestDessin extends javax.swing.JFrame {
@@ -91,6 +94,60 @@ public class FenetreTestDessin extends javax.swing.JFrame {
         instrument.ajouterTouche(new Point2D.Double(0.2, 0.5));
         instrument.ajouterTouche(new Point2D.Double(0.8, 0.1));
         instrument.ajouterTouche(new Point2D.Double(0.75, 0.75));
+        instrument.ajouterTouche(new Point2D.Double(0.5, 0.5));
+        instrument.ajouterTouche(new Point2D.Double(0.4, 0.2));
+        
+        ApparenceTouche apparence0 = instrument.getTouche(0).getApparence();
+        ApparenceTouche apparence1 = instrument.getTouche(1).getApparence();
+        ApparenceTouche apparence2 = instrument.getTouche(2).getApparence();
+        ApparenceTouche apparence3 = instrument.getTouche(3).getApparence();
+        ApparenceTouche apparence4 = instrument.getTouche(4).getApparence();
+        
+        apparence0.setForme(Forme.Rectangle);
+        apparence0.setCouleurFond(Color.red);
+        for (int i = 0; i < 6; i++)
+        {
+            apparence0.getBordure(i).setCouleur(Color.blue);
+            apparence0.getBordure(i).setLargeur(3);
+            apparence0.getBordure(i).setVisible(true);
+        }
+        apparence0.getBordure(3).setLargeur(5);
+        
+        apparence1.setForme(Forme.Pentagone);
+        apparence1.setCouleurFond(Color.green);
+        for (int i = 0; i < 7; i++)
+        {
+            apparence1.getBordure(i).setCouleur(Color.orange);
+            apparence1.getBordure(i).setLargeur(3);
+            apparence1.getBordure(i).setVisible(true);
+        }
+        
+        apparence2.setForme(Forme.Hexagone);
+        apparence2.setCouleurFond(Color.white);
+        for (int i = 0; i < 8; i++)
+        {
+            apparence2.getBordure(i).setCouleur(Color.pink);
+            apparence2.getBordure(i).setLargeur(3);
+            apparence2.getBordure(i).setVisible(true);
+        }
+        
+        apparence3.setForme(Forme.Cercle);
+        apparence3.setCouleurFond(Color.black);
+        for (int i = 0; i < 3; i++)
+        {
+            apparence3.getBordure(i).setCouleur(Color.white);
+            apparence3.getBordure(i).setLargeur(3);
+            apparence3.getBordure(i).setVisible(true);
+        }
+        
+        apparence4.setForme(Forme.Triangle);
+        apparence4.setCouleurFond(Color.blue);
+        for (int i = 0; i < 5; i++)
+        {
+            apparence4.getBordure(i).setCouleur(Color.yellow);
+            apparence4.getBordure(i).setLargeur(3);
+            apparence4.getBordure(i).setVisible(true);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
