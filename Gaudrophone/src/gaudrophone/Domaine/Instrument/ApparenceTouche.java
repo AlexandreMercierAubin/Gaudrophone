@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.Polygon;
 import java.awt.geom.Point2D;
 import java.util.List;
+import java.util.ArrayList;
 import java.awt.geom.Path2D;
 
 
@@ -25,7 +26,7 @@ public class ApparenceTouche {
         forme = Forme.Cercle;
         couleurFond = Color.BLACK;
         dimension = new Dimension2D(1,1);
-        
+        bordures = new ArrayList<Bordure>();
     }
     
     public Forme getForme()
