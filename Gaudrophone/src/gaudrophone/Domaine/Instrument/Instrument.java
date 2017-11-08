@@ -64,7 +64,7 @@ public class Instrument {
         
         //inserer sa position et la selectionner
         Touche toucheAjoutee = touches.get(touches.size()-1);
-        toucheAjoutee.setPosition(position);
+        toucheAjoutee.getApparence().setPosition(position);
         toucheSelectionee=touches.size()-1;
         
         //ajouter les points dans Path2D selon la dim du constructeur d'apparence

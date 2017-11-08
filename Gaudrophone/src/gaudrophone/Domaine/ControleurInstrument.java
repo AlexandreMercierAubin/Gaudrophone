@@ -100,7 +100,7 @@ public class ControleurInstrument {
                 {
                     int indexTouche = instrument.getToucheSelectionee();
                     Touche touche = instrument.getTouche(indexTouche);
-                    touche.setPosition(coordRelative);
+                    touche.getApparence().setPosition(coordRelative);
                 }
                 break;
                 
