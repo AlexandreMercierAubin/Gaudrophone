@@ -1,12 +1,17 @@
 package gaudrophone.Domaine.Instrument;
 
+import gaudrophone.Domaine.Dimension2D;
 import gaudrophone.Domaine.Enums.Forme;
+import gaudrophone.Domaine.Outils;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.geom.Dimension2D;
+import java.awt.Polygon;
 import java.awt.geom.Point2D;
 import java.util.List;
+import java.util.ArrayList;
+import java.awt.geom.Path2D;
+
 
 public class ApparenceTouche {
     Forme forme;
@@ -14,14 +19,16 @@ public class ApparenceTouche {
     Image imageFond;
     Dimension2D dimension;
     List<Bordure> bordures;
-    List<Point2D> coins;
+    Path2D coins;
     
     public ApparenceTouche()
     {
         forme = Forme.Cercle;
         couleurFond = Color.BLACK;
-        dimension = new Dimension(1,1);
+        dimension = new Dimension2D(0.05,0.05);
+        coins= new Path2D.Double();
         
+        initialiserBordures();
     }
     
     public Forme getForme()
@@ -32,6 +39,7 @@ public class ApparenceTouche {
     public void setForme(Forme forme)
     {
         this.forme = forme;
+        initialiserBordures();
     }
     
     public Color getCouleurFond() {
@@ -54,21 +62,38 @@ public class ApparenceTouche {
         return dimension;
     }
 
-    public void setDimension(Dimension2D dimension) {
+    public void setDimension(Dimension2D dimension,Point2D position) {
         this.dimension = dimension;
+        Polygon poly = Outils.calculerPolygone(36, position,dimension);
+        coins.reset();
+        coins.append(poly,true);
     }
     
     public Bordure getBordure(int index)
     {
-        return bordures.get(index);
+        if (bordures.size() > index)
+            return bordures.get(index);
+        else
+            return null;
     }
     
-    public List<Point2D> getCoins() {
+    public Path2D  getCoins() {
         return coins;
     }
-
-    public void setCoins(List<Point2D> coins) {
+    public void setCoins(Path2D coins) {
         this.coins = coins;
     }
     
+    private void initialiserBordures()
+    {
+        bordures = new ArrayList<Bordure>();
+        
+        int nbBordures = Outils.nbBordures(forme) + 2;
+        for (int i = 0; i < nbBordures; i++)
+            bordures.add(new Bordure());
+        
+        // Bordures transversales invisibles
+        bordures.get(nbBordures - 2).setVisible(false);
+        bordures.get(nbBordures - 1).setVisible(false);
+    }
 }

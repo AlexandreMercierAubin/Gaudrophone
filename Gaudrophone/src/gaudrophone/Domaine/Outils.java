@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 import java.lang.Math;
 
 public class Outils {
-    public String readFile(String strNomFichier, String strTexteInitial)
+    public static String readFile(String strNomFichier, String strTexteInitial)
     {
         String strTexte=strTexteInitial;
         String strChemin = new File("").getAbsolutePath();
@@ -34,27 +34,44 @@ public class Outils {
         return strTexte;
     }
     
-    public Point2D conversionPointPixelRelatif(Point2D coordPixel,Dimension2D dimensionPanneau)
+    // Retourne l'équivalent en coordonnées relatives d'un point donné en
+    // coordonnées pixel où (0.0, 0.0) est le coin supérieur gauche et
+    // (1.0, 1.0) est le coin inférieur droit.
+    public static Point2D conversionPointPixelRelatif(Point2D coordPixel,Dimension2D dimensionPanneau)
     {
-        //ajouter calcul
-        return null;
+        double x = coordPixel.getX() / dimensionPanneau.getWidth();
+        double y = coordPixel.getY() / dimensionPanneau.getHeight();
+        return new Point2D.Double(x, y);
     }
     
-    public Point2D conversionPointRelatifPixel(Point2D coordRelatif,Dimension2D dimensionPanneau)
+    // Retourne l'équivalent en coordonnées pixel d'un point donné en
+    // coordonnées relatives où (0.0, 0.0) est le coin supérieur gauche et
+    // (1.0, 1.0) est le coin inférieur droit.
+    public static Point2D conversionPointRelatifPixel(Point2D coordRelatif,Dimension2D dimensionPanneau)
     {
-        //ajouter calcul
-        return null;
+        int x = (int)(coordRelatif.getX() * dimensionPanneau.getWidth());
+        int y = (int)(coordRelatif.getY() * dimensionPanneau.getHeight());
+        return new Point2D.Double(x, y);
     }
     
-    public Dimension2D conversionDimensionPixelRelatif(Dimension2D dimensionPixel,Dimension2D dimensionPanneau)
+    // Retourne l'équivalent en dimension relative d'une dimension donnée en
+    // pixels, où chaque dimension est donnée comme fraction de la dimension
+    // totale du panneau.
+    public static Dimension2D conversionDimensionPixelRelatif(Dimension2D dimensionPixel,Dimension2D dimensionPanneau)
     {
-        //ajouter calcul
-        return null;
+        double largeur = dimensionPixel.getWidth() / dimensionPanneau.getWidth();
+        double hauteur = dimensionPixel.getHeight() / dimensionPanneau.getHeight();
+        return new Dimension2D(largeur, hauteur);
     }
-    public Dimension2D conversionDimensionRelatifPixel(Dimension2D dimensionRelative,Dimension2D dimensionPanneau)
+    
+    // Retourne l'équivalent en dimension pixel d'une dimension donnée en
+    // valeurs relatives, où chaque dimension est donnée comme fraction de la 
+    // dimension totale du panneau.
+    public static Dimension2D conversionDimensionRelatifPixel(Dimension2D dimensionRelative,Dimension2D dimensionPanneau)
     {
-        //ajouter calcul
-        return null;
+        int largeur = (int)(dimensionRelative.getWidth() * dimensionPanneau.getWidth());
+        int hauteur = (int)(dimensionRelative.getHeight() * dimensionPanneau.getHeight());
+        return new Dimension2D(largeur, hauteur);
     }
     
     public static int getMidiNoteNumber(NomNote note, int octave)
@@ -68,7 +85,7 @@ public class Outils {
         return midiNote;
     }
     
-    public Polygon calculerPolygone(int nbSommets, Point2D centrePoly, Dimension2D dimension)
+    public static Polygon calculerPolygone(int nbSommets, Point2D centrePoly, Dimension2D dimension)
     {
         if(nbSommets>0)
         {
@@ -82,8 +99,8 @@ public class Outils {
             {
                 //Calcul d'un point selon le nombre de sommets 
                 //en pourcentage
-                double x = Math.cos(Math.toRadians(ecart*i));
-                double y = Math.sin(Math.toRadians(ecart*i));
+                double x = Math.sin(Math.toRadians(ecart*i));
+                double y = -Math.cos(Math.toRadians(ecart*i));
 
                 //remise à l'échelle du point
                 x = (dimension.getWidth()/2)*x;
@@ -105,6 +122,25 @@ public class Outils {
         else
         {
             return null;
+        }
+    }
+    
+    public static int nbBordures(Forme forme)
+    {
+        switch(forme)
+        {
+            case Cercle:
+                return 1;
+            case Triangle:
+                return 3;
+            case Rectangle:
+                return 4;
+            case Pentagone:
+                return 5;
+            case Hexagone:
+                return 6;
+            default:
+                return 0;
         }
     }
 }
