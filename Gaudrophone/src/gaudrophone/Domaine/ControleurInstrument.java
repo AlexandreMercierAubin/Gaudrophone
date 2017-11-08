@@ -17,6 +17,9 @@ public class ControleurInstrument {
     
     public ControleurInstrument()
     {
+        instrument = new Instrument();
+        metronome = new Metronome();
+        modeVisuel = ModeVisuel.Ajouter;
     }
     
     public Instrument getInstrument()
