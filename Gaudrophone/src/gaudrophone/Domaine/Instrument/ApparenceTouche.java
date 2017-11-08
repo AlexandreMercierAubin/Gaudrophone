@@ -25,8 +25,10 @@ public class ApparenceTouche {
     {
         forme = Forme.Cercle;
         couleurFond = Color.BLACK;
-        dimension = new Dimension2D(1,1);
-        bordures = new ArrayList<Bordure>();
+        dimension = new Dimension2D(0.05,0.05);
+        coins= new Path2D.Double();
+        
+        initialiserBordures();
     }
     
     public Forme getForme()
@@ -37,6 +39,7 @@ public class ApparenceTouche {
     public void setForme(Forme forme)
     {
         this.forme = forme;
+        initialiserBordures();
     }
     
     public Color getCouleurFond() {
@@ -74,7 +77,6 @@ public class ApparenceTouche {
             return null;
     }
     
-
     public Path2D  getCoins() {
         return coins;
     }
@@ -82,4 +84,16 @@ public class ApparenceTouche {
         this.coins = coins;
     }
     
+    private void initialiserBordures()
+    {
+        bordures = new ArrayList<Bordure>();
+        
+        int nbBordures = Outils.nbBordures(forme) + 2;
+        for (int i = 0; i < nbBordures; i++)
+            bordures.add(new Bordure());
+        
+        // Bordures transversales invisibles
+        bordures.get(nbBordures - 2).setVisible(false);
+        bordures.get(nbBordures - 1).setVisible(false);
+    }
 }

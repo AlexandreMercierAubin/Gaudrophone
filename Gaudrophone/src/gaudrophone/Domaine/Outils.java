@@ -93,8 +93,8 @@ public class Outils {
             {
                 //Calcul d'un point selon le nombre de sommets 
                 //en pourcentage
-                double x = Math.cos(Math.toRadians(ecart*i));
-                double y = Math.sin(Math.toRadians(ecart*i));
+                double x = Math.sin(Math.toRadians(ecart*i));
+                double y = -Math.cos(Math.toRadians(ecart*i));
 
                 //remise à l'échelle du point
                 x = (dimension.getWidth()/2)*x;

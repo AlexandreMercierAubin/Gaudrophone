@@ -17,6 +17,7 @@ public class Instrument {
     {
         cleeTouche=0;
         touches = new ArrayList<Touche>();
+        nom="template";
     }
     
     public javax.sound.midi.Instrument getTimbre()
