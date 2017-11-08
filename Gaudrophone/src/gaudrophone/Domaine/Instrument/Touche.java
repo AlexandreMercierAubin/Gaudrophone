@@ -47,11 +47,14 @@ public class Touche {
         return son;
     }
     
-    public void commencerJouer(){}
+    public void commencerJouer()
+    {
+        
+    }
     
     public void arreterJouer(){}
     
-    public void ImporterFichierAudio(){}
+    public void importerFichierAudio(){}
     
     public void enleverFichierAudio(){}
     

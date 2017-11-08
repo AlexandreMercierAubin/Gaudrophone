@@ -19,7 +19,7 @@ public class Outils {
         String strChemin = new File("").getAbsolutePath();
         try (BufferedReader brLecteur = new BufferedReader(new InputStreamReader(new FileInputStream(strChemin.concat(strNomFichier)),"ISO-8859-1"))) 
         {
-
+            
             String strLigne;
 
             while ((strLigne = brLecteur.readLine()) != null) 
@@ -57,7 +57,7 @@ public class Outils {
         return null;
     }
     
-    public int getMidiNoteNumber(NomNote note, int octave)
+    public static int getMidiNoteNumber(NomNote note, int octave)
     {
         //Calcul du nombre de la note Midi
         int midiNote;

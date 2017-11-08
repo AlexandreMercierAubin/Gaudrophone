@@ -23,8 +23,7 @@ public class Note extends Son {
     {
         javax.sound.midi.Instrument instruments[], instr;
         int noInstrument = 24;
-        Outils outils = new Outils();
-        int midiNoteNumber = outils.getMidiNoteNumber(nom, octave);
+        int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
         try{
             
             synthesizer.open();
@@ -34,7 +33,7 @@ public class Note extends Son {
 
             channels = synthesizer.getChannels();
             channels[0].programChange(patch.getBank(),patch.getProgram());
-            channels[0].noteOn(midiNoteNumber, 429);    
+            channels[0].noteOn(midiNoteNumber, 100);    
         }
         catch (Exception e)
         {
@@ -46,8 +45,7 @@ public class Note extends Son {
     @Override
     public void arreterJouer()
     {
-        Outils outils = new Outils();
-        int midiNoteNumber = outils.getMidiNoteNumber(nom, octave);
+        int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
         try{
             channels[0].allNotesOff();
             channels[0].allSoundOff();

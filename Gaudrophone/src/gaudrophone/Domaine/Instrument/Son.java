@@ -28,7 +28,7 @@ public abstract class Son {
         persistance=valeur;
     }
     
-       public boolean isJouerSon() {
+    public boolean isJouerSon() {
         return jouerSon;
     }
 

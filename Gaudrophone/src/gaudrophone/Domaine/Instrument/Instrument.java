@@ -3,19 +3,22 @@ import java.util.List;
 import java.awt.geom.Point2D;
 
 public class Instrument {
-    javax.sound.midi.Instrument timbre;
+    int timbre;
     String nom;
     List<Touche> touches;
     int toucheSelectionee;
     
     public Instrument(){}
     
-    public javax.sound.midi.Instrument getTimbre()
+    public int getTimbre()
     {
         return timbre;
     }
     
-    public void setTimbre(){}
+    public void setTimbre(int noInstrument)
+    {
+        timbre=noInstrument;
+    }
     
     public String getNom()
     {
