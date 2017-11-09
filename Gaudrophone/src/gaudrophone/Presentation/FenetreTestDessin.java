@@ -3,6 +3,7 @@ package gaudrophone.Presentation;
 import gaudrophone.Domaine.ControleurInstrument;
 import gaudrophone.Domaine.Dimension2D;
 import gaudrophone.Domaine.Enums.Forme;
+import gaudrophone.Domaine.Generateur.GenerateurGuitare;
 import gaudrophone.Domaine.Instrument.ApparenceTouche;
 import gaudrophone.Domaine.Instrument.Instrument;
 import java.awt.Color;
@@ -18,7 +19,8 @@ public class FenetreTestDessin extends javax.swing.JFrame {
         controleur = fenetreInstrument.getControleur();
         
         panneauAffichage1.setFenetreInstrument(fenetreInstrument);
-        ajouterTouches();
+        //ajouterTouches();
+        controleur.genererInstrument(new GenerateurGuitare());
         
         panneauAffichage1.invalidate();
     }
