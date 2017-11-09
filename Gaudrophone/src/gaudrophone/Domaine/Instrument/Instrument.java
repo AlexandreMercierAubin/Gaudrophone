@@ -5,8 +5,9 @@ import java.awt.geom.Point2D;
 import gaudrophone.Domaine.Outils;
 import java.awt.geom.Path2D;
 import java.awt.Polygon;
+import java.io.Serializable;
 
-public class Instrument {
+public class Instrument implements Serializable{
     javax.sound.midi.Instrument timbre;
     String nom;
     List<Touche> touches;
