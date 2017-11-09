@@ -54,12 +54,17 @@ public class Touche {
         return son;
     }
     
-    public void commencerJouer()
+    public void commencerJouer(int timbre)
     {
-        
+        surbrillance = true;
+        son.commencerJouer(timbre);
     }
     
-    public void arreterJouer(){}
+    public void arreterJouer()
+    {
+        surbrillance = false;
+        son.arreterJouer();
+    }
     
     public void importerFichierAudio(){}
     

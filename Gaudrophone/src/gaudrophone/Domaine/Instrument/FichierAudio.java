@@ -12,10 +12,10 @@ public class FichierAudio extends Son{
     public FichierAudio(){}
     
     @Override
-    public void commencerJouer()
+    public void commencerJouer(int aa)
     {
         try {
-            File f = new File("/Users/alexa/BIGSHAQ.wav");
+            File f = new File(chemin);
             AudioInputStream aIS = AudioSystem.getAudioInputStream(f);
             Clip clip = AudioSystem.getClip();
             clip.open(aIS);

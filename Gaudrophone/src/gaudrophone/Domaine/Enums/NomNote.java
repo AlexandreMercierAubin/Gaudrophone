@@ -1,18 +1,18 @@
 package gaudrophone.Domaine.Enums;
 
 public enum NomNote {
-    Do(0),
-    DoDiese(1),
-    Re(2),
-    ReDiese(3),
-    Mi(4),
-    Fa(5),
-    FaDiese(6),
-    Sol(7),
-    SolDiese(8),
-    La(9),
-    LaDiese(10),
-    Si(11);
+    C(0),
+    CDiese(1),
+    D(2),
+    DDiese(3),
+    E(4),
+    F(5),
+    FDiese(6),
+    G(7),
+    GDiese(8),
+    A(9),
+    ADiese(10),
+    B(11);
     
     private int numNote;
 

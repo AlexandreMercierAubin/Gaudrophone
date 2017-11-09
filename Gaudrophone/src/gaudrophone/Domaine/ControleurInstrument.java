@@ -86,7 +86,7 @@ public class ControleurInstrument {
                 if(instrument.selectionnerTouche(coordRelative))
                 {
                     int indexTouche = instrument.getToucheSelectionee();
-                    instrument.getTouche(indexTouche).commencerJouer();
+                    instrument.getTouche(indexTouche).commencerJouer(instrument.getTimbre());
                 }
                 break;
         }

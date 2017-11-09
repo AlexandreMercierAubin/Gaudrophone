@@ -19,10 +19,11 @@ public class Note extends Son {
         }
     
     @Override
-    public void commencerJouer()
+    public void commencerJouer(int timbre)
     {
+        jouerSon = true;
         javax.sound.midi.Instrument instruments[], instr;
-        int noInstrument = 24;
+        int noInstrument = timbre;
         int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
         try{
             
@@ -45,18 +46,19 @@ public class Note extends Son {
     @Override
     public void arreterJouer()
     {
-        int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
-        try{
-            channels[0].allNotesOff();
-            channels[0].allSoundOff();
+        if (!jouerSon){
+            int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
+            try{
+                channels[0].allNotesOff();
+                channels[0].allSoundOff();
 
-            synthesizer.close();
+                synthesizer.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        //Ajouter code arreterJouer
     }
 
     @Override

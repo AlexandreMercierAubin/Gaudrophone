@@ -12,7 +12,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     ButtonGroup m_btnGroupeMode;
     ControleurInstrument controleur;
     PanneauAffichage panneauAffichage;
-    NomNote note = NomNote.Si;
+    NomNote note = NomNote.B;
     int octave = 3; 
     Note noteL = new Note();
           
@@ -287,19 +287,19 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        NomNote note = NomNote.ReDiese;
+        NomNote note = NomNote.DDiese;
         int octave = 3;
         Note noteL = new Note();
         noteL.setNom(note);
         noteL.setOctave(octave);
-        noteL.commencerJouer();
+        //noteL.commencerJouer();
 //        FichierAudio fichier = new FichierAudio();
 //        fichier.commencerJouer();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         System.out.println("commencerJouer");
-        noteL.commencerJouer();
+        //noteL.commencerJouer();
     }//GEN-LAST:event_jButton1MousePressed
 
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
