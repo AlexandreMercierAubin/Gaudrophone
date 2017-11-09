@@ -148,6 +148,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
         menuFichier.add(miEnregistrerSous);
 
         miQuitter.setText("Quitter");
+        miQuitter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miQuitterActionPerformed(evt);
+            }
+        });
         menuFichier.add(miQuitter);
 
         barreMenu.add(menuFichier);
@@ -260,6 +265,10 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private void miImporterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miImporterActionPerformed
         controleur.importerInstrument();
     }//GEN-LAST:event_miImporterActionPerformed
+
+    private void miQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miQuitterActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_miQuitterActionPerformed
    
     private void afficherAider(String filename, String... optionalFilenames)
     {
