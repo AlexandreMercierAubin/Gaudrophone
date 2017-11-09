@@ -192,5 +192,8 @@ public class ControleurInstrument {
         this.modeVisuel = modeVisuel;
     }
     
-    public void genererInstrument(GenerateurInstrument generateurInstrument){}
+    public void genererInstrument(GenerateurInstrument generateurInstrument)
+    {
+        instrument = generateurInstrument.generer();
+    }
 }
