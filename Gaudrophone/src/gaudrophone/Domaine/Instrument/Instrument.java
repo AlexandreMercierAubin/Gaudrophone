@@ -74,7 +74,7 @@ public class Instrument implements Serializable{
         apparence.getCoins().reset();
         apparence.getCoins().append(poly,true);
         
-        return null;
+        return toucheAjoutee;
     }
     
     public void rechercherTouche(String requete)

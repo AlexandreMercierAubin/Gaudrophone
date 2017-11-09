@@ -93,6 +93,11 @@ public class ApparenceTouche {
             return null;
     }
     
+    public int getNbBordures()
+    {
+        return bordures.size();
+    }
+    
     public Path2D  getCoins() {
         return coins;
     }

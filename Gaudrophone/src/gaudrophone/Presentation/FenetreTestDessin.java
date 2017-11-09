@@ -133,7 +133,7 @@ public class FenetreTestDessin extends javax.swing.JFrame {
         
         apparence3.setForme(Forme.Cercle);
         apparence3.setCouleurFond(Color.black);
-        apparence3.setDimension(new Dimension2D(0.2, 0.05), new Point2D.Double(0.5, 0.5));
+        apparence3.setDimension(new Dimension2D(0.2, 0.05));
         for (int i = 0; i < 3; i++)
         {
             apparence3.getBordure(i).setCouleur(Color.white);
