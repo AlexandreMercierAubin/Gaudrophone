@@ -7,10 +7,12 @@ import javax.sound.midi.*;
 public class Note extends Son {
     NomNote nom;
     int octave;
+    int timbreInstrument;
     Synthesizer synthesizer;
     MidiChannel[] channels;
     
-    public Note(){
+    public Note(int timbreInstr){
+        timbreInstrument = timbreInstr;
         try{
             synthesizer = MidiSystem.getSynthesizer();
         }
@@ -19,22 +21,22 @@ public class Note extends Son {
         }
     
     @Override
-    public void commencerJouer(int timbre)
+    public void commencerJouer()
     {
-        jouerSon = true;
         javax.sound.midi.Instrument instruments[], instr;
-        int noInstrument = timbre;
+        int noInstrument = timbreInstrument;
         int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
-        try{
-            
+        
+        jouerSon = true;
+        try{            
             synthesizer.open();
             instruments = synthesizer.getLoadedInstruments();
             instr = instruments[noInstrument];
             Patch patch = instr.getPatch();
 
             channels = synthesizer.getChannels();
-            channels[0].programChange(patch.getBank(),patch.getProgram());
-            channels[0].noteOn(midiNoteNumber, 100);    
+            channels[midiNoteNumber].programChange(patch.getBank(),patch.getProgram());
+            channels[midiNoteNumber].noteOn(midiNoteNumber, 100);    
         }
         catch (Exception e)
         {
@@ -49,8 +51,8 @@ public class Note extends Son {
         if (!jouerSon){
             int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
             try{
-                channels[0].allNotesOff();
-                channels[0].allSoundOff();
+                channels[midiNoteNumber].allNotesOff();
+                channels[midiNoteNumber].allSoundOff();
 
                 synthesizer.close();
             }

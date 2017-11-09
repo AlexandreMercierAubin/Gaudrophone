@@ -12,7 +12,7 @@ public class FichierAudio extends Son{
     public FichierAudio(){}
     
     @Override
-    public void commencerJouer(int aa)
+    public void commencerJouer()
     {
         try {
             File f = new File(chemin);

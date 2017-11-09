@@ -14,7 +14,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     PanneauAffichage panneauAffichage;
     NomNote note = NomNote.B;
     int octave = 3; 
-    Note noteL = new Note();
+    Note noteL = new Note(24);
           
     public FenetreInstrument() {
         initComponents();
@@ -289,7 +289,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         NomNote note = NomNote.DDiese;
         int octave = 3;
-        Note noteL = new Note();
+        Note noteL = new Note(24);
         noteL.setNom(note);
         noteL.setOctave(octave);
         //noteL.commencerJouer();

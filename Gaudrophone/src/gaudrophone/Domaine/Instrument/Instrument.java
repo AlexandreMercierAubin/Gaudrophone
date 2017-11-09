@@ -62,7 +62,7 @@ public class Instrument {
     public Touche ajouterTouche(Point2D position)
     {
         //ajouter une nouvelle touche à la fin de la liste
-        touches.add(new Touche(cleeTouche));
+        touches.add(new Touche(cleeTouche, timbre));
         ++cleeTouche;
         
         //inserer sa position et la selectionner

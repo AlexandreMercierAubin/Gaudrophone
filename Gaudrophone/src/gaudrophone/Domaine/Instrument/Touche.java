@@ -10,13 +10,15 @@ public class Touche {
     ApparenceTouche apparence;
     Son son;
     boolean surbrillance;
+    int timbreInstrument;
     
-    public Touche(int index)
+    public Touche(int index, int timbre)
     {
         this.index = index;
         texteAffichage="";
         apparence = new ApparenceTouche();
         surbrillance = false;
+        timbreInstrument = timbre;
     }
     
     public Point2D getPosition()
@@ -54,10 +56,10 @@ public class Touche {
         return son;
     }
     
-    public void commencerJouer(int timbre)
+    public void commencerJouer()
     {
         surbrillance = true;
-        son.commencerJouer(timbre);
+        son.commencerJouer();
     }
     
     public void arreterJouer()

@@ -5,7 +5,7 @@ public abstract class Son {
     int persistance;
     boolean jouerSon; 
     
-    public void commencerJouer(int aa){}
+    public void commencerJouer(){}
  
     public void arreterJouer(){}
     
