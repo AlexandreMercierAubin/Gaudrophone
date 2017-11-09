@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.awt.geom.Path2D;
 
 
-public class ApparenceTouche {
+public class ApparenceTouche 
+{
     Forme forme;
     Color couleurFond;
     Image imageFond;
@@ -58,27 +59,33 @@ public class ApparenceTouche {
         initialiserBordures();
     }
     
-    public Color getCouleurFond() {
+    public Color getCouleurFond() 
+    {
         return couleurFond;
     }
 
-    public void setCouleurFond(Color couleurFond) {
+    public void setCouleurFond(Color couleurFond) 
+    {
         this.couleurFond = couleurFond;
     }
 
-    public Image getImageFond() {
+    public Image getImageFond() 
+    {
         return imageFond;
     }
 
-    public void setImageFond(Image imageFond) {
+    public void setImageFond(Image imageFond) 
+    {
         this.imageFond = imageFond;
     }
 
-    public Dimension2D getDimension() {
+    public Dimension2D getDimension() 
+    {
         return dimension;
     }
 
-    public void setDimension(Dimension2D dimension) {
+    public void setDimension(Dimension2D dimension) 
+    {
         this.dimension = dimension;
         Polygon poly = Outils.calculerPolygone(36, position,dimension);
         coins.reset();
@@ -98,10 +105,12 @@ public class ApparenceTouche {
         return bordures.size();
     }
     
-    public Path2D  getCoins() {
+    public Path2D  getCoins() 
+    {
         return coins;
     }
-    public void setCoins(Path2D coins) {
+    public void setCoins(Path2D coins) 
+    {
         this.coins = coins;
     }
     
