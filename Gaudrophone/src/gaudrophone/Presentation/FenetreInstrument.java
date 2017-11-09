@@ -3,7 +3,13 @@ package gaudrophone.Presentation;
 import gaudrophone.Domaine.ControleurInstrument;
 import gaudrophone.Domaine.Enums.ModeVisuel;
 import gaudrophone.Domaine.Outils;
+import java.io.File;
+import java.io.FileInputStream;
 import javax.swing.*;
+import javax.swing.JFileChooser;
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 
 public class FenetreInstrument extends javax.swing.JFrame {
     ButtonGroup m_btnGroupeMode;
@@ -115,15 +121,30 @@ public class FenetreInstrument extends javax.swing.JFrame {
         menuFichier.setLabel("Fichier");
 
         miImporter.setText("Importer");
+        miImporter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miImporterActionPerformed(evt);
+            }
+        });
         menuFichier.add(miImporter);
 
         miImporterChanson.setText("Importer chanson");
         menuFichier.add(miImporterChanson);
 
         miEnregistrer.setText("Enregistrer");
+        miEnregistrer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miEnregistrerActionPerformed(evt);
+            }
+        });
         menuFichier.add(miEnregistrer);
 
         miEnregistrerSous.setText("Enregistrer sous");
+        miEnregistrerSous.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miEnregistrerSousActionPerformed(evt);
+            }
+        });
         menuFichier.add(miEnregistrerSous);
 
         miQuitter.setText("Quitter");
@@ -227,6 +248,18 @@ public class FenetreInstrument extends javax.swing.JFrame {
         btnOkAide.setVisible(false);
         scrlAide.setVisible(false);
     }//GEN-LAST:event_btnOkAideActionPerformed
+
+    private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEnregistrerActionPerformed
+        controleur.sauvegarderInstrument();
+    }//GEN-LAST:event_miEnregistrerActionPerformed
+
+    private void miEnregistrerSousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEnregistrerSousActionPerformed
+       controleur.sauvegarderSousInstrument();
+    }//GEN-LAST:event_miEnregistrerSousActionPerformed
+
+    private void miImporterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miImporterActionPerformed
+        controleur.importerInstrument();
+    }//GEN-LAST:event_miImporterActionPerformed
    
     private void afficherAider(String filename, String... optionalFilenames)
     {

@@ -4,8 +4,15 @@ import gaudrophone.Domaine.Generateur.GenerateurInstrument;
 import gaudrophone.Domaine.Instrument.Instrument;
 import gaudrophone.Domaine.Instrument.Touche;
 import gaudrophone.Domaine.Enums.ModeVisuel;
+import gaudrophone.Presentation.FenetreInstrument;
 import java.util.List;
 import java.awt.geom.Point2D;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import javax.swing.JFileChooser;
 
 public class ControleurInstrument {
     Instrument instrument;
@@ -119,9 +126,66 @@ public class ControleurInstrument {
     
     public void sauvegarderInstrument(){}
     
-    public void sauvegarderSousInstrument(){}
+    public void sauvegarderSousInstrument()
+    { 
+        JFileChooser dialogueEnregistrer = new JFileChooser();
+        // dialogue de sauvegarde
+        int rVal = dialogueEnregistrer.showSaveDialog(null);
+        
+        if (rVal == JFileChooser.APPROVE_OPTION) 
+        {
+            String filename = dialogueEnregistrer.getSelectedFile().getName();
+            String dir = dialogueEnregistrer.getCurrentDirectory().toString();
+            try 
+            {
+                FileOutputStream fichier = new FileOutputStream(dir+"\\"+filename);
+                ObjectOutputStream oosEnregistrer = new ObjectOutputStream(fichier);
+                
+                oosEnregistrer.writeObject(instrument);
+                oosEnregistrer.flush();
+                
+            } catch (final java.io.IOException e) 
+            {
+
+                e.printStackTrace();
+
+            }
+        }
+        if (rVal == JFileChooser.CANCEL_OPTION) {
+            
+        }
+    }
     
-    public void importerInstrument(){}
+    public void importerInstrument()
+    {
+        JFileChooser dialogueImporter = new JFileChooser();
+        // dialogue de sauvegarde
+        int rVal = dialogueImporter.showOpenDialog(null);
+        
+        if (rVal == JFileChooser.APPROVE_OPTION) 
+        {
+            File fichier = dialogueImporter.getSelectedFile();
+            try 
+            {
+                FileInputStream streamFichier = new FileInputStream(fichier.getAbsolutePath());
+                ObjectInputStream oisImporter = new ObjectInputStream(streamFichier);
+                
+                instrument=(Instrument)(oisImporter.readObject());
+                
+            } catch (final java.io.IOException e) 
+            {
+
+                e.printStackTrace();
+
+            }catch(ClassNotFoundException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if (rVal == JFileChooser.CANCEL_OPTION) {
+            
+        }
+    }
     
     public void modifierModeVisuel(ModeVisuel modeVisuel)
     {
