@@ -124,7 +124,23 @@ public class ControleurInstrument {
         }
     }
     
-    public void sauvegarderInstrument(){}
+    public void sauvegarderInstrument()
+    {
+            try 
+            {
+                FileOutputStream fichier = new FileOutputStream(instrument.getChemin());
+                ObjectOutputStream oosEnregistrer = new ObjectOutputStream(fichier);
+                
+                oosEnregistrer.writeObject(instrument);
+                oosEnregistrer.flush();
+                
+            } catch (final java.io.IOException e) 
+            {
+
+                e.printStackTrace();
+
+            }
+    }
     
     public void sauvegarderSousInstrument()
     { 
@@ -139,6 +155,7 @@ public class ControleurInstrument {
             try 
             {
                 FileOutputStream fichier = new FileOutputStream(dir+"\\"+filename);
+                instrument.setChemin(dir+"\\"+filename);
                 ObjectOutputStream oosEnregistrer = new ObjectOutputStream(fichier);
                 
                 oosEnregistrer.writeObject(instrument);

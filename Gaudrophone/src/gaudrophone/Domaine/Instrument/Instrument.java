@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class Instrument implements Serializable{
     javax.sound.midi.Instrument timbre;
     String nom;
+    String chemin;
     List<Touche> touches;
     int toucheSelectionee;
     int cleeTouche;
@@ -151,5 +152,13 @@ public class Instrument implements Serializable{
     
     public int getToucheSelectionee() {
         return toucheSelectionee;
+    }
+    
+        public String getChemin() {
+        return chemin;
+    }
+
+    public void setChemin(String chemin) {
+        this.chemin = chemin;
     }
 }
