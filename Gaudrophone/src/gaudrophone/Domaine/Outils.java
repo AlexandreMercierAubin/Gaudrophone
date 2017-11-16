@@ -1,6 +1,6 @@
 
 package gaudrophone.Domaine;
-
+import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.Enums.Forme;
 import java.awt.geom.Point2D;
 import java.awt.Polygon;
