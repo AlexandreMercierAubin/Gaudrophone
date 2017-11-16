@@ -8,14 +8,4 @@ public abstract class StrategieRecherche
     {
         return false;
     }
-    
-    public boolean estOctaveNote(String mots)
-    {
-        String regexpression="/[a-g]#?[0-9]/gi";
-        if(mots.matches(regexpression))
-        {
-            return true;
-        }
-        return false;
-    }
 }
