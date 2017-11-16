@@ -116,14 +116,14 @@ public class OutilsIT {
     public void testGetMidiNoteNumber() {
         System.out.println("getMidiNoteNumber");
         int octave = 5;
-        NomNote note = NomNote.Do;
+        NomNote note = NomNote.C;
         Outils instance = new Outils();
         int result = instance.getMidiNoteNumber(note, octave);
         assertEquals(60, result);
         
         // test avec une autre note        
         octave = 8;
-        note = NomNote.SolDiese;
+        note = NomNote.GSharp;
         result = instance.getMidiNoteNumber(note, octave);
         assertEquals(104, result);            
     }

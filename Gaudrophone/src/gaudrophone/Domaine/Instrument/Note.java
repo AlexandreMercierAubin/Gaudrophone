@@ -23,25 +23,52 @@ public class Note extends Son {
     @Override
     public void commencerJouer()
     {
-        javax.sound.midi.Instrument instruments[], instr;
-        int noInstrument = timbreInstrument;
-        int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
-        
-        jouerSon = true;
-        try{            
-            synthesizer.open();
-            instruments = synthesizer.getLoadedInstruments();
-            instr = instruments[noInstrument];
-            Patch patch = instr.getPatch();
+//        javax.sound.midi.Instrument instruments[], instr;
+//        int noInstrument = timbreInstrument;
+//        int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
+//        
+//        jouerSon = true;
+//        try{            
+//            synthesizer.open();
+//            instruments = synthesizer.getLoadedInstruments();
+//            instr = instruments[noInstrument];
+//            Patch patch = instr.getPatch();
+//
+//            channels = synthesizer.getChannels();
+//            channels[midiNoteNumber].programChange(patch.getBank(),patch.getProgram());
+//            channels[midiNoteNumber].noteOn(midiNoteNumber, 60);    
+//        }
+//        catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
+        try {
 
-            channels = synthesizer.getChannels();
-            channels[midiNoteNumber].programChange(patch.getBank(),patch.getProgram());
-            channels[midiNoteNumber].noteOn(midiNoteNumber, 100);    
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+            Sequencer sequencer = MidiSystem.getSequencer();
+            sequencer.open();
+            Sequence sequence = new Sequence(Sequence.PPQ,4);
+            Track track = sequence.createTrack();
+
+            MidiEvent event = null;
+
+            ShortMessage first = new ShortMessage();
+            first.setMessage(192,1,127,0);
+            MidiEvent changeInstrument = new MidiEvent(first, 0);
+            track.add(changeInstrument);
+
+            ShortMessage a = new ShortMessage();
+            a.setMessage(144,1,60,100);
+            MidiEvent noteOn = new MidiEvent(a, 0);
+            track.add(noteOn);
+
+            ShortMessage b = new ShortMessage();
+            b.setMessage(128,1,60,100);
+            MidiEvent noteOff = new MidiEvent(b, (60000/(60*4)));
+            track.add(noteOff);
+
+            sequencer.setSequence(sequence);
+            sequencer.start();
+        } catch (Exception ex) { ex.printStackTrace(); }
         //Ajouter code commencerJouer
     }
     
@@ -51,9 +78,7 @@ public class Note extends Son {
         if (!jouerSon){
             int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
             try{
-                channels[midiNoteNumber].allNotesOff();
-                channels[midiNoteNumber].allSoundOff();
-
+                channels[midiNoteNumber].noteOff(midiNoteNumber);
                 synthesizer.close();
             }
             catch (Exception e)

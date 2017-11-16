@@ -287,14 +287,14 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        NomNote note = NomNote.DDiese;
+        NomNote note = NomNote.DSharp;
         int octave = 3;
         Note noteL = new Note(24);
         noteL.setNom(note);
         noteL.setOctave(octave);
-        //noteL.commencerJouer();
-//        FichierAudio fichier = new FichierAudio();
-//        fichier.commencerJouer();
+        noteL.commencerJouer();
+ //       FichierAudio fichier = new FichierAudio();
+ //       fichier.commencerJouer();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
