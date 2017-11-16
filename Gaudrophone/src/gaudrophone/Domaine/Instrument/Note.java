@@ -52,7 +52,7 @@ public class Note extends Son {
             MidiEvent event = null;
 
             ShortMessage first = new ShortMessage();
-            first.setMessage(192,1,127,0);
+            first.setMessage(192,1,0,0);
             MidiEvent changeInstrument = new MidiEvent(first, 0);
             track.add(changeInstrument);
 
