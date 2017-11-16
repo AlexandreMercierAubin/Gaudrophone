@@ -36,51 +36,51 @@ public class Outils {
     // Retourne l'équivalent en coordonnées relatives d'un point donné en
     // coordonnées pixel où (0.0, 0.0) est le coin supérieur gauche et
     // (1.0, 1.0) est le coin inférieur droit.
-    public static Point2D conversionPointPixelRelatif(Point2D coordPixel,Dimension2D dimensionPanneau)
+    public static Point2D conversionPointPixelRelatif(Point2D coordPixel, int dimensionPanneau)
     {
-        double x = coordPixel.getX() / dimensionPanneau.getWidth();
-        double y = coordPixel.getY() / dimensionPanneau.getHeight();
+        double x = coordPixel.getX() / dimensionPanneau;
+        double y = coordPixel.getY() / dimensionPanneau;
         return new Point2D.Double(x, y);
     }
     
     // Retourne l'équivalent en coordonnées pixel d'un point donné en
     // coordonnées relatives où (0.0, 0.0) est le coin supérieur gauche et
     // (1.0, 1.0) est le coin inférieur droit.
-    public static Point2D conversionPointRelatifPixel(Point2D coordRelatif,Dimension2D dimensionPanneau)
+    public static Point2D conversionPointRelatifPixel(Point2D coordRelatif, int dimensionPanneau)
     {
-        int x = (int)(coordRelatif.getX() * dimensionPanneau.getWidth());
-        int y = (int)(coordRelatif.getY() * dimensionPanneau.getHeight());
+        int x = (int)(coordRelatif.getX() * dimensionPanneau);
+        int y = (int)(coordRelatif.getY() * dimensionPanneau);
         return new Point2D.Double(x, y);
     }
     
     // Retourne l'équivalent en dimension relative d'une dimension donnée en
     // pixels, où chaque dimension est donnée comme fraction de la dimension
     // totale du panneau.
-    public static Dimension2D conversionDimensionPixelRelatif(Dimension2D dimensionPixel,Dimension2D dimensionPanneau)
+    public static Dimension2D conversionDimensionPixelRelatif(Dimension2D dimensionPixel, int dimensionPanneau)
     {
-        double largeur = dimensionPixel.getWidth() / dimensionPanneau.getWidth();
-        double hauteur = dimensionPixel.getHeight() / dimensionPanneau.getHeight();
+        double largeur = dimensionPixel.getWidth() / dimensionPanneau;
+        double hauteur = dimensionPixel.getHeight() / dimensionPanneau;
         return new Dimension2D(largeur, hauteur);
     }
     
     // Retourne l'équivalent en dimension pixel d'une dimension donnée en
     // valeurs relatives, où chaque dimension est donnée comme fraction de la 
     // dimension totale du panneau.
-    public static Dimension2D conversionDimensionRelatifPixel(Dimension2D dimensionRelative,Dimension2D dimensionPanneau)
+    public static Dimension2D conversionDimensionRelatifPixel(Dimension2D dimensionRelative, int dimensionPanneau)
     {
-        int largeur = (int)(dimensionRelative.getWidth() * dimensionPanneau.getWidth());
-        int hauteur = (int)(dimensionRelative.getHeight() * dimensionPanneau.getHeight());
+        int largeur = (int)(dimensionRelative.getWidth() * dimensionPanneau);
+        int hauteur = (int)(dimensionRelative.getHeight() * dimensionPanneau);
         return new Dimension2D(largeur, hauteur);
     }
     
     // Conversion d'une valeur seule de pixel à relatif
-    public static double conversionPixelRelatif(int valeurPixel, double dimensionPanneau)
+    public static double conversionPixelRelatif(int valeurPixel, int dimensionPanneau)
     {
-        return valeurPixel / dimensionPanneau;
+        return (double)valeurPixel / (double)dimensionPanneau;
     }
     
     // Conversion d'une valeur seule de relatif à pixel
-    public static int conversionRelatifPixel(double valeurRelative, double dimensionPanneau)
+    public static int conversionRelatifPixel(double valeurRelative, int dimensionPanneau)
     {
         return (int)(valeurRelative * dimensionPanneau);
     }
