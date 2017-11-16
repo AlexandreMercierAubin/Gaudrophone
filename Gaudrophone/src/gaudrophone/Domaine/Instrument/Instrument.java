@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.awt.geom.Point2D;
 import gaudrophone.Domaine.Outils;
+import gaudrophone.Domaine.StrategieRecherche.StrategieRecherche;
 import java.awt.geom.Path2D;
 import java.awt.Polygon;
 import java.io.Serializable;
@@ -14,6 +15,7 @@ public class Instrument implements Serializable{
     List<Touche> touches;
     int toucheSelectionee;
     int cleeTouche;
+    List<StrategieRecherche> strategies;
     
     public Instrument()
     {
@@ -85,42 +87,18 @@ public class Instrument implements Serializable{
         for(int j=0; j<touches.size();++j)
         {
             Touche touche=touches.get(j);
-            String texteAffichage=touche.getTexteAffichage();
-
-            ApparenceTouche apparence =touche.apparence;
-            String forme = apparence.forme.toString();
-            String couleur = apparence.couleurFond.toString();
-            
-            Son son = touche.getSon();
-            int instanceOfIndex=0;
-            String nomNote = "";
-            String octave = "";
-            String chemin = "";
-            
-            if(son instanceof Note)
+            boolean correspond=false;
+            for(int i=0;i<mots.length && !correspond;++i)
             {
-                nomNote = ((Note)son).getNom().toString();
-                octave += ((Note)son).getOctave();
-                instanceOfIndex=1;
-            }
-            else if(son instanceof FichierAudio)
-            {
-                chemin = ((FichierAudio)son).getChemin();
-                instanceOfIndex=2;
-            }
-            
-            for(int i=0;i<mots.length;++i)
-            {
-                if(texteAffichage.contains(mots[i])
-                   || forme.contains(mots[i])
-                   || couleur.contains(mots[i])
-                   || instanceOfIndex==1&& nomNote.contains(mots[i])
-                   || instanceOfIndex==1&& octave.contains(mots[i])
-                   || instanceOfIndex==2&& chemin.contains(mots[i]))
+                for(int k=0;k<strategies.size()&& !correspond;++k)
                 {
-                    touche.setSurbrillance(true);
+                    if(strategies.get(k).comparer(touche, mots[i]))
+                    {
+                        correspond=true;
+                    }
                 }
             }
+            touche.setSurbrillance(correspond);
             
         }
         
