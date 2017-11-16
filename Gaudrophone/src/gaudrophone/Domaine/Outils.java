@@ -18,7 +18,7 @@ public class Outils {
         String strChemin = new File("").getAbsolutePath();
         try (BufferedReader brLecteur = new BufferedReader(new InputStreamReader(new FileInputStream(strChemin.concat(strNomFichier)),"ISO-8859-1"))) 
         {
-
+            
             String strLigne;
 
             while ((strLigne = brLecteur.readLine()) != null) 
@@ -85,10 +85,15 @@ public class Outils {
         return (int)(valeurRelative * dimensionPanneau);
     }
     
-    public static int getMidiNoteNumber(/*NomNote note,*/int octave)
+    public static int getMidiNoteNumber(NomNote note, int octave)
     {
-        //ajouter code
-        return -1;
+        //Calcul du nombre de la note Midi
+        int midiNote;
+        int midiOctave = octave * 12 ;
+        int numNote = note.getNumNote();        
+        
+        midiNote = midiOctave + numNote;
+        return midiNote;
     }
     
     public static Polygon calculerPolygone(int nbSommets, Point2D centrePoly, Dimension2D dimension)

@@ -12,7 +12,7 @@ import java.awt.Polygon;
 import java.io.Serializable;
 
 public class Instrument implements Serializable{
-    javax.sound.midi.Instrument timbre;
+    int timbre;
     String nom;
     String chemin;
     List<Touche> touches;
@@ -30,12 +30,15 @@ public class Instrument implements Serializable{
         strategies.add(new StrategieForme());
     }
     
-    public javax.sound.midi.Instrument getTimbre()
+    public int getTimbre()
     {
         return timbre;
     }
     
-    public void setTimbre(){}
+    public void setTimbre(int noInstrument)
+    {
+        timbre=noInstrument;
+    }
     
     public String getNom()
     {
@@ -69,7 +72,7 @@ public class Instrument implements Serializable{
     public Touche ajouterTouche(Point2D position)
     {
         //ajouter une nouvelle touche à la fin de la liste
-        touches.add(new Touche(cleeTouche));
+        touches.add(new Touche(cleeTouche, timbre));
         ++cleeTouche;
         
         //inserer sa position et la selectionner
