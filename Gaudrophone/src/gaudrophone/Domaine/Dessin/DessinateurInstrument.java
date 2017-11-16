@@ -51,9 +51,11 @@ public class DessinateurInstrument {
     
     private void dessinerCercle(Touche touche, Graphics2D g2)
     {
+        int minDimPanneau = (int)Math.min(dimensionPanneau.getWidth(), dimensionPanneau.getHeight());
+        
         ApparenceTouche apparence = touche.getApparence();
-        Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), dimensionPanneau);
-        Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), dimensionPanneau);
+        Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), minDimPanneau);
+        Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), minDimPanneau);
         
         // Dessin du cercle intérieur
         g2.setColor(apparence.getCouleurFond());
@@ -63,7 +65,7 @@ public class DessinateurInstrument {
 
         // Dessin de la bordure
         Bordure bordure = apparence.getBordure(0);
-        double minDimPanneau = Math.min(dimensionPanneau.getWidth(), dimensionPanneau.getHeight());
+
         int largeurBordure = Outils.conversionRelatifPixel(bordure.getLargeur(), minDimPanneau);
         
         if (bordure.getVisible())
@@ -76,10 +78,11 @@ public class DessinateurInstrument {
     
     private void dessinerRectangle(Touche touche, Graphics2D g2)
     {
+        int minDimPanneau = (int)Math.min(dimensionPanneau.getWidth(), dimensionPanneau.getHeight());
+        
         ApparenceTouche apparence = touche.getApparence();
-        Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), dimensionPanneau);
-        Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), dimensionPanneau);
-        double minDimPanneau = Math.min(dimensionPanneau.getWidth(), dimensionPanneau.getHeight());
+        Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), minDimPanneau);
+        Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), minDimPanneau);
         
         // Dessin du rectangle intérieur
         g2.setColor(apparence.getCouleurFond());
@@ -110,10 +113,11 @@ public class DessinateurInstrument {
     
     private void dessinerPolygone(Touche touche, Graphics2D g2)
     {
+        int minDimPanneau = (int)Math.min(dimensionPanneau.getWidth(), dimensionPanneau.getHeight());
+        
         ApparenceTouche apparence = touche.getApparence();
-        Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), dimensionPanneau);
-        Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), dimensionPanneau);
-        double minDimPanneau = Math.min(dimensionPanneau.getWidth(), dimensionPanneau.getHeight());
+        Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), minDimPanneau);
+        Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), minDimPanneau);
         
         // Dessin du polygone intérieur
         int nbBordures = Outils.nbBordures(apparence.getForme());
@@ -153,10 +157,11 @@ public class DessinateurInstrument {
     
     private void dessinerBorduresTransversales(Touche touche, Graphics2D g2)
     {
+        int minDimPanneau = (int)Math.min(dimensionPanneau.getWidth(), dimensionPanneau.getHeight());
+        
         ApparenceTouche apparence = touche.getApparence();
-        Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), dimensionPanneau);
-        Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), dimensionPanneau);
-        double minDimPanneau = Math.min(dimensionPanneau.getWidth(), dimensionPanneau.getHeight());
+        Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), minDimPanneau);
+        Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), minDimPanneau);
         
         int premiereBordureTransversale = Outils.nbBordures(apparence.getForme());
         Bordure bordureHorizontale = apparence.getBordure(premiereBordureTransversale);
