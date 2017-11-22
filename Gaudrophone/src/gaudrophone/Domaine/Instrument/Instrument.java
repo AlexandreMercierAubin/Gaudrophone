@@ -1,4 +1,5 @@
 package gaudrophone.Domaine.Instrument;
+import gaudrophone.Domaine.Dimension2D;
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.geom.Point2D;
@@ -22,6 +23,7 @@ public class Instrument implements Serializable{
     
     public Instrument()
     {
+        strategies = new ArrayList<StrategieRecherche>();
         cleeTouche=0;
         touches = new ArrayList<Touche>();
         nom="template";
@@ -68,6 +70,11 @@ public class Instrument implements Serializable{
     
     public Touche ajouterTouche(Point2D position)
     {
+        // Ajuste les valeurs relatives si nécessaire (valeur supérieur à 1
+        // lorsqu'on redimensionne la fenêtre et qu'on place une touche plus loin
+        // que la limite précédente)
+        ajusterTouches(position);
+        
         //ajouter une nouvelle touche à la fin de la liste
         touches.add(new Touche(cleeTouche));
         ++cleeTouche;
@@ -138,11 +145,38 @@ public class Instrument implements Serializable{
         return toucheSelectionee;
     }
     
-        public String getChemin() {
+    public String getChemin() {
         return chemin;
     }
 
     public void setChemin(String chemin) {
         this.chemin = chemin;
+    }
+    
+    // Ajuste la position et la dimension des touches existantes si 
+    private void ajusterTouches(Point2D nouvellePosition)
+    {
+        double x = nouvellePosition.getX();
+        double y = nouvellePosition.getY();
+        boolean ajusterX = x > 1;
+        boolean ajusterY = y > 1;
+        
+        if (ajusterX || ajusterY)
+        {
+            for (Touche touche: touches)
+            {
+                ApparenceTouche apparence = touche.getApparence();
+                Point2D position = apparence.getPosition();
+                Dimension2D dimension = apparence.getDimension();
+                
+                double nouveauX = ajusterX ? position.getX() / x : position.getX();
+                double nouveauY = ajusterY ? position.getY() / y : position.getY();
+                double nouveauWidth = ajusterX ? dimension.getWidth() / x : dimension.getWidth();
+                double nouveauHeight = ajusterY ? dimension.getHeight() / y : dimension.getHeight();
+                
+                apparence.setPosition(new Point2D.Double(nouveauX, nouveauY));
+                apparence.setDimension(new Dimension2D(nouveauWidth, nouveauHeight));
+            }
+        }
     }
 }

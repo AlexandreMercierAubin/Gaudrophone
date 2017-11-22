@@ -19,8 +19,8 @@ public class FenetreTestDessin extends javax.swing.JFrame {
         controleur = fenetreInstrument.getControleur();
         
         panneauAffichage1.setFenetreInstrument(fenetreInstrument);
-        ajouterTouches();
-        //controleur.genererInstrument(new GenerateurGuitare());
+        //ajouterTouches();
+        controleur.genererInstrument(new GenerateurGuitare());
         
         panneauAffichage1.invalidate();
     }
