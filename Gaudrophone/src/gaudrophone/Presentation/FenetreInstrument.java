@@ -1,15 +1,10 @@
 package gaudrophone.Presentation;
 
+import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.ControleurInstrument;
 import gaudrophone.Domaine.Enums.ModeVisuel;
 import gaudrophone.Domaine.Outils;
-import java.io.File;
-import java.io.FileInputStream;
 import javax.swing.*;
-import javax.swing.JFileChooser;
-import java.io.ObjectOutputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
 
 public class FenetreInstrument extends javax.swing.JFrame {
     ButtonGroup m_btnGroupeMode;
@@ -339,6 +334,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barreMenu;
     private javax.swing.JButton btnOkAide;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -13,7 +13,7 @@ import java.awt.Polygon;
 import java.io.Serializable;
 
 public class Instrument implements Serializable{
-    javax.sound.midi.Instrument timbre;
+    int timbre;
     String nom;
     String chemin;
     List<Touche> touches;
@@ -27,17 +27,21 @@ public class Instrument implements Serializable{
         cleeTouche=0;
         touches = new ArrayList<Touche>();
         nom="template";
+        strategies= new ArrayList<StrategieRecherche>();
         strategies.add(new StrategieChemin());
         strategies.add(new StrategieCouleur());
         strategies.add(new StrategieForme());
     }
     
-    public javax.sound.midi.Instrument getTimbre()
+    public int getTimbre()
     {
         return timbre;
     }
     
-    public void setTimbre(){}
+    public void setTimbre(int noInstrument)
+    {
+        timbre=noInstrument;
+    }
     
     public String getNom()
     {
@@ -76,7 +80,7 @@ public class Instrument implements Serializable{
         ajusterTouches(position);
         
         //ajouter une nouvelle touche à la fin de la liste
-        touches.add(new Touche(cleeTouche));
+        touches.add(new Touche(cleeTouche, timbre));
         ++cleeTouche;
         
         //inserer sa position et la selectionner
