@@ -25,6 +25,7 @@ public class Instrument implements Serializable{
         cleeTouche=0;
         touches = new ArrayList<Touche>();
         nom="template";
+        strategies= new ArrayList<StrategieRecherche>();
         strategies.add(new StrategieChemin());
         strategies.add(new StrategieCouleur());
         strategies.add(new StrategieForme());
