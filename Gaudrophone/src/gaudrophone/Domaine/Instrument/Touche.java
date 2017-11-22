@@ -5,33 +5,20 @@ import java.awt.geom.Point2D;
 
 public class Touche {
     int index;
-    Point2D position;
+    
     String texteAffichage;
     ApparenceTouche apparence;
     Son son;
     boolean surbrillance;
+    int timbreInstrument;
     
-    public Touche(int index)
+    public Touche(int index, int timbre)
     {
         this.index = index;
         texteAffichage="";
         apparence = new ApparenceTouche();
         surbrillance = false;
-    }
-    
-    public Point2D getPosition()
-    {
-        return position;
-    }
-    
-    public void setPosition(Point2D valeur)
-    {
-        position = valeur;
-        Polygon poly = Outils.calculerPolygone(36,
-                                               position,
-                                               apparence.getDimension());
-        apparence.getCoins().reset();
-        apparence.getCoins().append(poly,true);
+        timbreInstrument = timbre;
     }
     
     public String getTexteAffichage()
@@ -54,11 +41,19 @@ public class Touche {
         return son;
     }
     
-    public void commencerJouer(){}
+    public void commencerJouer()
+    {
+        surbrillance = true;
+        son.commencerJouer();
+    }
     
-    public void arreterJouer(){}
+    public void arreterJouer()
+    {
+        surbrillance = false;
+        son.arreterJouer();
+    }
     
-    public void ImporterFichierAudio(){}
+    public void importerFichierAudio(){}
     
     public void enleverFichierAudio(){}
     

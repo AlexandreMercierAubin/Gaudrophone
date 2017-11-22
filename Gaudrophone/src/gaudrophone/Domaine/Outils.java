@@ -1,6 +1,6 @@
 
 package gaudrophone.Domaine;
-
+import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.Enums.Forme;
 import java.awt.geom.Point2D;
 import java.awt.Polygon;
@@ -18,7 +18,7 @@ public class Outils {
         String strChemin = new File("").getAbsolutePath();
         try (BufferedReader brLecteur = new BufferedReader(new InputStreamReader(new FileInputStream(strChemin.concat(strNomFichier)),"ISO-8859-1"))) 
         {
-
+            
             String strLigne;
 
             while ((strLigne = brLecteur.readLine()) != null) 
@@ -36,47 +36,64 @@ public class Outils {
     // Retourne l'équivalent en coordonnées relatives d'un point donné en
     // coordonnées pixel où (0.0, 0.0) est le coin supérieur gauche et
     // (1.0, 1.0) est le coin inférieur droit.
-    public static Point2D conversionPointPixelRelatif(Point2D coordPixel,Dimension2D dimensionPanneau)
+    public static Point2D conversionPointPixelRelatif(Point2D coordPixel, int dimensionPanneau)
     {
-        double x = coordPixel.getX() / dimensionPanneau.getWidth();
-        double y = coordPixel.getY() / dimensionPanneau.getHeight();
+        double x = coordPixel.getX() / dimensionPanneau;
+        double y = coordPixel.getY() / dimensionPanneau;
         return new Point2D.Double(x, y);
     }
     
     // Retourne l'équivalent en coordonnées pixel d'un point donné en
     // coordonnées relatives où (0.0, 0.0) est le coin supérieur gauche et
     // (1.0, 1.0) est le coin inférieur droit.
-    public static Point2D conversionPointRelatifPixel(Point2D coordRelatif,Dimension2D dimensionPanneau)
+    public static Point2D conversionPointRelatifPixel(Point2D coordRelatif, int dimensionPanneau)
     {
-        int x = (int)(coordRelatif.getX() * dimensionPanneau.getWidth());
-        int y = (int)(coordRelatif.getY() * dimensionPanneau.getHeight());
+        int x = (int)(coordRelatif.getX() * dimensionPanneau);
+        int y = (int)(coordRelatif.getY() * dimensionPanneau);
         return new Point2D.Double(x, y);
     }
     
     // Retourne l'équivalent en dimension relative d'une dimension donnée en
     // pixels, où chaque dimension est donnée comme fraction de la dimension
     // totale du panneau.
-    public static Dimension2D conversionDimensionPixelRelatif(Dimension2D dimensionPixel,Dimension2D dimensionPanneau)
+    public static Dimension2D conversionDimensionPixelRelatif(Dimension2D dimensionPixel, int dimensionPanneau)
     {
-        double largeur = dimensionPixel.getWidth() / dimensionPanneau.getWidth();
-        double hauteur = dimensionPixel.getHeight() / dimensionPanneau.getHeight();
+        double largeur = dimensionPixel.getWidth() / dimensionPanneau;
+        double hauteur = dimensionPixel.getHeight() / dimensionPanneau;
         return new Dimension2D(largeur, hauteur);
     }
     
     // Retourne l'équivalent en dimension pixel d'une dimension donnée en
     // valeurs relatives, où chaque dimension est donnée comme fraction de la 
     // dimension totale du panneau.
-    public static Dimension2D conversionDimensionRelatifPixel(Dimension2D dimensionRelative,Dimension2D dimensionPanneau)
+    public static Dimension2D conversionDimensionRelatifPixel(Dimension2D dimensionRelative, int dimensionPanneau)
     {
-        int largeur = (int)(dimensionRelative.getWidth() * dimensionPanneau.getWidth());
-        int hauteur = (int)(dimensionRelative.getHeight() * dimensionPanneau.getHeight());
+        int largeur = (int)(dimensionRelative.getWidth() * dimensionPanneau);
+        int hauteur = (int)(dimensionRelative.getHeight() * dimensionPanneau);
         return new Dimension2D(largeur, hauteur);
     }
     
-    public static int getMidiNoteNumber(/*NomNote note,*/int octave)
+    // Conversion d'une valeur seule de pixel à relatif
+    public static double conversionPixelRelatif(int valeurPixel, int dimensionPanneau)
     {
-        //ajouter code
-        return -1;
+        return (double)valeurPixel / (double)dimensionPanneau;
+    }
+    
+    // Conversion d'une valeur seule de relatif à pixel
+    public static int conversionRelatifPixel(double valeurRelative, int dimensionPanneau)
+    {
+        return (int)(valeurRelative * dimensionPanneau);
+    }
+    
+    public static int getMidiNoteNumber(NomNote note, int octave)
+    {
+        //Calcul du nombre de la note Midi
+        int midiNote;
+        int midiOctave = octave * 12 ;
+        int numNote = note.getNumNote();        
+        
+        midiNote = midiOctave + numNote;
+        return midiNote;
     }
     
     public static Polygon calculerPolygone(int nbSommets, Point2D centrePoly, Dimension2D dimension)
@@ -93,8 +110,8 @@ public class Outils {
             {
                 //Calcul d'un point selon le nombre de sommets 
                 //en pourcentage
-                double x = Math.cos(Math.toRadians(ecart*i));
-                double y = Math.sin(Math.toRadians(ecart*i));
+                double x = Math.sin(Math.toRadians(ecart*i));
+                double y = -Math.cos(Math.toRadians(ecart*i));
 
                 //remise à l'échelle du point
                 x = (dimension.getWidth()/2)*x;

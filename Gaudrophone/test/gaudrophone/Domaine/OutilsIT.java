@@ -5,6 +5,7 @@
  */
 package gaudrophone.Domaine;
 
+import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.Enums.Forme;
 import java.awt.Polygon;
 import java.awt.geom.Point2D;
@@ -59,9 +60,8 @@ public class OutilsIT {
     public void testConversionPointPixelRelatif() {
         System.out.println("conversionPointPixelRelatif");
         Point2D coordPixel = new Point2D.Double(250, 500);
-        Dimension2D dimensionPanneau = new Dimension2D(2500, 2000);
-        Point2D expResult = new Point2D.Double(0.1, 0.25);
-        Point2D result = Outils.conversionPointPixelRelatif(coordPixel, dimensionPanneau);
+        Point2D expResult = new Point2D.Double(0.125, 0.25);
+        Point2D result = Outils.conversionPointPixelRelatif(coordPixel, 2000);
         assertEquals(expResult.getX(), result.getX(), 0.0);
         assertEquals(expResult.getY(), result.getY(), 0.0);
     }
@@ -72,10 +72,9 @@ public class OutilsIT {
     @Test
     public void testConversionPointRelatifPixel() {
         System.out.println("conversionPointRelatifPixel");
-        Point2D coordRelatif = new Point2D.Double(0.1, 0.25);
-        Dimension2D dimensionPanneau = new Dimension2D(2500, 2000);
+        Point2D coordRelatif = new Point2D.Double(0.125, 0.25);
         Point2D expResult = new Point2D.Double(250, 500);
-        Point2D result = Outils.conversionPointRelatifPixel(coordRelatif, dimensionPanneau);
+        Point2D result = Outils.conversionPointRelatifPixel(coordRelatif, 2000);
         assertEquals(expResult.getX(), result.getX(), 0.0);
         assertEquals(expResult.getY(), result.getY(), 0.0);
     }
@@ -87,9 +86,8 @@ public class OutilsIT {
     public void testConversionDimensionPixelRelatif() {
         System.out.println("conversionDimensionPixelRelatif");
         Dimension2D dimensionPixel = new Dimension2D(250, 500);
-        Dimension2D dimensionPanneau = new Dimension2D(2500, 2000);
-        Dimension2D expResult = new Dimension2D(0.1, 0.25);
-        Dimension2D result = Outils.conversionDimensionPixelRelatif(dimensionPixel, dimensionPanneau);
+        Dimension2D expResult = new Dimension2D(0.125, 0.25);
+        Dimension2D result = Outils.conversionDimensionPixelRelatif(dimensionPixel, 2000);
         assertEquals(expResult.getWidth(), result.getWidth(), 0.0);
         assertEquals(expResult.getHeight(), result.getHeight(), 0.0);
     }
@@ -100,28 +98,48 @@ public class OutilsIT {
     @Test
     public void testConversionDimensionRelatifPixel() {
         System.out.println("conversionDimensionRelatifPixel");
-        Dimension2D dimensionRelative = new Dimension2D(0.1, 0.25);
-        Dimension2D dimensionPanneau = new Dimension2D(2500, 2000);
+        Dimension2D dimensionRelative = new Dimension2D(0.125, 0.25);
         Dimension2D expResult = new Dimension2D(250, 500);
-        Dimension2D result = Outils.conversionDimensionRelatifPixel(dimensionRelative, dimensionPanneau);
+        Dimension2D result = Outils.conversionDimensionRelatifPixel(dimensionRelative, 2000);
         assertEquals(expResult.getWidth(), result.getWidth(), 0.0);
         assertEquals(expResult.getHeight(), result.getHeight(), 0.0);
     }
+    
+    @Test
+    public void testConversionPixelRelatif() {
+        System.out.println("conversionPixelRelatif");
+        double expResult = 0.25;
+        double result = Outils.conversionPixelRelatif(500, 2000);
+        assertEquals(expResult, result, 0.0);
+    }
+    
+    @Test
+    public void testConversionRelatifPixel() {
+        System.out.println("conversionRelatifPixel");
+        int expResult = 500;
+        int result = Outils.conversionRelatifPixel(0.25, 2000);
+        assertEquals(expResult, result);
+    }
 
-//    /**
-//     * Test of getMidiNoteNumber method, of class Outils.
-//     */
-//    @Test
-//    public void testGetMidiNoteNumber() {
-//        System.out.println("getMidiNoteNumber");
-//        int octave = 0;
-//        Outils instance = new Outils();
-//        int expResult = 0;
-//        int result = instance.getMidiNoteNumber(octave);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+/**
+     * Test of getMidiNoteNumber method, of class Outils.
+     */
+    @Test
+    public void testGetMidiNoteNumber() {
+        System.out.println("getMidiNoteNumber");
+        int octave = 5;
+        NomNote note = NomNote.C;
+        Outils instance = new Outils();
+        int result = instance.getMidiNoteNumber(note, octave);
+        assertEquals(60, result);
+        
+        // test avec une autre note        
+        octave = 8;
+        note = NomNote.GSharp;
+        result = instance.getMidiNoteNumber(note, octave);
+        assertEquals(104, result);            
+    }
+
 
     /**
      * Test of calculerPolygone method, of class Outils.
@@ -134,8 +152,8 @@ public class OutilsIT {
         Dimension2D dimension = new Dimension2D(100,100);
         Outils instance = new Outils();
         
-        int[] xPoly= {50,0,-50,0};
-        int[] yPoly= {0,50,0,-50};
+        int[] xPoly= {0,50,0,-50};
+        int[] yPoly= {-50,0,50,0};
        
         Polygon result = instance.calculerPolygone(nbSommets, centrePoly, dimension);
         assertEquals(4,result.npoints);
@@ -148,8 +166,8 @@ public class OutilsIT {
         
         //test avec un centre autre
         centrePoly = new Point2D.Double(50,50);
-        int[] xPoly2= {100,50,0,50};
-        int[] yPoly2= {50,100,50,0};
+        int[] xPoly2= {50,100,50,0};
+        int[] yPoly2= {0,50,100,50};
         result = instance.calculerPolygone(nbSommets, centrePoly, dimension);
         assertEquals(4,result.npoints);
         for(int i=0;i<4;i++)

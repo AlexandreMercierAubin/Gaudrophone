@@ -5,10 +5,15 @@ import java.awt.Color;
 public class Bordure {
     int cote;
     boolean visible;
-    int largeur;
+    double largeur;
     Color couleur;
     
-    public Bordure(){}
+    public Bordure()
+    {
+        couleur = Color.DARK_GRAY;
+        visible = true;
+        largeur = 0.002;
+    }
     
     public int getCote()
     {
@@ -30,12 +35,12 @@ public class Bordure {
         visible = valeur;
     }
     
-    public int getLargeur()
+    public double getLargeur()
     {
         return largeur;
     }
     
-    public void setLargeur(int largeur)
+    public void setLargeur(double largeur)
     {
         this.largeur = largeur;
     }

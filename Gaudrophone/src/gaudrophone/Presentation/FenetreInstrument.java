@@ -1,5 +1,6 @@
 package gaudrophone.Presentation;
 
+import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.ControleurInstrument;
 import gaudrophone.Domaine.Enums.ModeVisuel;
 import gaudrophone.Domaine.Outils;
@@ -568,18 +569,38 @@ public class FenetreInstrument extends javax.swing.JFrame {
         menuFichier.setLabel("Fichier");
 
         miImporter.setText("Importer");
+        miImporter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miImporterActionPerformed(evt);
+            }
+        });
         menuFichier.add(miImporter);
 
         miImporterChanson.setText("Importer chanson");
         menuFichier.add(miImporterChanson);
 
         miEnregistrer.setText("Enregistrer");
+        miEnregistrer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miEnregistrerActionPerformed(evt);
+            }
+        });
         menuFichier.add(miEnregistrer);
 
         miEnregistrerSous.setText("Enregistrer sous");
+        miEnregistrerSous.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miEnregistrerSousActionPerformed(evt);
+            }
+        });
         menuFichier.add(miEnregistrerSous);
 
         miQuitter.setText("Quitter");
+        miQuitter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miQuitterActionPerformed(evt);
+            }
+        });
         menuFichier.add(miQuitter);
 
         barreMenu.add(menuFichier);
