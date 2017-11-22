@@ -16,18 +16,17 @@ public class Note extends Son {
         try{
             synthesizer = MidiSystem.getSynthesizer();
         }
-        catch(Exception e){}
-        
+        catch(Exception e){}        
         }
     
     @Override
     public void commencerJouer()
     {
+        jouerSon = true;
 //        javax.sound.midi.Instrument instruments[], instr;
 //        int noInstrument = timbreInstrument;
 //        int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
 //        
-//        jouerSon = true;
 //        try{            
 //            synthesizer.open();
 //            instruments = synthesizer.getLoadedInstruments();
