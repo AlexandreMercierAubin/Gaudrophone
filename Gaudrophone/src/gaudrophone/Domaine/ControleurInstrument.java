@@ -22,12 +22,14 @@ public class ControleurInstrument {
     String cheminSauvegarde;
     ModeVisuel modeVisuel;
     boolean toucheEnDeplacement;
+    boolean toucheEnJeu;
     
     public ControleurInstrument()
     {
         instrument = new Instrument();
         metronome = new Metronome();
         toucheEnDeplacement = false;
+        toucheEnJeu=false;
         modeVisuel=ModeVisuel.Ajouter;
     }
     
@@ -93,6 +95,7 @@ public class ControleurInstrument {
                 {
                     int indexTouche = instrument.getToucheSelectionee();
                     instrument.getTouche(indexTouche).commencerJouer();
+                    toucheEnJeu=true;
                 }
                 break;
         }
@@ -114,10 +117,11 @@ public class ControleurInstrument {
                 
             case Jouer:
                 // envoyer un message d'arret a la touche relachee
-                if(instrument.selectionnerTouche(coordRelative))
+                if(toucheEnJeu)
                 {
                     int indexTouche = instrument.getToucheSelectionee();
                     instrument.getTouche(indexTouche).arreterJouer();
+                    toucheEnJeu=false;
                 }
                 break;
                 

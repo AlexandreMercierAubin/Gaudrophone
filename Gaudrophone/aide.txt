@@ -1,3 +1,3 @@
+Le Gaudrophone est un concepteur d'instrument virtuel.
+Grâce à ce logiciel, il devient possible de créer numériquement son propre instrument.
 
-Test Aide
-ok
