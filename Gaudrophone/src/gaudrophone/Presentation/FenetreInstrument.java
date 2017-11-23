@@ -2,10 +2,18 @@ package gaudrophone.Presentation;
 
 import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.ControleurInstrument;
+import gaudrophone.Domaine.Dimension2D;
+import gaudrophone.Domaine.Enums.Forme;
 import gaudrophone.Domaine.Enums.ModeVisuel;
+import gaudrophone.Domaine.Instrument.Instrument;
+import gaudrophone.Domaine.Instrument.Touche;
 import gaudrophone.Domaine.Outils;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.geom.Point2D;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class FenetreInstrument extends javax.swing.JFrame {
     ButtonGroup m_btnGroupeMode;
@@ -33,8 +41,115 @@ public class FenetreInstrument extends javax.swing.JFrame {
         btnParcourirImage.setEnabled(false);
         btnParcourirFichierAudio.setEnabled(false);
         spGaudrophone.setResizeWeight(1);
-
-
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        controleur.getInstrument().ajouterTouche(new Point2D.Double(0.5,0.5));
+        controleur.getInstrument().selectionnerTouche(new Point2D.Double(0.5,0.5));
+        int index = controleur.getInstrument().getToucheSelectionee();
+        Touche touche = controleur.getInstrument().getTouche(index);
+        touche.getApparence().setForme(Forme.Hexagone);
+        touche.getApparence().setCouleurFond(Color.green);
+        touche.getApparence().setDimension(new Dimension2D(0.5,0.5));
+        
+        controleur.getInstrument().setNom("Test123");
+        controleur.getInstrument().setTimbre(25);
+        
+        
+        TPInfo.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent ce) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                if(TPInfo.getSelectedIndex() == 0){
+                    InstrumentUpdater(); 
+                }
+                else{
+                    ToucheUpdater();
+                }
+            }
+        });
+        
+        
+    }
+    
+    public void InstrumentUpdater()
+    {
+        Instrument instru = controleur.getInstrument();
+        int index = instru.getTimbre();
+        
+        txtNomInstrument.setText(instru.getNom());
+        
+        switch(index){
+            case 1:{
+                cbTimbre.setSelectedIndex(0);
+                break;
+            }
+            case 25:{
+                cbTimbre.setSelectedIndex(1);
+                break;
+            }
+        }
+    }
+    
+    public void InstrumentEnregistrer()
+    {
+        Instrument instru = controleur.getInstrument();
+        int index = cbTimbre.getSelectedIndex();
+        
+        instru.setNom(txtNomInstrument.getText());
+        
+        switch(index){
+            case 0:{
+                instru.setTimbre(1);
+                break;
+            }
+            case 1:{
+                instru.setTimbre(25);
+                break;
+            }
+        }
+        
+    }
+    
+    public void ToucheUpdater(){
+        int index = controleur.getInstrument().getToucheSelectionee();
+        Touche touche = controleur.getInstrument().getTouche(index);
+        //touche.getApparence().setForme(Forme.Hexagone);
+        
+        Forme forme = touche.getApparence().getForme();
+        switch(forme){
+            case Cercle:{
+                cbForme.setSelectedIndex(0);
+                break;
+            }
+            case Triangle:{
+                cbForme.setSelectedIndex(1);
+                break;
+            }
+            case Rectangle:{
+                cbForme.setSelectedIndex(2);
+                break;
+            }
+            case Pentagone:{
+                cbForme.setSelectedIndex(3);
+                break;
+            }
+            case Hexagone:{
+                cbForme.setSelectedIndex(4);
+                break;
+            }
+        }
+        
+        Image image = touche.getApparence().getImageFond();
+        if(image == null){
+            bgFond.clearSelection();
+            rbCouleur.setSelected(true);
+            cbCouleur.setSelectedIndex(0);
+            
+            Color couleur = touche.getApparence().getCouleurFond();
+            spinRouge.setValue(couleur.getRed());
+            spinBleu.setValue(couleur.getBlue());
+            spinVert.setValue(couleur.getGreen());
+            //ne pas oublier de remettre les composantes enabled disabled.
+        }
     }
     
     public ControleurInstrument getControleur()
@@ -188,9 +303,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         lblTimbre.setText("Timbre :");
 
-        cbTimbre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Guitare", "Piano" }));
+        cbTimbre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piano", "Guitare" }));
 
-        lblMetronome.setText("Métronôme : ");
+        lblMetronome.setText("Métronome : ");
 
         lblNoteMetronome.setText("Note :");
 
@@ -276,6 +391,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
                     .addComponent(lblTimbre)
                     .addComponent(cbTimbre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(btnEnregistrerInstrument)
+                .addGap(20, 20, 20)
                 .addComponent(lblMetronome)
                 .addGap(18, 18, 18)
                 .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,9 +418,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
                     .addComponent(cbTimbreMetronome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnActif)
-                .addGap(18, 18, 18)
-                .addComponent(btnEnregistrerInstrument)
-                .addContainerGap())
+                .addGap(277, 277, 277))
         );
 
         lblTimbre.getAccessibleContext().setAccessibleDescription("");
@@ -329,7 +444,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
             }
         });
 
-        cbCouleur.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rouge", "Vert", "Bleu", "Brun", "Beige", "Jaune", "Blanc", "Noir" }));
+        cbCouleur.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Rouge", "Vert", "Bleu", "Brun", "Beige", "Jaune", "Blanc", "Noir" }));
         cbCouleur.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCouleurActionPerformed(evt);
@@ -692,6 +807,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_miAProposActionPerformed
 
     private void btnTestClickNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTestClickNoteActionPerformed
+        
         TPInfo.setSelectedIndex(1);
         TPInfo.setEnabledAt(1,true);
 
@@ -806,7 +922,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_btnParcourirImageActionPerformed
 
     private void btnEnregistrerInstrumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerInstrumentActionPerformed
-        // TODO add your handling code here:
+        InstrumentEnregistrer();
     }//GEN-LAST:event_btnEnregistrerInstrumentActionPerformed
 
     private void cbNoteMetronomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNoteMetronomeActionPerformed
