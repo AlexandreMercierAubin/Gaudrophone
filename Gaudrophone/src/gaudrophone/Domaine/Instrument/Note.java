@@ -2,7 +2,10 @@ package gaudrophone.Domaine.Instrument;
 
 import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.Outils;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.sound.midi.*;
+
 
 public class Note extends Son {
     NomNote nom;
@@ -12,6 +15,9 @@ public class Note extends Son {
     MidiChannel[] channels;
     
     public Note(int timbreInstr){
+        octave = 4;
+        nom = NomNote.C;
+        persistance = 1000;
         timbreInstrument = timbreInstr;
         try{
             synthesizer = MidiSystem.getSynthesizer();
@@ -22,10 +28,13 @@ public class Note extends Son {
     @Override
     public void commencerJouer()
     {
-        jouerSon = true;
+        Timer timer;        
         javax.sound.midi.Instrument instruments[], instr;
         int noInstrument = 1;
-        int midiNoteNumber = Outils.getMidiNoteNumber(NomNote.GSharp, 4);
+        int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
+        
+        // Permet de préciser que l'instrument commence a émettre un son
+        jouerSon = true;
         
         try{            
             synthesizer.open();
@@ -35,7 +44,16 @@ public class Note extends Son {
 
             channels = synthesizer.getChannels();
             channels[0].programChange(patch.getBank(),patch.getProgram());
-            channels[0].noteOn(midiNoteNumber, 60);    
+            channels[0].noteOn(midiNoteNumber, 60);
+            
+            // Faire durée un son au minimum le temps de la persistance
+            timer = new Timer("Tick");
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    arreterJouer();   
+                }
+            }, persistance);
         }
         catch (Exception e)
         {
@@ -74,24 +92,23 @@ public class Note extends Son {
     @Override
     public void arreterJouer()
     {
-        jouerSon = false;
         System.out.println(jouerSon);
         if (!jouerSon){
-            int midiNoteNumber = Outils.getMidiNoteNumber(NomNote.D, 4);
+            int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
             try{
                 channels[0].noteOff(midiNoteNumber, 60);
                 synthesizer.close();
             }
             catch (Exception e)
             {
-                e.printStackTrace();
+            e.printStackTrace();
             }
         }
+        else
+        {
+            jouerSon = false;
+        }
     }
-
-    @Override
-    
-    public void setFrequence(float valeur){}
     
     public NomNote getNom()
     {
