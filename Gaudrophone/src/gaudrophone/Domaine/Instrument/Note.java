@@ -24,7 +24,7 @@ public class Note extends Son {
     {
         jouerSon = true;
         javax.sound.midi.Instrument instruments[], instr;
-        int noInstrument = 65;
+        int noInstrument = 1;
         int midiNoteNumber = Outils.getMidiNoteNumber(NomNote.GSharp, 4);
         
         try{            
