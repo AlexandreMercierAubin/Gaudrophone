@@ -8,8 +8,12 @@ import javax.sound.sampled.Clip;
 
 public class FichierAudio extends Son{
     String chemin ;
+    Clip clip;
     
-    public FichierAudio(){}
+    public FichierAudio(String cheminFichierAudio)
+    {
+        chemin = cheminFichierAudio;
+    }
     
     @Override
     public void commencerJouer()
@@ -17,10 +21,9 @@ public class FichierAudio extends Son{
         try {
             File f = new File(chemin);
             AudioInputStream aIS = AudioSystem.getAudioInputStream(f);
-            Clip clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip();
             clip.open(aIS);
             clip.start();
-            Thread.sleep(100);
         }
         catch (Exception e)
         {
@@ -29,7 +32,16 @@ public class FichierAudio extends Son{
     }
     
     @Override
-    public void arreterJouer(){}
+    public void arreterJouer()
+    {
+        try{
+            clip.stop();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
     
     public String getChemin()
     {
