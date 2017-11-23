@@ -133,6 +133,8 @@ public class ControleurInstrument {
     
     public void sauvegarderInstrument()
     {
+        if(instrument.getChemin()!="")
+        {
             try 
             {
                 FileOutputStream fichier = new FileOutputStream(instrument.getChemin());
@@ -147,6 +149,10 @@ public class ControleurInstrument {
                 e.printStackTrace();
 
             }
+        }else
+        {
+            sauvegarderSousInstrument();
+        }
     }
     
     public void sauvegarderSousInstrument()
