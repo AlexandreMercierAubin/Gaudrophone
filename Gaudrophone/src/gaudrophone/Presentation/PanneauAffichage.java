@@ -24,10 +24,13 @@ public class PanneauAffichage extends JPanel {
     {
         super.paintComponent(g);
         
-        Dimension size = getSize();
-        Dimension2D taille = new Dimension2D(size.getWidth(), size.getHeight());
-        DessinateurInstrument dessinateur = new DessinateurInstrument(fenetreInstrument.getControleur(), taille);
-        dessinateur.dessiner(g);
+        if (fenetreInstrument != null)
+        {
+            Dimension size = getSize();
+            Dimension2D taille = new Dimension2D(size.getWidth(), size.getHeight());
+            DessinateurInstrument dessinateur = new DessinateurInstrument(fenetreInstrument.getControleur(), taille);
+            dessinateur.dessiner(g);
+        }
     }    
     
     public FenetreInstrument getFenetreInstrument()

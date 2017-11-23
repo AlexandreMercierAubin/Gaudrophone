@@ -21,9 +21,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
         panneauAffichage = new PanneauAffichage(this);
         controleur.modifierModeVisuel(ModeVisuel.Ajouter);
         
-        txtAide.setVisible(false);
-        btnOkAide.setVisible(false);
-        scrlAide.setVisible(false);
+        //txtAide.setVisible(false);
+        //btnOkAide.setVisible(false);
+        //scrlAide.setVisible(false);
         TPInfo.setEnabledAt(1,false);
         ((JSpinner.DefaultEditor) spinOctave.getEditor()).getTextField().setEditable(false);
         bgFond.add(rbCouleur);
@@ -50,10 +50,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
         bgType = new javax.swing.ButtonGroup();
         spGaudrophone = new javax.swing.JSplitPane();
         plNote = new javax.swing.JPanel();
-        scrlAide = new javax.swing.JScrollPane();
-        txtAide = new javax.swing.JTextArea();
+        panneauAffichage2 = new gaudrophone.Presentation.PanneauAffichage();
         btnTestClickNote = new javax.swing.JButton();
-        btnOkAide = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         plParametres = new javax.swing.JPanel();
         TPInfo = new javax.swing.JTabbedPane();
@@ -126,22 +124,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         spGaudrophone.setDividerLocation(700);
 
-        txtAide.setColumns(20);
-        txtAide.setRows(5);
-        scrlAide.setViewportView(txtAide);
-
         btnTestClickNote.setText("clickSurNote");
         btnTestClickNote.setActionCommand("btnTestNote");
         btnTestClickNote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTestClickNoteActionPerformed(evt);
-            }
-        });
-
-        btnOkAide.setText("Ok");
-        btnOkAide.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkAideActionPerformed(evt);
             }
         });
 
@@ -153,32 +140,39 @@ public class FenetreInstrument extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout panneauAffichage2Layout = new javax.swing.GroupLayout(panneauAffichage2);
+        panneauAffichage2.setLayout(panneauAffichage2Layout);
+        panneauAffichage2Layout.setHorizontalGroup(
+            panneauAffichage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panneauAffichage2Layout.createSequentialGroup()
+                .addContainerGap(418, Short.MAX_VALUE)
+                .addGroup(panneauAffichage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauAffichage2Layout.createSequentialGroup()
+                        .addComponent(btnTestClickNote)
+                        .addGap(168, 168, 168))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauAffichage2Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(158, 158, 158))))
+        );
+        panneauAffichage2Layout.setVerticalGroup(
+            panneauAffichage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauAffichage2Layout.createSequentialGroup()
+                .addContainerGap(584, Short.MAX_VALUE)
+                .addComponent(btnTestClickNote)
+                .addGap(27, 27, 27)
+                .addComponent(jButton1)
+                .addGap(27, 27, 27))
+        );
+
         javax.swing.GroupLayout plNoteLayout = new javax.swing.GroupLayout(plNote);
         plNote.setLayout(plNoteLayout);
         plNoteLayout.setHorizontalGroup(
             plNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plNoteLayout.createSequentialGroup()
-                .addGroup(plNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnOkAide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scrlAide, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(plNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnTestClickNote)
-                    .addComponent(jButton1))
-                .addGap(261, 261, 261))
+            .addComponent(panneauAffichage2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         plNoteLayout.setVerticalGroup(
             plNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(plNoteLayout.createSequentialGroup()
-                .addGroup(plNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrlAide, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(plNoteLayout.createSequentialGroup()
-                        .addGap(242, 242, 242)
-                        .addComponent(btnTestClickNote)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(btnOkAide))
+            .addComponent(panneauAffichage2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         spGaudrophone.setLeftComponent(plNote);
@@ -209,13 +203,16 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         spinOctaveMetronome.setModel(new javax.swing.SpinnerNumberModel(5, 0, 9, 1));
 
-        spinPersistanceMetronome.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        spinPersistanceMetronome.setModel(new javax.swing.SpinnerNumberModel());
 
-        lblPersistanceMertronome.setText("Persistance :");
+        lblPersistanceMertronome.setText("Persistance (ms) :");
 
         lblOctaveMetronome.setText("Octave :");
 
-        lblFrequenceMetronome.setText("Fréquence :");
+        lblFrequenceMetronome.setText("Fréquence (ms) :");
+        lblFrequenceMetronome.setToolTipText("");
+
+        spinFrequence.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
         lblTimbreMetronome.setText("Timbre :");
 
@@ -259,7 +256,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
                             .addComponent(lblTimbreMetronome, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbTimbreMetronome, 0, 235, Short.MAX_VALUE)
+                            .addComponent(cbTimbreMetronome, 0, 134, Short.MAX_VALUE)
                             .addComponent(spinFrequence)
                             .addComponent(spinPersistanceMetronome)
                             .addComponent(spinOctaveMetronome)
@@ -278,7 +275,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
                 .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTimbre)
                     .addComponent(cbTimbre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55)
+                .addGap(18, 18, 18)
                 .addComponent(lblMetronome)
                 .addGap(18, 18, 18)
                 .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -694,12 +691,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
         afficherAider("\\base.txt","\\apropos.txt");
     }//GEN-LAST:event_miAProposActionPerformed
 
-    private void btnOkAideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkAideActionPerformed
-        txtAide.setVisible(false);
-        btnOkAide.setVisible(false);
-        scrlAide.setVisible(false);
-    }//GEN-LAST:event_btnOkAideActionPerformed
-
     private void btnTestClickNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTestClickNoteActionPerformed
         TPInfo.setSelectedIndex(1);
         TPInfo.setEnabledAt(1,true);
@@ -826,6 +817,22 @@ public class FenetreInstrument extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomInstrumentActionPerformed
    
+    private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
+        controleur.sauvegarderInstrument();
+    }
+
+    private void miEnregistrerSousActionPerformed(java.awt.event.ActionEvent evt) {
+       controleur.sauvegarderSousInstrument();
+    }
+
+    private void miImporterActionPerformed(java.awt.event.ActionEvent evt) {
+        controleur.importerInstrument();
+    }
+
+    private void miQuitterActionPerformed(java.awt.event.ActionEvent evt) {
+        System.exit(0);
+    }
+    
     private void afficherAider(String filename, String... optionalFilenames)
     {
         Outils tool = new Outils();
@@ -837,14 +844,14 @@ public class FenetreInstrument extends javax.swing.JFrame {
             strTexte = tool.readFile(optionalFilenames[i],strTexte);
         }
         
-        txtAide.setText(strTexte);
+        /*txtAide.setText(strTexte);
         txtAide.setCaretPosition(txtAide.getDocument().getLength());
         txtAide.setEditable(false);
         txtAide.setWrapStyleWord(true);
         txtAide.setLineWrap(true);
         txtAide.setVisible(true);
         btnOkAide.setVisible(true);
-        scrlAide.setVisible(true);
+        scrlAide.setVisible(true);*/
     }
         
     private void initializeRadioButton()
@@ -900,7 +907,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JButton btnActif;
     private javax.swing.JButton btnEnregistrerInstrument;
     private javax.swing.JButton btnEnregistrerTouche;
-    private javax.swing.JButton btnOkAide;
     private javax.swing.JButton btnParcourirFichierAudio;
     private javax.swing.JButton btnParcourirImage;
     private javax.swing.JButton btnTestClickNote;
@@ -945,6 +951,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JMenuItem miImporterChanson;
     private javax.swing.JRadioButtonMenuItem miJouer;
     private javax.swing.JMenuItem miQuitter;
+    private gaudrophone.Presentation.PanneauAffichage panneauAffichage2;
     private javax.swing.JPanel plInstrument;
     private javax.swing.JPanel plNote;
     private javax.swing.JPanel plParametres;
@@ -953,7 +960,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbFichierAudio;
     private javax.swing.JRadioButton rbImage;
     private javax.swing.JRadioButton rbSon;
-    private javax.swing.JScrollPane scrlAide;
     private javax.swing.JSplitPane spGaudrophone;
     private javax.swing.JSpinner spinBleu;
     private javax.swing.JSpinner spinFrequence;
@@ -965,7 +971,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JSpinner spinPersistanceMetronome;
     private javax.swing.JSpinner spinRouge;
     private javax.swing.JSpinner spinVert;
-    private javax.swing.JTextArea txtAide;
     private javax.swing.JTextField txtNomInstrument;
     // End of variables declaration//GEN-END:variables
 }
