@@ -81,10 +81,6 @@ public class ControleurInstrument {
                 {
                     toucheEnDeplacement=true;
                 }
-                else
-                {
-                    toucheEnDeplacement = false;
-                }
                 break;
                 
             case Jouer:
@@ -103,13 +99,7 @@ public class ControleurInstrument {
         switch(modeVisuel)
         {
             case Editer:
-                // deplacement de la touche selectionnee a l'enfoncement
-                if(toucheEnDeplacement)
-                {
-                    int indexTouche = instrument.getToucheSelectionee();
-                    Touche touche = instrument.getTouche(indexTouche);
-                    touche.getApparence().setPosition(coordRelative);
-                }
+                toucheEnDeplacement = false;
                 break;
                 
             case Jouer:
@@ -125,6 +115,19 @@ public class ControleurInstrument {
                 instrument.ajouterTouche(coordRelative);
                 break;
         }
+    }
+    
+    public boolean glisserSouris(Point2D coordRelative)
+    {
+        // deplacement de la touche selectionnee a l'enfoncement
+        if (toucheEnDeplacement)
+        {
+            int indexTouche = instrument.getToucheSelectionee();
+            Touche touche = instrument.getTouche(indexTouche);
+            touche.getApparence().setPosition(coordRelative);
+        }
+        
+        return toucheEnDeplacement;
     }
     
     public void sauvegarderInstrument()

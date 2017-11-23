@@ -121,6 +121,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         spGaudrophone.setDividerLocation(700);
 
+        panneauAffichage.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                panneauAffichageMouseDragged(evt);
+            }
+        });
         panneauAffichage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panneauAffichageMouseClicked(evt);
@@ -802,6 +807,12 @@ public class FenetreInstrument extends javax.swing.JFrame {
         controleur.relacherSouris(Outils.conversionPointPixelRelatif( evt.getPoint(),dimension));
         panneauAffichage.repaint();
     }//GEN-LAST:event_panneauAffichageMouseReleased
+
+    private void panneauAffichageMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauAffichageMouseDragged
+        int dimension=(panneauAffichage.getWidth()>panneauAffichage.getHeight()?panneauAffichage.getHeight():panneauAffichage.getWidth());
+        controleur.glisserSouris(Outils.conversionPointPixelRelatif( evt.getPoint(),dimension));
+        panneauAffichage.repaint();
+    }//GEN-LAST:event_panneauAffichageMouseDragged
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.sauvegarderInstrument();
