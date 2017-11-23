@@ -1,3 +1,16 @@
 Le Gaudrophone est un concepteur d'instrument virtuel.
 Grâce à ce logiciel, il devient possible de créer numériquement son propre instrument.
+______________________________________________________________________________________
+Modes d'éditions
 
+Initialement, le Gaudrophone démarre en mode Ajouter touche.
+Comme le nom du mode le dit, il est possible d'ajouter des touches en cliquant. 
+La touche sera ajoutée à l'emplacement pointé par la souris lors du relâchement du clic.
+
+Le mode Éditer touche permet de sélectionner une touche afin de modifié ses
+charactéristiques, comme le son produit, ses bordures, sa dimension, sa forme, etc.
+Il est aussi possible de déplacer une touche en la cliquant sur une touche, conservant 
+le clic tout en la glissant et en relâchant le clic au nouvel emplacement désiré.
+
+Le mode jouer permet de jouer de votre instrument en cliquant sur les touches ajoutées
+et configurées à votre goût.
