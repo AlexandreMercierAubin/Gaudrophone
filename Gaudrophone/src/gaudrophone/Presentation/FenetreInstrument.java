@@ -10,7 +10,6 @@ import javax.swing.*;
 public class FenetreInstrument extends javax.swing.JFrame {
     ButtonGroup m_btnGroupeMode;
     ControleurInstrument controleur;
-    PanneauAffichage panneauAffichage;
     
     
     public FenetreInstrument() {
@@ -18,7 +17,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         initializeRadioButton();
         
         controleur = new ControleurInstrument();
-        panneauAffichage = new PanneauAffichage(this);
+        panneauAffichage.setFenetreInstrument(this);
         controleur.modifierModeVisuel(ModeVisuel.Ajouter);
         
         //txtAide.setVisible(false);
@@ -50,9 +49,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         bgType = new javax.swing.ButtonGroup();
         spGaudrophone = new javax.swing.JSplitPane();
         plNote = new javax.swing.JPanel();
-        panneauAffichage2 = new gaudrophone.Presentation.PanneauAffichage();
-        btnTestClickNote = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        panneauAffichage = new gaudrophone.Presentation.PanneauAffichage();
         plParametres = new javax.swing.JPanel();
         TPInfo = new javax.swing.JTabbedPane();
         plInstrument = new javax.swing.JPanel();
@@ -124,55 +121,38 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         spGaudrophone.setDividerLocation(700);
 
-        btnTestClickNote.setText("clickSurNote");
-        btnTestClickNote.setActionCommand("btnTestNote");
-        btnTestClickNote.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTestClickNoteActionPerformed(evt);
+        panneauAffichage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panneauAffichageMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                panneauAffichageMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                panneauAffichageMouseReleased(evt);
             }
         });
 
-        jButton1.setText("clickPasSurNote");
-        jButton1.setToolTipText("");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panneauAffichage2Layout = new javax.swing.GroupLayout(panneauAffichage2);
-        panneauAffichage2.setLayout(panneauAffichage2Layout);
-        panneauAffichage2Layout.setHorizontalGroup(
-            panneauAffichage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panneauAffichage2Layout.createSequentialGroup()
-                .addContainerGap(418, Short.MAX_VALUE)
-                .addGroup(panneauAffichage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauAffichage2Layout.createSequentialGroup()
-                        .addComponent(btnTestClickNote)
-                        .addGap(168, 168, 168))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauAffichage2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(158, 158, 158))))
+        javax.swing.GroupLayout panneauAffichageLayout = new javax.swing.GroupLayout(panneauAffichage);
+        panneauAffichage.setLayout(panneauAffichageLayout);
+        panneauAffichageLayout.setHorizontalGroup(
+            panneauAffichageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 699, Short.MAX_VALUE)
         );
-        panneauAffichage2Layout.setVerticalGroup(
-            panneauAffichage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauAffichage2Layout.createSequentialGroup()
-                .addContainerGap(584, Short.MAX_VALUE)
-                .addComponent(btnTestClickNote)
-                .addGap(27, 27, 27)
-                .addComponent(jButton1)
-                .addGap(27, 27, 27))
+        panneauAffichageLayout.setVerticalGroup(
+            panneauAffichageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 688, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout plNoteLayout = new javax.swing.GroupLayout(plNote);
         plNote.setLayout(plNoteLayout);
         plNoteLayout.setHorizontalGroup(
             plNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panneauAffichage2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panneauAffichage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         plNoteLayout.setVerticalGroup(
             plNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panneauAffichage2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panneauAffichage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         spGaudrophone.setLeftComponent(plNote);
@@ -691,18 +671,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
         afficherAider("\\base.txt","\\apropos.txt");
     }//GEN-LAST:event_miAProposActionPerformed
 
-    private void btnTestClickNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTestClickNoteActionPerformed
-        TPInfo.setSelectedIndex(1);
-        TPInfo.setEnabledAt(1,true);
-
-    }//GEN-LAST:event_btnTestClickNoteActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        TPInfo.setEnabledAt(1,false);
-        TPInfo.setSelectedIndex(0);
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void cbNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNoteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbNoteActionPerformed
@@ -816,6 +784,24 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private void txtNomInstrumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomInstrumentActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomInstrumentActionPerformed
+
+    private void panneauAffichageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauAffichageMouseClicked
+        int dimension=(panneauAffichage.getWidth()>panneauAffichage.getHeight()?panneauAffichage.getHeight():panneauAffichage.getWidth());
+        controleur.cliquerSouris(Outils.conversionPointPixelRelatif( evt.getPoint(),dimension));
+        panneauAffichage.repaint();
+    }//GEN-LAST:event_panneauAffichageMouseClicked
+
+    private void panneauAffichageMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauAffichageMousePressed
+        int dimension=(panneauAffichage.getWidth()>panneauAffichage.getHeight()?panneauAffichage.getHeight():panneauAffichage.getWidth());
+        controleur.enfoncerSouris(Outils.conversionPointPixelRelatif( evt.getPoint(),dimension));
+        panneauAffichage.repaint();
+    }//GEN-LAST:event_panneauAffichageMousePressed
+
+    private void panneauAffichageMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauAffichageMouseReleased
+        int dimension=(panneauAffichage.getWidth()>panneauAffichage.getHeight()?panneauAffichage.getHeight():panneauAffichage.getWidth());
+        controleur.relacherSouris(Outils.conversionPointPixelRelatif( evt.getPoint(),dimension));
+        panneauAffichage.repaint();
+    }//GEN-LAST:event_panneauAffichageMouseReleased
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.sauvegarderInstrument();
@@ -909,14 +895,12 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JButton btnEnregistrerTouche;
     private javax.swing.JButton btnParcourirFichierAudio;
     private javax.swing.JButton btnParcourirImage;
-    private javax.swing.JButton btnTestClickNote;
     private javax.swing.JComboBox<String> cbCouleur;
     private javax.swing.JComboBox<String> cbForme;
     private javax.swing.JComboBox<String> cbNote;
     private javax.swing.JComboBox<String> cbNoteMetronome;
     private javax.swing.JComboBox<String> cbTimbre;
     private javax.swing.JComboBox<String> cbTimbreMetronome;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblBleu;
     private javax.swing.JLabel lblBordure;
     private javax.swing.JLabel lblDimension;
@@ -951,7 +935,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JMenuItem miImporterChanson;
     private javax.swing.JRadioButtonMenuItem miJouer;
     private javax.swing.JMenuItem miQuitter;
-    private gaudrophone.Presentation.PanneauAffichage panneauAffichage2;
+    private gaudrophone.Presentation.PanneauAffichage panneauAffichage;
     private javax.swing.JPanel plInstrument;
     private javax.swing.JPanel plNote;
     private javax.swing.JPanel plParametres;

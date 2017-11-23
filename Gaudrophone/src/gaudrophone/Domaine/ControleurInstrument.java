@@ -62,13 +62,12 @@ public class ControleurInstrument {
     {
         switch(modeVisuel)
         {
-            case Ajouter:
-                instrument.ajouterTouche(coordRelative);
-                break;
                 
             case Editer:
                 instrument.selectionnerTouche(coordRelative);
                 break;
+                
+
         }
     }
     
@@ -120,6 +119,10 @@ public class ControleurInstrument {
                     int indexTouche = instrument.getToucheSelectionee();
                     instrument.getTouche(indexTouche).arreterJouer();
                 }
+                break;
+                
+            case Ajouter:
+                instrument.ajouterTouche(coordRelative);
                 break;
         }
     }

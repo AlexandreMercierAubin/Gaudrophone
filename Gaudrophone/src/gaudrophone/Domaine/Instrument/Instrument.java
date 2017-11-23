@@ -90,9 +90,6 @@ public class Instrument implements Serializable{
         
         //ajouter les points dans Path2D selon la dim du constructeur d'apparence
         ApparenceTouche apparence= toucheAjoutee.getApparence();
-        Polygon poly = Outils.calculerPolygone(36, position,apparence.getDimension());
-        apparence.getCoins().reset();
-        apparence.getCoins().append(poly,true);
         
         return toucheAjoutee;
     }
@@ -127,10 +124,15 @@ public class Instrument implements Serializable{
         for(int i=0;i<touches.size();++i)
         {
             Touche touche=touches.get(i);
-            ApparenceTouche apparence= touche.getApparence();
-            Path2D coins=apparence.getCoins();
-            
-            if(coins.contains(position))
+            ApparenceTouche apparence=touche.getApparence();
+            Point2D positionTouche=apparence.getPosition();
+            double width=apparence.getDimension().getWidth();
+            double height=apparence.getDimension().getHeight();
+            if(position.getX()<positionTouche.getX()+ width/2 &&
+               position.getX()>positionTouche.getX()- width/2 &&
+               position.getY()<positionTouche.getY()+ height/2 &&
+               position.getY()>positionTouche.getY()- height/2 
+               )
             {
                 toucheSelectionee=i;
                 return true;
