@@ -81,6 +81,7 @@ public class ControleurInstrument {
                 //detecter si une touche est selectionee
                 if(instrument.selectionnerTouche(coordRelative))
                 {
+                    instrument.replacerToucheDessus();
                     toucheEnDeplacement=true;
                 }
                 break;
@@ -93,6 +94,11 @@ public class ControleurInstrument {
                     instrument.getTouche(indexTouche).commencerJouer();
                     toucheEnJeu=true;
                 }
+                break;
+                
+            case Ajouter:
+                instrument.ajouterTouche(coordRelative);
+                toucheEnDeplacement=true;
                 break;
         }
     }
@@ -116,7 +122,7 @@ public class ControleurInstrument {
                 break;
                 
             case Ajouter:
-                instrument.ajouterTouche(coordRelative);
+                toucheEnDeplacement=false;
                 break;
         }
     }

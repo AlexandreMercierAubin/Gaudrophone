@@ -67,6 +67,26 @@ public class Instrument implements Serializable{
         return getTouche(toucheSelectionee);
     }
     
+    public boolean retirerTouche(int index)
+    {
+        if(index>=touches.size())
+        {
+            return false;
+        }
+        
+        touches.remove(index);
+        
+        return true;
+    }
+    
+    public void replacerToucheDessus()
+    {
+        Touche touche = touches.get(toucheSelectionee);
+        touches.remove(toucheSelectionee);
+        touches.add(touche);
+        toucheSelectionee=touches.size()-1;
+    }
+    
     public int getNombreTouches()
     {
         return touches.size();
