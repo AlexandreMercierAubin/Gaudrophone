@@ -9,7 +9,6 @@ import java.awt.Polygon;
 import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.ArrayList;
-import java.awt.geom.Path2D;
 
 
 public class ApparenceTouche 
@@ -19,7 +18,6 @@ public class ApparenceTouche
     Image imageFond;
     Dimension2D dimension;
     List<Bordure> bordures;
-    Path2D coins;
     Point2D position;
     
     public Point2D getPosition()
@@ -30,11 +28,6 @@ public class ApparenceTouche
     public void setPosition(Point2D valeur)
     {
         position = valeur;
-        Polygon poly = Outils.calculerPolygone(36,
-                                               position,
-                                               dimension);
-        coins.reset();
-        coins.append(poly,true);
     }
     
     public ApparenceTouche()
@@ -42,7 +35,6 @@ public class ApparenceTouche
         forme = Forme.Cercle;
         couleurFond = Color.BLACK;
         dimension = new Dimension2D(0.05,0.05);
-        coins= new Path2D.Double();
         
         initialiserBordures();
     }
@@ -86,9 +78,6 @@ public class ApparenceTouche
     public void setDimension(Dimension2D dimension) 
     {
         this.dimension = dimension;
-        Polygon poly = Outils.calculerPolygone(36, position,dimension);
-        coins.reset();
-        coins.append(poly,true);
     }
     
     public Bordure getBordure(int index)
@@ -102,15 +91,6 @@ public class ApparenceTouche
     public int getNbBordures()
     {
         return bordures.size();
-    }
-    
-    public Path2D  getCoins() 
-    {
-        return coins;
-    }
-    public void setCoins(Path2D coins) 
-    {
-        this.coins = coins;
     }
     
     private void initialiserBordures()
