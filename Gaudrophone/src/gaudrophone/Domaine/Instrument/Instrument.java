@@ -121,7 +121,7 @@ public class Instrument implements Serializable{
     public boolean selectionnerTouche(Point2D position)
     {
         //ajouter le contenu
-        for(int i=0;i<touches.size();++i)
+        for(int i=touches.size()-1;i>=0;--i)
         {
             Touche touche=touches.get(i);
             ApparenceTouche apparence=touche.getApparence();
