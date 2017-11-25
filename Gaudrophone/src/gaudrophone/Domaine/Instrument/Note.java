@@ -16,69 +16,70 @@ public class Note extends Son {
         try{
             synthesizer = MidiSystem.getSynthesizer();
         }
-        catch(Exception e){}
-        
+        catch(Exception e){}        
         }
     
     @Override
     public void commencerJouer()
     {
-//        javax.sound.midi.Instrument instruments[], instr;
-//        int noInstrument = timbreInstrument;
-//        int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
-//        
-//        jouerSon = true;
-//        try{            
-//            synthesizer.open();
-//            instruments = synthesizer.getLoadedInstruments();
-//            instr = instruments[noInstrument];
-//            Patch patch = instr.getPatch();
+        jouerSon = true;
+        javax.sound.midi.Instrument instruments[], instr;
+        int noInstrument = 1;
+        int midiNoteNumber = Outils.getMidiNoteNumber(NomNote.GSharp, 4);
+        
+        try{            
+            synthesizer.open();
+            instruments = synthesizer.getLoadedInstruments();
+            instr = instruments[noInstrument];
+            Patch patch = instr.getPatch();
+
+            channels = synthesizer.getChannels();
+            channels[0].programChange(patch.getBank(),patch.getProgram());
+            channels[0].noteOn(midiNoteNumber, 60);    
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+//        try {
 //
-//            channels = synthesizer.getChannels();
-//            channels[midiNoteNumber].programChange(patch.getBank(),patch.getProgram());
-//            channels[midiNoteNumber].noteOn(midiNoteNumber, 60);    
-//        }
-//        catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-        try {
-
-            Sequencer sequencer = MidiSystem.getSequencer();
-            sequencer.open();
-            Sequence sequence = new Sequence(Sequence.PPQ,4);
-            Track track = sequence.createTrack();
-
-            MidiEvent event = null;
-
-            ShortMessage first = new ShortMessage();
-            first.setMessage(192,1,0,0);
-            MidiEvent changeInstrument = new MidiEvent(first, 0);
-            track.add(changeInstrument);
-
-            ShortMessage a = new ShortMessage();
-            a.setMessage(144,1,60,100);
-            MidiEvent noteOn = new MidiEvent(a, 0);
-            track.add(noteOn);
-
-            ShortMessage b = new ShortMessage();
-            b.setMessage(128,1,60,100);
-            MidiEvent noteOff = new MidiEvent(b, (60000/(60*4)));
-            track.add(noteOff);
-
-            sequencer.setSequence(sequence);
-            sequencer.start();
-        } catch (Exception ex) { ex.printStackTrace(); }
+//            Sequencer sequencer = MidiSystem.getSequencer();
+//            sequencer.open();
+//            Sequence sequence = new Sequence(Sequence.PPQ,4);
+//            Track track = sequence.createTrack();
+//
+//            MidiEvent event = null;
+//
+//            ShortMessage first = new ShortMessage();
+//            first.setMessage(192,1,0,0);
+//            MidiEvent changeInstrument = new MidiEvent(first, 0);
+//            track.add(changeInstrument);
+//
+//            ShortMessage a = new ShortMessage();
+//            a.setMessage(144,1,60,100);
+//            MidiEvent noteOn = new MidiEvent(a, 0);
+//            track.add(noteOn);
+//
+//            ShortMessage b = new ShortMessage();
+//            b.setMessage(128,1,60,100);
+//            MidiEvent noteOff = new MidiEvent(b, 9900);
+//            track.add(noteOff);
+//
+//            sequencer.setSequence(sequence);
+//            sequencer.start();
+//        } catch (Exception ex) { ex.printStackTrace(); }
         //Ajouter code commencerJouer
     }
     
     @Override
     public void arreterJouer()
     {
+        jouerSon = false;
+        System.out.println(jouerSon);
         if (!jouerSon){
-            int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
+            int midiNoteNumber = Outils.getMidiNoteNumber(NomNote.D, 4);
             try{
-                channels[midiNoteNumber].noteOff(midiNoteNumber);
+                channels[0].noteOff(midiNoteNumber, 60);
                 synthesizer.close();
             }
             catch (Exception e)

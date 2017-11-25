@@ -19,6 +19,7 @@ public class Touche {
         apparence = new ApparenceTouche();
         surbrillance = false;
         timbreInstrument = timbre;
+        son = new Note(timbreInstrument);
     }
     
     public String getTexteAffichage()
@@ -53,9 +54,16 @@ public class Touche {
         son.arreterJouer();
     }
     
-    public void importerFichierAudio(){}
+    public void importerFichierAudio(String chemin)
+    {
+        // Ajouter le code pour importer le fichier audio si on veut mettre le fichier audio dans les dossiers du gaudrophone
+        son = new FichierAudio(chemin);
+    }
     
-    public void enleverFichierAudio(){}
+    public void enleverFichierAudio()
+    {
+        son = new Note(timbreInstrument);
+    }
     
     public boolean getSurbrillance()
     {

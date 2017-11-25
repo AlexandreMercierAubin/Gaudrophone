@@ -22,12 +22,14 @@ public class ControleurInstrument {
     String cheminSauvegarde;
     ModeVisuel modeVisuel;
     boolean toucheEnDeplacement;
+    boolean toucheEnJeu;
     
     public ControleurInstrument()
     {
         instrument = new Instrument();
         metronome = new Metronome();
         toucheEnDeplacement = false;
+        toucheEnJeu=false;
         modeVisuel=ModeVisuel.Ajouter;
     }
     
@@ -62,13 +64,12 @@ public class ControleurInstrument {
     {
         switch(modeVisuel)
         {
-            case Ajouter:
-                instrument.ajouterTouche(coordRelative);
-                break;
                 
             case Editer:
                 instrument.selectionnerTouche(coordRelative);
                 break;
+                
+
         }
     }
     
@@ -82,10 +83,6 @@ public class ControleurInstrument {
                 {
                     toucheEnDeplacement=true;
                 }
-                else
-                {
-                    toucheEnDeplacement = false;
-                }
                 break;
                 
             case Jouer:
@@ -94,6 +91,7 @@ public class ControleurInstrument {
                 {
                     int indexTouche = instrument.getToucheSelectionee();
                     instrument.getTouche(indexTouche).commencerJouer();
+                    toucheEnJeu=true;
                 }
                 break;
         }
@@ -104,28 +102,42 @@ public class ControleurInstrument {
         switch(modeVisuel)
         {
             case Editer:
-                // deplacement de la touche selectionnee a l'enfoncement
-                if(toucheEnDeplacement)
-                {
-                    int indexTouche = instrument.getToucheSelectionee();
-                    Touche touche = instrument.getTouche(indexTouche);
-                    touche.getApparence().setPosition(coordRelative);
-                }
+                toucheEnDeplacement = false;
                 break;
                 
             case Jouer:
                 // envoyer un message d'arret a la touche relachee
-                if(instrument.selectionnerTouche(coordRelative))
+                if(toucheEnJeu)
                 {
                     int indexTouche = instrument.getToucheSelectionee();
                     instrument.getTouche(indexTouche).arreterJouer();
+                    toucheEnJeu=false;
                 }
+                break;
+                
+            case Ajouter:
+                instrument.ajouterTouche(coordRelative);
                 break;
         }
     }
     
+    public boolean glisserSouris(Point2D coordRelative)
+    {
+        // deplacement de la touche selectionnee a l'enfoncement
+        if (toucheEnDeplacement)
+        {
+            int indexTouche = instrument.getToucheSelectionee();
+            Touche touche = instrument.getTouche(indexTouche);
+            touche.getApparence().setPosition(coordRelative);
+        }
+        
+        return toucheEnDeplacement;
+    }
+    
     public void sauvegarderInstrument()
     {
+        if(instrument.getChemin()!="")
+        {
             try 
             {
                 FileOutputStream fichier = new FileOutputStream(instrument.getChemin());
@@ -140,6 +152,10 @@ public class ControleurInstrument {
                 e.printStackTrace();
 
             }
+        }else
+        {
+            sauvegarderSousInstrument();
+        }
     }
     
     public void sauvegarderSousInstrument()
