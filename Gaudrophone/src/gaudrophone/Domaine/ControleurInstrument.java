@@ -60,25 +60,25 @@ public class ControleurInstrument {
     
     public void finEnregistrerBoucle(int index){}
     
-    public boolean cliquerSouris(Point2D coordRelative)
+    public void cliquerSouris(Point2D coordRelative)
     {
-        boolean clickTouche = false;
         switch(modeVisuel)
         {    
             case Editer:
-                clickTouche = instrument.selectionnerTouche(coordRelative);
+                instrument.selectionnerTouche(coordRelative);
                 break;
         }
-        return clickTouche;
     }
     
-    public void enfoncerSouris(Point2D coordRelative)
+    public boolean enfoncerSouris(Point2D coordRelative)
     {
+        boolean clickTouche = false;
         switch(modeVisuel)
         {
             case Editer:
                 //detecter si une touche est selectionee
-                if(instrument.selectionnerTouche(coordRelative))
+                clickTouche = instrument.selectionnerTouche(coordRelative);
+                if(clickTouche)
                 {
                     toucheEnDeplacement=true;
                 }
@@ -94,6 +94,7 @@ public class ControleurInstrument {
                 }
                 break;
         }
+        return clickTouche;
     }
    
     public void relacherSouris(Point2D coordRelative)
