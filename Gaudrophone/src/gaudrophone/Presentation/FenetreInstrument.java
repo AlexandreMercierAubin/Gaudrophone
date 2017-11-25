@@ -273,8 +273,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
         cbTimbreMetronome = new javax.swing.JComboBox<>();
         btnEnregistrerInstrument = new javax.swing.JButton();
         btnActif = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        lblRechercher = new javax.swing.JLabel();
+        txtRechercher = new javax.swing.JTextField();
+        btnRechercher = new javax.swing.JButton();
         plTouche = new javax.swing.JPanel();
         lblNote = new javax.swing.JLabel();
         lblOctave = new javax.swing.JLabel();
@@ -422,9 +423,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         btnActif.setText("Activer");
 
-        jLabel2.setText("Rechercher :");
+        lblRechercher.setText("Rechercher :");
 
-        jTextField1.setText("Rechercher");
+        btnRechercher.setText("Lancer la recherche");
 
         javax.swing.GroupLayout plInstrumentLayout = new javax.swing.GroupLayout(plInstrument);
         plInstrument.setLayout(plInstrumentLayout);
@@ -461,9 +462,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
                         .addComponent(lblMetronome)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(plInstrumentLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(lblRechercher)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1)))
+                        .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRechercher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtRechercher))))
                 .addContainerGap())
         );
         plInstrumentLayout.setVerticalGroup(
@@ -507,8 +510,10 @@ public class FenetreInstrument extends javax.swing.JFrame {
                 .addComponent(btnActif)
                 .addGap(18, 18, 18)
                 .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblRechercher)
+                    .addComponent(txtRechercher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRechercher)
                 .addContainerGap())
         );
 
@@ -1154,6 +1159,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JButton btnEnregistrerTouche;
     private javax.swing.JButton btnParcourirFichierAudio;
     private javax.swing.JButton btnParcourirImage;
+    private javax.swing.JButton btnRechercher;
     private javax.swing.JComboBox<String> cbCouleur;
     private javax.swing.JComboBox<String> cbForme;
     private javax.swing.JComboBox<String> cbNote;
@@ -1163,9 +1169,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblBleu;
     private javax.swing.JLabel lblBordure;
     private javax.swing.JLabel lblDimension;
@@ -1182,6 +1186,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JLabel lblOctaveMetronome;
     private javax.swing.JLabel lblPersistance;
     private javax.swing.JLabel lblPersistanceMertronome;
+    private javax.swing.JLabel lblRechercher;
     private javax.swing.JLabel lblRouge;
     private javax.swing.JLabel lblTimbre;
     private javax.swing.JLabel lblTimbreMetronome;
@@ -1221,5 +1226,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JSpinner spinRouge;
     private javax.swing.JSpinner spinVert;
     private javax.swing.JTextField txtNomInstrument;
+    private javax.swing.JTextField txtRechercher;
     // End of variables declaration//GEN-END:variables
 }
