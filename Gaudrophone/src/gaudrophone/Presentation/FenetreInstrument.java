@@ -273,6 +273,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
         cbTimbreMetronome = new javax.swing.JComboBox<>();
         btnEnregistrerInstrument = new javax.swing.JButton();
         btnActif = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         plTouche = new javax.swing.JPanel();
         lblNote = new javax.swing.JLabel();
         lblOctave = new javax.swing.JLabel();
@@ -354,7 +356,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
         panneauAffichageLayout.setVerticalGroup(
             panneauAffichageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 688, Short.MAX_VALUE)
-		);
+        );
+
         javax.swing.GroupLayout plNoteLayout = new javax.swing.GroupLayout(plNote);
         plNote.setLayout(plNoteLayout);
         plNoteLayout.setHorizontalGroup(
@@ -419,6 +422,10 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         btnActif.setText("Activer");
 
+        jLabel2.setText("Rechercher :");
+
+        jTextField1.setText("Rechercher");
+
         javax.swing.GroupLayout plInstrumentLayout = new javax.swing.GroupLayout(plInstrument);
         plInstrument.setLayout(plInstrumentLayout);
         plInstrumentLayout.setHorizontalGroup(
@@ -434,9 +441,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
                         .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbTimbre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtNomInstrument)))
-                    .addGroup(plInstrumentLayout.createSequentialGroup()
-                        .addComponent(lblMetronome)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(btnEnregistrerInstrument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(plInstrumentLayout.createSequentialGroup()
                         .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -451,8 +455,15 @@ public class FenetreInstrument extends javax.swing.JFrame {
                             .addComponent(spinFrequence)
                             .addComponent(spinPersistanceMetronome)
                             .addComponent(spinOctaveMetronome)
-                            .addComponent(btnActif, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbNoteMetronome, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnActif, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+                            .addComponent(cbNoteMetronome, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(plInstrumentLayout.createSequentialGroup()
+                        .addComponent(lblMetronome)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(plInstrumentLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField1)))
                 .addContainerGap())
         );
         plInstrumentLayout.setVerticalGroup(
@@ -494,7 +505,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
                     .addComponent(cbTimbreMetronome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnActif)
-                .addGap(277, 277, 277))
+                .addGap(18, 18, 18)
+                .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         lblTimbre.getAccessibleContext().setAccessibleDescription("");
@@ -1148,7 +1163,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblBleu;
     private javax.swing.JLabel lblBordure;
     private javax.swing.JLabel lblDimension;
