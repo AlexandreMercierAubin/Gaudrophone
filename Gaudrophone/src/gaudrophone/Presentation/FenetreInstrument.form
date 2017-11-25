@@ -496,6 +496,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Lancer la recherche"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRechercherActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

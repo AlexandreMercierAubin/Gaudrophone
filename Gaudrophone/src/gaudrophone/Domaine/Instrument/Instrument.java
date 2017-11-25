@@ -7,6 +7,7 @@ import gaudrophone.Domaine.Outils;
 import gaudrophone.Domaine.StrategieRecherche.StrategieChemin;
 import gaudrophone.Domaine.StrategieRecherche.StrategieCouleur;
 import gaudrophone.Domaine.StrategieRecherche.StrategieForme;
+import gaudrophone.Domaine.StrategieRecherche.StrategieNoteOctave;
 import gaudrophone.Domaine.StrategieRecherche.StrategieRecherche;
 import java.awt.geom.Path2D;
 import java.awt.Polygon;
@@ -27,10 +28,12 @@ public class Instrument implements Serializable{
         cleeTouche=0;
         touches = new ArrayList<Touche>();
         nom="template";
+        timbre=0;
         strategies= new ArrayList<StrategieRecherche>();
         strategies.add(new StrategieChemin());
         strategies.add(new StrategieCouleur());
         strategies.add(new StrategieForme());
+        strategies.add(new StrategieNoteOctave());
     }
     
     public int getTimbre()

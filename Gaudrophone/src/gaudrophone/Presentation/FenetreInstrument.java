@@ -426,6 +426,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
         lblRechercher.setText("Rechercher :");
 
         btnRechercher.setText("Lancer la recherche");
+        btnRechercher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRechercherActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout plInstrumentLayout = new javax.swing.GroupLayout(plInstrument);
         plInstrument.setLayout(plInstrumentLayout);
@@ -1066,6 +1071,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
         controleur.glisserSouris(Outils.conversionPointPixelRelatif( evt.getPoint(),dimension));
         panneauAffichage.repaint();
     }//GEN-LAST:event_panneauAffichageMouseDragged
+
+    private void btnRechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechercherActionPerformed
+        controleur.getInstrument().rechercherTouche(txtRechercher.getText());
+        panneauAffichage.repaint();
+    }//GEN-LAST:event_btnRechercherActionPerformed
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.sauvegarderInstrument();

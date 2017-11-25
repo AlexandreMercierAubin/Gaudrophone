@@ -15,16 +15,18 @@ public class StrategieNoteOctave extends StrategieRecherche{
         if(son instanceof Note)
         {
             String motsCoupe= mots.trim();
-            String nomNote=((Note)son).getNom().toString();
-            String octave=""+((Note)son).getOctave();
-            
-            nomNote.replaceAll("Sharp","#");
-            
-            if(motsCoupe==nomNote||motsCoupe==octave||motsCoupe==nomNote+octave)
+            if(((Note)son).getNom()!=null)
             {
-                return true;
+                String nomNote=((Note)son).getNom().toString();
+                String octave=""+((Note)son).getOctave();
+
+                nomNote.replaceAll("Sharp","#");
+
+                if(motsCoupe==nomNote||motsCoupe==octave||motsCoupe==nomNote+octave)
+                {
+                    return true;
+                }
             }
-            
         }
         return false;
     }
