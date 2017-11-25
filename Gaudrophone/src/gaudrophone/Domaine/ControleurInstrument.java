@@ -73,7 +73,7 @@ public class ControleurInstrument {
         }
     }
     
-    public void enfoncerSouris(Point2D coordRelative)
+   public void enfoncerSouris(Point2D coordRelative)
     {
         switch(modeVisuel)
         {
@@ -81,6 +81,7 @@ public class ControleurInstrument {
                 //detecter si une touche est selectionee
                 if(instrument.selectionnerTouche(coordRelative))
                 {
+                    instrument.replacerToucheDessus();
                     toucheEnDeplacement=true;
                 }
                 break;
@@ -94,8 +95,16 @@ public class ControleurInstrument {
                     toucheEnJeu=true;
                 }
                 break;
+                
+            case Ajouter:
+                instrument.ajouterTouche(coordRelative);
+                toucheEnDeplacement=true;
+                break;
         }
     }
+
+   
+   
    
     public void relacherSouris(Point2D coordRelative)
     {
@@ -116,11 +125,11 @@ public class ControleurInstrument {
                 break;
                 
             case Ajouter:
-                instrument.ajouterTouche(coordRelative);
+                toucheEnDeplacement=false;
                 break;
         }
     }
-    
+   
     public boolean glisserSouris(Point2D coordRelative)
     {
         // deplacement de la touche selectionnee a l'enfoncement
