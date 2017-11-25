@@ -681,6 +681,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
         lblBleuBordure.setText("Bleu");
 
         btnEffacer.setText("Effacer la Touche");
+        btnEffacer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEffacerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout plToucheLayout = new javax.swing.GroupLayout(plTouche);
         plTouche.setLayout(plToucheLayout);
@@ -1195,6 +1200,10 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private void miNouvelInstrumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNouvelInstrumentActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_miNouvelInstrumentActionPerformed
+
+    private void btnEffacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEffacerActionPerformed
+        controleur.getInstrument().retirerTouche(controleur.getInstrument().getToucheSelectionee());
+    }//GEN-LAST:event_btnEffacerActionPerformed
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.sauvegarderInstrument();
