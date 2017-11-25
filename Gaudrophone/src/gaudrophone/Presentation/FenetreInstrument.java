@@ -5,6 +5,7 @@ import gaudrophone.Domaine.ControleurInstrument;
 import gaudrophone.Domaine.Dimension2D;
 import gaudrophone.Domaine.Enums.Forme;
 import gaudrophone.Domaine.Enums.ModeVisuel;
+import gaudrophone.Domaine.Instrument.Bordure;
 import gaudrophone.Domaine.Instrument.FichierAudio;
 import gaudrophone.Domaine.Instrument.Instrument;
 import gaudrophone.Domaine.Instrument.Note;
@@ -52,9 +53,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
         touche.getApparence().setCouleurFond(Color.green);
         touche.getApparence().setDimension(new Dimension2D(0.5,0.5));
         Son son = touche.getSon();
-        //((Note)touche.getSon()).setNom(NomNote.DSharp);
-        //((Note)touche.getSon()).setOctave(8);
-        //((Note)touche.getSon()).setPersistance(100);
+        ((Note)touche.getSon()).setNom(NomNote.DSharp);
+        ((Note)touche.getSon()).setOctave(8);
+        ((Note)touche.getSon()).setPersistance(100);
         
         controleur.getInstrument().setNom("Test123");
         controleur.getInstrument().setTimbre(25);
@@ -151,6 +152,14 @@ public class FenetreInstrument extends javax.swing.JFrame {
             rbCouleur.setSelected(true);
             cbCouleur.setSelectedIndex(0);
             
+            cbCouleur.setEnabled(true);
+            spinRouge.setEnabled(true);
+            lblRouge.setEnabled(true);
+            spinVert.setEnabled(true);
+            lblVert.setEnabled(true);
+            spinBleu.setEnabled(true);
+            lblBleu.setEnabled(true);
+            
             Color couleur = touche.getApparence().getCouleurFond();
             spinRouge.setValue(couleur.getRed());
             spinBleu.setValue(couleur.getBlue());
@@ -158,6 +167,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
             //ne pas oublier de remettre les composantes enabled disabled.
         }
         else{
+            btnParcourirImage.setEnabled(true);
+            bgFond.clearSelection();
+            rbImage.setSelected(true);
             cbCouleur.setEnabled(false);
             spinRouge.setEnabled(false);
             lblRouge.setEnabled(false);
@@ -230,6 +242,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
             spinPersistance.setValue(son.getPersistance());
         }
         else{
+            btnParcourirFichierAudio.setEnabled(true);
+            bgType.clearSelection();
+            rbFichierAudio.setSelected(true);
             lblOctave.setEnabled(false);
             spinOctave.setEnabled(false);
             lblPersistance.setEnabled(false);
@@ -237,6 +252,12 @@ public class FenetreInstrument extends javax.swing.JFrame {
             lblNote.setEnabled(false);
             cbNote.setEnabled(false);
         }
+        
+        int nbBordure = Outils.nbBordures(touche.getApparence().getForme()) + 2;
+        for(int i = 1; i <= nbBordure; i ++){
+            cbBordure.addItem("" + i);
+        }
+        
     }
     
     public ControleurInstrument getControleur()
@@ -307,12 +328,22 @@ public class FenetreInstrument extends javax.swing.JFrame {
         btnParcourirFichierAudio = new javax.swing.JButton();
         cbNote = new javax.swing.JComboBox<>();
         btnEnregistrerTouche = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel1 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        cbBordure = new javax.swing.JComboBox<>();
+        checkVisible = new javax.swing.JCheckBox();
+        lblLargeurBordure = new javax.swing.JLabel();
+        spinLargeurBordure = new javax.swing.JSpinner();
+        lblCouleurBordure = new javax.swing.JLabel();
+        cbCouleurBordure = new javax.swing.JComboBox<>();
+        lblRougeBordure = new javax.swing.JLabel();
+        lblVertBordure = new javax.swing.JLabel();
+        lblBleuBordure = new javax.swing.JLabel();
+        spinRougeBordure = new javax.swing.JSpinner();
+        spinVertBordure = new javax.swing.JSpinner();
+        spinBleuBordure = new javax.swing.JSpinner();
+        btnEffacer = new javax.swing.JButton();
         barreMenu = new javax.swing.JMenuBar();
         menuFichier = new javax.swing.JMenu();
+        miNouvelInstrument = new javax.swing.JMenuItem();
         miImporter = new javax.swing.JMenuItem();
         miImporterChanson = new javax.swing.JMenuItem();
         miEnregistrer = new javax.swing.JMenuItem();
@@ -356,7 +387,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         );
         panneauAffichageLayout.setVerticalGroup(
             panneauAffichageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 688, Short.MAX_VALUE)
+            .addGap(0, 792, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout plNoteLayout = new javax.swing.GroupLayout(plNote);
@@ -628,9 +659,28 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         btnEnregistrerTouche.setText("Enregistrer");
 
-        jCheckBox1.setText("Visible");
+        cbBordure.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbBordureActionPerformed(evt);
+            }
+        });
 
-        jLabel1.setText("Largeur :");
+        checkVisible.setSelected(true);
+        checkVisible.setText("Visible");
+
+        lblLargeurBordure.setText("Largeur :");
+
+        lblCouleurBordure.setText("Couleur :");
+
+        cbCouleurBordure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Rouge", "Vert", "Bleu", "Brun", "Beige", "Jaune", "Blanc", "Noir" }));
+
+        lblRougeBordure.setText("Rouge");
+
+        lblVertBordure.setText("Vert");
+
+        lblBleuBordure.setText("Bleu");
+
+        btnEffacer.setText("Effacer la Touche");
 
         javax.swing.GroupLayout plToucheLayout = new javax.swing.GroupLayout(plTouche);
         plTouche.setLayout(plToucheLayout);
@@ -692,101 +742,138 @@ public class FenetreInstrument extends javax.swing.JFrame {
                                 .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(spinHauteur)
                                     .addComponent(spinLargeur)))
+                            .addComponent(lblFond)
+                            .addComponent(lblType)
+                            .addComponent(lblDimension)
+                            .addComponent(rbFichierAudio)
+                            .addComponent(rbSon)
+                            .addComponent(lblBordure)
                             .addGroup(plToucheLayout.createSequentialGroup()
+                                .addGap(19, 19, 19)
                                 .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblFond)
-                                    .addComponent(lblType)
-                                    .addComponent(lblDimension)
-                                    .addComponent(rbFichierAudio)
-                                    .addComponent(rbSon)
-                                    .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lblBordure)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(plToucheLayout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
                                         .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jCheckBox1)
+                                            .addComponent(cbBordure, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblLargeurBordure)
+                                            .addComponent(lblCouleurBordure))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(plToucheLayout.createSequentialGroup()
-                                                .addComponent(jLabel1)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                                .addComponent(checkVisible)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addComponent(spinLargeurBordure)))
+                                    .addGroup(plToucheLayout.createSequentialGroup()
+                                        .addComponent(cbCouleurBordure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblRougeBordure)
+                                            .addComponent(lblVertBordure)
+                                            .addComponent(lblBleuBordure))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(spinRougeBordure)
+                                            .addComponent(spinVertBordure)
+                                            .addComponent(spinBleuBordure)))))))
+                    .addGroup(plToucheLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnEffacer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         plToucheLayout.setVerticalGroup(
             plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(plToucheLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblForme)
-                    .addComponent(cbForme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(lblFond)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rbCouleur)
                     .addGroup(plToucheLayout.createSequentialGroup()
-                        .addComponent(spinRouge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblForme)
+                            .addComponent(cbForme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(lblFond)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rbCouleur)
+                            .addGroup(plToucheLayout.createSequentialGroup()
+                                .addComponent(spinRouge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(spinVert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbCouleur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spinBleu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(plToucheLayout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(lblRouge)
+                                .addGap(10, 10, 10)
+                                .addComponent(lblVert)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblBleu)))
+                        .addGap(13, 13, 13)
+                        .addComponent(rbImage)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnParcourirImage)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblDimension)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblHauteur)
+                            .addComponent(spinHauteur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblLargeur)
+                            .addComponent(spinLargeur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(lblBordure)
+                        .addGap(11, 11, 11)
+                        .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbBordure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(checkVisible))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblLargeurBordure)
+                            .addComponent(spinLargeurBordure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblCouleurBordure)
+                        .addGap(7, 7, 7)
+                        .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(spinRougeBordure, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblRougeBordure))
+                        .addGap(13, 13, 13)
+                        .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(spinVertBordure, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblVertBordure))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(spinBleuBordure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblBleuBordure))
+                        .addGap(14, 14, 14)
+                        .addComponent(lblType)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbSon)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNote)
+                            .addComponent(cbNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(10, 10, 10)
                         .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(spinVert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbCouleur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblOctave)
+                            .addComponent(spinOctave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPersistance)
+                            .addComponent(spinPersistance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rbFichierAudio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spinBleu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnParcourirFichierAudio))
                     .addGroup(plToucheLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(lblRouge)
-                        .addGap(10, 10, 10)
-                        .addComponent(lblVert)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblBleu)))
-                .addGap(13, 13, 13)
-                .addComponent(rbImage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnParcourirImage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblDimension)
+                        .addGap(409, 409, 409)
+                        .addComponent(cbCouleurBordure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHauteur)
-                    .addComponent(spinHauteur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblLargeur)
-                    .addComponent(spinLargeur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(lblBordure)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(lblType)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rbSon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNote)
-                    .addComponent(cbNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblOctave)
-                    .addComponent(spinOctave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPersistance)
-                    .addComponent(spinPersistance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rbFichierAudio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnParcourirFichierAudio)
-                .addGap(15, 15, 15)
                 .addComponent(btnEnregistrerTouche)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEffacer)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         TPInfo.addTab("Touche", plTouche);
@@ -799,14 +886,20 @@ public class FenetreInstrument extends javax.swing.JFrame {
         );
         plParametresLayout.setVerticalGroup(
             plParametresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(plParametresLayout.createSequentialGroup()
-                .addComponent(TPInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(TPInfo)
         );
 
         spGaudrophone.setRightComponent(plParametres);
 
         menuFichier.setLabel("Fichier");
+
+        miNouvelInstrument.setText("Nouvel Instrument");
+        miNouvelInstrument.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miNouvelInstrumentActionPerformed(evt);
+            }
+        });
+        menuFichier.add(miNouvelInstrument);
 
         miImporter.setText("Importer");
         miImporter.addActionListener(new java.awt.event.ActionListener() {
@@ -1049,15 +1142,28 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomInstrumentActionPerformed
 
     private void panneauAffichageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauAffichageMouseClicked
+        boolean clickTouche;
         int dimension=(panneauAffichage.getWidth()>panneauAffichage.getHeight()?panneauAffichage.getHeight():panneauAffichage.getWidth());
         controleur.cliquerSouris(Outils.conversionPointPixelRelatif( evt.getPoint(),dimension));
         panneauAffichage.repaint();
     }//GEN-LAST:event_panneauAffichageMouseClicked
 
     private void panneauAffichageMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauAffichageMousePressed
+        boolean clickTouche;
         int dimension=(panneauAffichage.getWidth()>panneauAffichage.getHeight()?panneauAffichage.getHeight():panneauAffichage.getWidth());
-        controleur.enfoncerSouris(Outils.conversionPointPixelRelatif( evt.getPoint(),dimension));
+        clickTouche = controleur.enfoncerSouris(Outils.conversionPointPixelRelatif( evt.getPoint(),dimension));
         panneauAffichage.repaint();
+        if(clickTouche == true)
+        {
+            TPInfo.setSelectedIndex(1); 
+            TPInfo.setEnabledAt(1,true);
+            ToucheUpdater();
+        }
+        else
+        {
+            TPInfo.setSelectedIndex(0); 
+            TPInfo.setEnabledAt(1,false);
+        }
     }//GEN-LAST:event_panneauAffichageMousePressed
 
     private void panneauAffichageMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauAffichageMouseReleased
@@ -1076,6 +1182,19 @@ public class FenetreInstrument extends javax.swing.JFrame {
         controleur.getInstrument().rechercherTouche(txtRechercher.getText());
         panneauAffichage.repaint();
     }//GEN-LAST:event_btnRechercherActionPerformed
+
+    private void cbBordureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBordureActionPerformed
+        int indexBordure = cbBordure.getSelectedIndex();
+        int indexTouche = controleur.getInstrument().getToucheSelectionee();
+        Touche touche = controleur.getInstrument().getTouche(indexTouche);
+        Bordure bordure = touche.getApparence().getBordure(indexBordure);
+        checkVisible.setSelected(bordure.getVisible());
+        
+    }//GEN-LAST:event_cbBordureActionPerformed
+
+    private void miNouvelInstrumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNouvelInstrumentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miNouvelInstrumentActionPerformed
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.sauvegarderInstrument();
@@ -1165,29 +1284,32 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bgFond;
     private javax.swing.ButtonGroup bgType;
     private javax.swing.JButton btnActif;
+    private javax.swing.JButton btnEffacer;
     private javax.swing.JButton btnEnregistrerInstrument;
     private javax.swing.JButton btnEnregistrerTouche;
     private javax.swing.JButton btnParcourirFichierAudio;
     private javax.swing.JButton btnParcourirImage;
     private javax.swing.JButton btnRechercher;
+    private javax.swing.JComboBox<String> cbBordure;
     private javax.swing.JComboBox<String> cbCouleur;
+    private javax.swing.JComboBox<String> cbCouleurBordure;
     private javax.swing.JComboBox<String> cbForme;
     private javax.swing.JComboBox<String> cbNote;
     private javax.swing.JComboBox<String> cbNoteMetronome;
     private javax.swing.JComboBox<String> cbTimbre;
     private javax.swing.JComboBox<String> cbTimbreMetronome;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JCheckBox checkVisible;
     private javax.swing.JLabel lblBleu;
+    private javax.swing.JLabel lblBleuBordure;
     private javax.swing.JLabel lblBordure;
+    private javax.swing.JLabel lblCouleurBordure;
     private javax.swing.JLabel lblDimension;
     private javax.swing.JLabel lblFond;
     private javax.swing.JLabel lblForme;
     private javax.swing.JLabel lblFrequenceMetronome;
     private javax.swing.JLabel lblHauteur;
     private javax.swing.JLabel lblLargeur;
+    private javax.swing.JLabel lblLargeurBordure;
     private javax.swing.JLabel lblMetronome;
     private javax.swing.JLabel lblNomInstrument;
     private javax.swing.JLabel lblNote;
@@ -1198,10 +1320,12 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JLabel lblPersistanceMertronome;
     private javax.swing.JLabel lblRechercher;
     private javax.swing.JLabel lblRouge;
+    private javax.swing.JLabel lblRougeBordure;
     private javax.swing.JLabel lblTimbre;
     private javax.swing.JLabel lblTimbreMetronome;
     private javax.swing.JLabel lblType;
     private javax.swing.JLabel lblVert;
+    private javax.swing.JLabel lblVertBordure;
     private javax.swing.JMenu menuAide;
     private javax.swing.JMenu menuFichier;
     private javax.swing.JMenu menuMode;
@@ -1214,6 +1338,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JMenuItem miImporter;
     private javax.swing.JMenuItem miImporterChanson;
     private javax.swing.JRadioButtonMenuItem miJouer;
+    private javax.swing.JMenuItem miNouvelInstrument;
     private javax.swing.JMenuItem miQuitter;
     private gaudrophone.Presentation.PanneauAffichage panneauAffichage;
     private javax.swing.JPanel plInstrument;
@@ -1226,15 +1351,19 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbSon;
     private javax.swing.JSplitPane spGaudrophone;
     private javax.swing.JSpinner spinBleu;
+    private javax.swing.JSpinner spinBleuBordure;
     private javax.swing.JSpinner spinFrequence;
     private javax.swing.JSpinner spinHauteur;
     private javax.swing.JSpinner spinLargeur;
+    private javax.swing.JSpinner spinLargeurBordure;
     private javax.swing.JSpinner spinOctave;
     private javax.swing.JSpinner spinOctaveMetronome;
     private javax.swing.JSpinner spinPersistance;
     private javax.swing.JSpinner spinPersistanceMetronome;
     private javax.swing.JSpinner spinRouge;
+    private javax.swing.JSpinner spinRougeBordure;
     private javax.swing.JSpinner spinVert;
+    private javax.swing.JSpinner spinVertBordure;
     private javax.swing.JTextField txtNomInstrument;
     private javax.swing.JTextField txtRechercher;
     // End of variables declaration//GEN-END:variables

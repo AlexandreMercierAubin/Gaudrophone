@@ -63,23 +63,22 @@ public class ControleurInstrument {
     public void cliquerSouris(Point2D coordRelative)
     {
         switch(modeVisuel)
-        {
-                
+        {    
             case Editer:
                 instrument.selectionnerTouche(coordRelative);
                 break;
-                
-
         }
     }
     
-   public void enfoncerSouris(Point2D coordRelative)
+    public boolean enfoncerSouris(Point2D coordRelative)
     {
+        boolean clickTouche = false;
         switch(modeVisuel)
         {
             case Editer:
                 //detecter si une touche est selectionee
-                if(instrument.selectionnerTouche(coordRelative))
+                clickTouche = instrument.selectionnerTouche(coordRelative);
+                if(clickTouche)
                 {
                     instrument.replacerToucheDessus();
                     toucheEnDeplacement=true;
@@ -101,6 +100,7 @@ public class ControleurInstrument {
                 toucheEnDeplacement=true;
                 break;
         }
+        return clickTouche;
     }
 
    
