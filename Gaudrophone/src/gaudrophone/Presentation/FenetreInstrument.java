@@ -151,6 +151,14 @@ public class FenetreInstrument extends javax.swing.JFrame {
             rbCouleur.setSelected(true);
             cbCouleur.setSelectedIndex(0);
             
+            cbCouleur.setEnabled(true);
+            spinRouge.setEnabled(true);
+            lblRouge.setEnabled(true);
+            spinVert.setEnabled(true);
+            lblVert.setEnabled(true);
+            spinBleu.setEnabled(true);
+            lblBleu.setEnabled(true);
+            
             Color couleur = touche.getApparence().getCouleurFond();
             spinRouge.setValue(couleur.getRed());
             spinBleu.setValue(couleur.getBlue());
@@ -1044,9 +1052,21 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomInstrumentActionPerformed
 
     private void panneauAffichageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauAffichageMouseClicked
+        boolean clickTouche;
         int dimension=(panneauAffichage.getWidth()>panneauAffichage.getHeight()?panneauAffichage.getHeight():panneauAffichage.getWidth());
-        controleur.cliquerSouris(Outils.conversionPointPixelRelatif( evt.getPoint(),dimension));
+        clickTouche = controleur.cliquerSouris(Outils.conversionPointPixelRelatif( evt.getPoint(),dimension));
         panneauAffichage.repaint();
+        if(clickTouche == true)
+        {
+            TPInfo.setSelectedIndex(1); 
+            TPInfo.setEnabledAt(1,true);
+            ToucheUpdater();
+        }
+        else
+        {
+            TPInfo.setSelectedIndex(0); 
+            TPInfo.setEnabledAt(1,false);
+        }
     }//GEN-LAST:event_panneauAffichageMouseClicked
 
     private void panneauAffichageMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauAffichageMousePressed

@@ -60,17 +60,16 @@ public class ControleurInstrument {
     
     public void finEnregistrerBoucle(int index){}
     
-    public void cliquerSouris(Point2D coordRelative)
+    public boolean cliquerSouris(Point2D coordRelative)
     {
+        boolean clickTouche = false;
         switch(modeVisuel)
-        {
-                
+        {    
             case Editer:
-                instrument.selectionnerTouche(coordRelative);
+                clickTouche = instrument.selectionnerTouche(coordRelative);
                 break;
-                
-
         }
+        return clickTouche;
     }
     
     public void enfoncerSouris(Point2D coordRelative)
