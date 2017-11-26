@@ -18,6 +18,8 @@ import java.awt.geom.Point2D;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class FenetreInstrument extends javax.swing.JFrame {
     ButtonGroup m_btnGroupeMode;
@@ -74,9 +76,24 @@ public class FenetreInstrument extends javax.swing.JFrame {
             }
         });
         
-        
+        txtRechercher.getDocument().addDocumentListener(new DocumentListener() 
+        {
+            public void changedUpdate(DocumentEvent e) {
+              warn();
+            }
+            public void removeUpdate(DocumentEvent e) {
+              warn();
+            }
+            public void insertUpdate(DocumentEvent e) {
+              warn();
+            }
+
+            public void warn() {
+                controleur.getInstrument().rechercherTouche(txtRechercher.getText());
+            }
+
+        });
     }
-    
     private void InstrumentUpdater()
     {
         Instrument instru = controleur.getInstrument();
@@ -334,7 +351,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
         btnActif = new javax.swing.JButton();
         lblRechercher = new javax.swing.JLabel();
         txtRechercher = new javax.swing.JTextField();
-        btnRechercher = new javax.swing.JButton();
         plTouche = new javax.swing.JPanel();
         lblNote = new javax.swing.JLabel();
         lblOctave = new javax.swing.JLabel();
@@ -504,8 +520,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         lblRechercher.setText("Rechercher :");
 
-        btnRechercher.setText("Lancer la recherche");
-
         javax.swing.GroupLayout plInstrumentLayout = new javax.swing.GroupLayout(plInstrument);
         plInstrument.setLayout(plInstrumentLayout);
         plInstrumentLayout.setHorizontalGroup(
@@ -543,9 +557,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
                     .addGroup(plInstrumentLayout.createSequentialGroup()
                         .addComponent(lblRechercher)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnRechercher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtRechercher))))
+                        .addComponent(txtRechercher)))
                 .addContainerGap())
         );
         plInstrumentLayout.setVerticalGroup(
@@ -591,9 +603,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
                 .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRechercher)
                     .addComponent(txtRechercher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnRechercher)
-                .addContainerGap())
+                .addGap(383, 383, 383))
         );
 
         lblTimbre.getAccessibleContext().setAccessibleDescription("");
@@ -1015,6 +1025,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
         menuGenerer.add(miGuitare);
 
         miPiano.setText("Piano");
+        miPiano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miPianoActionPerformed(evt);
+            }
+        });
         menuGenerer.add(miPiano);
 
         barreMenu.add(menuGenerer);
@@ -1342,6 +1357,10 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private void btnEnregistrerToucheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerToucheActionPerformed
         ToucheEnregistrer();
     }//GEN-LAST:event_btnEnregistrerToucheActionPerformed
+
+    private void miPianoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miPianoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miPianoActionPerformed
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.sauvegarderInstrument();
@@ -1436,7 +1455,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JButton btnEnregistrerTouche;
     private javax.swing.JButton btnParcourirFichierAudio;
     private javax.swing.JButton btnParcourirImage;
-    private javax.swing.JButton btnRechercher;
     private javax.swing.JComboBox<String> cbBordure;
     private javax.swing.JComboBox<String> cbCouleur;
     private javax.swing.JComboBox<String> cbCouleurBordure;
