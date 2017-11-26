@@ -5,6 +5,7 @@ import gaudrophone.Domaine.ControleurInstrument;
 import gaudrophone.Domaine.Dimension2D;
 import gaudrophone.Domaine.Enums.Forme;
 import gaudrophone.Domaine.Enums.ModeVisuel;
+import gaudrophone.Domaine.Generateur.GenerateurGuitare;
 import gaudrophone.Domaine.Instrument.Bordure;
 import gaudrophone.Domaine.Instrument.FichierAudio;
 import gaudrophone.Domaine.Instrument.Instrument;
@@ -1384,7 +1385,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_cbBordureComponentShown
 
     private void miGuitareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGuitareActionPerformed
-        // TODO add your handling code here:
+        controleur.genererInstrument(new GenerateurGuitare());
+        panneauAffichage.repaint();
+        InstrumentUpdater();
     }//GEN-LAST:event_miGuitareActionPerformed
 
     private void btnEnregistrerToucheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerToucheActionPerformed
