@@ -24,17 +24,17 @@ public class Instrument implements Serializable{
     
     public Instrument()
     {
+        toucheSelectionee = -1;
         timbre = 1;
         strategies = new ArrayList<StrategieRecherche>();
         cleeTouche=0;
         touches = new ArrayList<Touche>();
         nom="template";
-        timbre=0;
         strategies= new ArrayList<StrategieRecherche>();
-        strategies.add(new StrategieChemin());
-        strategies.add(new StrategieCouleur());
-        strategies.add(new StrategieForme());
-        strategies.add(new StrategieNoteOctave());
+        //strategies.add(new StrategieChemin());
+        //strategies.add(new StrategieCouleur());
+        //strategies.add(new StrategieForme());
+        //strategies.add(new StrategieNoteOctave());
     }
     
     public int getTimbre()
@@ -45,6 +45,11 @@ public class Instrument implements Serializable{
     public void setTimbre(int noInstrument)
     {
         timbre=noInstrument;
+        // Permet de changer le timbre pour tous les instruments
+        for(int i=0; i<touches.size();i++)
+        {
+            touches.get(i).setTimbreInstrument(noInstrument);
+        }
     }
     
     public String getNom()
@@ -95,6 +100,20 @@ public class Instrument implements Serializable{
     
     public void rechercherTouche(String requete)
     {   
+        //si la requete est vide, effacer la surbrillance
+        if(requete.equals(""))
+        {
+            for(int j=0; j<touches.size();++j)
+            {
+                if(j!=toucheSelectionee)
+                {
+                    touches.get(j).setSurbrillance(false);
+                }
+            }
+            
+            return;
+        }
+        
         String[] mots= requete.split("\\s+");
         
         for(int j=0; j<touches.size();++j)

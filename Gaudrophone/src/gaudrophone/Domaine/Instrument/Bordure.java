@@ -1,8 +1,9 @@
 package gaudrophone.Domaine.Instrument;
 
 import java.awt.Color;
+import java.io.Serializable;
 
-public class Bordure {
+public class Bordure implements Serializable{
     int cote;
     boolean visible;
     double largeur;

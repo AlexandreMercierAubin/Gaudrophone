@@ -1,6 +1,8 @@
 package gaudrophone.Domaine.Instrument;
 
-public abstract class Son {
+import java.io.Serializable;
+
+public abstract class Son implements Serializable{
     int persistance;
     boolean jouerSon; 
     

@@ -2,16 +2,17 @@ package gaudrophone.Domaine.Instrument;
 
 import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.Outils;
+import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.sound.midi.*;
 
 
-public class Note extends Son {
+public class Note extends Son implements Serializable{
     NomNote nom;
     int octave;
     int timbreInstrument;
-    Synthesizer synthesizer;
+    transient Synthesizer synthesizer;
     MidiChannel[] channels;
     
     public Note(int timbreInstr){
@@ -19,18 +20,24 @@ public class Note extends Son {
         nom = NomNote.C;
         persistance = 1000;
         timbreInstrument = timbreInstr;
-        try{
-            synthesizer = MidiSystem.getSynthesizer();
-        }
-        catch(Exception e){}        
-        }
+        initialiserSynthesizer();
+    }
+    
+    public Note(int timbreInstr, NomNote note, int octave)
+    {
+        this.octave = octave;
+        nom = note;
+        persistance = 1000;
+        timbreInstrument = timbreInstr;
+        initialiserSynthesizer();
+    }
     
     @Override
     public void commencerJouer()
     {
         Timer timer;        
         javax.sound.midi.Instrument instruments[], instr;
-        int noInstrument = 1;
+        int noInstrument = timbreInstrument;
         int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
         
         // Permet de préciser que l'instrument commence a émettre un son
@@ -110,6 +117,17 @@ public class Note extends Son {
         }
     }
     
+    public void initialiserSynthesizer()
+    {
+        try
+        {
+            synthesizer = MidiSystem.getSynthesizer();
+        }
+        catch(Exception e)
+        {        
+        }
+    }
+    
     public NomNote getNom()
     {
         return nom;
@@ -128,5 +146,10 @@ public class Note extends Son {
     public void setOctave(int valeur)
     {
         octave = valeur;
+    }
+    
+    public void setTimbreInstrument(int timbreInstr)
+    {
+        timbreInstrument = timbreInstr;
     }
 }
