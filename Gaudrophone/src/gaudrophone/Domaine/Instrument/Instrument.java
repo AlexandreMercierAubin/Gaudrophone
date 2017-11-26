@@ -100,6 +100,20 @@ public class Instrument implements Serializable{
     
     public void rechercherTouche(String requete)
     {   
+        //si la requete est vide, effacer la surbrillance
+        if(requete.equals(""))
+        {
+            for(int j=0; j<touches.size();++j)
+            {
+                if(j!=toucheSelectionee)
+                {
+                    touches.get(j).setSurbrillance(false);
+                }
+            }
+            
+            return;
+        }
+        
         String[] mots= requete.split("\\s+");
         
         for(int j=0; j<touches.size();++j)
