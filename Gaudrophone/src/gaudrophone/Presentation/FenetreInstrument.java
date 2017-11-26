@@ -356,6 +356,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
         miEnregistrer = new javax.swing.JMenuItem();
         miEnregistrerSous = new javax.swing.JMenuItem();
         miQuitter = new javax.swing.JMenuItem();
+        menuGenerer = new javax.swing.JMenu();
+        miGuitare = new javax.swing.JMenuItem();
+        miPiano = new javax.swing.JMenuItem();
         menuMode = new javax.swing.JMenu();
         miJouer = new javax.swing.JRadioButtonMenuItem();
         miEdition = new javax.swing.JRadioButtonMenuItem();
@@ -952,6 +955,21 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         barreMenu.add(menuFichier);
 
+        menuGenerer.setText("Générer");
+
+        miGuitare.setText("Guitare");
+        miGuitare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miGuitareActionPerformed(evt);
+            }
+        });
+        menuGenerer.add(miGuitare);
+
+        miPiano.setText("Piano");
+        menuGenerer.add(miPiano);
+
+        barreMenu.add(menuGenerer);
+
         menuMode.setText("Mode");
 
         miJouer.setSelected(true);
@@ -1267,6 +1285,10 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private void cbBordureComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_cbBordureComponentShown
 
     }//GEN-LAST:event_cbBordureComponentShown
+
+    private void miGuitareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGuitareActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miGuitareActionPerformed
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.sauvegarderInstrument();
@@ -1400,6 +1422,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JLabel lblVertBordure;
     private javax.swing.JMenu menuAide;
     private javax.swing.JMenu menuFichier;
+    private javax.swing.JMenu menuGenerer;
     private javax.swing.JMenu menuMode;
     private javax.swing.JMenuItem miAPropos;
     private javax.swing.JMenuItem miAide;
@@ -1407,10 +1430,12 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem miEdition;
     private javax.swing.JMenuItem miEnregistrer;
     private javax.swing.JMenuItem miEnregistrerSous;
+    private javax.swing.JMenuItem miGuitare;
     private javax.swing.JMenuItem miImporter;
     private javax.swing.JMenuItem miImporterChanson;
     private javax.swing.JRadioButtonMenuItem miJouer;
     private javax.swing.JMenuItem miNouvelInstrument;
+    private javax.swing.JMenuItem miPiano;
     private javax.swing.JMenuItem miQuitter;
     private gaudrophone.Presentation.PanneauAffichage panneauAffichage;
     private javax.swing.JPanel plInstrument;
