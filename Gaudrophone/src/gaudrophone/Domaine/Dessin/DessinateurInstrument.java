@@ -101,7 +101,7 @@ public class DessinateurInstrument {
         if (surbrillance)
             largeurBordure += 2;
         
-        if (bordure.getVisible())
+        if (bordure.getVisible() || surbrillance)
         {
             g2.setColor(bordure.getCouleur());
             g2.setStroke(new BasicStroke(largeurBordure));
@@ -129,7 +129,7 @@ public class DessinateurInstrument {
         for (int i = 0; i < 4; i++)
         {
             Bordure bordure = apparence.getBordure(i);
-            if (bordure.getVisible())
+            if (bordure.getVisible() || surbrillance)
             {
                 int largeurBordure = Outils.conversionRelatifPixel(bordure.getLargeur(), minDimPanneau);
                 if (surbrillance)
@@ -167,7 +167,7 @@ public class DessinateurInstrument {
         for (int i = 0; i < nbBordures; i++)
         {
             Bordure bordure = apparence.getBordure(i);
-            if (bordure.getVisible())
+            if (bordure.getVisible() || surbrillance)
             {
                 int x1, y1, x2, y2;
 
