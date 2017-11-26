@@ -2,6 +2,7 @@ package gaudrophone.Domaine.Generateur;
 
 import gaudrophone.Domaine.Dimension2D;
 import gaudrophone.Domaine.Enums.Forme;
+import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.Instrument.ApparenceTouche;
 import gaudrophone.Domaine.Instrument.Bordure;
 import gaudrophone.Domaine.Instrument.Instrument;
@@ -10,6 +11,7 @@ import gaudrophone.Domaine.Instrument.Touche;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GenerateurGuitare extends GenerateurInstrument{
@@ -21,7 +23,96 @@ public class GenerateurGuitare extends GenerateurInstrument{
         timbre = 24; // Guitare
         
         notes = new ArrayList<>();
-        
+        notes.add(Arrays.asList(
+                new Note(timbre, NomNote.F, 3),
+                new Note(timbre, NomNote.FSharp, 3),
+                new Note(timbre, NomNote.G, 3),
+                new Note(timbre, NomNote.GSharp, 3),
+                new Note(timbre, NomNote.A, 3),
+                new Note(timbre, NomNote.ASharp, 3),
+                new Note(timbre, NomNote.B, 3),
+                new Note(timbre, NomNote.C, 4),
+                new Note(timbre, NomNote.CSharp, 4),
+                new Note(timbre, NomNote.D, 4),
+                new Note(timbre, NomNote.DSharp, 4),
+                new Note(timbre, NomNote.E, 4),
+                new Note(timbre, NomNote.F, 4)
+        ));
+        notes.add(Arrays.asList(
+                new Note(timbre, NomNote.C, 4),
+                new Note(timbre, NomNote.CSharp, 4),
+                new Note(timbre, NomNote.D, 4),
+                new Note(timbre, NomNote.DSharp, 4),
+                new Note(timbre, NomNote.E, 4),
+                new Note(timbre, NomNote.F, 4),
+                new Note(timbre, NomNote.FSharp, 4),
+                new Note(timbre, NomNote.G, 4),
+                new Note(timbre, NomNote.GSharp, 4),
+                new Note(timbre, NomNote.A, 4),
+                new Note(timbre, NomNote.ASharp, 4),
+                new Note(timbre, NomNote.B, 4),
+                new Note(timbre, NomNote.C, 5)
+        ));
+        notes.add(Arrays.asList(
+                new Note(timbre, NomNote.GSharp, 4),
+                new Note(timbre, NomNote.A, 4),
+                new Note(timbre, NomNote.ASharp, 4),
+                new Note(timbre, NomNote.B, 4),
+                new Note(timbre, NomNote.C, 5),
+                new Note(timbre, NomNote.CSharp, 5),
+                new Note(timbre, NomNote.D, 5),
+                new Note(timbre, NomNote.DSharp, 5),
+                new Note(timbre, NomNote.E, 5),
+                new Note(timbre, NomNote.F, 5),
+                new Note(timbre, NomNote.FSharp, 5),
+                new Note(timbre, NomNote.G, 5),
+                new Note(timbre, NomNote.GSharp, 5)
+        ));
+        notes.add(Arrays.asList(
+                new Note(timbre, NomNote.DSharp, 5),
+                new Note(timbre, NomNote.E, 5),
+                new Note(timbre, NomNote.F, 5),
+                new Note(timbre, NomNote.FSharp, 5),
+                new Note(timbre, NomNote.G, 5),
+                new Note(timbre, NomNote.GSharp, 5),
+                new Note(timbre, NomNote.A, 5),
+                new Note(timbre, NomNote.ASharp, 5),
+                new Note(timbre, NomNote.B, 5),
+                new Note(timbre, NomNote.C, 6),
+                new Note(timbre, NomNote.CSharp, 6),
+                new Note(timbre, NomNote.D, 6),
+                new Note(timbre, NomNote.DSharp, 6)
+        ));
+        notes.add(Arrays.asList(
+                new Note(timbre, NomNote.ASharp, 5),
+                new Note(timbre, NomNote.B, 5),
+                new Note(timbre, NomNote.C, 6),
+                new Note(timbre, NomNote.CSharp, 6),
+                new Note(timbre, NomNote.D, 6),
+                new Note(timbre, NomNote.DSharp, 6),
+                new Note(timbre, NomNote.E, 6),
+                new Note(timbre, NomNote.F, 6),
+                new Note(timbre, NomNote.FSharp, 6),
+                new Note(timbre, NomNote.G, 6),
+                new Note(timbre, NomNote.GSharp, 6),
+                new Note(timbre, NomNote.A, 6),
+                new Note(timbre, NomNote.ASharp, 6)
+        ));
+        notes.add(Arrays.asList(
+                new Note(timbre, NomNote.F, 6),
+                new Note(timbre, NomNote.FSharp, 6),
+                new Note(timbre, NomNote.G, 6),
+                new Note(timbre, NomNote.GSharp, 6),
+                new Note(timbre, NomNote.A, 6),
+                new Note(timbre, NomNote.ASharp, 6),
+                new Note(timbre, NomNote.B, 6),
+                new Note(timbre, NomNote.C, 7),
+                new Note(timbre, NomNote.CSharp, 7),
+                new Note(timbre, NomNote.D, 7),
+                new Note(timbre, NomNote.DSharp, 7),
+                new Note(timbre, NomNote.E, 7),
+                new Note(timbre, NomNote.F, 7)
+        ));
     }
     
     @Override
@@ -37,7 +128,7 @@ public class GenerateurGuitare extends GenerateurInstrument{
             {   
                 Touche touche = instrument.ajouterTouche(new Point2D.Double(0.0, 0.0));
                 genererApparence(touche, i, j);
-                
+                genererSon(touche, i, j);
             }
         }
         
@@ -64,5 +155,13 @@ public class GenerateurGuitare extends GenerateurInstrument{
         corde.setVisible(true);
         corde.setCouleur(new Color(198, 198, 198));
         corde.setLargeur(0.0003 * (5 - i) + 0.001);
+    }
+    
+    private void genererSon(Touche touche, int i, int j)
+    {
+        Note note = (Note)touche.getSon();
+        note.setNom(notes.get(i).get(j).getNom());
+        note.setOctave(notes.get(i).get(j).getOctave());
+        note.setPersistance(500);
     }
 }
