@@ -46,6 +46,11 @@ public class Instrument implements Serializable{
     public void setTimbre(int noInstrument)
     {
         timbre=noInstrument;
+        // Permet de changer le timbre pour tous les instruments
+        for(int i=0; i<touches.size();i++)
+        {
+            touches.get(i).setTimbreInstrument(noInstrument);
+        }
     }
     
     public String getNom()

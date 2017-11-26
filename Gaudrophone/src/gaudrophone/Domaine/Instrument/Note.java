@@ -23,12 +23,21 @@ public class Note extends Son implements Serializable{
         initialiserSynthesizer();
     }
     
+    public Note(int timbreInstr, NomNote note, int octave)
+    {
+        octave = octave;
+        nom = note;
+        persistance = 1000;
+        timbreInstrument = timbreInstr;
+        initialiserSynthesizer();
+    }
+    
     @Override
     public void commencerJouer()
     {
         Timer timer;        
         javax.sound.midi.Instrument instruments[], instr;
-        int noInstrument = 1;
+        int noInstrument = timbreInstrument;
         int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
         
         // Permet de préciser que l'instrument commence a émettre un son
@@ -137,5 +146,10 @@ public class Note extends Son implements Serializable{
     public void setOctave(int valeur)
     {
         octave = valeur;
+    }
+    
+    public void setTimbreInstrument(int timbreInstr)
+    {
+        timbreInstrument = timbreInstr;
     }
 }
