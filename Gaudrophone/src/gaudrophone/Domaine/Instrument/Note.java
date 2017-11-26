@@ -25,7 +25,7 @@ public class Note extends Son implements Serializable{
     
     public Note(int timbreInstr, NomNote note, int octave)
     {
-        octave = octave;
+        this.octave = octave;
         nom = note;
         persistance = 1000;
         timbreInstrument = timbreInstr;
