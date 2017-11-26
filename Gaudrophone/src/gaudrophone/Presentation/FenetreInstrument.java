@@ -77,7 +77,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         
     }
     
-    public void InstrumentUpdater()
+    private void InstrumentUpdater()
     {
         Instrument instru = controleur.getInstrument();
         int index = instru.getTimbre();
@@ -96,7 +96,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         }
     }
     
-    public void InstrumentEnregistrer()
+    private void InstrumentEnregistrer()
     {
         Instrument instru = controleur.getInstrument();
         int index = cbTimbre.getSelectedIndex();
@@ -116,7 +116,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         
     }
     
-    public void ToucheUpdater(){
+    private void ToucheUpdater(){
         int index = controleur.getInstrument().getToucheSelectionee();
         Touche touche = controleur.getInstrument().getTouche(index);
         //touche.getApparence().setForme(Forme.Hexagone);
@@ -267,6 +267,36 @@ public class FenetreInstrument extends javax.swing.JFrame {
         //cbBordure.actionPerformed(null);
     }
     
+    private void ToucheEnregistrer()
+    {
+        int index = controleur.getInstrument().getToucheSelectionee();
+        int indexBordure = cbBordure.getSelectedIndex();
+        Touche touche = controleur.getInstrument().getTouche(index);
+        Bordure bordure = touche.getApparence().getBordure(indexBordure);
+        
+        touche.getApparence().setForme(Forme.valueOf(cbForme.getSelectedItem().toString()));
+        if(rbCouleur.isSelected()){
+            touche.getApparence().setCouleurFond(new Color((int)spinRouge.getValue(), (int)spinVert.getValue(), (int)spinBleu.getValue()));
+        }
+        else{
+            //enregistrer le path de limage
+        }
+        touche.getApparence().setDimension(new Dimension2D((double)spinLargeur.getValue(),(double)spinHauteur.getValue()));
+        bordure.setVisible(checkVisible.isSelected());
+        bordure.setLargeur((double)spinLargeurBordure.getValue());
+        bordure.setCouleur(new Color((int)spinRougeBordure.getValue(), (int)spinVertBordure.getValue(), (int)spinBleuBordure.getValue()));
+        if(rbSon.isSelected()){
+            ((Note)touche.getSon()).setNom(NomNote.valueOf(cbNote.getSelectedItem().toString().replaceAll("#", "Sharp")));
+            ((Note)touche.getSon()).setOctave((int)spinOctave.getValue());
+            ((Note)touche.getSon()).setPersistance((int)spinPersistance.getValue());
+        }
+        else{
+            //enregistrer le path de fichier audio
+        }
+        panneauAffichage.repaint();
+        
+    }
+    
     public ControleurInstrument getControleur()
     {
         return controleur;
@@ -281,6 +311,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         spGaudrophone = new javax.swing.JSplitPane();
         plNote = new javax.swing.JPanel();
         panneauAffichage = new gaudrophone.Presentation.PanneauAffichage();
+        txtMessageBar = new javax.swing.JTextField();
         plParametres = new javax.swing.JPanel();
         TPInfo = new javax.swing.JTabbedPane();
         plInstrument = new javax.swing.JPanel();
@@ -397,18 +428,25 @@ public class FenetreInstrument extends javax.swing.JFrame {
         );
         panneauAffichageLayout.setVerticalGroup(
             panneauAffichageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 818, Short.MAX_VALUE)
+            .addGap(0, 790, Short.MAX_VALUE)
         );
+
+        txtMessageBar.setEditable(false);
+        txtMessageBar.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout plNoteLayout = new javax.swing.GroupLayout(plNote);
         plNote.setLayout(plNoteLayout);
         plNoteLayout.setHorizontalGroup(
             plNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panneauAffichage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(txtMessageBar)
         );
         plNoteLayout.setVerticalGroup(
             plNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panneauAffichage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(plNoteLayout.createSequentialGroup()
+                .addComponent(panneauAffichage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtMessageBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         spGaudrophone.setLeftComponent(plNote);
@@ -663,6 +701,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
         });
 
         btnEnregistrerTouche.setText("Enregistrer");
+        btnEnregistrerTouche.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnregistrerToucheActionPerformed(evt);
+            }
+        });
 
         cbBordure.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -696,6 +739,12 @@ public class FenetreInstrument extends javax.swing.JFrame {
         lblVertBordure.setText("Vert");
 
         lblBleuBordure.setText("Bleu");
+
+        spinRougeBordure.setModel(new javax.swing.SpinnerNumberModel(0, 0, 255, 1));
+
+        spinVertBordure.setModel(new javax.swing.SpinnerNumberModel(0, 0, 255, 1));
+
+        spinBleuBordure.setModel(new javax.swing.SpinnerNumberModel(0, 0, 255, 1));
 
         btnEffacer.setText("Effacer la Touche");
 
@@ -890,7 +939,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
                 .addComponent(btnEnregistrerTouche)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEffacer)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         TPInfo.addTab("Touche", plTouche);
@@ -1289,6 +1338,10 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private void miGuitareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGuitareActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_miGuitareActionPerformed
+
+    private void btnEnregistrerToucheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerToucheActionPerformed
+        ToucheEnregistrer();
+    }//GEN-LAST:event_btnEnregistrerToucheActionPerformed
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.sauvegarderInstrument();
@@ -1461,6 +1514,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JSpinner spinRougeBordure;
     private javax.swing.JSpinner spinVert;
     private javax.swing.JSpinner spinVertBordure;
+    private javax.swing.JTextField txtMessageBar;
     private javax.swing.JTextField txtNomInstrument;
     private javax.swing.JTextField txtRechercher;
     // End of variables declaration//GEN-END:variables
