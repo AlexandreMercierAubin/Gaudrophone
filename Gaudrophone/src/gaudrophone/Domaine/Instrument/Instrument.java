@@ -188,6 +188,9 @@ public class Instrument implements Serializable{
             return false;
         }
         
+        if (index == toucheSelectionee)
+            toucheSelectionee = -1;
+        
         touches.remove(index);
         
         return true;
