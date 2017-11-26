@@ -90,6 +90,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
             public void warn() {
                 controleur.getInstrument().rechercherTouche(txtRechercher.getText());
+                panneauAffichage.repaint();
             }
 
         });
