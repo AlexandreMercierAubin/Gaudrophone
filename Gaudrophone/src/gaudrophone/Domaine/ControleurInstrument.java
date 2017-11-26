@@ -25,6 +25,7 @@ public class ControleurInstrument {
     ModeVisuel modeVisuel;
     boolean toucheEnDeplacement;
     boolean toucheEnJeu;
+    double echelleAffichage;
     
     public ControleurInstrument()
     {
@@ -33,6 +34,7 @@ public class ControleurInstrument {
         toucheEnDeplacement = false;
         toucheEnJeu=false;
         modeVisuel=ModeVisuel.Ajouter;
+        echelleAffichage = 1.0;
     }
     
     public Instrument getInstrument()
@@ -48,6 +50,11 @@ public class ControleurInstrument {
     public Metronome getMetronome()
     {
         return metronome;
+    }
+    
+    public void setEchelleAffichage(double echelle)
+    {
+        echelleAffichage = echelle;
     }
     
     public void importerPartition(){}
@@ -69,6 +76,10 @@ public class ControleurInstrument {
     
     public void cliquerSouris(Point2D coordRelative)
     {
+        coordRelative = new Point2D.Double(
+                coordRelative.getX() / echelleAffichage, 
+                coordRelative.getY() / echelleAffichage);
+        
         switch(modeVisuel)
         {    
             case Editer:
@@ -79,6 +90,10 @@ public class ControleurInstrument {
     
     public boolean enfoncerSouris(Point2D coordRelative)
     {
+        coordRelative = new Point2D.Double(
+                coordRelative.getX() / echelleAffichage, 
+                coordRelative.getY() / echelleAffichage);
+        
         boolean clickTouche = false;
         switch(modeVisuel)
         {
@@ -115,6 +130,10 @@ public class ControleurInstrument {
    
     public void relacherSouris(Point2D coordRelative)
     {
+        coordRelative = new Point2D.Double(
+                coordRelative.getX() / echelleAffichage, 
+                coordRelative.getY() / echelleAffichage);
+        
         switch(modeVisuel)
         {
             case Editer:
@@ -139,6 +158,10 @@ public class ControleurInstrument {
    
     public boolean glisserSouris(Point2D coordRelative)
     {
+        coordRelative = new Point2D.Double(
+                coordRelative.getX() / echelleAffichage, 
+                coordRelative.getY() / echelleAffichage);
+        
         // deplacement de la touche selectionnee a l'enfoncement
         if (toucheEnDeplacement)
         {
