@@ -487,7 +487,7 @@
                         <Component class="javax.swing.JSpinner" name="spinPersistanceMetronome">
                           <Properties>
                             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                              <SpinnerModel initial="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
                             </Property>
                           </Properties>
                         </Component>
@@ -604,7 +604,7 @@
                                                   </Group>
                                                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="1" attributes="0">
-                                                      <Component id="spinVert" alignment="1" pref="207" max="32767" attributes="0"/>
+                                                      <Component id="spinVert" alignment="1" pref="224" max="32767" attributes="0"/>
                                                       <Component id="spinRouge" alignment="1" max="32767" attributes="0"/>
                                                       <Component id="spinBleu" alignment="1" max="32767" attributes="0"/>
                                                   </Group>
@@ -699,12 +699,21 @@
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                   <Component id="cbForme" max="32767" attributes="0"/>
                                               </Group>
-                                              <Component id="lblFond" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lblType" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lblDimension" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="rbFichierAudio" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="rbSon" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lblBordure" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="lblFond" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lblType" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lblDimension" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="rbFichierAudio" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lblBordure" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="rbSon" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                                  <Component id="btnTestSon" max="32767" attributes="0"/>
+                                              </Group>
                                           </Group>
                                           <EmptySpace min="-2" max="-2" attributes="0"/>
                                       </Group>
@@ -799,7 +808,10 @@
                                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                                   <Component id="lblType" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  <Component id="rbSon" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="rbSon" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnTestSon" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="lblNote" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -823,7 +835,7 @@
                                   <Component id="btnEnregistrerTouche" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="btnEffacer" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="63" max="32767" attributes="0"/>
+                                  <EmptySpace pref="127" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1166,6 +1178,14 @@
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Effacer la Touche"/>
                           </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnTestSon">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Jouer le son"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTestSonActionPerformed"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
