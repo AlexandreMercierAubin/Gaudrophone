@@ -75,4 +75,12 @@ public class Touche implements Serializable{
     {
         surbrillance = valeur;
     }
+    
+    public void setTimbreInstrument(int timbreInstr) {
+        timbreInstrument = timbreInstr;
+        if (son instanceof Note)
+        {
+            ((Note)son).setTimbreInstrument(timbreInstr);
+        }
+    }
 }
