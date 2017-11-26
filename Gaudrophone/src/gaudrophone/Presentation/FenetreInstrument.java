@@ -1198,11 +1198,13 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_cbBordureActionPerformed
 
     private void miNouvelInstrumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNouvelInstrumentActionPerformed
-        // TODO add your handling code here:
+        controleur.nouvelInstrument();
+        panneauAffichage.repaint();
     }//GEN-LAST:event_miNouvelInstrumentActionPerformed
 
     private void btnEffacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEffacerActionPerformed
         controleur.getInstrument().retirerTouche(controleur.getInstrument().getToucheSelectionee());
+        panneauAffichage.repaint();
     }//GEN-LAST:event_btnEffacerActionPerformed
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1215,6 +1217,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
     private void miImporterActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.importerInstrument();
+        panneauAffichage.repaint();
     }
 
     private void miQuitterActionPerformed(java.awt.event.ActionEvent evt) {

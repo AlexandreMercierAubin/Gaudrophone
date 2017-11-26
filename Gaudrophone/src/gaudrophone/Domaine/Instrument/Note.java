@@ -2,16 +2,17 @@ package gaudrophone.Domaine.Instrument;
 
 import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.Outils;
+import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.sound.midi.*;
 
 
-public class Note extends Son {
+public class Note extends Son implements Serializable{
     NomNote nom;
     int octave;
     int timbreInstrument;
-    Synthesizer synthesizer;
+    transient Synthesizer synthesizer;
     MidiChannel[] channels;
     
     public Note(int timbreInstr){
@@ -19,11 +20,8 @@ public class Note extends Son {
         nom = NomNote.C;
         persistance = 1000;
         timbreInstrument = timbreInstr;
-        try{
-            synthesizer = MidiSystem.getSynthesizer();
-        }
-        catch(Exception e){}        
-        }
+        initialiserSynthesizer();
+    }
     
     @Override
     public void commencerJouer()
@@ -107,6 +105,17 @@ public class Note extends Son {
         else
         {
             jouerSon = false;
+        }
+    }
+    
+    public void initialiserSynthesizer()
+    {
+        try
+        {
+            synthesizer = MidiSystem.getSynthesizer();
+        }
+        catch(Exception e)
+        {        
         }
     }
     

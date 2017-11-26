@@ -2,11 +2,12 @@
 package gaudrophone.Domaine.Instrument;
 
 import java.io.File;
+import java.io.Serializable;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-public class FichierAudio extends Son{
+public class FichierAudio extends Son implements Serializable{
     String chemin ;
     Clip clip;
     

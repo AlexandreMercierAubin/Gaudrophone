@@ -7,11 +7,12 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.Polygon;
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
 
-public class ApparenceTouche 
+public class ApparenceTouche  implements Serializable
 {
     Forme forme;
     Color couleurFond;

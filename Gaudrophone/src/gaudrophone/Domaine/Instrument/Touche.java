@@ -2,8 +2,9 @@ package gaudrophone.Domaine.Instrument;
 import gaudrophone.Domaine.Outils;
 import java.awt.Polygon;
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 
-public class Touche {
+public class Touche implements Serializable{
     int index;
     
     String texteAffichage;

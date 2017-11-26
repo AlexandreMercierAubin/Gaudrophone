@@ -4,6 +4,8 @@ import gaudrophone.Domaine.Generateur.GenerateurInstrument;
 import gaudrophone.Domaine.Instrument.Instrument;
 import gaudrophone.Domaine.Instrument.Touche;
 import gaudrophone.Domaine.Enums.ModeVisuel;
+import gaudrophone.Domaine.Instrument.Note;
+import gaudrophone.Domaine.Instrument.Son;
 import gaudrophone.Presentation.FenetreInstrument;
 import java.util.List;
 import java.awt.geom.Point2D;
@@ -36,6 +38,11 @@ public class ControleurInstrument {
     public Instrument getInstrument()
     {
         return instrument;
+    }
+    
+    public void nouvelInstrument()
+    {
+        instrument = new Instrument();
     }
     
     public Metronome getMetronome()
@@ -179,8 +186,9 @@ public class ControleurInstrument {
             String dir = dialogueEnregistrer.getCurrentDirectory().toString();
             try 
             {
-                FileOutputStream fichier = new FileOutputStream(dir+"\\"+filename);
-                instrument.setChemin(dir+"\\"+filename);
+                String chemin = dir+"\\"+filename;
+                FileOutputStream fichier = new FileOutputStream(chemin,false);
+                instrument.setChemin(chemin);
                 ObjectOutputStream oosEnregistrer = new ObjectOutputStream(fichier);
                 
                 oosEnregistrer.writeObject(instrument);
@@ -213,6 +221,16 @@ public class ControleurInstrument {
                 ObjectInputStream oisImporter = new ObjectInputStream(streamFichier);
                 
                 instrument=(Instrument)(oisImporter.readObject());
+                
+                //reinitialiser le synthesizer
+                for(int i=0;i<instrument.getTouches().size();++i)
+                {
+                    Son son=instrument.getTouche(i).getSon();
+                    if(son instanceof Note)
+                    {
+                        ((Note)son).initialiserSynthesizer();
+                    }
+                }
                 
             } catch (final java.io.IOException e) 
             {
