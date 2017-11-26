@@ -146,6 +146,9 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Gaudrophone - Ajouter des touches"/>
+    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[625, 400]"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="barreMenu"/>
@@ -213,6 +216,11 @@
           </Layout>
           <SubComponents>
             <Container class="gaudrophone.Presentation.PanneauAffichage" name="panneauAffichage">
+              <Properties>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[300, 300]"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="panneauAffichageMouseDragged"/>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="panneauAffichageMouseClicked"/>
@@ -228,7 +236,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="790" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="891" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -253,7 +261,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="TPInfo" alignment="0" max="32767" attributes="0"/>
+                  <Component id="TPInfo" alignment="0" pref="402" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -264,10 +272,18 @@
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JTabbedPane" name="TPInfo">
+              <Properties>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[300, 54]"/>
+                </Property>
+              </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="plInstrument">
+                <Container class="javax.swing.JScrollPane" name="spInstrument">
+                  <Properties>
+                    <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                       <JTabbedPaneConstraints tabName="Instrument">
@@ -276,261 +292,275 @@
                     </Constraint>
                   </Constraints>
 
-                  <Layout>
-                    <DimensionLayout dim="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblTimbre" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblNomInstrument" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="cbTimbre" max="32767" attributes="0"/>
-                                          <Component id="txtNomInstrument" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Component id="btnEnregistrerInstrument" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblNoteMetronome" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblOctaveMetronome" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblPersistanceMertronome" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblFrequenceMetronome" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblTimbreMetronome" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="cbTimbreMetronome" alignment="0" pref="134" max="32767" attributes="0"/>
-                                          <Component id="spinFrequence" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="spinPersistanceMetronome" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="spinOctaveMetronome" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="btnActif" alignment="0" pref="213" max="32767" attributes="0"/>
-                                          <Component id="cbNoteMetronome" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="lblMetronome" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblRechercher" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txtRechercher" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                    </DimensionLayout>
-                    <DimensionLayout dim="1">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblNomInstrument" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNomInstrument" alignment="3" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblTimbre" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbTimbre" alignment="3" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnEnregistrerInstrument" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="lblMetronome" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblNoteMetronome" min="-2" pref="16" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                                      <Component id="lblOctaveMetronome" min="-2" pref="16" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                                      <Component id="lblPersistanceMertronome" min="-2" pref="16" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                                      <Component id="lblFrequenceMetronome" min="-2" pref="16" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="cbNoteMetronome" min="-2" pref="22" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                      <Component id="spinOctaveMetronome" min="-2" pref="22" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                                      <Component id="spinPersistanceMetronome" min="-2" pref="22" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                                      <Component id="spinFrequence" min="-2" pref="22" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblTimbreMetronome" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbTimbreMetronome" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnActif" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblRechercher" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtRechercher" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="383" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                    </DimensionLayout>
-                  </Layout>
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="lblNomInstrument">
+                    <Container class="javax.swing.JPanel" name="plInstrument">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Nom : "/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="txtNomInstrument">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="NomInstrument"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomInstrumentActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblTimbre">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Timbre :"/>
-                      </Properties>
-                      <AccessibilityProperties>
-                        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
-                      </AccessibilityProperties>
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="cbTimbre">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="2">
-                            <StringItem index="0" value="Piano"/>
-                            <StringItem index="1" value="Guitare"/>
-                          </StringArray>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[250, 828]"/>
                         </Property>
                       </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblMetronome">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="M&#xe9;tronome : "/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblNoteMetronome">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Note :"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="cbNoteMetronome">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="12">
-                            <StringItem index="0" value="C"/>
-                            <StringItem index="1" value="C#"/>
-                            <StringItem index="2" value="D"/>
-                            <StringItem index="3" value="D#"/>
-                            <StringItem index="4" value="E"/>
-                            <StringItem index="5" value="F"/>
-                            <StringItem index="6" value="F#"/>
-                            <StringItem index="7" value="G"/>
-                            <StringItem index="8" value="G#"/>
-                            <StringItem index="9" value="A"/>
-                            <StringItem index="10" value="A#"/>
-                            <StringItem index="11" value="B"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbNoteMetronomeActionPerformed"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JSpinner" name="spinOctaveMetronome">
-                      <Properties>
-                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                          <SpinnerModel initial="5" maximum="9" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JSpinner" name="spinPersistanceMetronome">
-                      <Properties>
-                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                          <SpinnerModel initial="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblPersistanceMertronome">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Persistance (ms) :"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblOctaveMetronome">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Octave :"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblFrequenceMetronome">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Fr&#xe9;quence (ms) :"/>
-                        <Property name="toolTipText" type="java.lang.String" value=""/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JSpinner" name="spinFrequence">
-                      <Properties>
-                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                          <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblTimbreMetronome">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Timbre :"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="cbTimbreMetronome">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="2">
-                            <StringItem index="0" value="Guitare"/>
-                            <StringItem index="1" value="Piano"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="btnEnregistrerInstrument">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Enregistrer"/>
-                        <Property name="toolTipText" type="java.lang.String" value=""/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEnregistrerInstrumentActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="btnActif">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Activer"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblRechercher">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Rechercher :"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="txtRechercher">
-                    </Component>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblTimbre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblNomInstrument" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="cbTimbre" max="32767" attributes="0"/>
+                                              <Component id="txtNomInstrument" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="btnEnregistrerInstrument" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblNoteMetronome" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblOctaveMetronome" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblPersistanceMertronome" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblFrequenceMetronome" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblTimbreMetronome" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="cbTimbreMetronome" alignment="0" pref="254" max="32767" attributes="0"/>
+                                              <Component id="spinFrequence" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="spinPersistanceMetronome" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="spinOctaveMetronome" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="btnActif" alignment="0" pref="254" max="32767" attributes="0"/>
+                                              <Component id="cbNoteMetronome" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="lblMetronome" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="lblRechercher" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="txtRechercher" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblNomInstrument" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtNomInstrument" alignment="3" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblTimbre" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbTimbre" alignment="3" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnEnregistrerInstrument" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="lblMetronome" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="lblNoteMetronome" min="-2" pref="16" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                                          <Component id="lblOctaveMetronome" min="-2" pref="16" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                          <Component id="lblPersistanceMertronome" min="-2" pref="16" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                          <Component id="lblFrequenceMetronome" min="-2" pref="16" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="cbNoteMetronome" min="-2" pref="22" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                          <Component id="spinOctaveMetronome" min="-2" pref="22" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                          <Component id="spinPersistanceMetronome" min="-2" pref="22" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                          <Component id="spinFrequence" min="-2" pref="22" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblTimbreMetronome" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbTimbreMetronome" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnActif" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblRechercher" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtRechercher" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="407" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="lblNomInstrument">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Nom : "/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="txtNomInstrument">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="NomInstrument"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomInstrumentActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblTimbre">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Timbre :"/>
+                          </Properties>
+                          <AccessibilityProperties>
+                            <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+                          </AccessibilityProperties>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbTimbre">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="2">
+                                <StringItem index="0" value="Piano"/>
+                                <StringItem index="1" value="Guitare"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblMetronome">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="M&#xe9;tronome : "/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblNoteMetronome">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Note :"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbNoteMetronome">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="12">
+                                <StringItem index="0" value="C"/>
+                                <StringItem index="1" value="C#"/>
+                                <StringItem index="2" value="D"/>
+                                <StringItem index="3" value="D#"/>
+                                <StringItem index="4" value="E"/>
+                                <StringItem index="5" value="F"/>
+                                <StringItem index="6" value="F#"/>
+                                <StringItem index="7" value="G"/>
+                                <StringItem index="8" value="G#"/>
+                                <StringItem index="9" value="A"/>
+                                <StringItem index="10" value="A#"/>
+                                <StringItem index="11" value="B"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbNoteMetronomeActionPerformed"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spinOctaveMetronome">
+                          <Properties>
+                            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                              <SpinnerModel initial="5" maximum="9" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spinPersistanceMetronome">
+                          <Properties>
+                            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                              <SpinnerModel initial="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblPersistanceMertronome">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Persistance (ms) :"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblOctaveMetronome">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Octave :"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblFrequenceMetronome">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Fr&#xe9;quence (ms) :"/>
+                            <Property name="toolTipText" type="java.lang.String" value=""/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spinFrequence">
+                          <Properties>
+                            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                              <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblTimbreMetronome">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Timbre :"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbTimbreMetronome">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="2">
+                                <StringItem index="0" value="Guitare"/>
+                                <StringItem index="1" value="Piano"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnEnregistrerInstrument">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Enregistrer"/>
+                            <Property name="toolTipText" type="java.lang.String" value=""/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEnregistrerInstrumentActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnActif">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Activer"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblRechercher">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Rechercher :"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="txtRechercher">
+                        </Component>
+                      </SubComponents>
+                    </Container>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="plTouche">
+                <Container class="javax.swing.JScrollPane" name="spTouche">
+                  <Properties>
+                    <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                       <JTabbedPaneConstraints tabName="Touche">
@@ -539,590 +569,606 @@
                     </Constraint>
                   </Constraints>
 
-                  <Layout>
-                    <DimensionLayout dim="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="btnParcourirImage" max="32767" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="rbImage" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="rbCouleur" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="cbCouleur" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="lblBleu" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="lblVert" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="lblRouge" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="spinVert" alignment="1" max="32767" attributes="0"/>
-                                                  <Component id="spinRouge" alignment="1" max="32767" attributes="0"/>
-                                                  <Component id="spinBleu" alignment="1" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btnEnregistrerTouche" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="lblForme" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="cbForme" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="lblNote" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="lblOctave" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="lblPersistance" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="cbNote" alignment="1" max="32767" attributes="0"/>
-                                                  <Component id="spinOctave" alignment="1" pref="235" max="32767" attributes="0"/>
-                                                  <Component id="spinPersistance" alignment="1" pref="235" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace min="24" pref="24" max="-2" attributes="0"/>
-                                              <Component id="btnParcourirFichierAudio" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="lblLargeur" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="lblHauteur" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="spinHauteur" max="32767" attributes="0"/>
-                                                  <Component id="spinLargeur" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Component id="lblFond" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblType" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblDimension" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="rbFichierAudio" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="rbSon" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblBordure" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="cbBordure" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
-                                                          <Component id="lblLargeurBordure" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="lblCouleurBordure" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <Component id="cbCouleurBordure" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <Component id="checkVisible" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                  </Group>
-                                                  <Component id="spinLargeurBordure" max="32767" attributes="0"/>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="lblRougeBordure" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="lblVertBordure" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="lblBleuBordure" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="spinRougeBordure" max="32767" attributes="0"/>
-                                                          <Component id="spinVertBordure" max="32767" attributes="0"/>
-                                                          <Component id="spinBleuBordure" alignment="0" max="32767" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btnEffacer" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                    </DimensionLayout>
-                    <DimensionLayout dim="1">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblForme" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbForme" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblFond" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="rbCouleur" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="spinRouge" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="spinVert" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cbCouleur" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="spinBleu" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                                      <Component id="lblRouge" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                      <Component id="lblVert" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblBleu" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                              <Component id="rbImage" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="btnParcourirImage" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="lblDimension" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblHauteur" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="spinHauteur" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblLargeur" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="spinLargeur" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="lblBordure" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="cbBordure" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkVisible" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblLargeurBordure" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="spinLargeurBordure" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="lblCouleurBordure" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cbCouleurBordure" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="spinRougeBordure" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                                          <Component id="lblRougeBordure" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="spinVertBordure" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                                          <Component id="lblVertBordure" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="spinBleuBordure" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblBleuBordure" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="lblType" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="rbSon" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblNote" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbNote" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblOctave" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="spinOctave" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblPersistance" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="spinPersistance" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                              <Component id="rbFichierAudio" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="btnParcourirFichierAudio" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnEnregistrerTouche" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnEffacer" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                    </DimensionLayout>
-                  </Layout>
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="lblNote">
+                    <Container class="javax.swing.JPanel" name="plTouche">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Note : "/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblOctave">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Octave :"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JSpinner" name="spinOctave">
-                      <Properties>
-                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                          <SpinnerModel initial="5" maximum="9" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[250, 888]"/>
                         </Property>
                       </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblForme">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Forme :"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="cbForme">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="Cercle"/>
-                            <StringItem index="1" value="Triangle"/>
-                            <StringItem index="2" value="Rectangle"/>
-                            <StringItem index="3" value="Pentagone"/>
-                            <StringItem index="4" value="Hexagone"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblFond">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Fond : "/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="btnParcourirImage">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Parcourir"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnParcourirImageActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="cbCouleur">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="9">
-                            <StringItem index="0" value=" "/>
-                            <StringItem index="1" value="Rouge"/>
-                            <StringItem index="2" value="Vert"/>
-                            <StringItem index="3" value="Bleu"/>
-                            <StringItem index="4" value="Brun"/>
-                            <StringItem index="5" value="Beige"/>
-                            <StringItem index="6" value="Jaune"/>
-                            <StringItem index="7" value="Blanc"/>
-                            <StringItem index="8" value="Noir"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCouleurActionPerformed"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JSpinner" name="spinRouge">
-                      <Properties>
-                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                          <SpinnerModel initial="0" maximum="255" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblRouge">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Rouge"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblVert">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Vert"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JSpinner" name="spinVert">
-                      <Properties>
-                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                          <SpinnerModel initial="0" maximum="255" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JSpinner" name="spinBleu">
-                      <Properties>
-                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                          <SpinnerModel initial="0" maximum="255" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblBleu">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Bleu"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JRadioButton" name="rbImage">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Image"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbImageActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JRadioButton" name="rbCouleur">
-                      <Properties>
-                        <Property name="selected" type="boolean" value="true"/>
-                        <Property name="text" type="java.lang.String" value="Couleur"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbCouleurActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblDimension">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Dimension :"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblHauteur">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Hauteur :"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JSpinner" name="spinHauteur">
-                      <Properties>
-                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                          <SpinnerModel initial="0.0" maximum="1.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.01" type="number"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblLargeur">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Largeur :"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JSpinner" name="spinLargeur">
-                      <Properties>
-                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                          <SpinnerModel initial="0.0" maximum="1.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.01" type="number"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblBordure">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Bordure(s) :"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblType">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Type :"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JRadioButton" name="rbSon">
-                      <Properties>
-                        <Property name="selected" type="boolean" value="true"/>
-                        <Property name="text" type="java.lang.String" value="Son"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbSonActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblPersistance">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Persistance :"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JSpinner" name="spinPersistance">
-                      <Properties>
-                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                          <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JRadioButton" name="rbFichierAudio">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Fichier Audio"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbFichierAudioActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="btnParcourirFichierAudio">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Parcourir"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnParcourirFichierAudioActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="cbNote">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="12">
-                            <StringItem index="0" value="C"/>
-                            <StringItem index="1" value="C#"/>
-                            <StringItem index="2" value="D"/>
-                            <StringItem index="3" value="D#"/>
-                            <StringItem index="4" value="E"/>
-                            <StringItem index="5" value="F"/>
-                            <StringItem index="6" value="F#"/>
-                            <StringItem index="7" value="G"/>
-                            <StringItem index="8" value="G#"/>
-                            <StringItem index="9" value="A"/>
-                            <StringItem index="10" value="A#"/>
-                            <StringItem index="11" value="B"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbNoteActionPerformed"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="btnEnregistrerTouche">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Enregistrer"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEnregistrerToucheActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="cbBordure">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="0"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="cbBordureComponentShown"/>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbBordureActionPerformed"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JCheckBox" name="checkVisible">
-                      <Properties>
-                        <Property name="selected" type="boolean" value="true"/>
-                        <Property name="text" type="java.lang.String" value="Visible"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblLargeurBordure">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Largeur :"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JSpinner" name="spinLargeurBordure">
-                      <Properties>
-                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                          <SpinnerModel initial="0.0" maximum="1.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.001" type="number"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblCouleurBordure">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Couleur :"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="cbCouleurBordure">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="9">
-                            <StringItem index="0" value=" "/>
-                            <StringItem index="1" value="Rouge"/>
-                            <StringItem index="2" value="Vert"/>
-                            <StringItem index="3" value="Bleu"/>
-                            <StringItem index="4" value="Brun"/>
-                            <StringItem index="5" value="Beige"/>
-                            <StringItem index="6" value="Jaune"/>
-                            <StringItem index="7" value="Blanc"/>
-                            <StringItem index="8" value="Noir"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCouleurBordureActionPerformed"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblRougeBordure">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Rouge"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblVertBordure">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Vert"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblBleuBordure">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Bleu"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JSpinner" name="spinRougeBordure">
-                      <Properties>
-                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                          <SpinnerModel initial="0" maximum="255" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JSpinner" name="spinVertBordure">
-                      <Properties>
-                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                          <SpinnerModel initial="0" maximum="255" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JSpinner" name="spinBleuBordure">
-                      <Properties>
-                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                          <SpinnerModel initial="0" maximum="255" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="btnEffacer">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Effacer la Touche"/>
-                      </Properties>
-                    </Component>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="btnParcourirImage" max="32767" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="rbImage" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="rbCouleur" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="cbCouleur" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="lblBleu" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lblVert" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lblRouge" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Component id="spinVert" alignment="1" pref="207" max="32767" attributes="0"/>
+                                                      <Component id="spinRouge" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="spinBleu" alignment="1" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="btnEnregistrerTouche" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="btnEffacer" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblNote" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblOctave" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblPersistance" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="cbNote" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="spinOctave" alignment="1" pref="297" max="32767" attributes="0"/>
+                                              <Component id="spinPersistance" alignment="1" pref="297" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="24" pref="24" max="-2" attributes="0"/>
+                                          <Component id="btnParcourirFichierAudio" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblLargeur" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblHauteur" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="spinHauteur" max="32767" attributes="0"/>
+                                              <Component id="spinLargeur" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="cbBordure" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
+                                                      <Component id="lblLargeurBordure" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lblCouleurBordure" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="cbCouleurBordure" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="checkVisible" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Component id="spinLargeurBordure" max="32767" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="lblRougeBordure" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lblVertBordure" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lblBleuBordure" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="spinRougeBordure" max="32767" attributes="0"/>
+                                                      <Component id="spinVertBordure" max="32767" attributes="0"/>
+                                                      <Component id="spinBleuBordure" alignment="0" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="lblForme" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="cbForme" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Component id="lblFond" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblType" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblDimension" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="rbFichierAudio" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="rbSon" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblBordure" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblForme" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbForme" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblFond" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="rbCouleur" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="spinRouge" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="spinVert" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="cbCouleur" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="spinBleu" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                          <Component id="lblRouge" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                          <Component id="lblVert" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="lblBleu" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                  <Component id="rbImage" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnParcourirImage" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblDimension" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblHauteur" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="spinHauteur" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblLargeur" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="spinLargeur" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="lblBordure" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="cbBordure" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="checkVisible" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblLargeurBordure" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="spinLargeurBordure" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="lblCouleurBordure" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="cbCouleurBordure" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="spinRougeBordure" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                              <Component id="lblRougeBordure" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="spinVertBordure" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                              <Component id="lblVertBordure" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="spinBleuBordure" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblBleuBordure" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Component id="lblType" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbSon" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblNote" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbNote" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblOctave" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="spinOctave" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblPersistance" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="spinPersistance" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbFichierAudio" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnParcourirFichierAudio" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="btnEnregistrerTouche" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="btnEffacer" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="63" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="lblNote">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Note : "/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblOctave">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Octave :"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spinOctave">
+                          <Properties>
+                            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                              <SpinnerModel initial="5" maximum="9" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblForme">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Forme :"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbForme">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="5">
+                                <StringItem index="0" value="Cercle"/>
+                                <StringItem index="1" value="Triangle"/>
+                                <StringItem index="2" value="Rectangle"/>
+                                <StringItem index="3" value="Pentagone"/>
+                                <StringItem index="4" value="Hexagone"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblFond">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Fond : "/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnParcourirImage">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Parcourir"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnParcourirImageActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbCouleur">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="9">
+                                <StringItem index="0" value=" "/>
+                                <StringItem index="1" value="Rouge"/>
+                                <StringItem index="2" value="Vert"/>
+                                <StringItem index="3" value="Bleu"/>
+                                <StringItem index="4" value="Brun"/>
+                                <StringItem index="5" value="Beige"/>
+                                <StringItem index="6" value="Jaune"/>
+                                <StringItem index="7" value="Blanc"/>
+                                <StringItem index="8" value="Noir"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCouleurActionPerformed"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spinRouge">
+                          <Properties>
+                            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                              <SpinnerModel initial="0" maximum="255" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblRouge">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Rouge"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblVert">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Vert"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spinVert">
+                          <Properties>
+                            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                              <SpinnerModel initial="0" maximum="255" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spinBleu">
+                          <Properties>
+                            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                              <SpinnerModel initial="0" maximum="255" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblBleu">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Bleu"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="rbImage">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Image"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbImageActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="rbCouleur">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="Couleur"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbCouleurActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblDimension">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Dimension :"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblHauteur">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Hauteur :"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spinHauteur">
+                          <Properties>
+                            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                              <SpinnerModel initial="0.0" maximum="1.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.01" type="number"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblLargeur">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Largeur :"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spinLargeur">
+                          <Properties>
+                            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                              <SpinnerModel initial="0.0" maximum="1.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.01" type="number"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblBordure">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Bordure(s) :"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblType">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Type :"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="rbSon">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="Son"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbSonActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblPersistance">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Persistance :"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spinPersistance">
+                          <Properties>
+                            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="rbFichierAudio">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Fichier Audio"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbFichierAudioActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnParcourirFichierAudio">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Parcourir"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnParcourirFichierAudioActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbNote">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="12">
+                                <StringItem index="0" value="C"/>
+                                <StringItem index="1" value="C#"/>
+                                <StringItem index="2" value="D"/>
+                                <StringItem index="3" value="D#"/>
+                                <StringItem index="4" value="E"/>
+                                <StringItem index="5" value="F"/>
+                                <StringItem index="6" value="F#"/>
+                                <StringItem index="7" value="G"/>
+                                <StringItem index="8" value="G#"/>
+                                <StringItem index="9" value="A"/>
+                                <StringItem index="10" value="A#"/>
+                                <StringItem index="11" value="B"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbNoteActionPerformed"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnEnregistrerTouche">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Enregistrer"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEnregistrerToucheActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbBordure">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="0"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="cbBordureComponentShown"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbBordureActionPerformed"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="checkVisible">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="Visible"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblLargeurBordure">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Largeur :"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spinLargeurBordure">
+                          <Properties>
+                            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                              <SpinnerModel initial="0.0" maximum="1.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.001" type="number"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblCouleurBordure">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Couleur :"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="cbCouleurBordure">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="9">
+                                <StringItem index="0" value=" "/>
+                                <StringItem index="1" value="Rouge"/>
+                                <StringItem index="2" value="Vert"/>
+                                <StringItem index="3" value="Bleu"/>
+                                <StringItem index="4" value="Brun"/>
+                                <StringItem index="5" value="Beige"/>
+                                <StringItem index="6" value="Jaune"/>
+                                <StringItem index="7" value="Blanc"/>
+                                <StringItem index="8" value="Noir"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCouleurBordureActionPerformed"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblRougeBordure">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Rouge"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblVertBordure">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Vert"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblBleuBordure">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Bleu"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spinRougeBordure">
+                          <Properties>
+                            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                              <SpinnerModel initial="0" maximum="255" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spinVertBordure">
+                          <Properties>
+                            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                              <SpinnerModel initial="0" maximum="255" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spinBleuBordure">
+                          <Properties>
+                            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                              <SpinnerModel initial="0" maximum="255" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnEffacer">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Effacer la Touche"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
                   </SubComponents>
                 </Container>
               </SubComponents>
