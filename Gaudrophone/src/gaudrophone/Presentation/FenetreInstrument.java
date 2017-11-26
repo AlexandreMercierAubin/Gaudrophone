@@ -49,6 +49,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         btnParcourirImage.setEnabled(false);
         btnParcourirFichierAudio.setEnabled(false);
         spGaudrophone.setResizeWeight(1);
+        splitAffichage.setResizeWeight(1);
         ///////////////////////////////////////////////////////////////////////////////////////////////
         controleur.getInstrument().ajouterTouche(new Point2D.Double(0.5,0.5));
         controleur.getInstrument().selectionnerTouche(new Point2D.Double(0.5,0.5));
@@ -335,8 +336,10 @@ public class FenetreInstrument extends javax.swing.JFrame {
         bgType = new javax.swing.ButtonGroup();
         spGaudrophone = new javax.swing.JSplitPane();
         plNote = new javax.swing.JPanel();
+        splitAffichage = new javax.swing.JSplitPane();
         panneauAffichage = new gaudrophone.Presentation.PanneauAffichage();
-        txtMessageBar = new javax.swing.JTextField();
+        plTextMessage = new javax.swing.JScrollPane();
+        txtMessage = new javax.swing.JTextArea();
         plParametres = new javax.swing.JPanel();
         TPInfo = new javax.swing.JTabbedPane();
         spInstrument = new javax.swing.JScrollPane();
@@ -431,6 +434,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         spGaudrophone.setDividerLocation(700);
 
+        splitAffichage.setDividerLocation(800);
+        splitAffichage.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
         panneauAffichage.setMinimumSize(new java.awt.Dimension(300, 300));
         panneauAffichage.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -453,29 +459,30 @@ public class FenetreInstrument extends javax.swing.JFrame {
         panneauAffichage.setLayout(panneauAffichageLayout);
         panneauAffichageLayout.setHorizontalGroup(
             panneauAffichageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 699, Short.MAX_VALUE)
+            .addGap(0, 697, Short.MAX_VALUE)
         );
         panneauAffichageLayout.setVerticalGroup(
             panneauAffichageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 891, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        txtMessageBar.setEditable(false);
-        txtMessageBar.setForeground(new java.awt.Color(255, 0, 0));
+        splitAffichage.setLeftComponent(panneauAffichage);
+
+        txtMessage.setColumns(20);
+        txtMessage.setRows(5);
+        plTextMessage.setViewportView(txtMessage);
+
+        splitAffichage.setRightComponent(plTextMessage);
 
         javax.swing.GroupLayout plNoteLayout = new javax.swing.GroupLayout(plNote);
         plNote.setLayout(plNoteLayout);
         plNoteLayout.setHorizontalGroup(
             plNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panneauAffichage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(txtMessageBar)
+            .addComponent(splitAffichage)
         );
         plNoteLayout.setVerticalGroup(
             plNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(plNoteLayout.createSequentialGroup()
-                .addComponent(panneauAffichage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMessageBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(splitAffichage, javax.swing.GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE)
         );
 
         spGaudrophone.setLeftComponent(plNote);
@@ -1594,6 +1601,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JPanel plInstrument;
     private javax.swing.JPanel plNote;
     private javax.swing.JPanel plParametres;
+    private javax.swing.JScrollPane plTextMessage;
     private javax.swing.JPanel plTouche;
     private javax.swing.JRadioButton rbCouleur;
     private javax.swing.JRadioButton rbFichierAudio;
@@ -1616,7 +1624,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JSpinner spinRougeBordure;
     private javax.swing.JSpinner spinVert;
     private javax.swing.JSpinner spinVertBordure;
-    private javax.swing.JTextField txtMessageBar;
+    private javax.swing.JSplitPane splitAffichage;
+    private javax.swing.JTextArea txtMessage;
     private javax.swing.JTextField txtNomInstrument;
     private javax.swing.JTextField txtRechercher;
     // End of variables declaration//GEN-END:variables
