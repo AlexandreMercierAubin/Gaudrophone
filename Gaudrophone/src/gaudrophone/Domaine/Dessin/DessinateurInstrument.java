@@ -27,9 +27,12 @@ public class DessinateurInstrument {
         Graphics2D g2 = (Graphics2D)g;
         List<Touche> touches = controleur.getInstrument().getTouches();
         
+        redimensionner(touches, g2);
+        
         for (Touche touche : touches)
         {   
-            switch (touche.getApparence().getForme())
+            ApparenceTouche apparence = touche.getApparence();
+            switch (apparence.getForme())
             {
                 case Cercle:
                     dessinerCercle(touche, g2);
@@ -44,8 +47,35 @@ public class DessinateurInstrument {
                     dessinerPolygone(touche, g2);
                     break;
             }
-            
             dessinerBorduresTransversales(touche, g2);
+        }
+    }
+    
+    // Ajuste l'échelle du dessin des touches pour qu'elles soient toutes visibles
+    private void redimensionner(List<Touche> touches, Graphics2D g2)
+    {
+        int minDimPanneau = (int)Math.min(dimensionPanneau.getWidth(), dimensionPanneau.getHeight());
+        int maxX = 0;
+        int maxY = 0;
+        
+        for (Touche touche: touches)
+        {
+            ApparenceTouche apparence = touche.getApparence();
+            Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), minDimPanneau);
+            Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), minDimPanneau);
+            
+            maxX = Math.max(maxX, (int)position.getX() + (int)dimension.getWidth() / 2);
+            maxY = Math.max(maxY, (int)position.getY() + (int)dimension.getHeight() / 2);
+        }
+        
+        double echelleX = dimensionPanneau.getWidth() / maxX;
+        double echelleY = dimensionPanneau.getHeight() / maxY;
+        
+        if (echelleX < 1.0 || echelleY < 1.0)
+        {
+            double echelle = Math.min(echelleX, echelleY);
+            g2.scale(echelle, echelle);
+            controleur.setEchelleAffichage(echelle);
         }
     }
     
