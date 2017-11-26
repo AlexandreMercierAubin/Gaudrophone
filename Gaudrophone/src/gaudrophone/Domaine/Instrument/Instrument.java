@@ -124,6 +124,9 @@ public class Instrument implements Serializable{
     
     public boolean selectionnerTouche(Point2D position)
     {
+        if (toucheSelectionee != -1)
+            touches.get(toucheSelectionee).setSurbrillance(false);
+        
         //ajouter le contenu
         for(int i=touches.size()-1;i>=0;--i)
         {
@@ -139,6 +142,7 @@ public class Instrument implements Serializable{
                )
             {
                 toucheSelectionee=i;
+                touche.setSurbrillance(true);
                 return true;
             }
         }
