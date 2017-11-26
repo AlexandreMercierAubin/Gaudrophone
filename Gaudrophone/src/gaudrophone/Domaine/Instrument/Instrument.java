@@ -24,6 +24,7 @@ public class Instrument implements Serializable{
     
     public Instrument()
     {
+        toucheSelectionee = -1;
         timbre = 1;
         strategies = new ArrayList<StrategieRecherche>();
         cleeTouche=0;
