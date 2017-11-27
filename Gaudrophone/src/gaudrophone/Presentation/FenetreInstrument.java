@@ -2,6 +2,7 @@ package gaudrophone.Presentation;
 
 import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.ControleurInstrument;
+import gaudrophone.Domaine.Dictionnaire.dictCouleur;
 import gaudrophone.Domaine.Dimension2D;
 import gaudrophone.Domaine.Enums.Forme;
 import gaudrophone.Domaine.Enums.ModeVisuel;
@@ -37,6 +38,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     public FenetreInstrument() {
         initComponents();
         initializeRadioButton();
+        
         
         controleur = new ControleurInstrument();
         panneauAffichage.setFenetreInstrument(this);
@@ -1244,46 +1246,56 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
     private void cbCouleurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCouleurActionPerformed
         String value = cbCouleur.getSelectedItem().toString();
+        dictCouleur couleurs= new dictCouleur();
+        Color couleur;
         switch(value){
             case "Rouge":
-            spinRouge.setValue(255);
-            spinVert.setValue(0);
-            spinBleu.setValue(0);
+            couleur=couleurs.trouverParClee("ROUGE");
+            spinRouge.setValue(couleur.getRed());
+            spinVert.setValue(couleur.getGreen());
+            spinBleu.setValue(couleur.getBlue());
             break;
             case "Vert":
-            spinRouge.setValue(0);
-            spinVert.setValue(255);
-            spinBleu.setValue(0);
+            couleur=couleurs.trouverParClee("VERT");
+            spinRouge.setValue(couleur.getRed());
+            spinVert.setValue(couleur.getGreen());
+            spinBleu.setValue(couleur.getBlue());
             break;
             case "Bleu":
-            spinRouge.setValue(0);
-            spinVert.setValue(0);
-            spinBleu.setValue(255);
+            couleur=couleurs.trouverParClee("BLEU");
+            spinRouge.setValue(couleur.getRed());
+            spinVert.setValue(couleur.getGreen());
+            spinBleu.setValue(couleur.getBlue());
             break;
             case "Brun":
-            spinRouge.setValue(72);
-            spinVert.setValue(52);
-            spinBleu.setValue(32);
+            couleur=couleurs.trouverParClee("BRUN");
+            spinRouge.setValue(couleur.getRed());
+            spinVert.setValue(couleur.getGreen());
+            spinBleu.setValue(couleur.getBlue());
             break;
             case "Beige":
-            spinRouge.setValue(245);
-            spinVert.setValue(245);
-            spinBleu.setValue(220);
+            couleur=couleurs.trouverParClee("BEIGE");
+            spinRouge.setValue(couleur.getRed());
+            spinVert.setValue(couleur.getGreen());
+            spinBleu.setValue(couleur.getBlue());
             break;
             case "Jaune":
-            spinRouge.setValue(255);
-            spinVert.setValue(255);
-            spinBleu.setValue(0);
+            couleur=couleurs.trouverParClee("JAUNE");
+            spinRouge.setValue(couleur.getRed());
+            spinVert.setValue(couleur.getGreen());
+            spinBleu.setValue(couleur.getBlue());
             break;
             case "Blanc":
-            spinRouge.setValue(255);
-            spinVert.setValue(255);
-            spinBleu.setValue(255);
+            couleur=couleurs.trouverParClee("BLANC");
+            spinRouge.setValue(couleur.getRed());
+            spinVert.setValue(couleur.getGreen());
+            spinBleu.setValue(couleur.getBlue());
             break;
             case "Noir":
-            spinRouge.setValue(0);
-            spinVert.setValue(0);
-            spinBleu.setValue(0);
+            couleur=couleurs.trouverParClee("NOIR");
+            spinRouge.setValue(couleur.getRed());
+            spinVert.setValue(couleur.getGreen());
+            spinBleu.setValue(couleur.getBlue());
             break;
         }
     }//GEN-LAST:event_cbCouleurActionPerformed
