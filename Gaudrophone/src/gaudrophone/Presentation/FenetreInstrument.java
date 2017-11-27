@@ -6,6 +6,7 @@ import gaudrophone.Domaine.Dimension2D;
 import gaudrophone.Domaine.Enums.Forme;
 import gaudrophone.Domaine.Enums.ModeVisuel;
 import gaudrophone.Domaine.Generateur.GenerateurGuitare;
+import gaudrophone.Domaine.Generateur.GenerateurPiano;
 import gaudrophone.Domaine.Instrument.Bordure;
 import gaudrophone.Domaine.Instrument.FichierAudio;
 import gaudrophone.Domaine.Instrument.Instrument;
@@ -51,6 +52,10 @@ public class FenetreInstrument extends javax.swing.JFrame {
         btnParcourirFichierAudio.setEnabled(false);
         spGaudrophone.setResizeWeight(1);
         splitAffichage.setResizeWeight(1);
+        
+        txtMessage.setEditable(false);
+        txtMessage.setWrapStyleWord(true);
+        txtMessage.setLineWrap(true);
         ///////////////////////////////////////////////////////////////////////////////////////////////
         controleur.getInstrument().ajouterTouche(new Point2D.Double(0.5,0.5));
         controleur.getInstrument().selectionnerTouche(new Point2D.Double(0.5,0.5));
@@ -1441,7 +1446,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEnregistrerToucheActionPerformed
 
     private void miPianoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miPianoActionPerformed
-        // TODO add your handling code here:
+        controleur.genererInstrument(new GenerateurPiano());
+        panneauAffichage.repaint();
+        InstrumentUpdater();
     }//GEN-LAST:event_miPianoActionPerformed
 
     private void btnTestSonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTestSonActionPerformed
@@ -1491,15 +1498,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
         {
             strTexte = tool.readFile(optionalFilenames[i],strTexte);
         }
-        
-        /*txtAide.setText(strTexte);
-        txtAide.setCaretPosition(txtAide.getDocument().getLength());
-        txtAide.setEditable(false);
-        txtAide.setWrapStyleWord(true);
-        txtAide.setLineWrap(true);
-        txtAide.setVisible(true);
-        btnOkAide.setVisible(true);
-        scrlAide.setVisible(true);*/
+        txtMessage.setText(strTexte);
+        txtMessage.setCaretPosition(0);
     }
         
     private void initializeRadioButton()

@@ -31,10 +31,10 @@ public class Instrument implements Serializable{
         touches = new ArrayList<Touche>();
         nom="template";
         strategies= new ArrayList<StrategieRecherche>();
-        //strategies.add(new StrategieChemin());
-        //strategies.add(new StrategieCouleur());
-        //strategies.add(new StrategieForme());
-        //strategies.add(new StrategieNoteOctave());
+        strategies.add(new StrategieChemin());
+        strategies.add(new StrategieCouleur());
+        strategies.add(new StrategieForme());
+        strategies.add(new StrategieNoteOctave());
     }
     
     public int getTimbre()

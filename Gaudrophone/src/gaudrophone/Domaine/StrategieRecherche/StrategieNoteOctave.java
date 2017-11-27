@@ -4,9 +4,10 @@ package gaudrophone.Domaine.StrategieRecherche;
 import gaudrophone.Domaine.Instrument.Note;
 import gaudrophone.Domaine.Instrument.Son;
 import gaudrophone.Domaine.Instrument.Touche;
+import java.io.Serializable;
 
 
-public class StrategieNoteOctave extends StrategieRecherche{
+public class StrategieNoteOctave extends StrategieRecherche implements Serializable{
 
     @Override
     public boolean comparer(Touche touche, String mots)
