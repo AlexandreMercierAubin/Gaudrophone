@@ -76,7 +76,7 @@ public class Note extends Son implements Serializable{
             int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
             try{
                 channels[0].noteOff(midiNoteNumber, 60);
-                synthesizer.close();
+                // Close du synthetizer non-nécessaire puisqu'il implémente AutoClose
             }
             catch (Exception e)
             {
