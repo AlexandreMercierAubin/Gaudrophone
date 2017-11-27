@@ -14,6 +14,7 @@ public class Note extends Son implements Serializable{
     int timbreInstrument;
     transient Synthesizer synthesizer;
     MidiChannel[] channels;
+    Timer timer;
     
     public Note(int timbreInstr){
         octave = 4;
@@ -34,8 +35,7 @@ public class Note extends Son implements Serializable{
     
     @Override
     public void commencerJouer()
-    {
-        Timer timer;        
+    {       
         javax.sound.midi.Instrument instruments[], instr;
         int noInstrument = timbreInstrument;
         int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
@@ -53,7 +53,10 @@ public class Note extends Son implements Serializable{
             channels[0].programChange(patch.getBank(),patch.getProgram());
             channels[0].noteOn(midiNoteNumber, 60);
             
-            // Faire durée un son au minimum le temps de la persistance
+            if (timer != null)
+                timer.cancel();
+            
+            // Faire durer un son au minimum le temps de la persistance
             timer = new Timer("Tick");
             timer.schedule(new TimerTask() {
                 @Override
@@ -76,11 +79,11 @@ public class Note extends Son implements Serializable{
             int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
             try{
                 channels[0].noteOff(midiNoteNumber, 60);
-                // Close du synthetizer non-nécessaire puisqu'il implémente AutoClose
+                synthesizer.close();
             }
             catch (Exception e)
             {
-            e.printStackTrace();
+                e.printStackTrace();
             }
         }
         else
