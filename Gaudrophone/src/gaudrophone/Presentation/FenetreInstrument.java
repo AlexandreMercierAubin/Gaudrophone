@@ -799,6 +799,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
         spinBleuBordure.setModel(new javax.swing.SpinnerNumberModel(0, 0, 255, 1));
 
         btnEffacer.setText("Effacer la Touche");
+        btnEffacer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEffacerActionPerformed(evt);
+            }
+        });
 
         btnTestSon.setText("Jouer le son");
         btnTestSon.addActionListener(new java.awt.event.ActionListener() {
