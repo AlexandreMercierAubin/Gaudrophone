@@ -10,7 +10,7 @@ public class StrategieForme extends StrategieRecherche implements Serializable{
     public boolean comparer(Touche touche, String mots)
     {
         ApparenceTouche apparence=touche.getApparence();
-        if(apparence.getForme().toString().contains(mots))
+        if(apparence.getForme().toString().toUpperCase().equals(mots.toUpperCase()))
         {
             return true;
         }

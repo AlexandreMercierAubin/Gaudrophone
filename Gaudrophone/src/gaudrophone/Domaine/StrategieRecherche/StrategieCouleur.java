@@ -11,7 +11,7 @@ public class StrategieCouleur extends StrategieRecherche implements Serializable
     public boolean comparer(Touche touche, String mots)
     {
         ApparenceTouche apparence=touche.getApparence();
-        if(apparence.getCouleurFond().toString().contains(mots))
+        if(apparence.getCouleurFond().toString().toUpperCase().equals(mots.toUpperCase()))
         {
             return true;
         }

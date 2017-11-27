@@ -22,8 +22,9 @@ public class StrategieNoteOctave extends StrategieRecherche implements Serializa
                 String octave=""+((Note)son).getOctave();
                 octave=octave.toUpperCase();
 
-                nomNote.replaceAll("SHARP","#");
-
+                nomNote=nomNote.replaceAll("SHARP","#");
+                octave=octave.replaceAll("SHARP","#");
+                
                 if(motsCoupe.equals(nomNote)||motsCoupe.equals(octave)||motsCoupe.equals(nomNote+octave))
                 {
                     return true;

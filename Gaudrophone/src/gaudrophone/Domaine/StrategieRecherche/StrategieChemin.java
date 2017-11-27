@@ -14,7 +14,7 @@ public class StrategieChemin extends StrategieRecherche implements Serializable{
         if(son instanceof FichierAudio)
         {
             String chemin = ((FichierAudio)son).getChemin();
-            return chemin.contains(mots);
+            return chemin.toUpperCase().equals(mots.toUpperCase());
         }
         return false;
     }
