@@ -14,14 +14,18 @@ public class FichierAudio extends Son implements Serializable{
     public FichierAudio(String cheminFichierAudio)
     {
         chemin = cheminFichierAudio;
+        jouerSon = true;
     }
     
     @Override
     public void commencerJouer()
     {
+        if(!jouerSon){ arreterJouer(); }
+        jouerSon = true;
+        
         try {
             File f = new File(chemin);
-            AudioInputStream aIS = AudioSystem.getAudioInputStream(f);
+            AudioInputStream aIS = AudioSystem.getAudioInputStream(f);            
             clip = AudioSystem.getClip();
             clip.open(aIS);
             clip.start();
@@ -35,12 +39,17 @@ public class FichierAudio extends Son implements Serializable{
     @Override
     public void arreterJouer()
     {
-        try{
-            clip.stop();
+        if (!jouerSon){
+            try{
+                clip.stop();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+        else {
+            jouerSon = false;
         }
     }
     
