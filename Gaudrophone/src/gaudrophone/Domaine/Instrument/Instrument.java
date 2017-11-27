@@ -30,12 +30,11 @@ public class Instrument implements Serializable{
         cleeTouche=0;
         touches = new ArrayList<Touche>();
         nom="template";
-        timbre=0;
         strategies= new ArrayList<StrategieRecherche>();
-        //strategies.add(new StrategieChemin());
-        //strategies.add(new StrategieCouleur());
-        //strategies.add(new StrategieForme());
-        //strategies.add(new StrategieNoteOctave());
+        strategies.add(new StrategieChemin());
+        strategies.add(new StrategieCouleur());
+        strategies.add(new StrategieForme());
+        strategies.add(new StrategieNoteOctave());
     }
     
     public int getTimbre()
@@ -188,6 +187,9 @@ public class Instrument implements Serializable{
         {
             return false;
         }
+        
+        if (index == toucheSelectionee)
+            toucheSelectionee = -1;
         
         touches.remove(index);
         
