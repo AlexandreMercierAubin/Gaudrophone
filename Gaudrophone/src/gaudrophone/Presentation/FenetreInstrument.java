@@ -17,7 +17,9 @@ import gaudrophone.Domaine.Outils;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -29,7 +31,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class FenetreInstrument extends javax.swing.JFrame {
     ButtonGroup m_btnGroupeMode;
     ControleurInstrument controleur;
-    String m_pathImage;
+    File m_fileToSaveImage;
+    String m_pathToFileAudio;
     
     public FenetreInstrument() {
         initComponents();
@@ -38,8 +41,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
         controleur = new ControleurInstrument();
         panneauAffichage.setFenetreInstrument(this);
         controleur.modifierModeVisuel(ModeVisuel.Ajouter);
-        
-        m_pathImage = "";
 
         TPInfo.setEnabledAt(1,false);
         ((JSpinner.DefaultEditor) spinOctave.getEditor()).getTextField().setEditable(false);
@@ -300,28 +301,37 @@ public class FenetreInstrument extends javax.swing.JFrame {
         int index = controleur.getInstrument().getToucheSelectionee();
         int indexBordure = cbBordure.getSelectedIndex();
         Touche touche = controleur.getInstrument().getTouche(index);
-        Bordure bordure = touche.getApparence().getBordure(indexBordure);
         
         touche.getApparence().setForme(Forme.valueOf(cbForme.getSelectedItem().toString()));
+        Bordure bordure = touche.getApparence().getBordure(indexBordure);
+        
         if(rbCouleur.isSelected()){
             touche.getApparence().setCouleurFond(new Color((int)spinRouge.getValue(), (int)spinVert.getValue(), (int)spinBleu.getValue()));
         }
         else{
-            ImageIO img;
-            
-            //touche.getApparence().setImageFond(imageFond);
+            BufferedImage img = null;
+            try 
+            {
+                img = ImageIO.read(m_fileToSaveImage);
+            } 
+            catch (IOException e) 
+            {
+                e.printStackTrace();
+            }
+            touche.getApparence().setImageFond(img);
         }
         touche.getApparence().setDimension(new Dimension2D((double)spinLargeur.getValue(),(double)spinHauteur.getValue()));
         bordure.setVisible(checkVisible.isSelected());
         bordure.setLargeur((double)spinLargeurBordure.getValue());
         bordure.setCouleur(new Color((int)spinRougeBordure.getValue(), (int)spinVertBordure.getValue(), (int)spinBleuBordure.getValue()));
         if(rbSon.isSelected()){
+            touche.enleverFichierAudio();
             ((Note)touche.getSon()).setNom(NomNote.valueOf(cbNote.getSelectedItem().toString().replaceAll("#", "Sharp")));
             ((Note)touche.getSon()).setOctave((int)spinOctave.getValue());
             ((Note)touche.getSon()).setPersistance((int)spinPersistance.getValue());
         }
         else{
-            //enregistrer le path de fichier audio
+            touche.importerFichierAudio(m_pathToFileAudio);
         }
         panneauAffichage.repaint();
         
@@ -794,6 +804,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
         spinBleuBordure.setModel(new javax.swing.SpinnerNumberModel(0, 0, 255, 1));
 
         btnEffacer.setText("Effacer la Touche");
+        btnEffacer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEffacerActionPerformed(evt);
+            }
+        });
 
         btnTestSon.setText("Jouer le son");
         btnTestSon.addActionListener(new java.awt.event.ActionListener() {
@@ -1186,7 +1201,13 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
     private void btnParcourirFichierAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParcourirFichierAudioActionPerformed
         JFileChooser fc = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Audio Files", "wav");
+        fc.setFileFilter(filter);
+        fc.setDialogTitle("Spécifier le fichier audio à utiliser.");
         int returnVal = fc.showOpenDialog(plInstrument);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            m_pathToFileAudio = fc.getSelectedFile().getAbsolutePath();
+        }
     }//GEN-LAST:event_btnParcourirFichierAudioActionPerformed
 
     private void rbFichierAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFichierAudioActionPerformed
@@ -1281,11 +1302,10 @@ public class FenetreInstrument extends javax.swing.JFrame {
         JFileChooser fc = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "png", "bmp", "jpeg");
         fc.setFileFilter(filter);
-        fc.setDialogTitle("Spécifier l'image à choisir.");
+        fc.setDialogTitle("Spécifier l'image à utiliser.");
         int returnVal = fc.showOpenDialog(plInstrument);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File fileToSave = fc.getSelectedFile();
-            m_pathImage = fileToSave.getAbsolutePath();
+            m_fileToSaveImage = fc.getSelectedFile();
         }
     }//GEN-LAST:event_btnParcourirImageActionPerformed
 
