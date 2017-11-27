@@ -1191,7 +1191,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
     private void btnParcourirFichierAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParcourirFichierAudioActionPerformed
         JFileChooser fc = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Audio Files", "wav");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Audio Files", "wav", "mp3");
         fc.setFileFilter(filter);
         fc.setDialogTitle("Spécifier le fichier audio à utiliser.");
         int returnVal = fc.showOpenDialog(plInstrument);
