@@ -56,22 +56,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
         txtMessage.setEditable(false);
         txtMessage.setWrapStyleWord(true);
         txtMessage.setLineWrap(true);
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        controleur.getInstrument().ajouterTouche(new Point2D.Double(0.5,0.5));
-        controleur.getInstrument().selectionnerTouche(new Point2D.Double(0.5,0.5));
-        int index = controleur.getInstrument().getToucheSelectionee();
-        Touche touche = controleur.getInstrument().getTouche(index);
-        touche.getApparence().setForme(Forme.Hexagone);
-        touche.getApparence().setCouleurFond(Color.green);
-        touche.getApparence().setDimension(new Dimension2D(0.5,0.5));
-        Son son = touche.getSon();
-        ((Note)touche.getSon()).setNom(NomNote.DSharp);
-        ((Note)touche.getSon()).setOctave(8);
-        ((Note)touche.getSon()).setPersistance(100);
-        
-        controleur.getInstrument().setNom("Test123");
-        controleur.getInstrument().setTimbre(25);
-        
         
         TPInfo.addChangeListener(new ChangeListener() {
             @Override
