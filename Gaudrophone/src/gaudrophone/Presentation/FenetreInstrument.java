@@ -810,7 +810,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
             }
         });
 
-        btnTestSon.setText("Jouer le son");
+        btnTestSon.setText("Aperçu du son");
         btnTestSon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTestSonActionPerformed(evt);
@@ -1387,6 +1387,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
     private void btnEffacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEffacerActionPerformed
         controleur.getInstrument().retirerTouche(controleur.getInstrument().getToucheSelectionee());
+        TPInfo.setSelectedIndex(0); 
+        TPInfo.setEnabledAt(1,false);
         panneauAffichage.repaint();
     }//GEN-LAST:event_btnEffacerActionPerformed
 
@@ -1457,22 +1459,28 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_miPianoActionPerformed
 
     private void btnTestSonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTestSonActionPerformed
-        
-        int timbre = 1;
-        switch(cbTimbre.getSelectedIndex()){
-            case 0:{
-                timbre = 1;
-                break;
+        if(rbSon.isSelected()){
+            int timbre = 1;
+            switch(cbTimbre.getSelectedIndex()){
+                case 0:{
+                    timbre = 1;
+                    break;
+                }
+                case 1:{
+                    timbre = 25;
+                    break;
+                }
             }
-            case 1:{
-                timbre = 25;
-                break;
-            }
+            Note noteTest = new Note(timbre, NomNote.valueOf(cbNote.getSelectedItem().toString().replaceAll("#", "Sharp")), (int)spinOctave.getValue());
+            noteTest.setPersistance((int)spinPersistance.getValue());
+            noteTest.commencerJouer();
+            noteTest.arreterJouer();
         }
-        Note noteTest = new Note(timbre, NomNote.valueOf(cbNote.getSelectedItem().toString().replaceAll("#", "Sharp")), (int)spinOctave.getValue());
-        noteTest.setPersistance((int)spinPersistance.getValue());
-        noteTest.commencerJouer();
-        noteTest.arreterJouer();
+        else{
+            FichierAudio fichierAudioTest = new FichierAudio(m_pathToFileAudio);
+            fichierAudioTest.commencerJouer();
+            
+        }
         
     }//GEN-LAST:event_btnTestSonActionPerformed
    

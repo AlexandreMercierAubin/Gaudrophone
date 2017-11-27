@@ -1206,7 +1206,7 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="btnTestSon">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Jouer le son"/>
+                            <Property name="text" type="java.lang.String" value="Aper&#xe7;u du son"/>
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTestSonActionPerformed"/>
