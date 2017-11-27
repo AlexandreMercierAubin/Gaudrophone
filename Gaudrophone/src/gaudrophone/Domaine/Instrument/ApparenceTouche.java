@@ -47,8 +47,11 @@ public class ApparenceTouche  implements Serializable
     
     public void setForme(Forme forme)
     {
-        this.forme = forme;
-        initialiserBordures();
+        if (forme != this.forme)
+        {
+            this.forme = forme;
+            initialiserBordures();
+        }
     }
     
     public Color getCouleurFond() 
@@ -96,11 +99,23 @@ public class ApparenceTouche  implements Serializable
     
     private void initialiserBordures()
     {
-        bordures = new ArrayList<Bordure>();
+        if (bordures == null)
+            bordures = new ArrayList<Bordure>();
         
         int nbBordures = Outils.nbBordures(forme) + 2;
-        for (int i = 0; i < nbBordures; i++)
-            bordures.add(new Bordure());
+        if (nbBordures > bordures.size())
+        {
+            for (int i = 0; i < nbBordures; i++)
+            {
+                bordures.add(new Bordure());
+                bordures.get(i).setVisible(true);
+            }
+        }
+        else
+        {
+            for (int i = bordures.size() - 1; i >= nbBordures; i--)
+                bordures.remove(i);
+        }
         
         // Bordures transversales invisibles
         bordures.get(nbBordures - 2).setVisible(false);
