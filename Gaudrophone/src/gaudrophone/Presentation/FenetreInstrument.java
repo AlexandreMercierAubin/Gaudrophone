@@ -1244,58 +1244,42 @@ public class FenetreInstrument extends javax.swing.JFrame {
         lblBleu.setEnabled(false);
     }//GEN-LAST:event_rbImageActionPerformed
 
-    private void cbCouleurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCouleurActionPerformed
-        String value = cbCouleur.getSelectedItem().toString();
+    private void setSpinColor(String strCouleur)
+    {
         dictCouleur couleurs= new dictCouleur();
         Color couleur;
+        couleur=couleurs.trouverParClee(strCouleur);
+        spinRouge.setValue(couleur.getRed());
+        spinVert.setValue(couleur.getGreen());
+        spinBleu.setValue(couleur.getBlue());
+    }
+    
+    private void cbCouleurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCouleurActionPerformed
+        String value = cbCouleur.getSelectedItem().toString();
         switch(value){
             case "Rouge":
-            couleur=couleurs.trouverParClee("ROUGE");
-            spinRouge.setValue(couleur.getRed());
-            spinVert.setValue(couleur.getGreen());
-            spinBleu.setValue(couleur.getBlue());
+            setSpinColor("ROUGE");
             break;
             case "Vert":
-            couleur=couleurs.trouverParClee("VERT");
-            spinRouge.setValue(couleur.getRed());
-            spinVert.setValue(couleur.getGreen());
-            spinBleu.setValue(couleur.getBlue());
+            setSpinColor("VERT");
             break;
             case "Bleu":
-            couleur=couleurs.trouverParClee("BLEU");
-            spinRouge.setValue(couleur.getRed());
-            spinVert.setValue(couleur.getGreen());
-            spinBleu.setValue(couleur.getBlue());
+            setSpinColor("BLEU");
             break;
             case "Brun":
-            couleur=couleurs.trouverParClee("BRUN");
-            spinRouge.setValue(couleur.getRed());
-            spinVert.setValue(couleur.getGreen());
-            spinBleu.setValue(couleur.getBlue());
+            setSpinColor("BRUN");
             break;
             case "Beige":
-            couleur=couleurs.trouverParClee("BEIGE");
-            spinRouge.setValue(couleur.getRed());
-            spinVert.setValue(couleur.getGreen());
-            spinBleu.setValue(couleur.getBlue());
+            setSpinColor("BEIGE");
             break;
             case "Jaune":
-            couleur=couleurs.trouverParClee("JAUNE");
-            spinRouge.setValue(couleur.getRed());
-            spinVert.setValue(couleur.getGreen());
-            spinBleu.setValue(couleur.getBlue());
+            setSpinColor("JAUNE");
             break;
             case "Blanc":
-            couleur=couleurs.trouverParClee("BLANC");
-            spinRouge.setValue(couleur.getRed());
-            spinVert.setValue(couleur.getGreen());
-            spinBleu.setValue(couleur.getBlue());
+            setSpinColor("BLANC");
             break;
             case "Noir":
-            couleur=couleurs.trouverParClee("NOIR");
-            spinRouge.setValue(couleur.getRed());
-            spinVert.setValue(couleur.getGreen());
-            spinBleu.setValue(couleur.getBlue());
+            setSpinColor("NOIR");
             break;
         }
     }//GEN-LAST:event_cbCouleurActionPerformed
