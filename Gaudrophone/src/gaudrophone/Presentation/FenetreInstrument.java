@@ -202,6 +202,12 @@ public class FenetreInstrument extends javax.swing.JFrame {
             btnParcourirFichierAudio.setEnabled(false);
             bgType.clearSelection();
             rbSon.setSelected(true);
+            lblNote.setEnabled(true);
+            cbNote.setEnabled(true);
+            lblOctave.setEnabled(true);
+            spinOctave.setEnabled(true);
+            lblPersistance.setEnabled(true);
+            spinPersistance.setEnabled(true);
             switch(((Note) son).getNom()){
                 case C:{
                     cbNote.setSelectedIndex(0);
