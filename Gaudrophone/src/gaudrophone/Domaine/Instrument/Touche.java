@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Touche implements Serializable{
     int index;
     
-    String texteAffichage;
+    String nom;
     ApparenceTouche apparence;
     Son son;
     boolean surbrillance;
@@ -16,21 +16,21 @@ public class Touche implements Serializable{
     public Touche(int index, int timbre)
     {
         this.index = index;
-        texteAffichage="";
+        nom="";
         apparence = new ApparenceTouche();
         surbrillance = false;
         timbreInstrument = timbre;
         son = new Note(timbreInstrument);
     }
     
-    public String getTexteAffichage()
+    public String getNom()
     {
-        return texteAffichage;
+        return nom;
     }
     
     public void setTexteAffichage(String valeur)
     {
-        texteAffichage = valeur;
+        nom = valeur;
     }
     
     public ApparenceTouche getApparence()
