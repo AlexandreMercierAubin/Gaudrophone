@@ -15,7 +15,7 @@ public class FichierAudio extends Son implements Serializable{
     public FichierAudio(String cheminFichierAudio)
     {
         chemin = cheminFichierAudio;
-        jouerSon = true;
+        jouerSon = false;
     }
     
     @Override
@@ -50,7 +50,7 @@ public class FichierAudio extends Son implements Serializable{
     @Override
     public void arreterJouer()
     {
-        if (!jouerSon){
+        if (!jouerSon && clip != null){
             try{
                 clip.stop();
             }
