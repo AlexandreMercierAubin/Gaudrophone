@@ -245,16 +245,6 @@ public class ControleurInstrument {
                 
                 instrument=(Instrument)(oisImporter.readObject());
                 
-                //reinitialiser le synthesizer
-                for(int i=0;i<instrument.getTouches().size();++i)
-                {
-                    Son son=instrument.getTouche(i).getSon();
-                    if(son instanceof Note)
-                    {
-                        ((Note)son).initialiserSynthesizer();
-                    }
-                }
-                
             } catch (final java.io.IOException e) 
             {
 

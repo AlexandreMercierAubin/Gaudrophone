@@ -2,6 +2,7 @@ package gaudrophone.Presentation;
 
 import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.ControleurInstrument;
+import gaudrophone.Domaine.Dictionnaire.dictCouleur;
 import gaudrophone.Domaine.Dimension2D;
 import gaudrophone.Domaine.Enums.Forme;
 import gaudrophone.Domaine.Enums.ModeVisuel;
@@ -37,6 +38,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     public FenetreInstrument() {
         initComponents();
         initializeRadioButton();
+        
         
         controleur = new ControleurInstrument();
         panneauAffichage.setFenetreInstrument(this);
@@ -1242,48 +1244,42 @@ public class FenetreInstrument extends javax.swing.JFrame {
         lblBleu.setEnabled(false);
     }//GEN-LAST:event_rbImageActionPerformed
 
+    private void setSpinColor(String strCouleur)
+    {
+        dictCouleur couleurs= new dictCouleur();
+        Color couleur;
+        couleur=couleurs.trouverParClee(strCouleur);
+        spinRouge.setValue(couleur.getRed());
+        spinVert.setValue(couleur.getGreen());
+        spinBleu.setValue(couleur.getBlue());
+    }
+    
     private void cbCouleurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCouleurActionPerformed
         String value = cbCouleur.getSelectedItem().toString();
         switch(value){
             case "Rouge":
-            spinRouge.setValue(255);
-            spinVert.setValue(0);
-            spinBleu.setValue(0);
+            setSpinColor("ROUGE");
             break;
             case "Vert":
-            spinRouge.setValue(0);
-            spinVert.setValue(255);
-            spinBleu.setValue(0);
+            setSpinColor("VERT");
             break;
             case "Bleu":
-            spinRouge.setValue(0);
-            spinVert.setValue(0);
-            spinBleu.setValue(255);
+            setSpinColor("BLEU");
             break;
             case "Brun":
-            spinRouge.setValue(72);
-            spinVert.setValue(52);
-            spinBleu.setValue(32);
+            setSpinColor("BRUN");
             break;
             case "Beige":
-            spinRouge.setValue(245);
-            spinVert.setValue(245);
-            spinBleu.setValue(220);
+            setSpinColor("BEIGE");
             break;
             case "Jaune":
-            spinRouge.setValue(255);
-            spinVert.setValue(255);
-            spinBleu.setValue(0);
+            setSpinColor("JAUNE");
             break;
             case "Blanc":
-            spinRouge.setValue(255);
-            spinVert.setValue(255);
-            spinBleu.setValue(255);
+            setSpinColor("BLANC");
             break;
             case "Noir":
-            spinRouge.setValue(0);
-            spinVert.setValue(0);
-            spinBleu.setValue(0);
+            setSpinColor("NOIR");
             break;
         }
     }//GEN-LAST:event_cbCouleurActionPerformed
