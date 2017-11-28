@@ -5,6 +5,7 @@ import gaudrophone.Domaine.Dimension2D;
 import gaudrophone.Domaine.Instrument.*;
 import gaudrophone.Domaine.Outils;
 import java.awt.BasicStroke;
+import java.awt.FontMetrics;
 import java.awt.geom.Point2D;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -51,6 +52,7 @@ public class DessinateurInstrument {
                     break;
             }
             dessinerBorduresTransversales(touche, g2);
+            dessinerTexte(touche, g2);
         }
     }
     
@@ -274,6 +276,38 @@ public class DessinateurInstrument {
             int y2 = (int)position.getY() + (int)dimension.getHeight() / 2;
             int x = (int)position.getX();
             g2.drawLine(x, y1, x, y2);
+        }
+    }
+    
+    private void dessinerTexte(Touche touche, Graphics2D g2)
+    {
+        ApparenceTouche apparence = touche.getApparence();
+        Son son = touche.getSon();
+        String texte = "";
+        
+        if (apparence.isAfficherNom())
+            texte += touche.getNom();
+        if (apparence.isAfficherNote() && son instanceof Note)
+            texte += " " + ((Note)son).getNom();
+        if (apparence.isAfficherOctave() && son instanceof Note)
+            texte += " " + ((Note)son).getOctave();
+        
+        texte = texte.trim();
+        
+        if (!texte.equals(""))
+        {
+            int minDimPanneau = (int)Math.min(dimensionPanneau.getWidth(), dimensionPanneau.getHeight());
+            Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), minDimPanneau);
+            Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), minDimPanneau);
+            int x = (int)position.getX() - (int)dimension.getWidth() / 2;
+            int y = (int)position.getY() - (int)dimension.getHeight() / 2;
+            int width = (int)dimension.getWidth();
+            int height = (int)dimension.getHeight();
+            
+            FontMetrics metrics = g2.getFontMetrics();
+            int xTexte = x + (width - metrics.stringWidth(texte)) / 2;
+            int yTexte = y + ((height - metrics.getHeight()) / 2) + metrics.getAscent();
+            g2.drawString(texte, xTexte, yTexte);
         }
     }
 }

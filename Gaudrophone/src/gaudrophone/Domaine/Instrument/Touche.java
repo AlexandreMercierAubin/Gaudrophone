@@ -28,7 +28,7 @@ public class Touche implements Serializable{
         return nom;
     }
     
-    public void setTexteAffichage(String valeur)
+    public void setNom(String valeur)
     {
         nom = valeur;
     }
