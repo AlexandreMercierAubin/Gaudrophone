@@ -25,6 +25,33 @@ public class ApparenceTouche  implements Serializable
     Dimension2D dimension;
     List<Bordure> bordures;
     Point2D position;
+    boolean afficherNom;
+    boolean afficherNote;
+    boolean afficherOctave;
+
+    public boolean isAfficherNom() {
+        return afficherNom;
+    }
+
+    public void setAfficherNom(boolean afficherNom) {
+        this.afficherNom = afficherNom;
+    }
+
+    public boolean isAfficherNote() {
+        return afficherNote;
+    }
+
+    public void setAfficherNote(boolean afficherNote) {
+        this.afficherNote = afficherNote;
+    }
+
+    public boolean isAfficherOctave() {
+        return afficherOctave;
+    }
+
+    public void setAfficherOctave(boolean afficherOctave) {
+        this.afficherOctave = afficherOctave;
+    }
     
     public Point2D getPosition()
     {
@@ -41,6 +68,9 @@ public class ApparenceTouche  implements Serializable
         forme = Forme.Cercle;
         couleurFond = Color.BLACK;
         dimension = new Dimension2D(0.05,0.05);
+        afficherNom = false;
+        afficherNote = false;
+        afficherOctave = false;
         
         initialiserBordures();
     }
