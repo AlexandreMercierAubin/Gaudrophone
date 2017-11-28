@@ -282,10 +282,12 @@ public class FenetreInstrument extends javax.swing.JFrame {
             for(int i = 0; i < nbBordure; ++i){
                 cbBordure.addItem("" + (i + 1));
             }
-            //cbBordure.setSelectedIndex(1);
             BordureUpdater();
-            //cbBordure.setSelectedIndex(0);
         }
+        txtNom.setText(touche.getNom());
+        checkAfficheNom.setSelected(touche.getApparence().isAfficherNom());
+        checkAfficheNote.setSelected(touche.getApparence().isAfficherNote());
+        checkAfficheOctave.setSelected(touche.getApparence().isAfficherOctave());
     }
     
     private void ToucheEnregistrer()
@@ -326,6 +328,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
             touche.importerFichierAudio(m_pathToFileAudio);
         }
         panneauAffichage.repaint();
+        
+        touche.setNom(txtNom.getText());
+        touche.getApparence().setAfficherNom(checkAfficheNom.isSelected());
+        touche.getApparence().setAfficherNote(checkAfficheNote.isSelected());
+        touche.getApparence().setAfficherOctave(checkAfficheOctave.isSelected());
         
         ToucheUpdater();
     }
@@ -416,6 +423,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
         spinBleuBordure = new javax.swing.JSpinner();
         btnEffacer = new javax.swing.JButton();
         btnTestSon = new javax.swing.JButton();
+        lblNom = new javax.swing.JLabel();
+        txtNom = new javax.swing.JTextField();
+        checkAfficheNom = new javax.swing.JCheckBox();
+        checkAfficheNote = new javax.swing.JCheckBox();
+        checkAfficheOctave = new javax.swing.JCheckBox();
         barreMenu = new javax.swing.JMenuBar();
         menuFichier = new javax.swing.JMenu();
         miNouvelInstrument = new javax.swing.JMenuItem();
@@ -809,14 +821,24 @@ public class FenetreInstrument extends javax.swing.JFrame {
             }
         });
 
+        lblNom.setText("Nom :");
+
+        txtNom.setText("NomDeLaTouche");
+        txtNom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout plToucheLayout = new javax.swing.GroupLayout(plTouche);
         plTouche.setLayout(plToucheLayout);
         plToucheLayout.setHorizontalGroup(
             plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(plToucheLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(plToucheLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
+                        .addGap(27, 27, 27)
                         .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnParcourirImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(plToucheLayout.createSequentialGroup()
@@ -836,27 +858,29 @@ public class FenetreInstrument extends javax.swing.JFrame {
                                     .addComponent(spinVert, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
                                     .addComponent(spinRouge)
                                     .addComponent(spinBleu)))))
-                    .addGroup(plToucheLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnEnregistrerTouche, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(plToucheLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnEffacer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(plToucheLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEnregistrerTouche, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEffacer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plToucheLayout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNote, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblOctave, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblPersistance, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(5, 5, 5)
-                        .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbNote, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(spinOctave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
-                            .addComponent(spinPersistance, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)))
+                        .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(plToucheLayout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(spinPersistance))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, plToucheLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(plToucheLayout.createSequentialGroup()
+                                        .addComponent(checkAfficheOctave)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(spinOctave))
+                                    .addGroup(plToucheLayout.createSequentialGroup()
+                                        .addComponent(checkAfficheNote)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbNote, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addGroup(plToucheLayout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(btnParcourirFichierAudio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -897,29 +921,39 @@ public class FenetreInstrument extends javax.swing.JFrame {
                                     .addComponent(spinVertBordure)
                                     .addComponent(spinBleuBordure)))))
                     .addGroup(plToucheLayout.createSequentialGroup()
+                        .addComponent(rbSon)
+                        .addGap(31, 31, 31)
+                        .addComponent(btnTestSon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(plToucheLayout.createSequentialGroup()
+                        .addComponent(lblForme)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbForme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(plToucheLayout.createSequentialGroup()
                         .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(plToucheLayout.createSequentialGroup()
-                                .addComponent(lblForme)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbForme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(plToucheLayout.createSequentialGroup()
-                                .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblFond)
-                                    .addComponent(lblType)
-                                    .addComponent(lblDimension)
-                                    .addComponent(rbFichierAudio)
-                                    .addComponent(lblBordure))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(plToucheLayout.createSequentialGroup()
-                                .addComponent(rbSon)
-                                .addGap(31, 31, 31)
-                                .addComponent(btnTestSon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                            .addComponent(lblFond)
+                            .addComponent(lblType)
+                            .addComponent(lblDimension)
+                            .addComponent(rbFichierAudio)
+                            .addComponent(lblBordure))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(plToucheLayout.createSequentialGroup()
+                        .addComponent(lblNom)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(checkAfficheNom)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNom)))
+                .addContainerGap())
         );
         plToucheLayout.setVerticalGroup(
             plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(plToucheLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblNom)
+                        .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(checkAfficheNom))
+                .addGap(30, 30, 30)
                 .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblForme)
                     .addComponent(cbForme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -994,11 +1028,13 @@ public class FenetreInstrument extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNote)
-                    .addComponent(cbNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                    .addComponent(cbNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkAfficheNote))
+                .addGap(7, 7, 7)
                 .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOctave)
-                    .addComponent(spinOctave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spinOctave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkAfficheOctave))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPersistance)
@@ -1011,7 +1047,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
                 .addComponent(btnEnregistrerTouche)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEffacer)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         spTouche.setViewportView(plTouche);
@@ -1473,6 +1509,10 @@ public class FenetreInstrument extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnTestSonActionPerformed
+
+    private void txtNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomActionPerformed
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.sauvegarderInstrument();
@@ -1570,6 +1610,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbNoteMetronome;
     private javax.swing.JComboBox<String> cbTimbre;
     private javax.swing.JComboBox<String> cbTimbreMetronome;
+    private javax.swing.JCheckBox checkAfficheNom;
+    private javax.swing.JCheckBox checkAfficheNote;
+    private javax.swing.JCheckBox checkAfficheOctave;
     private javax.swing.JCheckBox checkVisible;
     private javax.swing.JLabel lblBleu;
     private javax.swing.JLabel lblBleuBordure;
@@ -1583,6 +1626,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JLabel lblLargeur;
     private javax.swing.JLabel lblLargeurBordure;
     private javax.swing.JLabel lblMetronome;
+    private javax.swing.JLabel lblNom;
     private javax.swing.JLabel lblNomInstrument;
     private javax.swing.JLabel lblNote;
     private javax.swing.JLabel lblNoteMetronome;
@@ -1644,6 +1688,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JSpinner spinVertBordure;
     private javax.swing.JSplitPane splitAffichage;
     private javax.swing.JTextArea txtMessage;
+    private javax.swing.JTextField txtNom;
     private javax.swing.JTextField txtNomInstrument;
     private javax.swing.JTextField txtRechercher;
     // End of variables declaration//GEN-END:variables
