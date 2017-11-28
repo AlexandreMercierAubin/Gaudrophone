@@ -1169,14 +1169,17 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
     private void miJouerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miJouerActionPerformed
         controleur.modifierModeVisuel(ModeVisuel.Jouer);
+        panneauAffichage.repaint();
     }//GEN-LAST:event_miJouerActionPerformed
 
     private void miEditionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEditionActionPerformed
         controleur.modifierModeVisuel(ModeVisuel.Editer);
+        panneauAffichage.repaint();
     }//GEN-LAST:event_miEditionActionPerformed
 
     private void miAjouterTouchesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAjouterTouchesActionPerformed
         controleur.modifierModeVisuel(ModeVisuel.Ajouter);
+        panneauAffichage.repaint();
     }//GEN-LAST:event_miAjouterTouchesActionPerformed
 
     private void miAideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAideActionPerformed

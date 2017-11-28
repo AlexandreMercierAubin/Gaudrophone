@@ -89,10 +89,10 @@ public class Instrument implements Serializable{
         touches.add(new Touche(cleeTouche, timbre));
         ++cleeTouche;
         
-        //inserer sa position et la selectionner
+        //inserer sa position
         Touche toucheAjoutee = touches.get(touches.size()-1);
         toucheAjoutee.getApparence().setPosition(position);
-        toucheSelectionee=touches.size()-1;
+        selectionnerTouche(position);
         
         //ajouter les points dans Path2D selon la dim du constructeur d'apparence
         ApparenceTouche apparence= toucheAjoutee.getApparence();
@@ -165,6 +165,15 @@ public class Instrument implements Serializable{
         }
         toucheSelectionee=-1;
         return false;
+    }
+    
+    public void deselectionnerTouche()
+    {
+        if (toucheSelectionee != -1)
+        {
+            touches.get(toucheSelectionee).setSurbrillance(false);
+            toucheSelectionee = -1;
+        }
     }
     
     public List<Touche> getTouches()

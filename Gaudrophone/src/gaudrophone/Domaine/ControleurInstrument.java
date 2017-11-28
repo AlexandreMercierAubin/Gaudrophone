@@ -263,6 +263,7 @@ public class ControleurInstrument {
     public void modifierModeVisuel(ModeVisuel modeVisuel)
     {
         this.modeVisuel = modeVisuel;
+        instrument.deselectionnerTouche();
     }
     
     public void genererInstrument(GenerateurInstrument generateurInstrument)
