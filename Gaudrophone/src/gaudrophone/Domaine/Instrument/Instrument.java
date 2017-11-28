@@ -1,4 +1,5 @@
 package gaudrophone.Domaine.Instrument;
+import gaudrophone.Domaine.Dimension2D;
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.geom.Point2D;
@@ -6,6 +7,7 @@ import gaudrophone.Domaine.Outils;
 import gaudrophone.Domaine.StrategieRecherche.StrategieChemin;
 import gaudrophone.Domaine.StrategieRecherche.StrategieCouleur;
 import gaudrophone.Domaine.StrategieRecherche.StrategieForme;
+import gaudrophone.Domaine.StrategieRecherche.StrategieNoteOctave;
 import gaudrophone.Domaine.StrategieRecherche.StrategieRecherche;
 import java.awt.geom.Path2D;
 import java.awt.Polygon;
@@ -22,12 +24,19 @@ public class Instrument implements Serializable{
     
     public Instrument()
     {
+        toucheSelectionee = -1;
+        timbre = 1;
+        strategies = new ArrayList<StrategieRecherche>();
         cleeTouche=0;
         touches = new ArrayList<Touche>();
-        nom="template";
+        nom="instrument";
+        chemin = "";
+        
+        strategies= new ArrayList<StrategieRecherche>();
         strategies.add(new StrategieChemin());
         strategies.add(new StrategieCouleur());
         strategies.add(new StrategieForme());
+        strategies.add(new StrategieNoteOctave());
     }
     
     public int getTimbre()
@@ -38,6 +47,11 @@ public class Instrument implements Serializable{
     public void setTimbre(int noInstrument)
     {
         timbre=noInstrument;
+        // Permet de changer le timbre pour tous les instruments
+        for(int i=0; i<touches.size();i++)
+        {
+            touches.get(i).setTimbreInstrument(noInstrument);
+        }
     }
     
     public String getNom()
@@ -70,27 +84,39 @@ public class Instrument implements Serializable{
     }
     
     public Touche ajouterTouche(Point2D position)
-    {
+    {   
         //ajouter une nouvelle touche à la fin de la liste
         touches.add(new Touche(cleeTouche, timbre));
         ++cleeTouche;
         
-        //inserer sa position et la selectionner
+        //inserer sa position
         Touche toucheAjoutee = touches.get(touches.size()-1);
         toucheAjoutee.getApparence().setPosition(position);
-        toucheSelectionee=touches.size()-1;
+        selectionnerTouche(position);
         
         //ajouter les points dans Path2D selon la dim du constructeur d'apparence
         ApparenceTouche apparence= toucheAjoutee.getApparence();
-        Polygon poly = Outils.calculerPolygone(36, position,apparence.getDimension());
-        apparence.getCoins().reset();
-        apparence.getCoins().append(poly,true);
         
         return toucheAjoutee;
     }
     
     public void rechercherTouche(String requete)
     {   
+        //si la requete est vide, effacer la surbrillance
+        if(requete.trim().equals(""))
+        {
+            for(int j=0; j<touches.size();++j)
+            {
+                if(j!=toucheSelectionee)
+                {
+                    Touche touche=touches.get(j);
+                    touche.setSurbrillance(false);
+                }
+            }
+            
+            return;
+        }
+        
         String[] mots= requete.split("\\s+");
         
         for(int j=0; j<touches.size();++j)
@@ -115,21 +141,39 @@ public class Instrument implements Serializable{
     
     public boolean selectionnerTouche(Point2D position)
     {
+        if (toucheSelectionee != -1)
+            touches.get(toucheSelectionee).setSurbrillance(false);
+        
         //ajouter le contenu
-        for(int i=0;i<touches.size();++i)
+        for(int i=touches.size()-1;i>=0;--i)
         {
             Touche touche=touches.get(i);
-            ApparenceTouche apparence= touche.getApparence();
-            Path2D coins=apparence.getCoins();
-            
-            if(coins.contains(position))
+            ApparenceTouche apparence=touche.getApparence();
+            Point2D positionTouche=apparence.getPosition();
+            double width=apparence.getDimension().getWidth();
+            double height=apparence.getDimension().getHeight();
+            if(position.getX()<positionTouche.getX()+ width/2 &&
+               position.getX()>positionTouche.getX()- width/2 &&
+               position.getY()<positionTouche.getY()+ height/2 &&
+               position.getY()>positionTouche.getY()- height/2 
+               )
             {
                 toucheSelectionee=i;
+                touche.setSurbrillance(true);
                 return true;
             }
         }
         toucheSelectionee=-1;
         return false;
+    }
+    
+    public void deselectionnerTouche()
+    {
+        if (toucheSelectionee != -1)
+        {
+            touches.get(toucheSelectionee).setSurbrillance(false);
+            toucheSelectionee = -1;
+        }
     }
     
     public List<Touche> getTouches()
@@ -141,11 +185,34 @@ public class Instrument implements Serializable{
         return toucheSelectionee;
     }
     
-        public String getChemin() {
+    public String getChemin() {
         return chemin;
     }
 
     public void setChemin(String chemin) {
         this.chemin = chemin;
+    }
+    
+    public boolean retirerTouche(int index)
+    {
+        if(index>=touches.size())
+        {
+            return false;
+        }
+        
+        if (index == toucheSelectionee)
+            toucheSelectionee = -1;
+        
+        touches.remove(index);
+        
+        return true;
+    }
+    
+    public void replacerToucheDessus()
+    {
+        Touche touche = touches.get(toucheSelectionee);
+        touches.remove(toucheSelectionee);
+        touches.add(touche);
+        toucheSelectionee=touches.size()-1;
     }
 }

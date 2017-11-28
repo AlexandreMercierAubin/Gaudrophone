@@ -6,8 +6,16 @@ import gaudrophone.Domaine.Enums.Forme;
 import gaudrophone.Domaine.Generateur.GenerateurGuitare;
 import gaudrophone.Domaine.Instrument.ApparenceTouche;
 import gaudrophone.Domaine.Instrument.Instrument;
+import gaudrophone.Domaine.Instrument.Touche;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.geom.Point2D;
+import java.io.Console;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 public class FenetreTestDessin extends javax.swing.JFrame {
     private ControleurInstrument controleur;
@@ -19,8 +27,9 @@ public class FenetreTestDessin extends javax.swing.JFrame {
         controleur = fenetreInstrument.getControleur();
         
         panneauAffichage1.setFenetreInstrument(fenetreInstrument);
-        ajouterTouches();
+        //ajouterTouches();
         //controleur.genererInstrument(new GenerateurGuitare());
+        testImage();
         
         panneauAffichage1.invalidate();
     }
@@ -146,6 +155,26 @@ public class FenetreTestDessin extends javax.swing.JFrame {
         {
             apparence4.getBordure(i).setCouleur(Color.yellow);
             apparence4.getBordure(i).setVisible(true);
+        }
+    }
+    
+    private void testImage()
+    {
+        Instrument instrument = controleur.getInstrument();
+        instrument.retirerTouche(0);
+        Touche touche = instrument.ajouterTouche(new Point2D.Double(0.5, 0.5));
+        ApparenceTouche apparence = touche.getApparence();
+        apparence.setDimension(new Dimension2D(0.5, 0.5));
+        apparence.setForme(Forme.Hexagone);
+        try 
+        {
+            File file = new File("C:/Users/Sam/Pictures/Photo.jpg");
+            Image image = ImageIO.read(file);
+            apparence.setImageFond(image);
+        } 
+        catch (IOException ex) 
+        {
+            ex.printStackTrace();
         }
     }
 

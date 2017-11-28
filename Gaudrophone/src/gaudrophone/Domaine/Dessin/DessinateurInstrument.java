@@ -8,8 +8,11 @@ import java.awt.BasicStroke;
 import java.awt.geom.Point2D;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Polygon;
 import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import java.util.List;
 
 public class DessinateurInstrument {
@@ -27,9 +30,12 @@ public class DessinateurInstrument {
         Graphics2D g2 = (Graphics2D)g;
         List<Touche> touches = controleur.getInstrument().getTouches();
         
+        redimensionner(touches, g2);
+        
         for (Touche touche : touches)
         {   
-            switch (touche.getApparence().getForme())
+            ApparenceTouche apparence = touche.getApparence();
+            switch (apparence.getForme())
             {
                 case Cercle:
                     dessinerCercle(touche, g2);
@@ -44,8 +50,35 @@ public class DessinateurInstrument {
                     dessinerPolygone(touche, g2);
                     break;
             }
-            
             dessinerBorduresTransversales(touche, g2);
+        }
+    }
+    
+    // Ajuste l'échelle du dessin des touches pour qu'elles soient toutes visibles
+    private void redimensionner(List<Touche> touches, Graphics2D g2)
+    {
+        int minDimPanneau = (int)Math.min(dimensionPanneau.getWidth(), dimensionPanneau.getHeight());
+        int maxX = 0;
+        int maxY = 0;
+        
+        for (Touche touche: touches)
+        {
+            ApparenceTouche apparence = touche.getApparence();
+            Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), minDimPanneau);
+            Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), minDimPanneau);
+            
+            maxX = Math.max(maxX, (int)position.getX() + (int)dimension.getWidth() / 2);
+            maxY = Math.max(maxY, (int)position.getY() + (int)dimension.getHeight() / 2);
+        }
+        
+        double echelleX = dimensionPanneau.getWidth() / maxX;
+        double echelleY = dimensionPanneau.getHeight() / maxY;
+        
+        if (echelleX < 1.0 || echelleY < 1.0)
+        {
+            double echelle = Math.min(echelleX, echelleY);
+            g2.scale(echelle, echelle);
+            controleur.setEchelleAffichage(echelle);
         }
     }
     
@@ -54,21 +87,38 @@ public class DessinateurInstrument {
         int minDimPanneau = (int)Math.min(dimensionPanneau.getWidth(), dimensionPanneau.getHeight());
         
         ApparenceTouche apparence = touche.getApparence();
+        Image image = apparence.getImageFond();
         Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), minDimPanneau);
         Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), minDimPanneau);
+        boolean surbrillance = touche.getSurbrillance();
         
         // Dessin du cercle intérieur
-        g2.setColor(apparence.getCouleurFond());
         int x = (int)position.getX() - (int)dimension.getWidth() / 2;
         int y = (int)position.getY() - (int)dimension.getHeight() / 2;
-        g2.fillOval(x, y, (int)dimension.getWidth(), (int)dimension.getHeight());
+        int width = (int)dimension.getWidth();
+        int height = (int)dimension.getHeight();
+        Ellipse2D ellipse = new Ellipse2D.Double(x, y, width, height);
+        
+        if (image == null)
+        {
+            g2.setColor(apparence.getCouleurFond());
+            g2.fill(ellipse);
+        }
+        else
+        {
+            g2.setClip(ellipse);
+            g2.drawImage(image, x, y, x + width, y + height, 0, 0, image.getWidth(null), image.getHeight(null), null);
+            g2.setClip(null);
+        }
 
         // Dessin de la bordure
         Bordure bordure = apparence.getBordure(0);
 
         int largeurBordure = Outils.conversionRelatifPixel(bordure.getLargeur(), minDimPanneau);
+        if (surbrillance)
+            largeurBordure += 2;
         
-        if (bordure.getVisible())
+        if (bordure.getVisible() || surbrillance)
         {
             g2.setColor(bordure.getCouleur());
             g2.setStroke(new BasicStroke(largeurBordure));
@@ -81,23 +131,40 @@ public class DessinateurInstrument {
         int minDimPanneau = (int)Math.min(dimensionPanneau.getWidth(), dimensionPanneau.getHeight());
         
         ApparenceTouche apparence = touche.getApparence();
+        Image image = apparence.getImageFond();
         Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), minDimPanneau);
         Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), minDimPanneau);
+        boolean surbrillance = touche.getSurbrillance();
         
         // Dessin du rectangle intérieur
-        g2.setColor(apparence.getCouleurFond());
         int x = (int)position.getX() - (int)dimension.getWidth() / 2;
         int y = (int)position.getY() - (int)dimension.getHeight() / 2;
-        Rectangle rectangle = new Rectangle(x, y, (int)dimension.getWidth(), (int)dimension.getHeight());
-        g2.fill(rectangle);
-
+        int width = (int)dimension.getWidth();
+        int height = (int)dimension.getHeight();
+        Rectangle2D rectangle = new Rectangle2D.Double(x, y, width, height);
+        
+        if (image == null)
+        {
+            g2.setColor(apparence.getCouleurFond());
+            g2.fill(rectangle);
+        }
+        else
+        {
+            g2.setClip(rectangle);
+            g2.drawImage(image, x, y, x + width, y + height, 0, 0, image.getWidth(null), image.getHeight(null), null);
+            g2.setClip(null);
+        }
+        
         // Dessin des bordures
         for (int i = 0; i < 4; i++)
         {
             Bordure bordure = apparence.getBordure(i);
-            if (bordure.getVisible())
+            if (bordure.getVisible() || surbrillance)
             {
                 int largeurBordure = Outils.conversionRelatifPixel(bordure.getLargeur(), minDimPanneau);
+                if (surbrillance)
+                    largeurBordure += 2;
+                
                 g2.setColor(bordure.getCouleur());
                 g2.setStroke(new BasicStroke(largeurBordure));
 
@@ -116,20 +183,37 @@ public class DessinateurInstrument {
         int minDimPanneau = (int)Math.min(dimensionPanneau.getWidth(), dimensionPanneau.getHeight());
         
         ApparenceTouche apparence = touche.getApparence();
+        Image image = apparence.getImageFond();
         Point2D position = Outils.conversionPointRelatifPixel(touche.getApparence().getPosition(), minDimPanneau);
         Dimension2D dimension = Outils.conversionDimensionRelatifPixel(apparence.getDimension(), minDimPanneau);
+        boolean surbrillance = touche.getSurbrillance();
         
         // Dessin du polygone intérieur
         int nbBordures = Outils.nbBordures(apparence.getForme());
         Polygon polygone = Outils.calculerPolygone(nbBordures, position, dimension);
-        g2.setColor(apparence.getCouleurFond());
-        g2.fillPolygon(polygone);
+        
+        if (image == null)
+        {
+            g2.setColor(apparence.getCouleurFond());
+            g2.fillPolygon(polygone);
+        }
+        else
+        {
+            int x1 = (int)position.getX() - (int)dimension.getWidth() / 2;
+            int y1 = (int)position.getY() - (int)dimension.getHeight() / 2;
+            int x2 = (int)position.getX() + (int)dimension.getWidth() / 2;
+            int y2 = (int)position.getY() + (int)dimension.getHeight() / 2;
+            
+            g2.setClip(polygone);
+            g2.drawImage(image, x1, y1, x2, y2, 0, 0, image.getWidth(null), image.getHeight(null), null);
+            g2.setClip(null);
+        }
 
         // Dessin des bordures
         for (int i = 0; i < nbBordures; i++)
         {
             Bordure bordure = apparence.getBordure(i);
-            if (bordure.getVisible())
+            if (bordure.getVisible() || surbrillance)
             {
                 int x1, y1, x2, y2;
 
@@ -148,6 +232,9 @@ public class DessinateurInstrument {
                 }
 
                 int largeurBordure = Outils.conversionRelatifPixel(bordure.getLargeur(), minDimPanneau);
+                if (surbrillance)
+                    largeurBordure += 2;
+                
                 g2.setColor(bordure.getCouleur());
                 g2.setStroke(new BasicStroke(largeurBordure));
                 g2.drawLine(x1, y1, x2, y2);

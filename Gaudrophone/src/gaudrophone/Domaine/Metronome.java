@@ -2,11 +2,13 @@ package gaudrophone.Domaine;
 import gaudrophone.Domaine.Instrument.Note;
 import gaudrophone.Domaine.Instrument.Son;
 
+
 public class Metronome {
     Son son;
-    float frequence;
+    int frequence;
     int timbre;
-
+    Thread metronome;
+    boolean metronomeActif;
 
     
     public Metronome()
@@ -14,6 +16,41 @@ public class Metronome {
         timbre=0;
         frequence=60;
         son=new Note(timbre);
+        
+        Thread metronome = new Thread() 
+        {
+            public void run() 
+            {
+                while(metronomeActif)
+                {
+                    jouerSon();
+                    try 
+                    {
+                       Thread.sleep(frequence);
+                    } catch (Exception e) {
+                       System.out.println(e);
+                    }
+                    
+                }
+            }
+        };
+    }
+    
+    void jouerSon()
+    {
+        son.commencerJouer();
+    }
+    
+    public void arreter()
+    {
+        metronomeActif=false;
+    }
+    
+    public void demarrer()
+    {
+        metronomeActif=true;
+        metronome.start();
+
     }
     
     public Son getSon()
@@ -38,11 +75,11 @@ public class Metronome {
 
     }
     
-    public float getFrequence() {
+    public int getFrequence() {
         return frequence;
     }
 
-    public void setFrequence(float frequence) {
+    public void setFrequence(int frequence) {
         this.frequence = frequence;
     }
 }

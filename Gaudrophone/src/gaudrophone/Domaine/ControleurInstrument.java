@@ -4,6 +4,8 @@ import gaudrophone.Domaine.Generateur.GenerateurInstrument;
 import gaudrophone.Domaine.Instrument.Instrument;
 import gaudrophone.Domaine.Instrument.Touche;
 import gaudrophone.Domaine.Enums.ModeVisuel;
+import gaudrophone.Domaine.Instrument.Note;
+import gaudrophone.Domaine.Instrument.Son;
 import gaudrophone.Presentation.FenetreInstrument;
 import java.util.List;
 import java.awt.geom.Point2D;
@@ -22,13 +24,17 @@ public class ControleurInstrument {
     String cheminSauvegarde;
     ModeVisuel modeVisuel;
     boolean toucheEnDeplacement;
+    boolean toucheEnJeu;
+    double echelleAffichage;
     
     public ControleurInstrument()
     {
         instrument = new Instrument();
         metronome = new Metronome();
         toucheEnDeplacement = false;
+        toucheEnJeu=false;
         modeVisuel=ModeVisuel.Ajouter;
+        echelleAffichage = 1.0;
     }
     
     public Instrument getInstrument()
@@ -36,9 +42,19 @@ public class ControleurInstrument {
         return instrument;
     }
     
+    public void nouvelInstrument()
+    {
+        instrument = new Instrument();
+    }
+    
     public Metronome getMetronome()
     {
         return metronome;
+    }
+    
+    public void setEchelleAffichage(double echelle)
+    {
+        echelleAffichage = echelle;
     }
     
     public void importerPartition(){}
@@ -60,31 +76,34 @@ public class ControleurInstrument {
     
     public void cliquerSouris(Point2D coordRelative)
     {
+        coordRelative = new Point2D.Double(
+                coordRelative.getX() / echelleAffichage, 
+                coordRelative.getY() / echelleAffichage);
+        
         switch(modeVisuel)
-        {
-            case Ajouter:
-                instrument.ajouterTouche(coordRelative);
-                break;
-                
+        {    
             case Editer:
                 instrument.selectionnerTouche(coordRelative);
                 break;
         }
     }
     
-    public void enfoncerSouris(Point2D coordRelative)
+    public boolean enfoncerSouris(Point2D coordRelative)
     {
+        coordRelative = new Point2D.Double(
+                coordRelative.getX() / echelleAffichage, 
+                coordRelative.getY() / echelleAffichage);
+        
+        boolean clickTouche = false;
         switch(modeVisuel)
         {
             case Editer:
                 //detecter si une touche est selectionee
-                if(instrument.selectionnerTouche(coordRelative))
+                clickTouche = instrument.selectionnerTouche(coordRelative);
+                if(clickTouche)
                 {
+                    instrument.replacerToucheDessus();
                     toucheEnDeplacement=true;
-                }
-                else
-                {
-                    toucheEnDeplacement = false;
                 }
                 break;
                 
@@ -94,38 +113,70 @@ public class ControleurInstrument {
                 {
                     int indexTouche = instrument.getToucheSelectionee();
                     instrument.getTouche(indexTouche).commencerJouer();
+                    toucheEnJeu=true;
                 }
                 break;
+                
+            case Ajouter:
+                instrument.ajouterTouche(coordRelative);
+                toucheEnDeplacement=true;
+                break;
         }
+        return clickTouche;
     }
+
+   
+   
    
     public void relacherSouris(Point2D coordRelative)
     {
+        coordRelative = new Point2D.Double(
+                coordRelative.getX() / echelleAffichage, 
+                coordRelative.getY() / echelleAffichage);
+        
         switch(modeVisuel)
         {
             case Editer:
-                // deplacement de la touche selectionnee a l'enfoncement
-                if(toucheEnDeplacement)
-                {
-                    int indexTouche = instrument.getToucheSelectionee();
-                    Touche touche = instrument.getTouche(indexTouche);
-                    touche.getApparence().setPosition(coordRelative);
-                }
+                toucheEnDeplacement = false;
                 break;
                 
             case Jouer:
                 // envoyer un message d'arret a la touche relachee
-                if(instrument.selectionnerTouche(coordRelative))
+                if(toucheEnJeu)
                 {
                     int indexTouche = instrument.getToucheSelectionee();
                     instrument.getTouche(indexTouche).arreterJouer();
+                    toucheEnJeu=false;
                 }
                 break;
+                
+            case Ajouter:
+                toucheEnDeplacement=false;
+                break;
         }
+    }
+   
+    public boolean glisserSouris(Point2D coordRelative)
+    {
+        coordRelative = new Point2D.Double(
+                coordRelative.getX() / echelleAffichage, 
+                coordRelative.getY() / echelleAffichage);
+        
+        // deplacement de la touche selectionnee a l'enfoncement
+        if (toucheEnDeplacement)
+        {
+            int indexTouche = instrument.getToucheSelectionee();
+            Touche touche = instrument.getTouche(indexTouche);
+            touche.getApparence().setPosition(coordRelative);
+        }
+        
+        return toucheEnDeplacement;
     }
     
     public void sauvegarderInstrument()
     {
+        if(instrument.getChemin()!="")
+        {
             try 
             {
                 FileOutputStream fichier = new FileOutputStream(instrument.getChemin());
@@ -140,6 +191,10 @@ public class ControleurInstrument {
                 e.printStackTrace();
 
             }
+        }else
+        {
+            sauvegarderSousInstrument();
+        }
     }
     
     public void sauvegarderSousInstrument()
@@ -154,8 +209,9 @@ public class ControleurInstrument {
             String dir = dialogueEnregistrer.getCurrentDirectory().toString();
             try 
             {
-                FileOutputStream fichier = new FileOutputStream(dir+"\\"+filename);
-                instrument.setChemin(dir+"\\"+filename);
+                String chemin = dir+"\\"+filename;
+                FileOutputStream fichier = new FileOutputStream(chemin,false);
+                instrument.setChemin(chemin);
                 ObjectOutputStream oosEnregistrer = new ObjectOutputStream(fichier);
                 
                 oosEnregistrer.writeObject(instrument);
@@ -207,6 +263,7 @@ public class ControleurInstrument {
     public void modifierModeVisuel(ModeVisuel modeVisuel)
     {
         this.modeVisuel = modeVisuel;
+        instrument.deselectionnerTouche();
     }
     
     public void genererInstrument(GenerateurInstrument generateurInstrument)

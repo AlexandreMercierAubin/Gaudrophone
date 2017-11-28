@@ -1,7 +1,8 @@
 package gaudrophone.Domaine.Instrument;
 
-public abstract class Son {
-    float frequence;
+import java.io.Serializable;
+
+public abstract class Son implements Serializable{
     int persistance;
     boolean jouerSon; 
     
@@ -9,15 +10,6 @@ public abstract class Son {
  
     public void arreterJouer(){}
     
-    public float getFrequence()
-    {
-        return frequence;
-    }
-    
-    public void setFrequence(float valeur)
-    {
-        frequence=valeur;
-    }
     public int getPersistance()
     {
         return persistance;

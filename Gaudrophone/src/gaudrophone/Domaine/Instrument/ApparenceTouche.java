@@ -7,19 +7,23 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.Polygon;
 import java.awt.geom.Point2D;
+import java.awt.image.RenderedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
-import java.awt.geom.Path2D;
+import javax.imageio.ImageIO;
 
 
-public class ApparenceTouche 
+public class ApparenceTouche  implements Serializable
 {
     Forme forme;
     Color couleurFond;
-    Image imageFond;
+    transient Image imageFond;
     Dimension2D dimension;
     List<Bordure> bordures;
-    Path2D coins;
     Point2D position;
     
     public Point2D getPosition()
@@ -30,11 +34,6 @@ public class ApparenceTouche
     public void setPosition(Point2D valeur)
     {
         position = valeur;
-        Polygon poly = Outils.calculerPolygone(36,
-                                               position,
-                                               dimension);
-        coins.reset();
-        coins.append(poly,true);
     }
     
     public ApparenceTouche()
@@ -42,7 +41,6 @@ public class ApparenceTouche
         forme = Forme.Cercle;
         couleurFond = Color.BLACK;
         dimension = new Dimension2D(0.05,0.05);
-        coins= new Path2D.Double();
         
         initialiserBordures();
     }
@@ -54,8 +52,11 @@ public class ApparenceTouche
     
     public void setForme(Forme forme)
     {
-        this.forme = forme;
-        initialiserBordures();
+        if (forme != this.forme)
+        {
+            this.forme = forme;
+            initialiserBordures();
+        }
     }
     
     public Color getCouleurFond() 
@@ -86,9 +87,6 @@ public class ApparenceTouche
     public void setDimension(Dimension2D dimension) 
     {
         this.dimension = dimension;
-        Polygon poly = Outils.calculerPolygone(36, position,dimension);
-        coins.reset();
-        coins.append(poly,true);
     }
     
     public Bordure getBordure(int index)
@@ -104,25 +102,45 @@ public class ApparenceTouche
         return bordures.size();
     }
     
-    public Path2D  getCoins() 
-    {
-        return coins;
-    }
-    public void setCoins(Path2D coins) 
-    {
-        this.coins = coins;
-    }
-    
     private void initialiserBordures()
     {
-        bordures = new ArrayList<Bordure>();
+        if (bordures == null)
+            bordures = new ArrayList<Bordure>();
         
         int nbBordures = Outils.nbBordures(forme) + 2;
-        for (int i = 0; i < nbBordures; i++)
-            bordures.add(new Bordure());
+        if (nbBordures > bordures.size())
+        {
+            for (int i = 0; i < nbBordures; i++)
+            {
+                bordures.add(new Bordure());
+                bordures.get(i).setVisible(true);
+            }
+        }
+        else
+        {
+            for (int i = bordures.size() - 1; i >= nbBordures; i--)
+                bordures.remove(i);
+        }
         
         // Bordures transversales invisibles
         bordures.get(nbBordures - 2).setVisible(false);
         bordures.get(nbBordures - 1).setVisible(false);
+    }
+    
+    private void writeObject(ObjectOutputStream out) throws IOException
+    {
+        out.defaultWriteObject();
+        boolean ecrireImage = imageFond != null;
+        out.writeBoolean(ecrireImage);
+        if (ecrireImage)
+            ImageIO.write((RenderedImage)imageFond, "png", out);
+    }
+    
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
+    {
+        in.defaultReadObject();
+        final boolean lireImage = in.readBoolean();
+        if (lireImage)
+            imageFond = ImageIO.read(in);
     }
 }

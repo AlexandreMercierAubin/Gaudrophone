@@ -2,83 +2,92 @@ package gaudrophone.Domaine.Instrument;
 
 import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.Outils;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.sound.midi.*;
 
-public class Note extends Son {
+
+public class Note extends Son implements Serializable{
     NomNote nom;
     int octave;
     int timbreInstrument;
-    Synthesizer synthesizer;
-    MidiChannel[] channels;
+    transient Synthesizer synthesizer;
+    transient MidiChannel[] channels;
+    transient Timer timer;
     
     public Note(int timbreInstr){
+        octave = 4;
+        nom = NomNote.C;
+        persistance = 1000;
         timbreInstrument = timbreInstr;
-        try{
-            synthesizer = MidiSystem.getSynthesizer();
-        }
-        catch(Exception e){}
-        
-        }
+        initialiserSynthesizer();
+    }
+    
+    public Note(int timbreInstr, NomNote note, int octave)
+    {
+        this.octave = octave;
+        nom = note;
+        persistance = 1000;
+        timbreInstrument = timbreInstr;
+        initialiserSynthesizer();
+    }
+    
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
+    {
+        in.defaultReadObject();
+        initialiserSynthesizer();
+    }
     
     @Override
     public void commencerJouer()
-    {
-//        javax.sound.midi.Instrument instruments[], instr;
-//        int noInstrument = timbreInstrument;
-//        int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
-//        
-//        jouerSon = true;
-//        try{            
-//            synthesizer.open();
-//            instruments = synthesizer.getLoadedInstruments();
-//            instr = instruments[noInstrument];
-//            Patch patch = instr.getPatch();
-//
-//            channels = synthesizer.getChannels();
-//            channels[midiNoteNumber].programChange(patch.getBank(),patch.getProgram());
-//            channels[midiNoteNumber].noteOn(midiNoteNumber, 60);    
-//        }
-//        catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-        try {
+    {       
+        javax.sound.midi.Instrument instruments[], instr;
+        int noInstrument = timbreInstrument;
+        int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
+        
+        // Permet de préciser que l'instrument commence a émettre un son
+        jouerSon = true;
+        
+        try{            
+            synthesizer.open();
+            instruments = synthesizer.getLoadedInstruments();
+            instr = instruments[noInstrument];
+            Patch patch = instr.getPatch();
 
-            Sequencer sequencer = MidiSystem.getSequencer();
-            sequencer.open();
-            Sequence sequence = new Sequence(Sequence.PPQ,4);
-            Track track = sequence.createTrack();
-
-            MidiEvent event = null;
-
-            ShortMessage first = new ShortMessage();
-            first.setMessage(192,1,0,0);
-            MidiEvent changeInstrument = new MidiEvent(first, 0);
-            track.add(changeInstrument);
-
-            ShortMessage a = new ShortMessage();
-            a.setMessage(144,1,60,100);
-            MidiEvent noteOn = new MidiEvent(a, 0);
-            track.add(noteOn);
-
-            ShortMessage b = new ShortMessage();
-            b.setMessage(128,1,60,100);
-            MidiEvent noteOff = new MidiEvent(b, (60000/(60*4)));
-            track.add(noteOff);
-
-            sequencer.setSequence(sequence);
-            sequencer.start();
-        } catch (Exception ex) { ex.printStackTrace(); }
-        //Ajouter code commencerJouer
+            channels = synthesizer.getChannels();
+            channels[0].programChange(patch.getBank(),patch.getProgram());
+            channels[0].noteOn(midiNoteNumber, 60);
+            
+            if (timer != null)
+                timer.cancel();
+            
+            // Faire durer un son au minimum le temps de la persistance
+            timer = new Timer("Tick");
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    arreterJouer();   
+                }
+            }, persistance);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
     
     @Override
     public void arreterJouer()
     {
+        System.out.println(jouerSon);
         if (!jouerSon){
             int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
             try{
-                channels[midiNoteNumber].noteOff(midiNoteNumber);
+                channels[0].noteOff(midiNoteNumber, 60);
                 synthesizer.close();
             }
             catch (Exception e)
@@ -86,11 +95,22 @@ public class Note extends Son {
                 e.printStackTrace();
             }
         }
+        else
+        {
+            jouerSon = false;
+        }
     }
-
-    @Override
     
-    public void setFrequence(float valeur){}
+    public void initialiserSynthesizer()
+    {
+        try
+        {
+            synthesizer = MidiSystem.getSynthesizer();
+        }
+        catch(Exception e)
+        {        
+        }
+    }
     
     public NomNote getNom()
     {
@@ -110,5 +130,10 @@ public class Note extends Son {
     public void setOctave(int valeur)
     {
         octave = valeur;
+    }
+    
+    public void setTimbreInstrument(int timbreInstr)
+    {
+        timbreInstrument = timbreInstr;
     }
 }

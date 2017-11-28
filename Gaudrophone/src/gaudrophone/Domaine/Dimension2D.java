@@ -1,6 +1,8 @@
 package gaudrophone.Domaine;
 
-public class Dimension2D extends java.awt.geom.Dimension2D
+import java.io.Serializable;
+
+public class Dimension2D extends java.awt.geom.Dimension2D implements Serializable
 {
     double width;
     double height;
