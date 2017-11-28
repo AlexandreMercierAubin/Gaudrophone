@@ -2,6 +2,9 @@ package gaudrophone.Domaine.Instrument;
 
 import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.Outils;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,6 +33,12 @@ public class Note extends Son implements Serializable{
         nom = note;
         persistance = 1000;
         timbreInstrument = timbreInstr;
+        initialiserSynthesizer();
+    }
+    
+    public void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException 
+    {
+        in.defaultReadObject();
         initialiserSynthesizer();
     }
     
