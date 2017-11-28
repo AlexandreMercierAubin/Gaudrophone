@@ -36,7 +36,7 @@ public class Note extends Son implements Serializable{
         initialiserSynthesizer();
     }
     
-    public void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException 
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
     {
         in.defaultReadObject();
         initialiserSynthesizer();
