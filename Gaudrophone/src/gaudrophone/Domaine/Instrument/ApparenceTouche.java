@@ -7,16 +7,21 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.Polygon;
 import java.awt.geom.Point2D;
+import java.awt.image.RenderedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 
 
 public class ApparenceTouche  implements Serializable
 {
     Forme forme;
     Color couleurFond;
-    Image imageFond;
+    transient Image imageFond;
     Dimension2D dimension;
     List<Bordure> bordures;
     Point2D position;
@@ -120,5 +125,22 @@ public class ApparenceTouche  implements Serializable
         // Bordures transversales invisibles
         bordures.get(nbBordures - 2).setVisible(false);
         bordures.get(nbBordures - 1).setVisible(false);
+    }
+    
+    private void writeObject(ObjectOutputStream out) throws IOException
+    {
+        out.defaultWriteObject();
+        boolean ecrireImage = imageFond != null;
+        out.writeBoolean(ecrireImage);
+        if (ecrireImage)
+            ImageIO.write((RenderedImage)imageFond, "png", out);
+    }
+    
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
+    {
+        in.defaultReadObject();
+        final boolean lireImage = in.readBoolean();
+        if (lireImage)
+            imageFond = ImageIO.read(in);
     }
 }
