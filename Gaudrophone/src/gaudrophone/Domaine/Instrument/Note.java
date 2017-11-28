@@ -16,8 +16,8 @@ public class Note extends Son implements Serializable{
     int octave;
     int timbreInstrument;
     transient Synthesizer synthesizer;
-    MidiChannel[] channels;
-    Timer timer;
+    transient MidiChannel[] channels;
+    transient Timer timer;
     
     public Note(int timbreInstr){
         octave = 4;
