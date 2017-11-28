@@ -27,18 +27,8 @@ public class FichierAudio extends Son implements Serializable{
         try {
             File f = new File(chemin);
             AudioInputStream aIS = AudioSystem.getAudioInputStream(f); 
-            AudioInputStream din = null;
-            AudioFormat baseFormat = aIS.getFormat();
-            AudioFormat decodedFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 
-                                            baseFormat.getSampleRate(),
-                                            16,
-                                            baseFormat.getChannels(),
-                                            baseFormat.getChannels() * 2,
-                                            baseFormat.getSampleRate(),
-                                            false);
-            din = AudioSystem.getAudioInputStream(decodedFormat, aIS);
             clip = AudioSystem.getClip();
-            clip.open(din);
+            clip.open(aIS);
             clip.start();
         }
         catch (Exception e)
