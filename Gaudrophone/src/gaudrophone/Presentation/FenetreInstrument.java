@@ -214,6 +214,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
             spinOctave.setEnabled(true);
             lblPersistance.setEnabled(true);
             spinPersistance.setEnabled(true);
+            
             switch(((Note) son).getNom()){
                 case C:{
                     cbNote.setSelectedIndex(0);
@@ -289,14 +290,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
             BordureUpdater();
         }
         txtNom.setText(touche.getNom());
-        if(rbSon.isSelected()){
-            checkAfficheNote.setEnabled(true);
-            checkAfficheOctave.setEnabled(true);
-        }
-        else{
-            checkAfficheNote.setEnabled(false);
-            checkAfficheOctave.setEnabled(false);
-        }
         checkAfficheNom.setSelected(touche.getApparence().isAfficherNom());
         checkAfficheNote.setSelected(touche.getApparence().isAfficherNote());
         checkAfficheOctave.setSelected(touche.getApparence().isAfficherOctave());
@@ -1269,6 +1262,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
         spinPersistance.setEnabled(false);
         lblNote.setEnabled(false);
         cbNote.setEnabled(false);
+        checkAfficheNote.setEnabled(false);
+        checkAfficheOctave.setEnabled(false);
     }//GEN-LAST:event_rbFichierAudioActionPerformed
 
     private void rbSonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSonActionPerformed
@@ -1279,6 +1274,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
         spinPersistance.setEnabled(true);
         lblNote.setEnabled(true);
         cbNote.setEnabled(true);
+        checkAfficheNote.setEnabled(true);
+        checkAfficheOctave.setEnabled(true);
     }//GEN-LAST:event_rbSonActionPerformed
 
     private void rbCouleurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCouleurActionPerformed
