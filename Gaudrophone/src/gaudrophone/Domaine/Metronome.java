@@ -39,6 +39,7 @@ public class Metronome {
     void jouerSon()
     {
         son.commencerJouer();
+        son.arreterJouer();
     }
     
     public void arreter()
