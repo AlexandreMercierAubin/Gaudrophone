@@ -5,6 +5,7 @@ import gaudrophone.Domaine.Dimension2D;
 import gaudrophone.Domaine.Instrument.*;
 import gaudrophone.Domaine.Outils;
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.geom.Point2D;
 import java.awt.Graphics;
@@ -293,6 +294,7 @@ public class DessinateurInstrument {
             texte += " " + ((Note)son).getOctave();
         
         texte = texte.trim();
+        texte = texte.replace("Sharp", "#");
         
         if (!texte.equals(""))
         {
@@ -307,6 +309,12 @@ public class DessinateurInstrument {
             FontMetrics metrics = g2.getFontMetrics();
             int xTexte = x + (width - metrics.stringWidth(texte)) / 2;
             int yTexte = y + ((height - metrics.getHeight()) / 2) + metrics.getAscent();
+            
+            if (apparence.getCouleurFond().equals(Color.BLACK))
+                g2.setColor(Color.RED);
+            else
+                g2.setColor(Color.BLACK);
+            
             g2.drawString(texte, xTexte, yTexte);
         }
     }
