@@ -266,6 +266,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
             }
             spinOctave.setValue(((Note) son).getOctave());
             spinPersistance.setValue(son.getPersistance());
+            checkAfficheNote.setEnabled(true);
+            checkAfficheOctave.setEnabled(true);
         }
         else{
             btnParcourirFichierAudio.setEnabled(true);
@@ -277,6 +279,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
             spinPersistance.setEnabled(false);
             lblNote.setEnabled(false);
             cbNote.setEnabled(false);
+            checkAfficheNote.setEnabled(false);
+            checkAfficheOctave.setEnabled(false);
         }
         int nbBordure = Outils.nbBordures(touche.getApparence().getForme()) + 2;
         if(nbBordure>0){
