@@ -266,8 +266,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
             }
             spinOctave.setValue(((Note) son).getOctave());
             spinPersistance.setValue(son.getPersistance());
-            checkAfficheNote.setEnabled(true);
-            checkAfficheOctave.setEnabled(true);
         }
         else{
             btnParcourirFichierAudio.setEnabled(true);
@@ -279,8 +277,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
             spinPersistance.setEnabled(false);
             lblNote.setEnabled(false);
             cbNote.setEnabled(false);
-            checkAfficheNote.setEnabled(false);
-            checkAfficheOctave.setEnabled(false);
         }
         int nbBordure = Outils.nbBordures(touche.getApparence().getForme()) + 2;
         if(nbBordure>0){
@@ -293,6 +289,14 @@ public class FenetreInstrument extends javax.swing.JFrame {
             BordureUpdater();
         }
         txtNom.setText(touche.getNom());
+        if(rbSon.isSelected()){
+            checkAfficheNote.setEnabled(true);
+            checkAfficheOctave.setEnabled(true);
+        }
+        else{
+            checkAfficheNote.setEnabled(false);
+            checkAfficheOctave.setEnabled(false);
+        }
         checkAfficheNom.setSelected(touche.getApparence().isAfficherNom());
         checkAfficheNote.setSelected(touche.getApparence().isAfficherNote());
         checkAfficheOctave.setSelected(touche.getApparence().isAfficherOctave());
@@ -559,7 +563,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         lblTimbreMetronome.setText("Timbre :");
 
-        cbTimbreMetronome.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Guitare", "Piano" }));
+        cbTimbreMetronome.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Steel Drums", "Piano", "Guitare" }));
 
         btnEnregistrerInstrument.setText("Enregistrer");
         btnEnregistrerInstrument.setToolTipText("");

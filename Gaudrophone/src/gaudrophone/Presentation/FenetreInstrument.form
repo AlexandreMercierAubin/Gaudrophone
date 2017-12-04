@@ -544,9 +544,10 @@
                         <Component class="javax.swing.JComboBox" name="cbTimbreMetronome">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="2">
-                                <StringItem index="0" value="Guitare"/>
+                              <StringArray count="3">
+                                <StringItem index="0" value="Steel Drums"/>
                                 <StringItem index="1" value="Piano"/>
+                                <StringItem index="2" value="Guitare"/>
                               </StringArray>
                             </Property>
                           </Properties>
