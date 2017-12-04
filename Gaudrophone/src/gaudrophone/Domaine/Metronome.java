@@ -4,7 +4,7 @@ import gaudrophone.Domaine.Instrument.Son;
 
 
 public class Metronome {
-    Son son;
+    Note son;
     int frequence;
     int timbre;
     Thread metronome;
@@ -53,12 +53,12 @@ public class Metronome {
 
     }
     
-    public Son getSon()
+    public Note getNote()
     {
         return son;
     }
     
-    public void setSon(Son valeur)
+    public void setNote(Note valeur)
     {
         son = valeur;
     }

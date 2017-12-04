@@ -59,6 +59,10 @@ public class FenetreInstrument extends javax.swing.JFrame {
         txtMessage.setWrapStyleWord(true);
         txtMessage.setLineWrap(true);
         
+        spinFrequenceMetronome.setValue(controleur.getMetronome().getFrequence());
+        spinPersistanceMetronome.setValue(controleur.getMetronome().getNote().getPersistance());
+        spinOctaveMetronome.setValue(controleur.getMetronome().getNote().getOctave());
+        
         TPInfo.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent ce) {
@@ -370,7 +374,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         lblPersistanceMertronome = new javax.swing.JLabel();
         lblOctaveMetronome = new javax.swing.JLabel();
         lblFrequenceMetronome = new javax.swing.JLabel();
-        spinFrequence = new javax.swing.JSpinner();
+        spinFrequenceMetronome = new javax.swing.JSpinner();
         lblTimbreMetronome = new javax.swing.JLabel();
         cbTimbreMetronome = new javax.swing.JComboBox<>();
         btnEnregistrerInstrument = new javax.swing.JButton();
@@ -547,7 +551,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         lblFrequenceMetronome.setText("Fréquence (ms) :");
         lblFrequenceMetronome.setToolTipText("");
 
-        spinFrequence.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        spinFrequenceMetronome.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
         lblTimbreMetronome.setText("Timbre :");
 
@@ -562,6 +566,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
         });
 
         btnActif.setText("Activer");
+        btnActif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActifActionPerformed(evt);
+            }
+        });
 
         lblRechercher.setText("Rechercher :");
 
@@ -591,7 +600,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbTimbreMetronome, 0, 254, Short.MAX_VALUE)
-                            .addComponent(spinFrequence)
+                            .addComponent(spinFrequenceMetronome)
                             .addComponent(spinPersistanceMetronome)
                             .addComponent(spinOctaveMetronome)
                             .addComponent(btnActif, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
@@ -637,7 +646,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
                         .addGap(13, 13, 13)
                         .addComponent(spinPersistanceMetronome, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(13, 13, 13)
-                        .addComponent(spinFrequence, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(spinFrequenceMetronome, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15)
                 .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTimbreMetronome)
@@ -1047,7 +1056,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
                 .addComponent(btnEnregistrerTouche)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEffacer)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         spTouche.setViewportView(plTouche);
@@ -1513,6 +1522,36 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private void txtNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomActionPerformed
+
+    private void btnActifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActifActionPerformed
+            if(btnActif.getText().equals("Activer"))
+            {
+                int timbre=cbTimbreMetronome.getSelectedIndex();
+                int frequence=spinFrequenceMetronome.getComponentCount();
+                int persistance= spinPersistanceMetronome.getComponentCount();
+                Note note= new Note(timbre);
+                int octave=spinOctaveMetronome.getComponentCount();
+                NomNote nomNote=(NomNote) cbNoteMetronome.getSelectedItem();
+
+                note.setOctave(octave);
+                note.setNom(nomNote);
+                note.setPersistance(persistance);
+
+                controleur.getMetronome().setTimbre(timbre);
+                controleur.getMetronome().setFrequence(frequence);
+                controleur.getMetronome().setNote(note);
+                
+                controleur.getMetronome().demarrer();
+                
+                btnActif.setText("Désactiver");
+            }
+            else
+            {
+                controleur.getMetronome().arreter();
+                btnActif.setText("Activer");
+            }
+
+    }//GEN-LAST:event_btnActifActionPerformed
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.sauvegarderInstrument();
@@ -1674,7 +1713,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JScrollPane spTouche;
     private javax.swing.JSpinner spinBleu;
     private javax.swing.JSpinner spinBleuBordure;
-    private javax.swing.JSpinner spinFrequence;
+    private javax.swing.JSpinner spinFrequenceMetronome;
     private javax.swing.JSpinner spinHauteur;
     private javax.swing.JSpinner spinLargeur;
     private javax.swing.JSpinner spinLargeurBordure;
