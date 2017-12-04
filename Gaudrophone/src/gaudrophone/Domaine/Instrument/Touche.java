@@ -2,11 +2,12 @@ package gaudrophone.Domaine.Instrument;
 import gaudrophone.Domaine.Outils;
 import java.awt.Polygon;
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 
-public class Touche {
+public class Touche implements Serializable{
     int index;
     
-    String texteAffichage;
+    String nom;
     ApparenceTouche apparence;
     Son son;
     boolean surbrillance;
@@ -15,21 +16,21 @@ public class Touche {
     public Touche(int index, int timbre)
     {
         this.index = index;
-        texteAffichage="";
+        nom="";
         apparence = new ApparenceTouche();
         surbrillance = false;
         timbreInstrument = timbre;
         son = new Note(timbreInstrument);
     }
     
-    public String getTexteAffichage()
+    public String getNom()
     {
-        return texteAffichage;
+        return nom;
     }
     
-    public void setTexteAffichage(String valeur)
+    public void setNom(String valeur)
     {
-        texteAffichage = valeur;
+        nom = valeur;
     }
     
     public ApparenceTouche getApparence()
@@ -73,5 +74,13 @@ public class Touche {
     public void setSurbrillance(boolean valeur)
     {
         surbrillance = valeur;
+    }
+    
+    public void setTimbreInstrument(int timbreInstr) {
+        timbreInstrument = timbreInstr;
+        if (son instanceof Note)
+        {
+            ((Note)son).setTimbreInstrument(timbreInstr);
+        }
     }
 }
