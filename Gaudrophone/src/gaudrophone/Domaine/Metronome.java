@@ -1,39 +1,43 @@
 package gaudrophone.Domaine;
+import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.Instrument.Note;
 import gaudrophone.Domaine.Instrument.Son;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class Metronome {
-    Son son;
+    Note son;
     int frequence;
     int timbre;
-    Thread metronome;
-    boolean metronomeActif;
-
+    Timer metronome;
+    Note note;
+    TimerTask tache;
     
     public Metronome()
     {
-        timbre=0;
-        frequence=60;
-        son=new Note(timbre);
+        timbre=1;
+        frequence=500;
+        note = new Note(timbre);
+        note.setOctave(4);
+        note.setPersistance(500);
+        note.setNom(NomNote.C);
+        son=note;
         
-        Thread metronome = new Thread() 
+        
+        tache = new TimerTask()
         {
+            @Override
             public void run() 
             {
-                while(metronomeActif)
-                {
-                    jouerSon();
-                    try 
-                    {
-                       Thread.sleep(frequence);
-                    } catch (Exception e) {
-                       System.out.println(e);
-                    }
-                    
-                }
+
+                jouerSon();
+                
             }
         };
+        
+        metronome = new Timer();
     }
     
     void jouerSon()
@@ -44,22 +48,22 @@ public class Metronome {
     
     public void arreter()
     {
-        metronomeActif=false;
+        metronome.cancel();
+        metronome.purge();
     }
     
     public void demarrer()
     {
-        metronomeActif=true;
-        metronome.start();
+        metronome.scheduleAtFixedRate(tache,new Date(),frequence);
 
     }
     
-    public Son getSon()
+    public Note getNote()
     {
         return son;
     }
     
-    public void setSon(Son valeur)
+    public void setNote(Note valeur)
     {
         son = valeur;
     }

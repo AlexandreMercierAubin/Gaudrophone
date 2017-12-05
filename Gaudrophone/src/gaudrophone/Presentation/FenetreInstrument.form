@@ -352,7 +352,7 @@
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="cbTimbreMetronome" alignment="0" pref="254" max="32767" attributes="0"/>
-                                              <Component id="spinFrequence" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="spinFrequenceMetronome" alignment="0" max="32767" attributes="0"/>
                                               <Component id="spinPersistanceMetronome" alignment="0" max="32767" attributes="0"/>
                                               <Component id="spinOctaveMetronome" alignment="0" max="32767" attributes="0"/>
                                               <Component id="btnActif" alignment="0" pref="254" max="32767" attributes="0"/>
@@ -408,7 +408,7 @@
                                           <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                           <Component id="spinPersistanceMetronome" min="-2" pref="22" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                                          <Component id="spinFrequence" min="-2" pref="22" max="-2" attributes="0"/>
+                                          <Component id="spinFrequenceMetronome" min="-2" pref="22" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -529,7 +529,7 @@
                             <Property name="toolTipText" type="java.lang.String" value=""/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JSpinner" name="spinFrequence">
+                        <Component class="javax.swing.JSpinner" name="spinFrequenceMetronome">
                           <Properties>
                             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                               <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
@@ -544,12 +544,16 @@
                         <Component class="javax.swing.JComboBox" name="cbTimbreMetronome">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="2">
-                                <StringItem index="0" value="Guitare"/>
+                              <StringArray count="3">
+                                <StringItem index="0" value="Steel Drums"/>
                                 <StringItem index="1" value="Piano"/>
+                                <StringItem index="2" value="Guitare"/>
                               </StringArray>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTimbreMetronomeActionPerformed"/>
+                          </Events>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                           </AuxValues>
@@ -567,6 +571,9 @@
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Activer"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActifActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="lblRechercher">
                           <Properties>
