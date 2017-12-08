@@ -15,17 +15,23 @@ public class Metronome {
     Note note;
     TimerTask tache;
     
+    
     public Metronome()
     {
         timbre=1;
-        frequence=500;
+        frequence=10000;
         note = new Note(timbre);
         note.setOctave(4);
         note.setPersistance(500);
         note.setNom(NomNote.C);
         son=note;
         
-        
+        preparerTimer();
+    }
+    
+    void preparerTimer()
+    {
+        metronome = new Timer(true);
         tache = new TimerTask()
         {
             @Override
@@ -36,8 +42,6 @@ public class Metronome {
                 
             }
         };
-        
-        metronome = new Timer();
     }
     
     void jouerSon()
@@ -50,12 +54,12 @@ public class Metronome {
     {
         metronome.cancel();
         metronome.purge();
+        preparerTimer();
     }
     
     public void demarrer()
     {
-        metronome.scheduleAtFixedRate(tache,new Date(),frequence);
-
+        metronome.scheduleAtFixedRate(tache,0,frequence);
     }
     
     public Note getNote()
@@ -76,11 +80,12 @@ public class Metronome {
     public void setTimbre(int timbre)
     {
         this.timbre=timbre;
-        son = new Note(timbre);
+        son.setTimbreInstrument(timbre);
 
     }
     
     public int getFrequence() {
+        //(metronome)
         return frequence;
     }
 
