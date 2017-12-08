@@ -63,6 +63,74 @@ public class FenetreInstrument extends javax.swing.JFrame {
         spinPersistanceMetronome.setValue(controleur.getMetronome().getNote().getPersistance());
         spinOctaveMetronome.setValue(controleur.getMetronome().getNote().getOctave());
         
+        final JTextField frequenceMetronome = ((JSpinner.DefaultEditor)spinFrequenceMetronome.getEditor()).getTextField();
+        frequenceMetronome.getDocument().addDocumentListener(new DocumentListener(){              
+                   
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    showChangedValue(e);    
+                }
+
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    showChangedValue(e);                
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    showChangedValue(e);    
+                }
+                
+                private void showChangedValue(DocumentEvent e){
+                    setMetronome();
+                }
+            });
+        
+            final JTextField octaveMetronome = ((JSpinner.DefaultEditor)spinOctaveMetronome.getEditor()).getTextField();
+            octaveMetronome.getDocument().addDocumentListener(new DocumentListener(){              
+                   
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    showChangedValue(e);    
+                }
+
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    showChangedValue(e);                
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    showChangedValue(e);    
+                }
+                
+                private void showChangedValue(DocumentEvent e){
+                    setMetronome();
+                }
+            });
+            final JTextField persistanceMetronome = ((JSpinner.DefaultEditor)spinPersistanceMetronome.getEditor()).getTextField();
+            persistanceMetronome.getDocument().addDocumentListener(new DocumentListener(){              
+                   
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    showChangedValue(e);    
+                }
+
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    showChangedValue(e);                
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    showChangedValue(e);    
+                }
+                
+                private void showChangedValue(DocumentEvent e){
+                    setMetronome();
+                }
+            });
+        
         TPInfo.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent ce) {
@@ -1364,7 +1432,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEnregistrerInstrumentActionPerformed
 
     private void cbNoteMetronomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNoteMetronomeActionPerformed
-        // TODO add your handling code here:
+        setMetronome();
     }//GEN-LAST:event_cbNoteMetronomeActionPerformed
 
     private void txtNomInstrumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomInstrumentActionPerformed
@@ -1536,41 +1604,48 @@ public class FenetreInstrument extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomActionPerformed
 
+    private void setMetronome()
+    {
+        int timbre=0;
+        switch(cbTimbreMetronome.getSelectedIndex()){
+            case 0:{
+                timbre = 115;
+                break;
+            }
+            case 1:{
+                timbre = 1;
+                break;
+            }
+            case 2:{
+                timbre = 25;
+                break;
+            }
+        }
+        Note note= new Note(timbre);
+
+        int frequence=(int)spinFrequenceMetronome.getValue();
+        int persistance=(int) spinPersistanceMetronome.getValue();
+
+        int octave=(int)spinOctaveMetronome.getValue();
+        NomNote nomNote=NomNote.valueOf(cbNoteMetronome.getSelectedItem().toString().replaceAll("#", "Sharp"));
+
+        note.setOctave(octave);
+        note.setNom(nomNote);
+        note.setPersistance(persistance);
+
+        controleur.getMetronome().setNote(note);
+        controleur.getMetronome().setTimbre(timbre);
+        controleur.getMetronome().setFrequence(frequence);
+
+    }
+    
     private void btnActifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActifActionPerformed
             if(btnActif.getText().equals("Activer"))
             {
-                int timbre=0;
-                switch(cbTimbreMetronome.getSelectedIndex()){
-                    case 0:{
-                        timbre = 115;
-                        break;
-                    }
-                    case 1:{
-                        timbre = 1;
-                        break;
-                    }
-                    case 2:{
-                        timbre = 25;
-                        break;
-                    }
-                }
-                Note note= new Note(timbre);
-                
-                int frequence=(int)spinFrequenceMetronome.getComponentCount();
-                int persistance=(int) spinPersistanceMetronome.getComponentCount();
-                
-                int octave=(int)spinOctaveMetronome.getValue();
-                NomNote nomNote=NomNote.valueOf(cbNote.getSelectedItem().toString().replaceAll("#", "Sharp"));
-                
-                note.setOctave(octave);
-                note.setNom(nomNote);
-                note.setPersistance(persistance);
-
-                controleur.getMetronome().setTimbre(timbre);
-                controleur.getMetronome().setFrequence(frequence);
-                controleur.getMetronome().setNote(note);
                 
                 controleur.getMetronome().demarrer();
+                
+                setMetronome();
                 
                 btnActif.setText("Désactiver");
             }
@@ -1583,7 +1658,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActifActionPerformed
 
     private void cbTimbreMetronomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTimbreMetronomeActionPerformed
-        // TODO add your handling code here:
+        setMetronome();
     }//GEN-LAST:event_cbTimbreMetronomeActionPerformed
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1597,6 +1672,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private void miImporterActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.importerInstrument();
         panneauAffichage.repaint();
+        InstrumentUpdater();
     }
 
     private void miQuitterActionPerformed(java.awt.event.ActionEvent evt) {
