@@ -1670,7 +1670,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEnregistrerToucheActionPerformed
 
     private void miPianoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miPianoActionPerformed
-        // TO-DO
+        controleur.genererInstrument(new GenerateurPiano());
+        panneauAffichage.repaint();
+        InstrumentUpdater();
     }//GEN-LAST:event_miPianoActionPerformed
 
     private void btnTestSonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTestSonActionPerformed

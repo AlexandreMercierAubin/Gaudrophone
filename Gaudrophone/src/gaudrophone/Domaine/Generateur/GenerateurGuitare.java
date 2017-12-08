@@ -20,7 +20,7 @@ public class GenerateurGuitare extends GenerateurInstrument{
     
     public GenerateurGuitare()
     {
-        timbre = 24; // Guitare
+        timbre = 25; // Guitare
         
         notes = new ArrayList<>();
         
