@@ -1,5 +1,6 @@
 package gaudrophone.Presentation;
 
+import gaudrophone.Domaine.Boucle;
 import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.ControleurInstrument;
 import gaudrophone.Domaine.Dictionnaire.dictCouleur;
@@ -71,7 +72,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
                     InstrumentUpdater(); 
                 }
                 else{
-                    ToucheUpdater();
+                    if(TPInfo.getSelectedIndex() == 1){
+                        ToucheUpdater();
+                    }
                 }
             }
         });
@@ -361,8 +364,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
         txtMessage = new javax.swing.JTextArea();
         plParametres = new javax.swing.JPanel();
         TPInfo = new javax.swing.JTabbedPane();
-        spInstrument = new javax.swing.JScrollPane();
-        plInstrument = new javax.swing.JPanel();
+        spGeneral = new javax.swing.JScrollPane();
+        plGeneral = new javax.swing.JPanel();
         lblNomInstrument = new javax.swing.JLabel();
         txtNomInstrument = new javax.swing.JTextField();
         lblTimbre = new javax.swing.JLabel();
@@ -378,10 +381,29 @@ public class FenetreInstrument extends javax.swing.JFrame {
         spinFrequenceMetronome = new javax.swing.JSpinner();
         lblTimbreMetronome = new javax.swing.JLabel();
         cbTimbreMetronome = new javax.swing.JComboBox<>();
-        btnEnregistrerInstrument = new javax.swing.JButton();
         btnActif = new javax.swing.JButton();
         lblRechercher = new javax.swing.JLabel();
         txtRechercher = new javax.swing.JTextField();
+        lbBoucles = new javax.swing.JLabel();
+        btnBoucle1 = new javax.swing.JButton();
+        btnBoucle2 = new javax.swing.JButton();
+        btnBoucle3 = new javax.swing.JButton();
+        btnBoucle4 = new javax.swing.JButton();
+        btnBoucle5 = new javax.swing.JButton();
+        btnBoucle6 = new javax.swing.JButton();
+        btnBoucle7 = new javax.swing.JButton();
+        btnBoucle8 = new javax.swing.JButton();
+        btnBoucle9 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jSlider2 = new javax.swing.JSlider();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jToggleButton2 = new javax.swing.JToggleButton();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
         spTouche = new javax.swing.JScrollPane();
         plTouche = new javax.swing.JPanel();
         lblNote = new javax.swing.JLabel();
@@ -513,9 +535,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         TPInfo.setMinimumSize(new java.awt.Dimension(300, 54));
 
-        spInstrument.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        spGeneral.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        plInstrument.setPreferredSize(new java.awt.Dimension(250, 828));
+        plGeneral.setPreferredSize(new java.awt.Dimension(250, 828));
 
         lblNomInstrument.setText("Nom : ");
 
@@ -558,14 +580,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         cbTimbreMetronome.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Steel Drums", "Piano", "Guitare" }));
 
-        btnEnregistrerInstrument.setText("Enregistrer");
-        btnEnregistrerInstrument.setToolTipText("");
-        btnEnregistrerInstrument.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEnregistrerInstrumentActionPerformed(evt);
-            }
-        });
-
         btnActif.setText("Activer");
         btnActif.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -575,64 +589,133 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         lblRechercher.setText("Rechercher :");
 
-        javax.swing.GroupLayout plInstrumentLayout = new javax.swing.GroupLayout(plInstrument);
-        plInstrument.setLayout(plInstrumentLayout);
-        plInstrumentLayout.setHorizontalGroup(
-            plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(plInstrumentLayout.createSequentialGroup()
+        lbBoucles.setText("Boucles :");
+
+        btnBoucle1.setText("1");
+        btnBoucle1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBoucle1ActionPerformed(evt);
+            }
+        });
+
+        btnBoucle2.setText("2");
+
+        btnBoucle3.setText("3");
+
+        btnBoucle4.setText("4");
+
+        btnBoucle5.setText("5");
+
+        btnBoucle6.setText("6");
+
+        btnBoucle7.setText("7");
+
+        btnBoucle8.setText("8");
+
+        btnBoucle9.setText("9");
+
+        jLabel2.setText("Partition :");
+
+        jToggleButton1.setText("jToggleButton1");
+
+        jToggleButton2.setText("jToggleButton2");
+
+        jLabel1.setText("Instrument :");
+
+        javax.swing.GroupLayout plGeneralLayout = new javax.swing.GroupLayout(plGeneral);
+        plGeneral.setLayout(plGeneralLayout);
+        plGeneralLayout.setHorizontalGroup(
+            plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1)
+            .addComponent(jSeparator2)
+            .addComponent(jSeparator3)
+            .addComponent(jSeparator4)
+            .addGroup(plGeneralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(plInstrumentLayout.createSequentialGroup()
-                        .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(plGeneralLayout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTimbre)
                             .addComponent(lblNomInstrument))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbTimbre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtNomInstrument)))
-                    .addComponent(btnEnregistrerInstrument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(plInstrumentLayout.createSequentialGroup()
-                        .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(plGeneralLayout.createSequentialGroup()
+                        .addComponent(lblRechercher)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtRechercher))
+                    .addGroup(plGeneralLayout.createSequentialGroup()
+                        .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNoteMetronome, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblOctaveMetronome, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblPersistanceMertronome, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblFrequenceMetronome, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblTimbreMetronome, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbTimbreMetronome, 0, 254, Short.MAX_VALUE)
+                        .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbTimbreMetronome, 0, 177, Short.MAX_VALUE)
                             .addComponent(spinFrequenceMetronome)
                             .addComponent(spinPersistanceMetronome)
                             .addComponent(spinOctaveMetronome)
-                            .addComponent(btnActif, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                            .addComponent(btnActif, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbNoteMetronome, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(plInstrumentLayout.createSequentialGroup()
-                        .addComponent(lblMetronome)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(plInstrumentLayout.createSequentialGroup()
-                        .addComponent(lblRechercher)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtRechercher)))
+                    .addGroup(plGeneralLayout.createSequentialGroup()
+                        .addComponent(btnBoucle7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBoucle8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBoucle9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(plGeneralLayout.createSequentialGroup()
+                        .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBoucle4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBoucle1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBoucle5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBoucle2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBoucle6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBoucle3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jSlider2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plGeneralLayout.createSequentialGroup()
+                        .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(plGeneralLayout.createSequentialGroup()
+                        .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(lblMetronome)
+                            .addComponent(lbBoucles)
+                            .addComponent(jLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addComponent(jSeparator5)
         );
-        plInstrumentLayout.setVerticalGroup(
-            plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(plInstrumentLayout.createSequentialGroup()
+        plGeneralLayout.setVerticalGroup(
+            plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(plGeneralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNomInstrument)
-                    .addComponent(txtNomInstrument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTimbre)
-                    .addComponent(cbTimbre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnEnregistrerInstrument)
-                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
+                .addGap(14, 14, 14)
+                .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(plGeneralLayout.createSequentialGroup()
+                        .addComponent(txtNomInstrument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)
+                        .addComponent(cbTimbre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(plGeneralLayout.createSequentialGroup()
+                        .addComponent(lblNomInstrument)
+                        .addGap(21, 21, 21)
+                        .addComponent(lblTimbre)))
+                .addGap(12, 12, 12)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMetronome)
                 .addGap(18, 18, 18)
-                .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(plInstrumentLayout.createSequentialGroup()
+                .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(plGeneralLayout.createSequentialGroup()
                         .addComponent(lblNoteMetronome, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(16, 16, 16)
                         .addComponent(lblOctaveMetronome, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -640,7 +723,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
                         .addComponent(lblPersistanceMertronome, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19)
                         .addComponent(lblFrequenceMetronome, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(plInstrumentLayout.createSequentialGroup()
+                    .addGroup(plGeneralLayout.createSequentialGroup()
                         .addComponent(cbNoteMetronome, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
                         .addComponent(spinOctaveMetronome, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -649,23 +732,56 @@ public class FenetreInstrument extends javax.swing.JFrame {
                         .addGap(13, 13, 13)
                         .addComponent(spinFrequenceMetronome, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15)
-                .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTimbreMetronome)
                     .addComponent(cbTimbreMetronome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnActif)
-                .addGap(18, 18, 18)
-                .addGroup(plInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRechercher)
                     .addComponent(txtRechercher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(407, 407, 407))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbBoucles)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBoucle1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBoucle2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBoucle3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBoucle4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBoucle5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBoucle6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBoucle7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBoucle8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBoucle9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jToggleButton1)
+                    .addComponent(jToggleButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(275, 275, 275))
         );
 
         lblTimbre.getAccessibleContext().setAccessibleDescription("");
 
-        spInstrument.setViewportView(plInstrument);
+        spGeneral.setViewportView(plGeneral);
 
-        TPInfo.addTab("Instrument", spInstrument);
+        TPInfo.addTab("Général", spGeneral);
 
         spTouche.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -865,7 +981,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
                                     .addComponent(lblRouge))
                                 .addGap(12, 12, 12)
                                 .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(spinVert, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                                    .addComponent(spinVert, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                                     .addComponent(spinRouge)
                                     .addComponent(spinBleu)))))
                     .addComponent(btnEnregistrerTouche, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1068,7 +1184,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         plParametres.setLayout(plParametresLayout);
         plParametresLayout.setHorizontalGroup(
             plParametresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TPInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+            .addComponent(TPInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         plParametresLayout.setVerticalGroup(
             plParametresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1248,7 +1364,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Audio Files", "wav");
         fc.setFileFilter(filter);
         fc.setDialogTitle("Spécifier le fichier audio à utiliser.");
-        int returnVal = fc.showOpenDialog(plInstrument);
+        int returnVal = fc.showOpenDialog(plGeneral);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             m_pathToFileAudio = fc.getSelectedFile().getAbsolutePath();
         }
@@ -1345,15 +1461,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "png", "bmp", "jpeg");
         fc.setFileFilter(filter);
         fc.setDialogTitle("Spécifier l'image à utiliser.");
-        int returnVal = fc.showOpenDialog(plInstrument);
+        int returnVal = fc.showOpenDialog(plGeneral);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             m_fileToSaveImage = fc.getSelectedFile();
         }
     }//GEN-LAST:event_btnParcourirImageActionPerformed
-
-    private void btnEnregistrerInstrumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerInstrumentActionPerformed
-        InstrumentEnregistrer();
-    }//GEN-LAST:event_btnEnregistrerInstrumentActionPerformed
 
     private void cbNoteMetronomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNoteMetronomeActionPerformed
         // TODO add your handling code here:
@@ -1557,6 +1669,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
             }
 
     }//GEN-LAST:event_btnActifActionPerformed
+
+    private void btnBoucle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoucle1ActionPerformed
+        
+        
+    }//GEN-LAST:event_btnBoucle1ActionPerformed
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.sauvegarderInstrument();
@@ -1640,8 +1757,16 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bgFond;
     private javax.swing.ButtonGroup bgType;
     private javax.swing.JButton btnActif;
+    private javax.swing.JButton btnBoucle1;
+    private javax.swing.JButton btnBoucle2;
+    private javax.swing.JButton btnBoucle3;
+    private javax.swing.JButton btnBoucle4;
+    private javax.swing.JButton btnBoucle5;
+    private javax.swing.JButton btnBoucle6;
+    private javax.swing.JButton btnBoucle7;
+    private javax.swing.JButton btnBoucle8;
+    private javax.swing.JButton btnBoucle9;
     private javax.swing.JButton btnEffacer;
-    private javax.swing.JButton btnEnregistrerInstrument;
     private javax.swing.JButton btnEnregistrerTouche;
     private javax.swing.JButton btnParcourirFichierAudio;
     private javax.swing.JButton btnParcourirImage;
@@ -1658,6 +1783,17 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkAfficheNote;
     private javax.swing.JCheckBox checkAfficheOctave;
     private javax.swing.JCheckBox checkVisible;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSlider jSlider2;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JLabel lbBoucles;
     private javax.swing.JLabel lblBleu;
     private javax.swing.JLabel lblBleuBordure;
     private javax.swing.JLabel lblBordure;
@@ -1704,7 +1840,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JMenuItem miPiano;
     private javax.swing.JMenuItem miQuitter;
     private gaudrophone.Presentation.PanneauAffichage panneauAffichage;
-    private javax.swing.JPanel plInstrument;
+    private javax.swing.JPanel plGeneral;
     private javax.swing.JPanel plNote;
     private javax.swing.JPanel plParametres;
     private javax.swing.JScrollPane plTextMessage;
@@ -1714,7 +1850,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbImage;
     private javax.swing.JRadioButton rbSon;
     private javax.swing.JSplitPane spGaudrophone;
-    private javax.swing.JScrollPane spInstrument;
+    private javax.swing.JScrollPane spGeneral;
     private javax.swing.JScrollPane spTouche;
     private javax.swing.JSpinner spinBleu;
     private javax.swing.JSpinner spinBleuBordure;
