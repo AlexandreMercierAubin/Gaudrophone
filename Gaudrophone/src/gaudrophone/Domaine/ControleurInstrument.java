@@ -121,6 +121,7 @@ public class ControleurInstrument {
             case Ajouter:
                 instrument.ajouterTouche(coordRelative);
                 toucheEnDeplacement=true;
+                clickTouche=true;
                 break;
         }
         return clickTouche;
