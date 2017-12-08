@@ -60,7 +60,7 @@ public class Note extends Son implements Serializable{
 
             channels = synthesizer.getChannels();
             channels[0].programChange(patch.getBank(),patch.getProgram());
-            channels[0].noteOn(midiNoteNumber, 60);
+            channels[0].noteOn(midiNoteNumber, 127);
             
             if (timer != null)
                 timer.cancel();
@@ -87,7 +87,7 @@ public class Note extends Son implements Serializable{
         if (!jouerSon){
             int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
             try{
-                channels[0].noteOff(midiNoteNumber, 60);
+                channels[0].noteOff(midiNoteNumber, 127);
                 synthesizer.close();
             }
             catch (Exception e)
