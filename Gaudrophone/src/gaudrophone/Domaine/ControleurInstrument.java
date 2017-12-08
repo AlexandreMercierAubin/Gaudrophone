@@ -15,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class ControleurInstrument {
     Instrument instrument;
@@ -120,6 +121,7 @@ public class ControleurInstrument {
             case Ajouter:
                 instrument.ajouterTouche(coordRelative);
                 toucheEnDeplacement=true;
+                clickTouche=true;
                 break;
         }
         return clickTouche;
@@ -201,6 +203,7 @@ public class ControleurInstrument {
     { 
         JFileChooser dialogueEnregistrer = new JFileChooser();
         // dialogue de sauvegarde
+        dialogueEnregistrer.setSelectedFile(new File(instrument.getNom()));
         int rVal = dialogueEnregistrer.showSaveDialog(null);
         
         if (rVal == JFileChooser.APPROVE_OPTION) 
@@ -209,7 +212,7 @@ public class ControleurInstrument {
             String dir = dialogueEnregistrer.getCurrentDirectory().toString();
             try 
             {
-                String chemin = dir+"\\"+filename;
+                String chemin = dir+"\\"+filename+".kys";
                 FileOutputStream fichier = new FileOutputStream(chemin,false);
                 instrument.setChemin(chemin);
                 ObjectOutputStream oosEnregistrer = new ObjectOutputStream(fichier);
@@ -233,6 +236,9 @@ public class ControleurInstrument {
     {
         JFileChooser dialogueImporter = new JFileChooser();
         // dialogue de sauvegarde
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("instrument gaudrophone", "kys");
+        dialogueImporter.setFileFilter(filter);
+        
         int rVal = dialogueImporter.showOpenDialog(null);
         
         if (rVal == JFileChooser.APPROVE_OPTION) 

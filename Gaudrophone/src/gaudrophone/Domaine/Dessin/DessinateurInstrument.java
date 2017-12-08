@@ -74,15 +74,12 @@ public class DessinateurInstrument {
             maxY = Math.max(maxY, (int)position.getY() + (int)dimension.getHeight() / 2);
         }
         
-        double echelleX = dimensionPanneau.getWidth() / maxX;
-        double echelleY = dimensionPanneau.getHeight() / maxY;
+        double echelleX = Math.min(1.0, dimensionPanneau.getWidth() / maxX);
+        double echelleY = Math.min(1.0, dimensionPanneau.getHeight() / maxY);
         
-        if (echelleX < 1.0 || echelleY < 1.0)
-        {
-            double echelle = Math.min(echelleX, echelleY);
-            g2.scale(echelle, echelle);
-            controleur.setEchelleAffichage(echelle);
-        }
+        double echelle = Math.min(echelleX, echelleY);
+        g2.scale(echelle, echelle);
+        controleur.setEchelleAffichage(echelle);
     }
     
     private void dessinerCercle(Touche touche, Graphics2D g2)
