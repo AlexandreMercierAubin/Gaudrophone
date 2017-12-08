@@ -19,7 +19,7 @@ public class Metronome {
     public Metronome()
     {
         timbre=1;
-        frequence=10000;
+        frequence=1000;
         note = new Note(timbre);
         note.setOctave(4);
         note.setPersistance(500);
