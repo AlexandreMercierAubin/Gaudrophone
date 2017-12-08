@@ -184,26 +184,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
         }
     }
     
-    private void InstrumentEnregistrer()
-    {
-        Instrument instru = controleur.getInstrument();
-        int index = cbTimbre.getSelectedIndex();
-        
-        instru.setNom(txtNomInstrument.getText());
-        
-        switch(index){
-            case 0:{
-                instru.setTimbre(1);
-                break;
-            }
-            case 1:{
-                instru.setTimbre(25);
-                break;
-            }
-        }
-        
-    }
-    
     private void ToucheUpdater(){
         int index = controleur.getInstrument().getToucheSelectionee();
         Touche touche = controleur.getInstrument().getTouche(index);
@@ -600,10 +580,20 @@ public class FenetreInstrument extends javax.swing.JFrame {
                 txtNomInstrumentActionPerformed(evt);
             }
         });
+        txtNomInstrument.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNomInstrumentKeyTyped(evt);
+            }
+        });
 
         lblTimbre.setText("Timbre :");
 
         cbTimbre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piano", "Guitare" }));
+        cbTimbre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTimbreActionPerformed(evt);
+            }
+        });
 
         lblMetronome.setText("Métronome : ");
 
@@ -1428,7 +1418,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_btnParcourirImageActionPerformed
 
     private void btnEnregistrerInstrumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerInstrumentActionPerformed
-        InstrumentEnregistrer();
+
     }//GEN-LAST:event_btnEnregistrerInstrumentActionPerformed
 
     private void cbNoteMetronomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNoteMetronomeActionPerformed
@@ -1436,7 +1426,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_cbNoteMetronomeActionPerformed
 
     private void txtNomInstrumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomInstrumentActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtNomInstrumentActionPerformed
 
     private void panneauAffichageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauAffichageMouseClicked
@@ -1660,6 +1650,33 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private void cbTimbreMetronomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTimbreMetronomeActionPerformed
         setMetronome();
     }//GEN-LAST:event_cbTimbreMetronomeActionPerformed
+
+    private void txtNomInstrumentKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomInstrumentKeyTyped
+                
+        char character =evt.getKeyChar();
+        String nomInstrument=txtNomInstrument.getText();
+        if(Character.isDigit(character) || Character.isLetter(character) )
+        {
+            nomInstrument=nomInstrument+character;
+        }
+        
+        controleur.getInstrument().setNom(nomInstrument);
+        
+    }//GEN-LAST:event_txtNomInstrumentKeyTyped
+
+    private void cbTimbreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTimbreActionPerformed
+        int index = cbTimbre.getSelectedIndex();
+        switch(index){
+            case 0:{
+                controleur.getInstrument().setTimbre(1);
+                break;
+            }
+            case 1:{
+                controleur.getInstrument().setTimbre(25);
+                break;
+            }
+        }
+    }//GEN-LAST:event_cbTimbreActionPerformed
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.sauvegarderInstrument();
