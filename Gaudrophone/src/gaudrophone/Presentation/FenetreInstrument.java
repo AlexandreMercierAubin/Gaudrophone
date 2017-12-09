@@ -350,6 +350,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     {
         int index = controleur.getInstrument().getToucheSelectionee();
         int indexBordure = cbBordure.getSelectedIndex();
+        
         Touche touche = controleur.getInstrument().getTouche(index);
         
         touche.getApparence().setForme(Forme.valueOf(cbForme.getSelectedItem().toString()));
@@ -1559,7 +1560,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
         {
             TPInfo.setEnabledAt(1,true);
             ToucheUpdater();
-            //TPInfo.setSelectedIndex(1); 
         }
         else
         {
