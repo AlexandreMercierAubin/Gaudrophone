@@ -1592,7 +1592,10 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_cbTimbreMetronomeActionPerformed
 
     private void miImporterChansonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miImporterChansonActionPerformed
-        controleur.importerPartition();
+        String txt;
+        txt = controleur.importerPartition();
+        txtMessage.setText(txt);
+        txtMessage.setCaretPosition(0);
     }//GEN-LAST:event_miImporterChansonActionPerformed
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {

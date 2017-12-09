@@ -27,6 +27,7 @@ public class ControleurInstrument {
     boolean toucheEnDeplacement;
     boolean toucheEnJeu;
     double echelleAffichage;
+    String textePartitionAffichage;
     
     public ControleurInstrument()
     {
@@ -58,7 +59,7 @@ public class ControleurInstrument {
         echelleAffichage = echelle;
     }
     
-    public void importerPartition(){
+    public String importerPartition(){
         partition = new Partition();
                 
         JFileChooser fc = new JFileChooser();
@@ -69,7 +70,8 @@ public class ControleurInstrument {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             partition.chemin = fc.getSelectedFile().getAbsolutePath();
         }
-        partition.lirePartition();
+        textePartitionAffichage = partition.lirePartition();
+        return textePartitionAffichage;
     }
     
     public void jouerPartition(){

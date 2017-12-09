@@ -6,14 +6,17 @@ import java.io.FileReader;
 public class Partition {
     String chemin;
     String textePartition;
+    String [] aTextePartition;
     int pulsation;
+    String note;
     
     public Partition()
     {
-        
+        textePartition = "";
+        note = "";        
     }
     
-    public void lirePartition(){
+    public String lirePartition(){
         
         try{
             BufferedReader reader = new BufferedReader(new FileReader(chemin));
@@ -21,26 +24,42 @@ public class Partition {
             String sReadLine;
             
             while ((sReadLine = reader.readLine()) != null) {
-                if(!sReadLine.equals("")){
-                    if(sReadLine.charAt(0) != '/' && sReadLine.charAt(1) != '/'){
-                        if(!bPulsation){
-                            bPulsation = true;
-                            pulsation = Integer.parseInt(sReadLine);
+                if (bPulsation){
+                        textePartition = textePartition + sReadLine;
+                        if (sReadLine.equals("")){
+                            textePartition = textePartition + "\r\n";
                         }
-                        else{
-                            System.out.println(sReadLine);
+                }
+                else{
+                    if(!sReadLine.equals("")){
+                        if(sReadLine.charAt(0) != '/' && sReadLine.charAt(1) != '/'){
+                            if(!bPulsation){
+                                bPulsation = true;
+                                pulsation = Integer.parseInt(sReadLine);
+                            }
+                            else{
+                                note = note + sReadLine.toUpperCase();
+                            }
                         }
-                    }
-                    else
-                    {
-                        System.out.println("not good" + sReadLine);
                     }
                 }
             }
+            aTextePartition = textePartition.split(".6.6");
+            int i = 0;
+            while (i < aTextePartition.length){
+                System.out.println(aTextePartition[i]);
+                i++;
+            }
+            
+//            System.out.println(textePartition);
+//            System.out.println("Pulsation" + pulsation);
+//            System.out.println("note");
+//            System.out.println(note);
         }
         catch (Exception e){
             System.out.println(e);
         }
+        return textePartition;
     }
     
     public void setChemin(String chemin) {
