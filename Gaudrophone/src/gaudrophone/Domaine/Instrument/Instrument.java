@@ -115,11 +115,7 @@ public class Instrument implements Serializable{
         Touche toucheAjoutee = touches.get(touches.size()-1);
         toucheAjoutee.getApparence().setPosition(position);
         
-        toucheSelectionee=touches.size()-1;
         selectionnerTouche(position);
-        
-        //ajouter les points dans Path2D selon la dim du constructeur d'apparence
-        ApparenceTouche apparence= toucheAjoutee.getApparence();
         
         return toucheAjoutee;
     }

@@ -859,6 +859,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
         lblForme.setText("Forme :");
 
         cbForme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cercle", "Triangle", "Rectangle", "Pentagone", "Hexagone" }));
+        cbForme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFormeActionPerformed(evt);
+            }
+        });
 
         lblFond.setText("Fond : ");
 
@@ -1552,9 +1557,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
         panneauAffichage.repaint();
         if(clickTouche == true)
         {
-            TPInfo.setSelectedIndex(1); 
             TPInfo.setEnabledAt(1,true);
             ToucheUpdater();
+            //TPInfo.setSelectedIndex(1); 
         }
         else
         {
@@ -1793,6 +1798,10 @@ public class FenetreInstrument extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_cbTimbreActionPerformed
+
+    private void cbFormeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFormeActionPerformed
+        ToucheEnregistrer();
+    }//GEN-LAST:event_cbFormeActionPerformed
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.sauvegarderInstrument();
