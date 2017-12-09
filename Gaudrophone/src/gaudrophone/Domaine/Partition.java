@@ -2,16 +2,19 @@ package gaudrophone.Domaine;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Arrays;
 
 public class Partition {
     String chemin;
     String textePartition;
-    String [] aTextePartition;
+    String [] aTextePartition; //Changer en ArrayList optimalement
     int pulsation;
     String note;
     
     public Partition()
     {
+        aTextePartition = new String[10];
+        Arrays.fill(aTextePartition, "");
         textePartition = "";
         note = "";        
     }
@@ -22,13 +25,28 @@ public class Partition {
             BufferedReader reader = new BufferedReader(new FileReader(chemin));
             boolean bPulsation = false;
             String sReadLine;
+            int pos = -1;
+            int longMax = 0;
             
             while ((sReadLine = reader.readLine()) != null) {
-                if (bPulsation){
-                        textePartition = textePartition + sReadLine;
-                        if (sReadLine.equals("")){
-                            textePartition = textePartition + "\r\n";
+                if (bPulsation){  
+                    pos ++;
+                    if (sReadLine.equals("")){
+                        if (longMax != 0){
+                            int i = 0;
+                            while (i < aTextePartition.length && !aTextePartition[i].equals("")){
+                                aTextePartition[i] = String.format("%1$-" + (longMax + 1) + "s", aTextePartition[i]);
+                                i++;
+                            }
                         }
+                        longMax = 0;                        
+                        pos = -1;
+                    }
+                    else{
+                        aTextePartition[pos] = aTextePartition[pos] + " " + sReadLine;
+                        if (longMax < sReadLine.length())
+                                longMax = sReadLine.length();
+                    }                    
                 }
                 else{
                     if(!sReadLine.equals("")){
@@ -44,9 +62,8 @@ public class Partition {
                     }
                 }
             }
-            aTextePartition = textePartition.split(".6.6");
             int i = 0;
-            while (i < aTextePartition.length){
+            while (i < aTextePartition.length && !aTextePartition[i].equals("")){
                 System.out.println(aTextePartition[i]);
                 i++;
             }
