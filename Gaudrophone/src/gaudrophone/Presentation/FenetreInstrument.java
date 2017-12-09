@@ -1108,6 +1108,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
         menuFichier.add(miImporter);
 
         miImporterChanson.setText("Importer chanson");
+        miImporterChanson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miImporterChansonActionPerformed(evt);
+            }
+        });
         menuFichier.add(miImporterChanson);
 
         miEnregistrer.setText("Enregistrer");
@@ -1585,6 +1590,10 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private void cbTimbreMetronomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTimbreMetronomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbTimbreMetronomeActionPerformed
+
+    private void miImporterChansonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miImporterChansonActionPerformed
+        controleur.importerPartition();
+    }//GEN-LAST:event_miImporterChansonActionPerformed
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.sauvegarderInstrument();

@@ -15,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class ControleurInstrument {
     Instrument instrument;
@@ -57,9 +58,23 @@ public class ControleurInstrument {
         echelleAffichage = echelle;
     }
     
-    public void importerPartition(){}
+    public void importerPartition(){
+        partition = new Partition();
+                
+        JFileChooser fc = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Musique Gaudrophone (.txt)", "txt");
+        fc.setFileFilter(filter);
+        fc.setDialogTitle("Spécifier le fichier de partition à importer");
+        int returnVal = fc.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            partition.chemin = fc.getSelectedFile().getAbsolutePath();
+        }
+        partition.lirePartition();
+    }
     
-    public void jouerPartition(){}
+    public void jouerPartition(){
+    
+    }
     
     public Boucle getBoucle(int index)
     {
