@@ -1800,7 +1800,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_cbTimbreActionPerformed
 
     private void cbFormeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFormeActionPerformed
-        ToucheEnregistrer();
+        
     }//GEN-LAST:event_cbFormeActionPerformed
    
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
