@@ -9,20 +9,18 @@ import java.util.List;
 public class Partition {
     String chemin;
     String textePartition;
-    List<String> aTextePartition;
     int pulsation;
     String[][] note;
     String[] tempsNote;
     
     public Partition()
     {
-        aTextePartition = new ArrayList<String>();
         textePartition = "";  
         tempsNote = null;
         note = null;
     }
     
-    public String lirePartition(){
+    public void lirePartition(){
         
         try{
             BufferedReader reader = new BufferedReader(new FileReader(chemin));
@@ -31,6 +29,7 @@ public class Partition {
             int pos = -1;
             int longMax = 0;
             int compteurLigneComment = 0;
+            List<String> aTextePartition = new ArrayList<String>();
             
             while ((sReadLine = reader.readLine()) != null) {
                 if (bPulsation){  
@@ -88,6 +87,7 @@ public class Partition {
                         y++;
                     }
                 }
+                textePartition = textePartition + "\r\n" + aTextePartition.get(i);
                 i++;
             }
             i = 0;
@@ -104,7 +104,6 @@ public class Partition {
         catch (Exception e){
             System.out.println(e);
         }
-        return textePartition;
     }
     
     public boolean ligneIsTemps(String ligne){
@@ -118,4 +117,9 @@ public class Partition {
     public void setChemin(String chemin) {
         this.chemin = chemin;
     }
+    
+    public String getTextePartition() {
+        return textePartition;
+    }
+    
 }

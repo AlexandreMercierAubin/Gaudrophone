@@ -59,7 +59,7 @@ public class ControleurInstrument {
         echelleAffichage = echelle;
     }
     
-    public String importerPartition(){
+    public void importerPartition(){
         partition = new Partition();
                 
         JFileChooser fc = new JFileChooser();
@@ -70,8 +70,7 @@ public class ControleurInstrument {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             partition.chemin = fc.getSelectedFile().getAbsolutePath();
         }
-        textePartitionAffichage = partition.lirePartition();
-        return textePartitionAffichage;
+        partition.lirePartition();
     }
     
     public void jouerPartition(){
