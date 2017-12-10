@@ -2,23 +2,24 @@ package gaudrophone.Domaine;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import static java.lang.Character.isDigit;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Partition {
     String chemin;
     String textePartition;
-    List<String> aTextePartition; //Changer en ArrayList optimalement
+    List<String> aTextePartition;
     int pulsation;
-    String note;
+    String[][] note;
+    String[] tempsNote;
     
     public Partition()
     {
         aTextePartition = new ArrayList<String>();
-//        Arrays.fill(aTextePartition, "");
-        textePartition = "";
-        note = "";        
+        textePartition = "";  
+        tempsNote = null;
+        note = null;
     }
     
     public String lirePartition(){
@@ -29,6 +30,7 @@ public class Partition {
             String sReadLine;
             int pos = -1;
             int longMax = 0;
+            int compteurLigneComment = 0;
             
             while ((sReadLine = reader.readLine()) != null) {
                 if (bPulsation){  
@@ -49,6 +51,8 @@ public class Partition {
                             aTextePartition.set(pos, aTextePartition.get(pos) + " " + sReadLine); 
                         }
                         else{
+                            if(sReadLine.charAt(0) == '/' && sReadLine.charAt(1) == '/')
+                                compteurLigneComment ++;
                             aTextePartition.add(sReadLine);
                         }
                         
@@ -63,28 +67,52 @@ public class Partition {
                                 bPulsation = true;
                                 pulsation = Integer.parseInt(sReadLine);
                             }
-                            else{
-                                note = note + sReadLine.toUpperCase();
-                            }
                         }
                     }
                 }
             }
+            
             int i = 0;
+            int y = 0;
+            int accordMax = aTextePartition.size() - compteurLigneComment;
+            note = new String[accordMax - 1][];
+            String a = "";
             while (i < aTextePartition.size() && !aTextePartition.get(i).equals("")){
-                System.out.println(aTextePartition.get(i));
+                if (aTextePartition.get(i).charAt(0) != '/' && aTextePartition.get(i).charAt(1) != '/'){
+                    if (ligneIsTemps(aTextePartition.get(i))){
+                        tempsNote = aTextePartition.get(i).split(" +");
+                    }
+                    else{
+                        a = aTextePartition.get(i).replace("|", " ");
+                        note[y] = a.split(" +");
+                        y++;
+                    }
+                }
                 i++;
             }
-            
-//            System.out.println(textePartition);
-//            System.out.println("Pulsation" + pulsation);
-//            System.out.println("note");
-//            System.out.println(note);
+            i = 0;
+            while (i < note.length)
+            {
+                y = 0;
+                while (y < note[i].length){
+                    System.out.println(note[i][y]);
+                    y++;
+                }
+                i++;
+            }          
         }
         catch (Exception e){
             System.out.println(e);
         }
         return textePartition;
+    }
+    
+    public boolean ligneIsTemps(String ligne){
+        String a = ligne.replaceAll("\\s+","");
+        if (a.charAt(0) != '_' && a.charAt(0) != ',' && a.charAt(0) != '.' && !isDigit(a.charAt(0)))
+            return false;
+        else
+            return true;
     }
     
     public void setChemin(String chemin) {
