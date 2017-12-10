@@ -2,19 +2,21 @@ package gaudrophone.Domaine;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Partition {
     String chemin;
     String textePartition;
-    String [] aTextePartition; //Changer en ArrayList optimalement
+    List<String> aTextePartition; //Changer en ArrayList optimalement
     int pulsation;
     String note;
     
     public Partition()
     {
-        aTextePartition = new String[10];
-        Arrays.fill(aTextePartition, "");
+        aTextePartition = new ArrayList<String>();
+//        Arrays.fill(aTextePartition, "");
         textePartition = "";
         note = "";        
     }
@@ -34,8 +36,8 @@ public class Partition {
                     if (sReadLine.equals("")){
                         if (longMax != 0){
                             int i = 0;
-                            while (i < aTextePartition.length && !aTextePartition[i].equals("")){
-                                aTextePartition[i] = String.format("%1$-" + (longMax + 1) + "s", aTextePartition[i]);
+                            while (i < aTextePartition.size() && !aTextePartition.get(i).equals("")){
+                                aTextePartition.set(i, String.format("%1$-" + (longMax + 1) + "s", aTextePartition.get(i))) ;
                                 i++;
                             }
                         }
@@ -43,7 +45,13 @@ public class Partition {
                         pos = -1;
                     }
                     else{
-                        aTextePartition[pos] = aTextePartition[pos] + " " + sReadLine;
+                        if( pos < aTextePartition.size()){
+                            aTextePartition.set(pos, aTextePartition.get(pos) + " " + sReadLine); 
+                        }
+                        else{
+                            aTextePartition.add(sReadLine);
+                        }
+                        
                         if (longMax < sReadLine.length())
                                 longMax = sReadLine.length();
                     }                    
@@ -63,8 +71,8 @@ public class Partition {
                 }
             }
             int i = 0;
-            while (i < aTextePartition.length && !aTextePartition[i].equals("")){
-                System.out.println(aTextePartition[i]);
+            while (i < aTextePartition.size() && !aTextePartition.get(i).equals("")){
+                System.out.println(aTextePartition.get(i));
                 i++;
             }
             
