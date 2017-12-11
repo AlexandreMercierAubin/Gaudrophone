@@ -10,14 +10,14 @@ public class Partition {
     String chemin;
     String textePartition;
     int pulsation;
-    String[][] note;
-    String[] tempsNote;
+    List<List<String>> note;
+    List<String> tempsNote;
     
     public Partition()
     {
         textePartition = "";  
-        tempsNote = null;
-        note = null;
+        note = new ArrayList<>();
+        tempsNote = new ArrayList<>();
     }
     
     public void lirePartition(){
@@ -70,20 +70,22 @@ public class Partition {
                     }
                 }
             }
+            String[][] noteTable;
+            String[] tempsNoteTable = null;
             
             int i = 0;
             int y = 0;
             int accordMax = aTextePartition.size() - compteurLigneComment;
-            note = new String[accordMax - 1][];
+            noteTable = new String[accordMax - 1][];
             String a = "";
             while (i < aTextePartition.size() && !aTextePartition.get(i).equals("")){
                 if (aTextePartition.get(i).charAt(0) != '/' && aTextePartition.get(i).charAt(1) != '/'){
                     if (ligneIsTemps(aTextePartition.get(i))){
-                        tempsNote = aTextePartition.get(i).split(" +");
+                        tempsNoteTable = aTextePartition.get(i).split(" +");
                     }
                     else{
                         a = aTextePartition.get(i).replace("|", " ");
-                        note[y] = a.split(" +");
+                        noteTable[y] = a.split(" +");
                         y++;
                     }
                 }
@@ -91,15 +93,28 @@ public class Partition {
                 i++;
             }
             i = 0;
-            while (i < note.length)
+            while (i < noteTable.length)
             {
+                note.add(new ArrayList<>());
                 y = 0;
-                while (y < note[i].length){
-                    System.out.println(note[i][y]);
+                while (y < noteTable[i].length){
+                    if(!noteTable[i][y].equals(""))
+                    {
+                        note.get(i).add(noteTable[i][y]);
+                        System.out.println(noteTable[i][y]);
+                    }
                     y++;
                 }
                 i++;
-            }          
+            }
+            
+            i = 0;
+            while(i < tempsNoteTable.length){
+                if(!tempsNoteTable[i].equals("")){
+                    tempsNote.add(tempsNoteTable[i]);
+                }
+                i++;
+            }
         }
         catch (Exception e){
             System.out.println(e);

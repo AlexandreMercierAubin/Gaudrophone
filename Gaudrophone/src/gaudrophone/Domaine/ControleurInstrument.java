@@ -73,8 +73,9 @@ public class ControleurInstrument {
         partition.lirePartition();
     }
     
-    public void jouerPartition(){
-    
+    public String jouerPartition(){
+        String textePartition = partition.getTextePartition();
+        return textePartition; // txtMessage.setWrapStyle(false) et txtMessage.setLineWrap(false) dans la fenetre
     }
     
     public Boucle getBoucle(int index)
