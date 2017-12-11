@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -36,6 +37,12 @@ public class ControleurInstrument {
         toucheEnJeu=-1;
         modeVisuel=ModeVisuel.Ajouter;
         echelleAffichage = 1.0;
+        boucles = new ArrayList<>();
+        
+        for (int i = 0; i < 9; i++)
+        {
+            boucles.add(new Boucle());
+        }
     }
     
     public Instrument getInstrument()

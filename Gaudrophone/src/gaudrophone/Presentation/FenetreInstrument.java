@@ -1,5 +1,9 @@
 package gaudrophone.Presentation;
 
+import com.sun.glass.events.KeyEvent;
+import gaudrophone.Domaine.Action.ActionArreterJouerTouche;
+import gaudrophone.Domaine.Action.ActionBoucle;
+import gaudrophone.Domaine.Action.ActionCommencerJouerTouche;
 import gaudrophone.Domaine.Boucle;
 import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.ControleurInstrument;
@@ -18,10 +22,14 @@ import gaudrophone.Domaine.Instrument.Touche;
 import gaudrophone.Domaine.Outils;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -35,6 +43,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     ControleurInstrument controleur;
     File m_fileToSaveImage;
     String m_pathToFileAudio;
+    List<JButton> boutonsBoucle;
     
     public FenetreInstrument() {
         initComponents();
@@ -167,7 +176,27 @@ public class FenetreInstrument extends javax.swing.JFrame {
             }
 
         });
+        
+        boutonsBoucle = Arrays.asList(
+                btnBoucle1,
+                btnBoucle2,
+                btnBoucle3,
+                btnBoucle4,
+                btnBoucle5,
+                btnBoucle6,
+                btnBoucle7,
+                btnBoucle8,
+                btnBoucle9
+        );
+        
+        for (int i = 1; i <= 9; i++)
+        {
+            String cle = "" + i;
+            panneauAffichage.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(cle), cle);
+            panneauAffichage.getActionMap().put(cle, new ActionBoucle(controleur.getBoucle(i - 1), boutonsBoucle.get(i - 1)));
+        }
     }
+    
     private void InstrumentUpdater()
     {
         Instrument instru = controleur.getInstrument();
@@ -1545,7 +1574,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomInstrumentActionPerformed
 
     private void panneauAffichageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauAffichageMouseClicked
-        boolean clickTouche;
+        panneauAffichage.requestFocusInWindow();
         int dimension=(panneauAffichage.getWidth()>panneauAffichage.getHeight()?panneauAffichage.getHeight():panneauAffichage.getWidth());
         controleur.cliquerSouris(Outils.conversionPointPixelRelatif( evt.getPoint(),dimension));
         panneauAffichage.repaint();
