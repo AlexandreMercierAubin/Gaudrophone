@@ -1831,6 +1831,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
         {
             strTexte = tool.readFile(optionalFilenames[i],strTexte);
         }
+        txtMessage.setWrapStyleWord(true);
+        txtMessage.setLineWrap(true);
         txtMessage.setText(strTexte);
         txtMessage.setCaretPosition(0);
     }
