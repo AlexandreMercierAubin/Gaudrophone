@@ -373,6 +373,13 @@ public class FenetreInstrument extends javax.swing.JFrame {
         checkAfficheNom.setSelected(touche.getApparence().isAfficherNom());
         checkAfficheNote.setSelected(touche.getApparence().isAfficherNote());
         checkAfficheOctave.setSelected(touche.getApparence().isAfficherOctave());
+        
+        // Touche reliée
+        char cle = touche.getCleReliee();
+        if (cle != '\u0000') // Null char
+            txtCleReliee.setText("" + cle);
+        else
+            txtCleReliee.setText("");
     }
     
     private void ToucheEnregistrer()
@@ -419,6 +426,45 @@ public class FenetreInstrument extends javax.swing.JFrame {
         touche.getApparence().setAfficherNom(checkAfficheNom.isSelected());
         touche.getApparence().setAfficherNote(checkAfficheNote.isSelected());
         touche.getApparence().setAfficherOctave(checkAfficheOctave.isSelected());
+        
+        // Touche reliee
+        boolean changerCle = false;
+        char ancienneCle = touche.getCleReliee();
+        char nouvelleCle = '\u0000';
+        InputMap im = panneauAffichage.getInputMap(JComponent.WHEN_FOCUSED);
+        ActionMap am = panneauAffichage.getActionMap();
+        
+        if (txtCleReliee.getText().length() > 0)
+        {
+            char cle = txtCleReliee.getText().toUpperCase().charAt(0);
+            Object obj = im.get(KeyStroke.getKeyStroke((int)cle, 0, false));
+            
+            changerCle = Character.isAlphabetic((int)cle);
+            if (changerCle)
+            {
+                if (obj == null)
+                    changerCle = true;
+                else
+                    changerCle = obj.toString().equals("S" + index);
+            }
+            
+            if (changerCle)
+                nouvelleCle = cle;
+        }
+        
+        im.remove(KeyStroke.getKeyStroke((int)ancienneCle, 0, false));
+        im.remove(KeyStroke.getKeyStroke((int)ancienneCle, 0, true));
+        am.remove("S" + index);
+        am.remove("E" + index);
+        touche.setCleReliee(nouvelleCle);
+        
+        if (changerCle)
+        {   
+            im.put(KeyStroke.getKeyStroke((int)nouvelleCle, 0, false), "S" + index);
+            am.put("S" + index, new ActionCommencerJouerTouche(touche, panneauAffichage));
+            im.put(KeyStroke.getKeyStroke((int)nouvelleCle, 0, true), "E" + index);
+            am.put("E" + index, new ActionArreterJouerTouche(touche, panneauAffichage));
+        }
         
         ToucheUpdater();
     }
@@ -533,6 +579,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
         checkAfficheNom = new javax.swing.JCheckBox();
         checkAfficheNote = new javax.swing.JCheckBox();
         checkAfficheOctave = new javax.swing.JCheckBox();
+        lblCleReliee = new javax.swing.JLabel();
+        txtCleReliee = new javax.swing.JTextField();
         barreMenu = new javax.swing.JMenuBar();
         menuFichier = new javax.swing.JMenu();
         miNouvelInstrument = new javax.swing.JMenuItem();
@@ -1054,6 +1102,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
             }
         });
 
+        lblCleReliee.setText("Clé reliée:");
+
         javax.swing.GroupLayout plToucheLayout = new javax.swing.GroupLayout(plTouche);
         plTouche.setLayout(plToucheLayout);
         plToucheLayout.setHorizontalGroup(
@@ -1079,7 +1129,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
                                     .addComponent(lblRouge))
                                 .addGap(12, 12, 12)
                                 .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(spinVert, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                                    .addComponent(spinVert, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                                     .addComponent(spinRouge)
                                     .addComponent(spinBleu)))))
                     .addComponent(btnEnregistrerTouche, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1153,6 +1203,12 @@ public class FenetreInstrument extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbForme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(plToucheLayout.createSequentialGroup()
+                        .addComponent(lblNom)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(checkAfficheNom)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNom))
+                    .addGroup(plToucheLayout.createSequentialGroup()
                         .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblFond)
                             .addComponent(lblType)
@@ -1161,11 +1217,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
                             .addComponent(lblBordure))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(plToucheLayout.createSequentialGroup()
-                        .addComponent(lblNom)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(checkAfficheNom)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNom)))
+                        .addComponent(lblCleReliee)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCleReliee)))
                 .addContainerGap())
         );
         plToucheLayout.setVerticalGroup(
@@ -1177,11 +1231,15 @@ public class FenetreInstrument extends javax.swing.JFrame {
                         .addComponent(lblNom)
                         .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(checkAfficheNom))
-                .addGap(30, 30, 30)
+                .addGap(14, 14, 14)
+                .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCleReliee)
+                    .addComponent(txtCleReliee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblForme)
                     .addComponent(cbForme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblFond)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1429,18 +1487,24 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
     private void miJouerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miJouerActionPerformed
         controleur.modifierModeVisuel(ModeVisuel.Jouer);
+        TPInfo.setSelectedIndex(0); 
+        TPInfo.setEnabledAt(1,false);
         setTitle("Gaudrophone - Jouer");
         panneauAffichage.repaint();
     }//GEN-LAST:event_miJouerActionPerformed
 
     private void miEditionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEditionActionPerformed
         controleur.modifierModeVisuel(ModeVisuel.Editer);
+        TPInfo.setSelectedIndex(0); 
+        TPInfo.setEnabledAt(1,false);
         setTitle("Gaudrophone - Édition");
         panneauAffichage.repaint();
     }//GEN-LAST:event_miEditionActionPerformed
 
     private void miAjouterTouchesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAjouterTouchesActionPerformed
         controleur.modifierModeVisuel(ModeVisuel.Ajouter);
+        TPInfo.setSelectedIndex(0); 
+        TPInfo.setEnabledAt(1,false);
         setTitle("Gaudrophone - Ajouter des touches");
         panneauAffichage.repaint();
     }//GEN-LAST:event_miAjouterTouchesActionPerformed
@@ -1957,6 +2021,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JLabel lblBleu;
     private javax.swing.JLabel lblBleuBordure;
     private javax.swing.JLabel lblBordure;
+    private javax.swing.JLabel lblCleReliee;
     private javax.swing.JLabel lblCouleurBordure;
     private javax.swing.JLabel lblDimension;
     private javax.swing.JLabel lblFond;
@@ -2027,6 +2092,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JSpinner spinVert;
     private javax.swing.JSpinner spinVertBordure;
     private javax.swing.JSplitPane splitAffichage;
+    private javax.swing.JTextField txtCleReliee;
     private javax.swing.JTextArea txtMessage;
     private javax.swing.JTextField txtNom;
     private javax.swing.JTextField txtNomInstrument;

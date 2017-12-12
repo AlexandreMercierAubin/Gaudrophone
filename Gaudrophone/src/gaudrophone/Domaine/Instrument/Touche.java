@@ -12,6 +12,8 @@ public class Touche implements Serializable{
     Son son;
     boolean surbrillance;
     int timbreInstrument;
+    char cleReliee;
+    boolean cleAppuyee;
     
     public Touche(int index, int timbre)
     {
@@ -82,5 +84,21 @@ public class Touche implements Serializable{
         {
             ((Note)son).setTimbreInstrument(timbreInstr);
         }
+    }
+    
+    public char getCleReliee() {
+        return cleReliee;
+    }
+    
+    public void setCleReliee(char cle) {
+        cleReliee = cle;
+    }
+    
+    public boolean getCleAppuyee() {
+        return cleAppuyee;
+    }
+    
+    public void setCleAppuyee(boolean value) {
+        cleAppuyee = value;
     }
 }
