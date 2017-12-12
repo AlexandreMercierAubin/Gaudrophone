@@ -795,7 +795,7 @@
                                                   </Group>
                                                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="1" attributes="0">
-                                                      <Component id="spinVert" alignment="1" pref="122" max="32767" attributes="0"/>
+                                                      <Component id="spinVert" alignment="1" pref="103" max="32767" attributes="0"/>
                                                       <Component id="spinRouge" alignment="1" max="32767" attributes="0"/>
                                                       <Component id="spinBleu" alignment="1" max="32767" attributes="0"/>
                                                   </Group>
@@ -896,6 +896,13 @@
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="cbForme" max="32767" attributes="0"/>
                                       </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="lblNom" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="checkAfficheNom" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="txtNom" max="32767" attributes="0"/>
+                                      </Group>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="lblFond" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -907,11 +914,9 @@
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lblNom" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="checkAfficheNom" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtNom" max="32767" attributes="0"/>
+                                          <Component id="lblCleReliee" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="txtCleReliee" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -929,14 +934,19 @@
                                       </Group>
                                       <Component id="checkAfficheNom" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblCleReliee" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtCleReliee" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="lblForme" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="cbForme" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="lblFond" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="rbCouleur" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
@@ -1418,6 +1428,13 @@
                         <Component class="javax.swing.JCheckBox" name="checkAfficheNote">
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="checkAfficheOctave">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblCleReliee">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Cl&#xe9; reli&#xe9;e:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="txtCleReliee">
                         </Component>
                       </SubComponents>
                     </Container>
