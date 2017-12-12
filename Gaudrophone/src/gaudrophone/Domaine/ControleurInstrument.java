@@ -74,6 +74,7 @@ public class ControleurInstrument {
     }
     
     public String jouerPartition(){
+        partition.jouerPartition(instrument.getTouches(), instrument.getTimbre());
         String textePartition = partition.getTextePartition();
         return textePartition; // txtMessage.setWrapStyle(false) et txtMessage.setLineWrap(false) dans la fenetre
     }

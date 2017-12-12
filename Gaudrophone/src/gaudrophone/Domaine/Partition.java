@@ -1,5 +1,8 @@
 package gaudrophone.Domaine;
 
+import gaudrophone.Domaine.Enums.NomNote;
+import gaudrophone.Domaine.Instrument.Note;
+import gaudrophone.Domaine.Instrument.Touche;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import static java.lang.Character.isDigit;
@@ -47,7 +50,16 @@ public class Partition {
                     }
                     else{
                         if( pos < aTextePartition.size()){
-                            aTextePartition.set(pos, aTextePartition.get(pos) + " " + sReadLine); 
+                            if(sReadLine.charAt(0) == '/' && sReadLine.charAt(1) == '/'){
+                                compteurLigneComment ++;
+                                if(aTextePartition.get(pos).charAt(0) != '/' && aTextePartition.get(pos).charAt(1) != '/')
+                                    aTextePartition.add(sReadLine);
+                                else
+                                    aTextePartition.set(pos, aTextePartition.get(pos) + " " + sReadLine);
+                            }  
+                            else{
+                                aTextePartition.set(pos, aTextePartition.get(pos) + " " + sReadLine); 
+                            }
                         }
                         else{
                             if(sReadLine.charAt(0) == '/' && sReadLine.charAt(1) == '/')
@@ -76,7 +88,7 @@ public class Partition {
             int i = 0;
             int y = 0;
             int accordMax = aTextePartition.size() - compteurLigneComment;
-            noteTable = new String[accordMax - 1][];
+            noteTable = new String[accordMax][];
             String a = "";
             while (i < aTextePartition.size() && !aTextePartition.get(i).equals("")){
                 if (aTextePartition.get(i).charAt(0) != '/' && aTextePartition.get(i).charAt(1) != '/'){
@@ -109,15 +121,36 @@ public class Partition {
             }
             
             i = 0;
-            while(i < tempsNoteTable.length){
-                if(!tempsNoteTable[i].equals("")){
-                    tempsNote.add(tempsNoteTable[i]);
+            if(tempsNoteTable != null){
+                while(i < tempsNoteTable.length){
+                    if(!tempsNoteTable[i].equals("")){
+                        tempsNote.add(tempsNoteTable[i]);
+                    }
+                    i++;
                 }
-                i++;
+            }
+            else{
+                i = 0;
+                while(i < note.get(0).size()){
+                    tempsNote.add("_");
+                    i++;
+                }
             }
         }
         catch (Exception e){
             System.out.println(e);
+        }
+    }
+    
+    public void jouerPartition(List<Touche> touches, int timbre){
+        Note[] noteJouer = new Note[note.size()];
+        int i = 0;
+        int y = 0;
+        while(i < tempsNote.size()){
+            while(y < note.size()){
+                y++;
+            }
+            i++;
         }
     }
     
