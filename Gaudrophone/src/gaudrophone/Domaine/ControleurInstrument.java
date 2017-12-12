@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -25,7 +26,7 @@ public class ControleurInstrument {
     String cheminSauvegarde;
     ModeVisuel modeVisuel;
     boolean toucheEnDeplacement;
-    boolean toucheEnJeu;
+    int toucheEnJeu;
     double echelleAffichage;
     
     public ControleurInstrument()
@@ -33,9 +34,15 @@ public class ControleurInstrument {
         instrument = new Instrument();
         metronome = new Metronome();
         toucheEnDeplacement = false;
-        toucheEnJeu=false;
+        toucheEnJeu=-1;
         modeVisuel=ModeVisuel.Ajouter;
         echelleAffichage = 1.0;
+        boucles = new ArrayList<>();
+        
+        for (int i = 0; i < 9; i++)
+        {
+            boucles.add(new Boucle());
+        }
     }
     
     public Instrument getInstrument()
@@ -114,7 +121,7 @@ public class ControleurInstrument {
                 {
                     int indexTouche = instrument.getToucheSelectionee();
                     instrument.getTouche(indexTouche).commencerJouer();
-                    toucheEnJeu=true;
+                    toucheEnJeu=indexTouche;
                 }
                 break;
                 
@@ -144,11 +151,11 @@ public class ControleurInstrument {
                 
             case Jouer:
                 // envoyer un message d'arret a la touche relachee
-                if(toucheEnJeu)
+                if(toucheEnJeu >= 0)
                 {
                     int indexTouche = instrument.getToucheSelectionee();
                     instrument.getTouche(indexTouche).arreterJouer();
-                    toucheEnJeu=false;
+                    toucheEnJeu=-1;
                 }
                 break;
                 
@@ -164,12 +171,33 @@ public class ControleurInstrument {
                 coordRelative.getX() / echelleAffichage, 
                 coordRelative.getY() / echelleAffichage);
         
-        // deplacement de la touche selectionnee a l'enfoncement
-        if (toucheEnDeplacement)
+        switch (modeVisuel)
         {
-            int indexTouche = instrument.getToucheSelectionee();
-            Touche touche = instrument.getTouche(indexTouche);
-            touche.getApparence().setPosition(coordRelative);
+            case Editer:
+            case Ajouter:
+                // deplacement de la touche selectionnee a l'enfoncement
+                if (toucheEnDeplacement)
+                {
+                    int indexTouche = instrument.getToucheSelectionee();
+                    Touche touche = instrument.getTouche(indexTouche);
+                    touche.getApparence().setPosition(coordRelative);
+                }
+                break;
+            
+            case Jouer:
+                if (instrument.selectionnerTouche(coordRelative))
+                {
+                    int indexTouche = instrument.getToucheSelectionee();
+                    if (indexTouche != toucheEnJeu)
+                    {
+                        if (toucheEnJeu >= 0)
+                            instrument.getTouche(toucheEnJeu).arreterJouer();
+                        instrument.getTouche(indexTouche).commencerJouer();
+                        toucheEnJeu = indexTouche;
+                    }
+                }
+                else
+                    toucheEnJeu = -1;
         }
         
         return toucheEnDeplacement;

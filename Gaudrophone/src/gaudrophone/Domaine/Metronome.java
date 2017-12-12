@@ -20,7 +20,7 @@ public class Metronome {
     public Metronome()
     {
         metronomeActif=false;
-        timbre=1;
+        timbre=115;
         frequence=1000;
         note = new Note(timbre);
         note.setOctave(4);
