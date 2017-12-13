@@ -374,6 +374,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         checkAfficheNom.setSelected(touche.getApparence().isAfficherNom());
         checkAfficheNote.setSelected(touche.getApparence().isAfficherNote());
         checkAfficheOctave.setSelected(touche.getApparence().isAfficherOctave());
+        checkAfficheCle.setSelected(touche.getApparence().isAfficherCle());
         
         // Touche reliée
         char cle = touche.getCleReliee();
@@ -427,6 +428,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         touche.getApparence().setAfficherNom(checkAfficheNom.isSelected());
         touche.getApparence().setAfficherNote(checkAfficheNote.isSelected());
         touche.getApparence().setAfficherOctave(checkAfficheOctave.isSelected());
+        touche.getApparence().setAfficherCle(checkAfficheCle.isSelected());
         
         // Touche reliee
         delierCle(touche);
@@ -591,6 +593,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         checkAfficheOctave = new javax.swing.JCheckBox();
         lblCleReliee = new javax.swing.JLabel();
         txtCleReliee = new javax.swing.JTextField();
+        checkAfficheCle = new javax.swing.JCheckBox();
         barreMenu = new javax.swing.JMenuBar();
         menuFichier = new javax.swing.JMenu();
         miNouvelInstrument = new javax.swing.JMenuItem();
@@ -1228,7 +1231,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(plToucheLayout.createSequentialGroup()
                         .addComponent(lblCleReliee)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(checkAfficheCle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCleReliee)))
                 .addContainerGap())
         );
@@ -1241,10 +1246,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
                         .addComponent(lblNom)
                         .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(checkAfficheNom))
-                .addGap(14, 14, 14)
+                .addGap(13, 13, 13)
                 .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCleReliee)
-                    .addComponent(txtCleReliee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCleReliee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkAfficheCle))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblForme)
@@ -2023,6 +2029,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbNoteMetronome;
     private javax.swing.JComboBox<String> cbTimbre;
     private javax.swing.JComboBox<String> cbTimbreMetronome;
+    private javax.swing.JCheckBox checkAfficheCle;
     private javax.swing.JCheckBox checkAfficheNom;
     private javax.swing.JCheckBox checkAfficheNote;
     private javax.swing.JCheckBox checkAfficheOctave;
