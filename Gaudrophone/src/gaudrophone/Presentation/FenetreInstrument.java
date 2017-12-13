@@ -445,7 +445,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
                 if (obj == null)
                     changerCle = true;
                 else
-                    changerCle = obj.toString().equals("S" + index);
+                    changerCle = obj.toString().equals("D" + ancienneCle);
             }
             
             if (changerCle)
@@ -454,16 +454,16 @@ public class FenetreInstrument extends javax.swing.JFrame {
         
         im.remove(KeyStroke.getKeyStroke((int)ancienneCle, 0, false));
         im.remove(KeyStroke.getKeyStroke((int)ancienneCle, 0, true));
-        am.remove("S" + index);
-        am.remove("E" + index);
+        am.remove("D" + ancienneCle);
+        am.remove("F" + ancienneCle);
         touche.setCleReliee(nouvelleCle);
         
         if (changerCle)
         {   
-            im.put(KeyStroke.getKeyStroke((int)nouvelleCle, 0, false), "S" + index);
-            am.put("S" + index, new ActionCommencerJouerTouche(touche, panneauAffichage));
-            im.put(KeyStroke.getKeyStroke((int)nouvelleCle, 0, true), "E" + index);
-            am.put("E" + index, new ActionArreterJouerTouche(touche, panneauAffichage));
+            im.put(KeyStroke.getKeyStroke((int)nouvelleCle, 0, false), "D" + nouvelleCle);
+            am.put("D" + nouvelleCle, new ActionCommencerJouerTouche(touche, panneauAffichage));
+            im.put(KeyStroke.getKeyStroke((int)nouvelleCle, 0, true), "F" + nouvelleCle);
+            am.put("F" + nouvelleCle, new ActionArreterJouerTouche(touche, panneauAffichage));
         }
         
         ToucheUpdater();
