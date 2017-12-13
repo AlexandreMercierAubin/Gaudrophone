@@ -12,6 +12,7 @@ import gaudrophone.Domaine.Dimension2D;
 import gaudrophone.Domaine.Enums.Forme;
 import gaudrophone.Domaine.Enums.ModeVisuel;
 import gaudrophone.Domaine.Generateur.GenerateurGuitare;
+import gaudrophone.Domaine.Generateur.GenerateurInstrument;
 import gaudrophone.Domaine.Generateur.GenerateurPiano;
 import gaudrophone.Domaine.Instrument.Bordure;
 import gaudrophone.Domaine.Instrument.FichierAudio;
@@ -428,45 +429,54 @@ public class FenetreInstrument extends javax.swing.JFrame {
         touche.getApparence().setAfficherOctave(checkAfficheOctave.isSelected());
         
         // Touche reliee
-        boolean changerCle = false;
-        char ancienneCle = touche.getCleReliee();
-        char nouvelleCle = '\u0000';
-        InputMap im = panneauAffichage.getInputMap(JComponent.WHEN_FOCUSED);
-        ActionMap am = panneauAffichage.getActionMap();
-        
+        delierCle(touche);
         if (txtCleReliee.getText().length() > 0)
         {
+            char ancienneCle = touche.getCleReliee();
             char cle = txtCleReliee.getText().toUpperCase().charAt(0);
-            Object obj = im.get(KeyStroke.getKeyStroke((int)cle, 0, false));
+            Object obj = panneauAffichage.getInputMap(JComponent.WHEN_FOCUSED).get(KeyStroke.getKeyStroke((int)cle, 0, false));
             
-            changerCle = Character.isAlphabetic((int)cle);
-            if (changerCle)
+            if (Character.isAlphabetic((int)cle))
             {
+                boolean changerCle = false;
                 if (obj == null)
                     changerCle = true;
                 else
-                    changerCle = obj.toString().equals("S" + index);
+                    changerCle = obj.toString().equals("D" + ancienneCle);
+                
+                if (changerCle)
+                    lierCle(touche, cle);
             }
-            
-            if (changerCle)
-                nouvelleCle = cle;
-        }
-        
-        im.remove(KeyStroke.getKeyStroke((int)ancienneCle, 0, false));
-        im.remove(KeyStroke.getKeyStroke((int)ancienneCle, 0, true));
-        am.remove("S" + index);
-        am.remove("E" + index);
-        touche.setCleReliee(nouvelleCle);
-        
-        if (changerCle)
-        {   
-            im.put(KeyStroke.getKeyStroke((int)nouvelleCle, 0, false), "S" + index);
-            am.put("S" + index, new ActionCommencerJouerTouche(touche, panneauAffichage));
-            im.put(KeyStroke.getKeyStroke((int)nouvelleCle, 0, true), "E" + index);
-            am.put("E" + index, new ActionArreterJouerTouche(touche, panneauAffichage));
         }
         
         ToucheUpdater();
+    }
+    
+    private void lierCle(Touche touche, char cle)
+    {
+        InputMap im = panneauAffichage.getInputMap(JComponent.WHEN_FOCUSED);
+        ActionMap am = panneauAffichage.getActionMap();
+        
+        im.put(KeyStroke.getKeyStroke((int)cle, 0, false), "D" + cle);
+        am.put("D" + cle, new ActionCommencerJouerTouche(touche, panneauAffichage));
+        im.put(KeyStroke.getKeyStroke((int)cle, 0, true), "F" + cle);
+        am.put("F" + cle, new ActionArreterJouerTouche(touche, panneauAffichage));
+        
+        touche.setCleReliee(cle);
+    }
+    
+    private void delierCle(Touche touche)
+    {
+        InputMap im = panneauAffichage.getInputMap(JComponent.WHEN_FOCUSED);
+        ActionMap am = panneauAffichage.getActionMap();
+        char cle = touche.getCleReliee();
+        
+        im.remove(KeyStroke.getKeyStroke((int)cle, 0, false));
+        im.remove(KeyStroke.getKeyStroke((int)cle, 0, true));
+        am.remove("D" + cle);
+        am.remove("F" + cle);
+        
+        touche.setCleReliee('\u0000');
     }
     
     public ControleurInstrument getControleur()
@@ -1696,11 +1706,14 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_cbBordureActionPerformed
 
     private void miNouvelInstrumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNouvelInstrumentActionPerformed
+        for (Touche touche: controleur.getInstrument().getTouches())
+            delierCle(touche);
         controleur.nouvelInstrument();
         panneauAffichage.repaint();
     }//GEN-LAST:event_miNouvelInstrumentActionPerformed
 
     private void btnEffacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEffacerActionPerformed
+        delierCle(controleur.getInstrument().getTouche());
         controleur.getInstrument().retirerTouche(controleur.getInstrument().getToucheSelectionee());
         TPInfo.setSelectedIndex(0); 
         TPInfo.setEnabledAt(1,false);
@@ -1758,9 +1771,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_cbBordureComponentShown
 
     private void miGuitareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGuitareActionPerformed
-        controleur.genererInstrument(new GenerateurGuitare());
-        panneauAffichage.repaint();
-        InstrumentUpdater();
+        genererInstrument(new GenerateurGuitare());
     }//GEN-LAST:event_miGuitareActionPerformed
 
     private void btnEnregistrerToucheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerToucheActionPerformed
@@ -1768,11 +1779,18 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEnregistrerToucheActionPerformed
 
     private void miPianoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miPianoActionPerformed
-        controleur.genererInstrument(new GenerateurPiano());
-        panneauAffichage.repaint();
-        InstrumentUpdater();
+        genererInstrument(new GenerateurPiano());
     }//GEN-LAST:event_miPianoActionPerformed
 
+    private void genererInstrument(GenerateurInstrument generateur)
+    {
+        for (Touche touche: controleur.getInstrument().getTouches())
+            delierCle(touche);
+        controleur.genererInstrument(generateur);
+        panneauAffichage.repaint();
+        InstrumentUpdater();
+    }
+    
     private void btnTestSonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTestSonActionPerformed
         if(rbSon.isSelected()){
             int timbre = 1;
@@ -1906,6 +1924,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
     private void miImporterActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.importerInstrument();
+        for (Touche touche: controleur.getInstrument().getTouches())
+            lierCle(touche, touche.getCleReliee());
         panneauAffichage.repaint();
         InstrumentUpdater();
     }
