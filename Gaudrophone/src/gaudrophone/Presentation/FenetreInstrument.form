@@ -913,9 +913,11 @@
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <Component id="lblCleReliee" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="checkAfficheCle" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
                                           <Component id="txtCleReliee" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -934,10 +936,11 @@
                                       </Group>
                                       <Component id="checkAfficheNom" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="lblCleReliee" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtCleReliee" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="checkAfficheCle" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -1435,6 +1438,8 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txtCleReliee">
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="checkAfficheCle">
                         </Component>
                       </SubComponents>
                     </Container>

@@ -289,6 +289,12 @@ public class DessinateurInstrument {
             texte += " " + ((Note)son).getNom();
         if (apparence.isAfficherOctave() && son instanceof Note)
             texte += " " + ((Note)son).getOctave();
+        if (apparence.isAfficherCle())
+        {
+            char cle = touche.getCleReliee();
+            if (cle != '\u0000') // Null char
+                texte += " " + cle;
+        }
         
         texte = texte.trim();
         texte = texte.replace("Sharp", "#");

@@ -28,6 +28,15 @@ public class ApparenceTouche  implements Serializable
     boolean afficherNom;
     boolean afficherNote;
     boolean afficherOctave;
+    boolean afficherCle;
+
+    public boolean isAfficherCle() {
+        return afficherCle;
+    }
+
+    public void setAfficherCle(boolean afficherCle) {
+        this.afficherCle = afficherCle;
+    }
 
     public boolean isAfficherNom() {
         return afficherNom;
