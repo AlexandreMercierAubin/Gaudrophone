@@ -14,12 +14,14 @@ public class Metronome {
     Timer metronome;
     Note note;
     TimerTask tache;
+    boolean metronomeActif;
     
     
     public Metronome()
     {
-        timbre=1;
-        frequence=10000;
+        metronomeActif=false;
+        timbre=115;
+        frequence=1000;
         note = new Note(timbre);
         note.setOctave(4);
         note.setPersistance(500);
@@ -55,10 +57,12 @@ public class Metronome {
         metronome.cancel();
         metronome.purge();
         preparerTimer();
+        metronomeActif=false;
     }
     
     public void demarrer()
     {
+        metronomeActif=true;
         metronome.scheduleAtFixedRate(tache,0,frequence);
     }
     
@@ -91,5 +95,10 @@ public class Metronome {
 
     public void setFrequence(int frequence) {
         this.frequence = frequence;
+        if(metronomeActif)
+        {
+            arreter();
+            demarrer();
+        }
     }
 }
