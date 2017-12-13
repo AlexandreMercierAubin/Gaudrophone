@@ -71,6 +71,7 @@ public class ControleurInstrument {
             partition.chemin = fc.getSelectedFile().getAbsolutePath();
         }
         partition.lirePartition();
+        jouerPartition();
     }
     
     public String jouerPartition(){

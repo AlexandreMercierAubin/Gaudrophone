@@ -6,8 +6,11 @@ import gaudrophone.Domaine.Instrument.Touche;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import static java.lang.Character.isDigit;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Partition {
     String chemin;
@@ -15,6 +18,8 @@ public class Partition {
     int pulsation;
     List<List<String>> note;
     List<String> tempsNote;
+    int compteurNote;
+    public static Timer timer;
     
     public Partition()
     {
@@ -143,15 +148,143 @@ public class Partition {
     }
     
     public void jouerPartition(List<Touche> touches, int timbre){
-        Note[] noteJouer = new Note[note.size()];
-        int i = 0;
-        int y = 0;
-        while(i < tempsNote.size()){
-            while(y < note.size()){
-                y++;
+        compteurNote = 0;
+        Note noteJouer = new Note(timbre);
+        TimerTask timerTask = new TimerTask(){
+
+            @Override
+            public void run() {
+                System.out.println(Instant.now());
+                int i = 0;
+                String sNote;
+                while (i < note.size()){
+                    sNote = note.get(i).get(compteurNote);
+                    switch (sNote.length()) {
+                        case 1:
+                            if (!sNote.equals("X"))
+                            {
+                                noteJouer.setNom(retourNomNote(sNote));
+                                noteJouer.setOctave(4);
+                            }   break;
+                        case 2:
+                            if (sNote.charAt(1) == '#')
+                            {
+                                noteJouer.setNom(retourNomNote(sNote));
+                                noteJouer.setOctave(4);
+                            }
+                            else
+                            {
+                                noteJouer.setNom(retourNomNote(String.valueOf(sNote.charAt(0))));
+                                noteJouer.setOctave(Character.getNumericValue(sNote.charAt(1)));
+                            }   break;
+                        default:
+                            noteJouer.setNom(retourNomNote(String.valueOf(sNote.charAt(0)) + String.valueOf(sNote.charAt(2))));
+                            noteJouer.setOctave(Character.getNumericValue(sNote.charAt(1)));
+                            break;
+                    }
+                    noteJouer.setPersistance((retourPersistance(tempsNote.get(compteurNote)) * pulsation / 60));
+                    noteJouer.commencerJouer();
+                    noteJouer.arreterJouer();
+                    i++;
+                }
+                update(timbre);
             }
-            i++;
+        };
+        timer = new Timer();
+        timer.schedule(timerTask, 0);
+    }
+    
+    public void update(int timbre) {
+        Note noteJouer = new Note(timbre);
+        TimerTask timerTask = new TimerTask() {
+
+            @Override
+            public void run() {
+                System.out.println(Instant.now());
+                int i = 0;
+                String sNote;
+                while (i < note.size()){
+                    sNote = note.get(i).get(compteurNote);
+                    switch (sNote.length()) {
+                        case 1:
+                            if (!sNote.equals("X"))
+                            {
+                                noteJouer.setNom(retourNomNote(sNote));
+                                noteJouer.setOctave(4);
+                            }   break;
+                        case 2:
+                            if (sNote.charAt(1) == '#')
+                            {
+                                noteJouer.setNom(retourNomNote(sNote));
+                                noteJouer.setOctave(4);
+                            }
+                            else
+                            {
+                                noteJouer.setNom(retourNomNote(String.valueOf(sNote.charAt(0))));
+                                noteJouer.setOctave(Character.getNumericValue(sNote.charAt(1)));
+                            }   break;
+                        default:
+                            noteJouer.setNom(retourNomNote(String.valueOf(sNote.charAt(0)) + String.valueOf(sNote.charAt(2))));
+                            noteJouer.setOctave(Character.getNumericValue(sNote.charAt(1)));
+                            break;
+                    }
+                    noteJouer.setPersistance((retourPersistance(tempsNote.get(compteurNote)) * pulsation / 60));
+                    noteJouer.commencerJouer();
+                    noteJouer.arreterJouer();
+                    i++;
+                }
+                update(timbre);
+
+            }
+        };
+        timer.cancel();
+        if (compteurNote < note.get(0).size()){
+            timer = new Timer();
+            timer.schedule(timerTask, (retourPersistance(tempsNote.get(compteurNote)) * pulsation / 60));
+            compteurNote++;
         }
+    }
+    
+    public NomNote retourNomNote(String sNote) {
+        switch (sNote) {
+            case "A":
+                return NomNote.A;
+            case "A#":
+                return NomNote.ASharp;
+            case "B":
+                return NomNote.B;
+            case "C":
+                return NomNote.C;
+            case "C#":
+                return NomNote.CSharp;
+            case "D":
+                return NomNote.D;
+            case "D#":
+                return NomNote.DSharp;
+            case "E":
+                return NomNote.E;
+            case "F":
+                return NomNote.F;
+            case "F#":
+                return NomNote.FSharp;
+            case "G":
+                return NomNote.G;
+            case "G#":
+                return NomNote.GSharp;
+            default:
+                return NomNote.A;
+        }        
+    }
+    
+    public int retourPersistance(String persistance) {
+        if (persistance.equals("_"))
+            return 1000;
+        else if (persistance.equals(","))
+            return 500;
+        else if (persistance.equals("."))
+            return 250;
+        else
+            return Integer.parseInt(persistance) * 1000;
     }
     
     public boolean ligneIsTemps(String ligne){
