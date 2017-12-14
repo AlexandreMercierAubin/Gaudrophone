@@ -210,22 +210,22 @@ public class Partition {
                 System.out.println(Instant.now());
                 int i = 0;
                 while (i < noteJouer.size()){
-                   toucheSurbrillance = 0;
-                    boolean bTrouve = false;
-                    while(toucheSurbrillance < touches.size() && !bTrouve)
-                    {
-                        Son son = touches.get(toucheSurbrillance).getSon();
-                        if (((Note)son).getNom() == noteJouer.get(i).get(compteurNote).getNom() && ((Note)son).getOctave() == noteJouer.get(i).get(compteurNote).getOctave())
-                        {
-                            bTrouve = true;                            
-                        }
-                        else                            
-                            toucheSurbrillance++;
-                    }
-                    if(bTrouve)
-                        touches.get(toucheSurbrillance).setSurbrillance(true);
-                    else
-                        toucheSurbrillance = 22222;
+//                    toucheSurbrillance = 0;
+//                    boolean bTrouve = false;
+//                    while(toucheSurbrillance < touches.size() && !bTrouve)
+//                    {
+//                        Son son = touches.get(toucheSurbrillance).getSon();
+//                        if (((Note)son).getNom() == noteJouer.get(i).get(compteurNote).getNom() && ((Note)son).getOctave() == noteJouer.get(i).get(compteurNote).getOctave())
+//                        {
+//                            bTrouve = true;                            
+//                        }
+//                        else                            
+//                            toucheSurbrillance++;
+//                    }
+//                    if(bTrouve)
+//                        touches.get(toucheSurbrillance).setSurbrillance(true);
+//                    else
+//                        toucheSurbrillance = 22222;
                         
                     noteJouer.get(i).get(compteurNote).commencerJouer();
                     noteJouer.get(i).get(compteurNote).arreterJouer();
@@ -244,7 +244,8 @@ public class Partition {
 
             @Override
             public void run() {
-                touches.get(toucheSurbrillance).setSurbrillance(false);
+//                if(toucheSurbrillance != 22222)
+//                    touches.get(toucheSurbrillance).setSurbrillance(false);
                 System.out.println(Instant.now()); 
                 int i = 0;
                 while (i < noteJouer.size()){
