@@ -4,14 +4,13 @@ import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.Instrument.Note;
 import gaudrophone.Domaine.Instrument.Son;
 import gaudrophone.Domaine.Instrument.Touche;
+import gaudrophone.Presentation.PanneauAffichage;
+import javax.swing.JSlider;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import static java.lang.Character.isDigit;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Partition {
     String chemin;
@@ -23,13 +22,17 @@ public class Partition {
     List<Integer> tempsNoteJouer;
     List<List<Note>> noteJouer;
     List<List<Touche>> toucheSurbriller;
+    PanneauAffichage panneauAffichage;
+    JSlider slider;
     
-    public Partition()
+    public Partition(PanneauAffichage panneauAffichage, JSlider slider)
     {
         tempsNoteJouer = new ArrayList<>();
         noteJouer = new ArrayList<>();
         toucheSurbriller = new ArrayList<>();
-        textePartition = "";  
+        textePartition = "";
+        this.panneauAffichage = panneauAffichage;
+        this.slider = slider;
     }
     
     public void lirePartition(int timbre, List<Touche> touches){        
@@ -245,26 +248,64 @@ public class Partition {
         {
             int index = 0;
             long tempsDepartNano = System.nanoTime();
+            long tempsActuel = tempsDepart;
             while (index < tempsNoteJouer.size())
             {
-                long tempsActuel = (System.nanoTime() - tempsDepartNano) / 1000000 + tempsDepart;
+                tempsActuel = (System.nanoTime() - tempsDepartNano) / 1000000 + tempsDepart;
                 if (tempsActuel >= tempsNoteJouer.get(index))
                 {
+                    boolean repaint = false;
                     System.out.println(tempsActuel);
+                    
                     for (List<Note> liste: noteJouer)
                     {
                         liste.get(index).commencerJouer();
                         liste.get(index).arreterJouer();
                     }
+                    
                     for (List<Touche> liste: toucheSurbriller)
                     {
                         if (index > 0)
-                            liste.get(index - 1).setSurbrillance(false);
-                        liste.get(index).setSurbrillance(true);
+                        {
+                            Touche touchePrecedente = liste.get(index - 1);
+                            if (touchePrecedente != null)
+                            {
+                                touchePrecedente.setSurbrillance(false);
+                                repaint = true;
+                            }
+                        }
+                        
+                        Touche touche = liste.get(index);
+                        if (touche != null)
+                        {
+                            touche.setSurbrillance(true);
+                            repaint = true;
+                        }
                     }
+                    
+                    if (repaint)
+                        panneauAffichage.repaint();
+                    
                     index++;
                 }
             }
+            
+            // Attente que la derniere touche finisse de jouer
+            while (tempsActuel < tempsTotal)
+                tempsActuel = (System.nanoTime() - tempsDepartNano) / 1000000 + tempsDepart;
+            
+            boolean repaint = false;
+            for (List<Touche> liste: toucheSurbriller)
+            {
+                Touche touche = liste.get(liste.size() - 1);
+                if (touche != null)
+                {
+                    touche.setSurbrillance(false);
+                    repaint = true;
+                }
+            }
+            if (repaint)
+                panneauAffichage.repaint();
         }
     }
     

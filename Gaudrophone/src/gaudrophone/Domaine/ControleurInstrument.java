@@ -7,6 +7,7 @@ import gaudrophone.Domaine.Enums.ModeVisuel;
 import gaudrophone.Domaine.Instrument.Note;
 import gaudrophone.Domaine.Instrument.Son;
 import gaudrophone.Presentation.FenetreInstrument;
+import gaudrophone.Presentation.PanneauAffichage;
 import java.util.List;
 import java.awt.geom.Point2D;
 import java.io.File;
@@ -16,6 +17,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
+import javax.swing.JSlider;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class ControleurInstrument {
@@ -71,8 +73,8 @@ public class ControleurInstrument {
         echelleAffichage = echelle;
     }
     
-    public void importerPartition(){
-        partition = new Partition();
+    public void importerPartition(PanneauAffichage panneauAffichage, JSlider slider){
+        partition = new Partition(panneauAffichage, slider);
                 
         JFileChooser fc = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Musique Gaudrophone (.txt)", "txt");
