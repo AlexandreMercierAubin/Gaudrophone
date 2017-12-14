@@ -34,6 +34,7 @@ public class ControleurInstrument {
     {
         instrument = new Instrument();
         metronome = new Metronome();
+        partition = null;
         toucheEnDeplacement = false;
         toucheEnJeu=-1;
         modeVisuel=ModeVisuel.Ajouter;
@@ -50,6 +51,10 @@ public class ControleurInstrument {
     {
         return instrument;
     }
+
+    public Partition getPartition() {
+        return partition;
+    }   
     
     public void nouvelInstrument()
     {

@@ -654,6 +654,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         splitAffichage.setLeftComponent(panneauAffichage);
 
         txtMessage.setColumns(20);
+        txtMessage.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         txtMessage.setRows(5);
         plTextMessage.setViewportView(txtMessage);
 
@@ -1918,10 +1919,14 @@ public class FenetreInstrument extends javax.swing.JFrame {
         switch(index){
             case 0:{
                 controleur.getInstrument().setTimbre(1);
+                if(controleur.getPartition() != null)
+                    controleur.getPartition().updateTimbre(1);
                 break;
             }
             case 1:{
                 controleur.getInstrument().setTimbre(25);
+                if(controleur.getPartition() != null)
+                    controleur.getPartition().updateTimbre(25);
                 break;
             }
         }
@@ -1938,7 +1943,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         txtMessage.setText(partition);
     }//GEN-LAST:event_btnJouerPartitionActionPerformed
    
-    private void miImporterChansonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miImporterChansonActionPerformed
+    private void miImporterChansonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         controleur.importerPartition();
     }
 
