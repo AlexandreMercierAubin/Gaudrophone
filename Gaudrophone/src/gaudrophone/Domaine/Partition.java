@@ -229,25 +229,49 @@ public class Partition {
     }
     
     public void jouerPartition(){
-        compteurNote = 0;
-        TimerTask timerTask = new TimerTask(){
-
-            @Override
-            public void run() {
-                System.out.println(Instant.now());
-                int i = 0;
-                while (i < noteJouer.size()){
-                        
-                    noteJouer.get(i).get(compteurNote).commencerJouer();
-                    noteJouer.get(i).get(compteurNote).arreterJouer();
-                    i++;
+//        compteurNote = 0;
+//        TimerTask timerTask = new TimerTask(){
+//
+//            @Override
+//            public void run() {
+//                System.out.println(Instant.now());
+//                int i = 0;
+//                while (i < noteJouer.size()){
+//                        
+//                    noteJouer.get(i).get(compteurNote).commencerJouer();
+//                    noteJouer.get(i).get(compteurNote).arreterJouer();
+//                    i++;
+//                }
+//                
+//                update();
+//            }
+//        };
+//        timer = new Timer();
+//        timer.schedule(timerTask, 0);
+        Thread thread = new ThreadJouer();
+        thread.start();
+    }
+    
+    private class ThreadJouer extends Thread {
+        @Override
+        public void run()
+        {
+            int index = 0;
+            long tempsDepart = System.nanoTime();
+            while (index < tempsNoteJouer.size())
+            {
+                long tempsActuel = (System.nanoTime() - tempsDepart) * 1000000;
+                if (tempsActuel >= tempsNoteJouer.get(index))
+                {
+                    for (Note note: noteJouer.get(index))
+                    {
+                        note.commencerJouer();
+                        note.arreterJouer();
+                    }
+                    index++;
                 }
-                
-                update();
             }
-        };
-        timer = new Timer();
-        timer.schedule(timerTask, 0);
+        }
     }
     
     public void update() {
