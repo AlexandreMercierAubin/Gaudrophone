@@ -82,11 +82,11 @@ public class ControleurInstrument {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             partition.chemin = fc.getSelectedFile().getAbsolutePath();
         }
-        partition.lirePartition(instrument.getTimbre());
+        partition.lirePartition(instrument.getTimbre(), instrument.getTouches());
     }
     
     public String jouerPartition(){
-        partition.jouerPartition(instrument.getTouches());
+        partition.jouerPartition();
         String textePartition = partition.getTextePartition();
         return textePartition;
     }

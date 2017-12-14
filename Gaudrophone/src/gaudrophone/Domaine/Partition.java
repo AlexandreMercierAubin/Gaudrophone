@@ -21,6 +21,7 @@ public class Partition {
     int compteurNote;
     List<Integer> tempsNoteJouer;
     List<List<Note>> noteJouer;
+    List<Touche> toucheASurbriller;
     public static Timer timer;
     
     public Partition()
@@ -30,7 +31,7 @@ public class Partition {
         textePartition = "";  
     }
     
-    public void lirePartition(int timbre){        
+    public void lirePartition(int timbre, List<Touche> touches){        
         try{
             BufferedReader reader = new BufferedReader(new FileReader(chemin));
             boolean bPulsation = false;
@@ -195,22 +196,7 @@ public class Partition {
                     i++;
                 }
             }  
-        }
-        catch (Exception e){
-            System.out.println(e);
-        }
-    }
-    
-    public void jouerPartition(List<Touche> touches){
-        compteurNote = 0;
-        TimerTask timerTask = new TimerTask(){
-
-            @Override
-            public void run() {
-                System.out.println(Instant.now());
-                int i = 0;
-                while (i < noteJouer.size()){
-//                    toucheSurbrillance = 0;
+            //                    toucheSurbrillance = 0;
 //                    boolean bTrouve = false;
 //                    while(toucheSurbrillance < touches.size() && !bTrouve)
 //                    {
@@ -226,20 +212,37 @@ public class Partition {
 //                        touches.get(toucheSurbrillance).setSurbrillance(true);
 //                    else
 //                        toucheSurbrillance = 22222;
+            
+            
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public void jouerPartition(){
+        compteurNote = 0;
+        TimerTask timerTask = new TimerTask(){
+
+            @Override
+            public void run() {
+                System.out.println(Instant.now());
+                int i = 0;
+                while (i < noteJouer.size()){
                         
                     noteJouer.get(i).get(compteurNote).commencerJouer();
                     noteJouer.get(i).get(compteurNote).arreterJouer();
                     i++;
                 }
                 
-                update(touches);
+                update();
             }
         };
         timer = new Timer();
         timer.schedule(timerTask, 0);
     }
     
-    public void update(List<Touche> touches) {
+    public void update() {
         TimerTask timerTask = new TimerTask() {
 
             @Override
@@ -255,7 +258,7 @@ public class Partition {
                 }
                 
                 if (compteurNote + 1 < noteJouer.get(0).size())
-                    update(touches);
+                    update();
             }
         };
         timer.cancel();
@@ -296,14 +299,16 @@ public class Partition {
     }
     
     public int retourPersistance(String persistance) {
-        if (persistance.equals("_"))
-            return 1000;
-        else if (persistance.equals(","))
-            return 500;
-        else if (persistance.equals("."))
-            return 250;
-        else
-            return Integer.parseInt(persistance) * 1000;
+        switch (persistance) {
+            case "_":
+                return 1000;
+            case ",":
+                return 500;
+            case ".":
+                return 250;
+            default:
+                return Integer.parseInt(persistance) * 1000;
+        }
     }
     
     public boolean ligneIsTemps(String ligne){
