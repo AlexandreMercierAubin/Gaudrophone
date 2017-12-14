@@ -1247,10 +1247,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
                         .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(checkAfficheNom))
                 .addGap(13, 13, 13)
-                .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCleReliee)
-                    .addComponent(txtCleReliee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkAfficheCle))
+                .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkAfficheCle)
+                    .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblCleReliee)
+                        .addComponent(txtCleReliee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblForme)
@@ -1925,6 +1926,10 @@ public class FenetreInstrument extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cbFormeActionPerformed
    
+    private void miImporterChansonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miImporterChansonActionPerformed
+        controleur.importerPartition();
+    }
+
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.sauvegarderInstrument();
     }
