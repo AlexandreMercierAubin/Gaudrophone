@@ -260,13 +260,15 @@ public class Partition {
             long tempsDepart = System.nanoTime();
             while (index < tempsNoteJouer.size())
             {
-                long tempsActuel = (System.nanoTime() - tempsDepart) * 1000000;
+                long tempsActuel = (System.nanoTime() - tempsDepart) / 1000000;
+                
                 if (tempsActuel >= tempsNoteJouer.get(index))
                 {
-                    for (Note note: noteJouer.get(index))
+                    System.out.println(tempsActuel);
+                    for (List<Note> liste: noteJouer)
                     {
-                        note.commencerJouer();
-                        note.arreterJouer();
+                        liste.get(index).commencerJouer();
+                        liste.get(index).arreterJouer();
                     }
                     index++;
                 }
