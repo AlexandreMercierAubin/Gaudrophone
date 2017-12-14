@@ -21,13 +21,14 @@ public class Partition {
     int compteurNote;
     List<Integer> tempsNoteJouer;
     List<List<Note>> noteJouer;
-    List<Touche> toucheASurbriller;
+    List<List<Touche>> toucheASurbriller;
     public static Timer timer;
     
     public Partition()
     {
         tempsNoteJouer = new ArrayList<>();
         noteJouer = new ArrayList<>();
+        toucheASurbriller = new ArrayList<>();
         textePartition = "";  
     }
     
@@ -196,23 +197,30 @@ public class Partition {
                     i++;
                 }
             }  
-            //                    toucheSurbrillance = 0;
-//                    boolean bTrouve = false;
-//                    while(toucheSurbrillance < touches.size() && !bTrouve)
-//                    {
-//                        Son son = touches.get(toucheSurbrillance).getSon();
-//                        if (((Note)son).getNom() == noteJouer.get(i).get(compteurNote).getNom() && ((Note)son).getOctave() == noteJouer.get(i).get(compteurNote).getOctave())
-//                        {
-//                            bTrouve = true;                            
-//                        }
-//                        else                            
-//                            toucheSurbrillance++;
-//                    }
-//                    if(bTrouve)
-//                        touches.get(toucheSurbrillance).setSurbrillance(true);
-//                    else
-//                        toucheSurbrillance = 22222;
-            
+            i = 0;
+            while(i < noteJouer.size()){
+                toucheASurbriller.add(new ArrayList<>());
+                j = 0;
+                while(j < noteJouer.get(i).size()){
+                    boolean bTrouve = false;
+                    k = 0;
+                    while(k < touches.size() && !bTrouve){
+                        Son son = touches.get(k).getSon();
+                        if (((Note)son).getNom() == noteJouer.get(i).get(j).getNom() && ((Note)son).getOctave() == noteJouer.get(i).get(j).getOctave())
+                            bTrouve = true;
+                        else
+                            k++;
+                    }
+                    if (bTrouve)
+                        toucheASurbriller.get(i).add(touches.get(k));
+                    else
+                        toucheASurbriller.get(i).add(null);
+                    j++;
+                }
+                i++;
+            }
+            String ada = "";
+            ada = ada + ada;
             
         }
         catch (Exception e){
