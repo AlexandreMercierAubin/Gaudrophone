@@ -77,14 +77,13 @@ public class ControleurInstrument {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             partition.chemin = fc.getSelectedFile().getAbsolutePath();
         }
-        partition.lirePartition();
-        jouerPartition();
+        partition.lirePartition(instrument.getTimbre());
     }
     
     public String jouerPartition(){
-        partition.jouerPartition(instrument.getTouches(), instrument.getTimbre());
+        partition.jouerPartition(instrument.getTouches());
         String textePartition = partition.getTextePartition();
-        return textePartition; // txtMessage.setWrapStyle(false) et txtMessage.setLineWrap(false) dans la fenetre
+        return textePartition;
     }
     
     public Boucle getBoucle(int index)

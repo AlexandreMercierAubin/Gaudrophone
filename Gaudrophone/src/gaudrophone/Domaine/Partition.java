@@ -16,20 +16,19 @@ public class Partition {
     String chemin;
     String textePartition;
     int pulsation;
-    List<List<String>> note;
-    List<String> tempsNote;
     int compteurNote;
+    List<Integer> tempsNoteJouer;
+    List<List<Note>> noteJouer;
     public static Timer timer;
     
     public Partition()
     {
+        tempsNoteJouer = new ArrayList<>();
+        noteJouer = new ArrayList<>();
         textePartition = "";  
-        note = new ArrayList<>();
-        tempsNote = new ArrayList<>();
     }
     
-    public void lirePartition(){
-        
+    public void lirePartition(int timbre){        
         try{
             BufferedReader reader = new BufferedReader(new FileReader(chemin));
             boolean bPulsation = false;
@@ -37,7 +36,9 @@ public class Partition {
             int pos = -1;
             int longMax = 0;
             int compteurLigneComment = 0;
-            List<String> aTextePartition = new ArrayList<String>();
+            List<String> aTextePartition = new ArrayList<>();
+            List<List<String>> note = new ArrayList<>();
+            List<String> tempsNote = new ArrayList<>();
             
             while ((sReadLine = reader.readLine()) != null) {
                 if (bPulsation){  
@@ -109,27 +110,14 @@ public class Partition {
                 textePartition = textePartition + "\r\n" + aTextePartition.get(i);
                 i++;
             }
-            i = 0;
-            while (i < noteTable.length)
-            {
-                note.add(new ArrayList<>());
-                y = 0;
-                while (y < noteTable[i].length){
-                    if(!noteTable[i][y].equals(""))
-                    {
-                        note.get(i).add(noteTable[i][y]);
-                        System.out.println(noteTable[i][y]);
-                    }
-                    y++;
-                }
-                i++;
-            }
             
+            int compteurTemps = 0;
             i = 0;
             if(tempsNoteTable != null){
                 while(i < tempsNoteTable.length){
-                    if(!tempsNoteTable[i].equals("")){
-                        tempsNote.add(tempsNoteTable[i]);
+                    if(!tempsNoteTable[i].equals("")){                        
+                        tempsNoteJouer.add(compteurTemps);     
+                        compteurTemps = compteurTemps + retourPersistance(tempsNoteTable[i]);
                     }
                     i++;
                 }
@@ -137,9 +125,110 @@ public class Partition {
             else{
                 i = 0;
                 while(i < note.get(0).size()){
-                    tempsNote.add("_");
+                    tempsNoteJouer.add(1000 * i);  
                     i++;
                 }
+            }            
+            
+            String sNote;
+            i = 0;
+            int j = 0;
+            int k = 0;
+            NomNote nom = NomNote.A;
+            int octave = 4;
+            while (i < noteTable.length)
+            {
+                noteJouer.add(new ArrayList<>());
+                j = 0;
+                k = 0;
+                while (j < noteTable[i].length){
+                    if(!noteTable[i][j].equals(""))
+                    {
+                        noteJouer.get(i).add(new Note(timbre));
+                        sNote = noteTable[i][y].toUpperCase();
+                        switch (sNote.length()) {
+                            case 1:
+                                if (!sNote.equals("X"))
+                                {
+                                    nom = retourNomNote(sNote);
+                                    octave = 4;
+                                }
+                                else{
+                                    octave = 22;
+                                }
+                                break;
+                            case 2:
+                                if (sNote.charAt(1) == '#')
+                                {
+                                    nom = retourNomNote(sNote);
+                                    octave = 4;
+                                }
+                                else
+                                {
+                                    nom = retourNomNote(String.valueOf(sNote.charAt(0)));
+                                    octave = Character.getNumericValue(sNote.charAt(1));
+                                }   break;
+                            default:
+                                nom = retourNomNote(String.valueOf(sNote.charAt(0)) + String.valueOf(sNote.charAt(2)));
+                                octave = Character.getNumericValue(sNote.charAt(1));
+                                break;
+                        }
+                        noteJouer.get(i).get(k).setNom(nom);
+                        noteJouer.get(i).get(k).setOctave(octave);
+                        if( k == 0 )
+                            noteJouer.get(i).get(k).setPersistance(tempsNoteJouer.get(k));
+                        else 
+                            noteJouer.get(i).get(k).setPersistance(tempsNoteJouer.get(k) - tempsNoteJouer.get(k - 1));
+                        k++;
+                    }
+                    j++;
+                }
+                i++;
+            }
+            
+            
+            
+            while (i < note.size()){
+                noteJouer.add(new ArrayList<>());
+                j = 0;
+                while(j < note.get(i).size()){
+                    noteJouer.get(i).add(new Note(timbre));
+                    sNote = note.get(i).get(compteurNote);
+                    switch (sNote.length()) {
+                        case 1:
+                            if (!sNote.equals("X"))
+                            {
+                                nom = retourNomNote(sNote);
+                                octave = 4;
+                            }   break;
+                        case 2:
+                            if (sNote.charAt(1) == '#')
+                            {
+                                nom = retourNomNote(sNote);
+                                octave = 4;
+                            }
+                            else
+                            {
+                                nom = retourNomNote(String.valueOf(sNote.charAt(0)));
+                                octave = Character.getNumericValue(sNote.charAt(1));
+                            }   break;
+                        default:
+                            nom = retourNomNote(String.valueOf(sNote.charAt(0)) + String.valueOf(sNote.charAt(2)));
+                            octave = Character.getNumericValue(sNote.charAt(1));
+                            break;
+                    }
+                    noteJouer.get(i).get(j).setNom(nom);
+                    noteJouer.get(i).get(j).setOctave(octave);
+                    noteJouer.get(i).get(j).setPersistance((retourPersistance(tempsNote.get(compteurNote)) * pulsation / 60));
+                    j++;
+                }
+                i++;
+            }
+            i = 0;
+            while(i < tempsNote.size()){
+                compteurTemps = compteurTemps + retourPersistance(tempsNote.get(compteurNote));
+                tempsNoteJouer.add(compteurTemps);
+                i++;
             }
         }
         catch (Exception e){
@@ -147,102 +236,35 @@ public class Partition {
         }
     }
     
-    public void jouerPartition(List<Touche> touches, int timbre){
+    public void jouerPartition(List<Touche> touches){
         compteurNote = 0;
-        Note noteJouer = new Note(timbre);
         TimerTask timerTask = new TimerTask(){
 
             @Override
             public void run() {
                 System.out.println(Instant.now());
                 int i = 0;
-                String sNote;
-                while (i < note.size()){
-                    sNote = note.get(i).get(compteurNote);
-                    switch (sNote.length()) {
-                        case 1:
-                            if (!sNote.equals("X"))
-                            {
-                                noteJouer.setNom(retourNomNote(sNote));
-                                noteJouer.setOctave(4);
-                            }   break;
-                        case 2:
-                            if (sNote.charAt(1) == '#')
-                            {
-                                noteJouer.setNom(retourNomNote(sNote));
-                                noteJouer.setOctave(4);
-                            }
-                            else
-                            {
-                                noteJouer.setNom(retourNomNote(String.valueOf(sNote.charAt(0))));
-                                noteJouer.setOctave(Character.getNumericValue(sNote.charAt(1)));
-                            }   break;
-                        default:
-                            noteJouer.setNom(retourNomNote(String.valueOf(sNote.charAt(0)) + String.valueOf(sNote.charAt(2))));
-                            noteJouer.setOctave(Character.getNumericValue(sNote.charAt(1)));
-                            break;
-                    }
-                    noteJouer.setPersistance((retourPersistance(tempsNote.get(compteurNote)) * pulsation / 60));
-                    noteJouer.commencerJouer();
-                    noteJouer.arreterJouer();
-                    i++;
-                }
-                update(timbre);
+                
+                update();
             }
         };
         timer = new Timer();
         timer.schedule(timerTask, 0);
     }
     
-    public void update(int timbre) {
-        Note noteJouer = new Note(timbre);
+    public void update() {
         TimerTask timerTask = new TimerTask() {
 
             @Override
             public void run() {
-                System.out.println(Instant.now());
-                int i = 0;
-                String sNote;
-                while (i < note.size()){
-                    sNote = note.get(i).get(compteurNote);
-                    switch (sNote.length()) {
-                        case 1:
-                            if (!sNote.equals("X"))
-                            {
-                                noteJouer.setNom(retourNomNote(sNote));
-                                noteJouer.setOctave(4);
-                            }   break;
-                        case 2:
-                            if (sNote.charAt(1) == '#')
-                            {
-                                noteJouer.setNom(retourNomNote(sNote));
-                                noteJouer.setOctave(4);
-                            }
-                            else
-                            {
-                                noteJouer.setNom(retourNomNote(String.valueOf(sNote.charAt(0))));
-                                noteJouer.setOctave(Character.getNumericValue(sNote.charAt(1)));
-                            }   break;
-                        default:
-                            noteJouer.setNom(retourNomNote(String.valueOf(sNote.charAt(0)) + String.valueOf(sNote.charAt(2))));
-                            noteJouer.setOctave(Character.getNumericValue(sNote.charAt(1)));
-                            break;
-                    }
-                    noteJouer.setPersistance((retourPersistance(tempsNote.get(compteurNote)) * pulsation / 60));
-                    noteJouer.commencerJouer();
-                    noteJouer.arreterJouer();
-                    i++;
-                }
-                update(timbre);
-
+                System.out.println(Instant.now());               
+                update();
             }
         };
         timer.cancel();
-        if (compteurNote < note.get(0).size()){
-            timer = new Timer();
-            timer.schedule(timerTask, (retourPersistance(tempsNote.get(compteurNote)) * pulsation / 60));
-            compteurNote++;
-        }
+        timer = new Timer();
+        timer.schedule(timerTask, tempsNoteJouer.get(compteurNote));
+        compteurNote++;
     }
     
     public NomNote retourNomNote(String sNote) {

@@ -44,60 +44,64 @@ public class Note extends Son implements Serializable{
     
     @Override
     public void commencerJouer()
-    {       
-        javax.sound.midi.Instrument instruments[], instr;
-        int noInstrument = timbreInstrument;
-        int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
-        
-        // Permet de préciser que l'instrument commence a émettre un son
-        jouerSon = true;
-        
-        try{            
-            synthesizer.open();
-            instruments = synthesizer.getLoadedInstruments();
-            instr = instruments[noInstrument];
-            Patch patch = instr.getPatch();
-
-            channels = synthesizer.getChannels();
-            channels[0].programChange(patch.getBank(),patch.getProgram());
-            channels[0].noteOn(midiNoteNumber, 127);
-            
-            if (timer != null)
-                timer.cancel();
-            
-            // Faire durer un son au minimum le temps de la persistance
-            timer = new Timer("Tick");
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    arreterJouer();   
-                }
-            }, persistance);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-    
-    @Override
-    public void arreterJouer()
-    {
-        System.out.println(jouerSon);
-        if (!jouerSon){
+    {    
+        if (octave != 22){
+            javax.sound.midi.Instrument instruments[], instr;
+            int noInstrument = timbreInstrument;
             int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
-            try{
-                channels[0].noteOff(midiNoteNumber, 127);
-                synthesizer.close();
+
+            // Permet de préciser que l'instrument commence a émettre un son
+            jouerSon = true;
+
+            try{            
+                synthesizer.open();
+                instruments = synthesizer.getLoadedInstruments();
+                instr = instruments[noInstrument];
+                Patch patch = instr.getPatch();
+
+                channels = synthesizer.getChannels();
+                channels[0].programChange(patch.getBank(),patch.getProgram());
+                channels[0].noteOn(midiNoteNumber, 127);
+
+                if (timer != null)
+                    timer.cancel();
+
+                // Faire durer un son au minimum le temps de la persistance
+                timer = new Timer("Tick");
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        arreterJouer();   
+                    }
+                }, persistance);
             }
             catch (Exception e)
             {
                 e.printStackTrace();
             }
         }
-        else
-        {
-            jouerSon = false;
+    }
+    
+    @Override
+    public void arreterJouer()
+    {
+        if (octave != 22){
+            System.out.println(jouerSon);
+            if (!jouerSon){
+                int midiNoteNumber = Outils.getMidiNoteNumber(nom, octave);
+                try{
+                    channels[0].noteOff(midiNoteNumber, 127);
+                    synthesizer.close();
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            else
+            {
+                jouerSon = false;
+            }
         }
     }
     
