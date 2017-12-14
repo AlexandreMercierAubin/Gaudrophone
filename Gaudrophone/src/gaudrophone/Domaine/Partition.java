@@ -19,6 +19,7 @@ public class Partition {
     int pulsation;
     int toucheSurbrillance;
     int compteurNote;
+    int tempsTotal;
     List<Integer> tempsNoteJouer;
     List<List<Note>> noteJouer;
     List<List<Touche>> toucheSurbriller;
@@ -166,19 +167,19 @@ public class Partition {
                 i++;
             }
             
-            int compteurTemps = 0;
+            tempsTotal = 0;
             i = 0;
             j = 0;
             if(tempsNoteTable != null){
                 while(i < tempsNoteTable.length){
                     if(!tempsNoteTable[i].equals("")){                        
-                        tempsNoteJouer.add(compteurTemps);
+                        tempsNoteJouer.add(tempsTotal);
                         k = 0;
                         while (k < noteJouer.size()){
                             noteJouer.get(k).get(j).setPersistance(retourPersistance(tempsNoteTable[i]) * 60 / pulsation);
                             k++;
                         }
-                        compteurTemps = compteurTemps + retourPersistance(tempsNoteTable[i]) * 60 / pulsation;
+                        tempsTotal = tempsTotal + retourPersistance(tempsNoteTable[i]) * 60 / pulsation;
                         j++;
                     }
                     i++;
@@ -195,6 +196,7 @@ public class Partition {
                     tempsNoteJouer.add(1000 * i * 60 / pulsation );  
                     i++;
                 }
+                tempsTotal = 1000 * i * 60 / pulsation;
             }  
             i = 0;
             while(i < noteJouer.size()){
