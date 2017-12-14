@@ -21,14 +21,14 @@ public class Partition {
     int compteurNote;
     List<Integer> tempsNoteJouer;
     List<List<Note>> noteJouer;
-    List<List<Touche>> toucheASurbriller;
+    List<List<Touche>> toucheSurbriller;
     public static Timer timer;
     
     public Partition()
     {
         tempsNoteJouer = new ArrayList<>();
         noteJouer = new ArrayList<>();
-        toucheASurbriller = new ArrayList<>();
+        toucheSurbriller = new ArrayList<>();
         textePartition = "";  
     }
     
@@ -199,7 +199,7 @@ public class Partition {
             }  
             i = 0;
             while(i < noteJouer.size()){
-                toucheASurbriller.add(new ArrayList<>());
+                toucheSurbriller.add(new ArrayList<>());
                 j = 0;
                 while(j < noteJouer.get(i).size()){
                     boolean bTrouve = false;
@@ -212,15 +212,13 @@ public class Partition {
                             k++;
                     }
                     if (bTrouve)
-                        toucheASurbriller.get(i).add(touches.get(k));
+                        toucheSurbriller.get(i).add(touches.get(k));
                     else
-                        toucheASurbriller.get(i).add(null);
+                        toucheSurbriller.get(i).add(null);
                     j++;
                 }
                 i++;
             }
-            String ada = "";
-            ada = ada + ada;
             
         }
         catch (Exception e){
