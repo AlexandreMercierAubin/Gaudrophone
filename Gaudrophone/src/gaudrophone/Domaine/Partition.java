@@ -22,7 +22,6 @@ public class Partition {
     List<Integer> tempsNoteJouer;
     List<List<Note>> noteJouer;
     List<List<Touche>> toucheSurbriller;
-    public static Timer timer;
     
     public Partition()
     {
@@ -227,39 +226,26 @@ public class Partition {
     }
     
     public void jouerPartition(){
-//        compteurNote = 0;
-//        TimerTask timerTask = new TimerTask(){
-//
-//            @Override
-//            public void run() {
-//                System.out.println(Instant.now());
-//                int i = 0;
-//                while (i < noteJouer.size()){
-//                        
-//                    noteJouer.get(i).get(compteurNote).commencerJouer();
-//                    noteJouer.get(i).get(compteurNote).arreterJouer();
-//                    i++;
-//                }
-//                
-//                update();
-//            }
-//        };
-//        timer = new Timer();
-//        timer.schedule(timerTask, 0);
-        Thread thread = new ThreadJouer();
+        Thread thread = new ThreadJouer(0);
         thread.start();
     }
     
     private class ThreadJouer extends Thread {
+        long tempsDepart;
+        
+        public ThreadJouer(long tempsDepart)
+        {
+            this.tempsDepart = tempsDepart;
+        }
+        
         @Override
         public void run()
         {
             int index = 0;
-            long tempsDepart = System.nanoTime();
+            long tempsDepartNano = System.nanoTime();
             while (index < tempsNoteJouer.size())
             {
-                long tempsActuel = (System.nanoTime() - tempsDepart) / 1000000;
-                
+                long tempsActuel = (System.nanoTime() - tempsDepartNano) / 1000000 + tempsDepart;
                 if (tempsActuel >= tempsNoteJouer.get(index))
                 {
                     System.out.println(tempsActuel);
@@ -268,35 +254,16 @@ public class Partition {
                         liste.get(index).commencerJouer();
                         liste.get(index).arreterJouer();
                     }
+                    for (List<Touche> liste: toucheSurbriller)
+                    {
+                        if (index > 0)
+                            liste.get(index - 1).setSurbrillance(false);
+                        liste.get(index).setSurbrillance(true);
+                    }
                     index++;
                 }
             }
         }
-    }
-    
-    public void update() {
-        TimerTask timerTask = new TimerTask() {
-
-            @Override
-            public void run() {
-//                if(toucheSurbrillance != 22222)
-//                    touches.get(toucheSurbrillance).setSurbrillance(false);
-                System.out.println(Instant.now()); 
-                int i = 0;
-                while (i < noteJouer.size()){
-                    noteJouer.get(i).get(compteurNote).commencerJouer();
-                    noteJouer.get(i).get(compteurNote).arreterJouer();
-                    i++;
-                }
-                
-                if (compteurNote + 1 < noteJouer.get(0).size())
-                    update();
-            }
-        };
-        timer.cancel();
-        timer = new Timer();
-        timer.schedule(timerTask, (tempsNoteJouer.get(compteurNote + 1) - tempsNoteJouer.get((compteurNote))));
-        compteurNote++;
     }
     
     public NomNote retourNomNote(String sNote) {
