@@ -397,7 +397,7 @@
                                               <Component id="btnBoucle3" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Component id="jSlider2" max="32767" attributes="0"/>
+                                      <Component id="sliderPartition" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -498,7 +498,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jSlider2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="sliderPartition" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnJouerPartition" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -715,7 +715,7 @@
                             <Property name="text" type="java.lang.String" value="Partition :"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JSlider" name="jSlider2">
+                        <Component class="javax.swing.JSlider" name="sliderPartition">
                         </Component>
                         <Component class="javax.swing.JToggleButton" name="btnJouerPartition">
                           <Properties>
