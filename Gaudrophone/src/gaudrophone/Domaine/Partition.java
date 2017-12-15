@@ -39,7 +39,7 @@ public class Partition {
             String sReadLine;
             int pos = -1;
             int longMax = 0;
-            int compteurLigneComment = 0;
+            int compteurLigneNonNote = 0;
             List<String> aTextePartition = new ArrayList<>();
             
             while ((sReadLine = reader.readLine()) != null) {
@@ -59,7 +59,7 @@ public class Partition {
                     else{
                         if( pos < aTextePartition.size()){
                             if(sReadLine.charAt(0) == '/' && sReadLine.charAt(1) == '/'){
-                                compteurLigneComment ++;
+                                compteurLigneNonNote ++;
                                 if(aTextePartition.get(pos).charAt(0) != '/' && aTextePartition.get(pos).charAt(1) != '/')
                                     aTextePartition.add(sReadLine);
                                 else
@@ -71,12 +71,12 @@ public class Partition {
                         }
                         else{
                             if(sReadLine.charAt(0) == '/' && sReadLine.charAt(1) == '/')
-                                compteurLigneComment ++;
+                                compteurLigneNonNote ++;
                             aTextePartition.add(sReadLine);
                         }
                         
                         if (longMax < sReadLine.length())
-                                longMax = sReadLine.length();
+                            longMax = sReadLine.length();
                     }                    
                 }
                 else{
@@ -95,8 +95,7 @@ public class Partition {
             
             int i = 0;
             int y = 0;
-            int accordMax = aTextePartition.size() - compteurLigneComment;
-            noteTable = new String[accordMax][];
+            noteTable = new String[aTextePartition.size()][];
             String a = "";
             while (i < aTextePartition.size() && !aTextePartition.get(i).equals("")){
                 if (aTextePartition.get(i).charAt(0) != '/' && aTextePartition.get(i).charAt(1) != '/'){
@@ -122,47 +121,49 @@ public class Partition {
             int octave = 4;
             while (i < noteTable.length)
             {
-                noteJouer.add(new ArrayList<>());
-                j = 0;
-                k = 0;
-                while (j < noteTable[i].length){
-                    if(!noteTable[i][j].equals(""))
-                    {
-                        noteJouer.get(i).add(new Note(timbre));
-//                        noteJouer.get(i).get(k).jouerMuet();
-                        sNote = noteTable[i][j].toUpperCase();
-                        switch (sNote.length()) {
-                            case 1:
-                                if (!sNote.equals("X"))
-                                {
-                                    nom = retourNomNote(sNote);
-                                    octave = 4;
-                                }
-                                else{
-                                    octave = 22;
-                                }
-                                break;
-                            case 2:
-                                if (sNote.charAt(1) == '#')
-                                {
-                                    nom = retourNomNote(sNote);
-                                    octave = 4;
-                                }
-                                else
-                                {
-                                    nom = retourNomNote(String.valueOf(sNote.charAt(0)));
+                if (noteTable[i] != null){
+                    noteJouer.add(new ArrayList<>());
+                    j = 0;
+                    k = 0;
+                    while (j < noteTable[i].length){
+                        if(!noteTable[i][j].equals(""))
+                        {
+                            noteJouer.get(i).add(new Note(timbre));
+    //                        noteJouer.get(i).get(k).jouerMuet();
+                            sNote = noteTable[i][j].toUpperCase();
+                            switch (sNote.length()) {
+                                case 1:
+                                    if (!sNote.equals("X"))
+                                    {
+                                        nom = retourNomNote(sNote);
+                                        octave = 4;
+                                    }
+                                    else{
+                                        octave = 22;
+                                    }
+                                    break;
+                                case 2:
+                                    if (sNote.charAt(1) == '#')
+                                    {
+                                        nom = retourNomNote(sNote);
+                                        octave = 4;
+                                    }
+                                    else
+                                    {
+                                        nom = retourNomNote(String.valueOf(sNote.charAt(0)));
+                                        octave = Character.getNumericValue(sNote.charAt(1));
+                                    }   break;
+                                default:
+                                    nom = retourNomNote(String.valueOf(sNote.charAt(0)) + String.valueOf(sNote.charAt(2)));
                                     octave = Character.getNumericValue(sNote.charAt(1));
-                                }   break;
-                            default:
-                                nom = retourNomNote(String.valueOf(sNote.charAt(0)) + String.valueOf(sNote.charAt(2)));
-                                octave = Character.getNumericValue(sNote.charAt(1));
-                                break;
+                                    break;
+                            }
+                            noteJouer.get(i).get(k).setNom(nom);
+                            noteJouer.get(i).get(k).setOctave(octave);
+                            k++;
                         }
-                        noteJouer.get(i).get(k).setNom(nom);
-                        noteJouer.get(i).get(k).setOctave(octave);
-                        k++;
+                        j++;
                     }
-                    j++;
                 }
                 i++;
             }
