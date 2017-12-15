@@ -472,9 +472,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
         ActionMap am = panneauAffichage.getActionMap();
         
         im.put(KeyStroke.getKeyStroke((int)cle, 0, false), "D" + cle);
-        am.put("D" + cle, new ActionCommencerJouerTouche(touche, panneauAffichage));
+        am.put("D" + cle, new ActionCommencerJouerTouche(touche, panneauAffichage, controleur));
         im.put(KeyStroke.getKeyStroke((int)cle, 0, true), "F" + cle);
-        am.put("F" + cle, new ActionArreterJouerTouche(touche, panneauAffichage));
+        am.put("F" + cle, new ActionArreterJouerTouche(touche, panneauAffichage, controleur));
         
         touche.setCleReliee(cle);
     }

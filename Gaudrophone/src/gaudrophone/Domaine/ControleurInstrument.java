@@ -146,8 +146,7 @@ public class ControleurInstrument {
                     Touche touche = instrument.getTouche(indexTouche);
                     touche.commencerJouer();
                     toucheEnJeu=indexTouche;
-                    for (Boucle boucle: boucles)
-                        boucle.ajouterTouche(touche, true);
+                    ajouterToucheBoucles(touche, true);
                 }
                 break;
                 
@@ -183,8 +182,7 @@ public class ControleurInstrument {
                     Touche touche = instrument.getTouche(indexTouche);
                     touche.arreterJouer();
                     toucheEnJeu=-1;
-                    for (Boucle boucle: boucles)
-                        boucle.ajouterTouche(touche, false);
+                    ajouterToucheBoucles(touche, false);
                 }
                 break;
                 
@@ -226,8 +224,7 @@ public class ControleurInstrument {
                         Touche toucheSelectionnee = instrument.getTouche(indexTouche);
                         toucheSelectionnee.commencerJouer();
                         toucheEnJeu = indexTouche;
-                        for (Boucle boucle: boucles)
-                            boucle.ajouterTouche(toucheSelectionnee, true);
+                        ajouterToucheBoucles(toucheSelectionnee, true);
                     }
                 }
                 else
@@ -240,12 +237,17 @@ public class ControleurInstrument {
                 if (toucheAArreter != null)
                 {
                     toucheAArreter.arreterJouer();
-                    for (Boucle boucle: boucles)
-                        boucle.ajouterTouche(toucheAArreter, false);
+                    ajouterToucheBoucles(toucheAArreter, false);
                 }
         }
         
         return toucheEnDeplacement;
+    }
+    
+    public void ajouterToucheBoucles(Touche touche, boolean enJeu)
+    {
+        for (Boucle boucle: boucles)
+            boucle.ajouterTouche(touche, enJeu);
     }
     
     public void sauvegarderInstrument()
