@@ -225,7 +225,8 @@ public class Partition {
                 }
                 i++;
             }
-            
+                   
+            this.slider.repaint();
             this.slider.setMaximum(tempsTotal);
             this.slider.setMinimum(0);
             this.slider.setValue(0);
