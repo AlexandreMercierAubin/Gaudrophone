@@ -93,6 +93,10 @@ public class ControleurInstrument {
         return textePartition;
     }
     
+    public void pausePartition() {
+        partition.pausePartition();
+    }
+    
     public Boucle getBoucle(int index)
     {
         if(boucles.size()>index)

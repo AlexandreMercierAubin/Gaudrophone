@@ -65,6 +65,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         btnParcourirFichierAudio.setEnabled(false);
         spGaudrophone.setResizeWeight(1);
         splitAffichage.setResizeWeight(1);
+        btnJouerPartition.setEnabled(false);
         
         txtMessage.setEditable(false);
         txtMessage.setWrapStyleWord(true);
@@ -1929,21 +1930,24 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_cbFormeActionPerformed
 
     private void btnJouerPartitionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJouerPartitionActionPerformed
-        if (btnJouerPartition.isSelected())
+        if (btnJouerPartition.getText().equals("Jouer") || btnJouerPartition.getText().equals("Recommencer"))
         {
             String partition = controleur.jouerPartition();
             txtMessage.setWrapStyleWord(false);
             txtMessage.setLineWrap(false);
             txtMessage.setText(partition);
+            btnJouerPartition.setText("Pause");
         }
         else
         {
-            
+            btnJouerPartition.setText("Jouer");
+            controleur.pausePartition();
         }
     }//GEN-LAST:event_btnJouerPartitionActionPerformed
    
     private void miImporterChansonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         controleur.importerPartition(panneauAffichage, sliderPartition);
+        btnJouerPartition.setEnabled(true);
     }
 
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
