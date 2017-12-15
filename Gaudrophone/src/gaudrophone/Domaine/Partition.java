@@ -24,6 +24,7 @@ public class Partition {
     List<List<Touche>> toucheSurbriller;
     PanneauAffichage panneauAffichage;
     JSlider slider;
+    boolean partitionJouer;
     
     public Partition(PanneauAffichage panneauAffichage, JSlider slider)
     {
@@ -42,7 +43,7 @@ public class Partition {
             String sReadLine;
             int pos = -1;
             int longMax = 0;
-            int compteurLigneComment = 0;
+            int compteurLigneNonNote = 0;
             List<String> aTextePartition = new ArrayList<>();
             
             while ((sReadLine = reader.readLine()) != null) {
@@ -62,7 +63,7 @@ public class Partition {
                     else{
                         if( pos < aTextePartition.size()){
                             if(sReadLine.charAt(0) == '/' && sReadLine.charAt(1) == '/'){
-                                compteurLigneComment ++;
+                                compteurLigneNonNote ++;
                                 if(aTextePartition.get(pos).charAt(0) != '/' && aTextePartition.get(pos).charAt(1) != '/')
                                     aTextePartition.add(sReadLine);
                                 else
@@ -74,12 +75,12 @@ public class Partition {
                         }
                         else{
                             if(sReadLine.charAt(0) == '/' && sReadLine.charAt(1) == '/')
-                                compteurLigneComment ++;
+                                compteurLigneNonNote ++;
                             aTextePartition.add(sReadLine);
                         }
                         
                         if (longMax < sReadLine.length())
-                                longMax = sReadLine.length();
+                            longMax = sReadLine.length();
                     }                    
                 }
                 else{
@@ -98,8 +99,7 @@ public class Partition {
             
             int i = 0;
             int y = 0;
-            int accordMax = aTextePartition.size() - compteurLigneComment;
-            noteTable = new String[accordMax][];
+            noteTable = new String[aTextePartition.size()][];
             String a = "";
             while (i < aTextePartition.size() && !aTextePartition.get(i).equals("")){
                 if (aTextePartition.get(i).charAt(0) != '/' && aTextePartition.get(i).charAt(1) != '/'){
@@ -125,47 +125,49 @@ public class Partition {
             int octave = 4;
             while (i < noteTable.length)
             {
-                noteJouer.add(new ArrayList<>());
-                j = 0;
-                k = 0;
-                while (j < noteTable[i].length){
-                    if(!noteTable[i][j].equals(""))
-                    {
-                        noteJouer.get(i).add(new Note(timbre));
-//                        noteJouer.get(i).get(k).jouerMuet();
-                        sNote = noteTable[i][j].toUpperCase();
-                        switch (sNote.length()) {
-                            case 1:
-                                if (!sNote.equals("X"))
-                                {
-                                    nom = retourNomNote(sNote);
-                                    octave = 4;
-                                }
-                                else{
-                                    octave = 22;
-                                }
-                                break;
-                            case 2:
-                                if (sNote.charAt(1) == '#')
-                                {
-                                    nom = retourNomNote(sNote);
-                                    octave = 4;
-                                }
-                                else
-                                {
-                                    nom = retourNomNote(String.valueOf(sNote.charAt(0)));
+                if (noteTable[i] != null){
+                    noteJouer.add(new ArrayList<>());
+                    j = 0;
+                    k = 0;
+                    while (j < noteTable[i].length){
+                        if(!noteTable[i][j].equals(""))
+                        {
+                            noteJouer.get(i).add(new Note(timbre));
+    //                        noteJouer.get(i).get(k).jouerMuet();
+                            sNote = noteTable[i][j].toUpperCase();
+                            switch (sNote.length()) {
+                                case 1:
+                                    if (!sNote.equals("X"))
+                                    {
+                                        nom = retourNomNote(sNote);
+                                        octave = 4;
+                                    }
+                                    else{
+                                        octave = 22;
+                                    }
+                                    break;
+                                case 2:
+                                    if (sNote.charAt(1) == '#')
+                                    {
+                                        nom = retourNomNote(sNote);
+                                        octave = 4;
+                                    }
+                                    else
+                                    {
+                                        nom = retourNomNote(String.valueOf(sNote.charAt(0)));
+                                        octave = Character.getNumericValue(sNote.charAt(1));
+                                    }   break;
+                                default:
+                                    nom = retourNomNote(String.valueOf(sNote.charAt(0)) + String.valueOf(sNote.charAt(2)));
                                     octave = Character.getNumericValue(sNote.charAt(1));
-                                }   break;
-                            default:
-                                nom = retourNomNote(String.valueOf(sNote.charAt(0)) + String.valueOf(sNote.charAt(2)));
-                                octave = Character.getNumericValue(sNote.charAt(1));
-                                break;
+                                    break;
+                            }
+                            noteJouer.get(i).get(k).setNom(nom);
+                            noteJouer.get(i).get(k).setOctave(octave);
+                            k++;
                         }
-                        noteJouer.get(i).get(k).setNom(nom);
-                        noteJouer.get(i).get(k).setOctave(octave);
-                        k++;
+                        j++;
                     }
-                    j++;
                 }
                 i++;
             }
@@ -223,89 +225,119 @@ public class Partition {
                 }
                 i++;
             }
-            
+                   
+            this.slider.repaint();
+            this.slider.setMaximum(tempsTotal);
+            this.slider.setMinimum(0);
+            this.slider.setValue(0);
+            this.slider.setMajorTickSpacing((int)(tempsTotal / 5));
+            this.slider.setPaintTicks(true);
+            this.slider.setPaintLabels(true);
         }
         catch (Exception e){
             System.out.println(e);
         }
     }
     
+    public void pausePartition(){
+        partitionJouer = false;
+    }
+    
     public void jouerPartition(){
-        Thread thread = new ThreadJouer(0);
+        partitionJouer = true;
+        long tempsPartition = this.slider.getValue();
+        
+        if (tempsPartition == tempsTotal)
+            tempsPartition = 0;
+        
+        Thread thread = new ThreadJouer(tempsPartition);
         thread.start();
     }
     
     private class ThreadJouer extends Thread {
         long tempsDepart;
+        int indexDepart;
         
         public ThreadJouer(long tempsDepart)
         {
             this.tempsDepart = tempsDepart;
+            indexDepart = -1;
+            int i = 0;
+            
+            while (i < tempsNoteJouer.size() && indexDepart == -1)
+            {
+                if (tempsNoteJouer.get(i) >= tempsDepart)
+                    indexDepart = i;
+                i++;
+            }
+            
+            if (indexDepart == -1)
+                indexDepart = tempsNoteJouer.size();
         }
         
         @Override
         public void run()
         {
-            int index = 0;
             long tempsDepartNano = System.nanoTime();
-            long tempsActuel = tempsDepart;
-            while (index < tempsNoteJouer.size())
+            long tempsPartition = tempsDepart;
+            int indexPartition = indexDepart;
+            
+            while (partitionJouer && tempsPartition < tempsTotal)
             {
-                tempsActuel = (System.nanoTime() - tempsDepartNano) / 1000000 + tempsDepart;
-                if (tempsActuel >= tempsNoteJouer.get(index))
+                tempsPartition = (System.nanoTime() - tempsDepartNano) / 1000000 + tempsDepart;
+                slider.setValue((int)tempsPartition);   
+                
+                if (indexPartition < tempsNoteJouer.size())
                 {
-                    boolean repaint = false;
-                    System.out.println(tempsActuel);
-                    
-                    for (List<Note> liste: noteJouer)
+                    if (tempsPartition >= tempsNoteJouer.get(indexPartition) && partitionJouer)
                     {
-                        liste.get(index).commencerJouer();
-                        liste.get(index).arreterJouer();
-                    }
-                    
-                    for (List<Touche> liste: toucheSurbriller)
-                    {
-                        if (index > 0)
+                        boolean repaint = false;
+                        System.out.println(tempsPartition);
+
+                        for (List<Note> liste: noteJouer)
                         {
-                            Touche touchePrecedente = liste.get(index - 1);
-                            if (touchePrecedente != null)
+                            liste.get(indexPartition).commencerJouer();
+                            liste.get(indexPartition).arreterJouer();
+                        }
+
+                        for (List<Touche> liste: toucheSurbriller)
+                        {
+                            if (indexPartition > 0)
                             {
-                                touchePrecedente.setSurbrillance(false);
+                                Touche touchePrecedente = liste.get(indexPartition - 1);
+                                if (touchePrecedente != null)
+                                {
+                                    touchePrecedente.setSurbrillance(false);
+                                    repaint = true;
+                                }
+                            }
+
+                            Touche touche = liste.get(indexPartition);
+                            if (touche != null)
+                            {
+                                touche.setSurbrillance(true);
                                 repaint = true;
                             }
                         }
-                        
-                        Touche touche = liste.get(index);
-                        if (touche != null)
-                        {
-                            touche.setSurbrillance(true);
-                            repaint = true;
-                        }
+
+                        if (repaint)
+                            panneauAffichage.repaint();
+
+                        indexPartition++;
                     }
-                    
-                    if (repaint)
-                        panneauAffichage.repaint();
-                    
-                    index++;
                 }
             }
             
-            // Attente que la derniere touche finisse de jouer
-            while (tempsActuel < tempsTotal)
-                tempsActuel = (System.nanoTime() - tempsDepartNano) / 1000000 + tempsDepart;
-            
-            boolean repaint = false;
-            for (List<Touche> liste: toucheSurbriller)
+            if (indexPartition > 0)
             {
-                Touche touche = liste.get(liste.size() - 1);
-                if (touche != null)
+                for (List<Touche> liste: toucheSurbriller)
                 {
-                    touche.setSurbrillance(false);
-                    repaint = true;
+                    Touche touchePrecedente = liste.get(indexPartition - 1);
+                    if (touchePrecedente != null)
+                        touchePrecedente.setSurbrillance(false);
                 }
-            }
-            if (repaint)
                 panneauAffichage.repaint();
+            }
         }
     }
     

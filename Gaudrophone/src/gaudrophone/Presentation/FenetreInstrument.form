@@ -740,6 +740,11 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JSlider" name="sliderPartition">
+                          <Events>
+                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="sliderPartitionStateChanged"/>
+                            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sliderPartitionMousePressed"/>
+                            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="sliderPartitionPropertyChange"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JToggleButton" name="btnJouerPartition">
                           <Properties>
