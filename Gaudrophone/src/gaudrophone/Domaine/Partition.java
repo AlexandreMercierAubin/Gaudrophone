@@ -25,8 +25,6 @@ public class Partition {
     PanneauAffichage panneauAffichage;
     JSlider slider;
     boolean partitionJouer;
-    long tempsPartition;
-    int indexPartition;
     
     public Partition(PanneauAffichage panneauAffichage, JSlider slider)
     {
@@ -36,8 +34,6 @@ public class Partition {
         textePartition = "";
         this.panneauAffichage = panneauAffichage;
         this.slider = slider;
-        tempsPartition = 0;
-        indexPartition = 0;
     }
     
     public void lirePartition(int timbre, List<Touche> touches){        
@@ -232,7 +228,7 @@ public class Partition {
             
             this.slider.setMaximum(tempsTotal);
             this.slider.setMinimum(0);
-            this.slider.setValue((int)tempsPartition);
+            this.slider.setValue(0);
             this.slider.setMajorTickSpacing((int)(tempsTotal / 5));
             this.slider.setPaintTicks(true);
             this.slider.setPaintLabels(true);
@@ -248,86 +244,98 @@ public class Partition {
     
     public void jouerPartition(){
         partitionJouer = true;
-        tempsPartition = this.slider.getValue();
+        long tempsPartition = this.slider.getValue();
+        
+        if (tempsPartition == tempsTotal)
+            tempsPartition = 0;
+        
         Thread thread = new ThreadJouer(tempsPartition);
         thread.start();
     }
     
     private class ThreadJouer extends Thread {
         long tempsDepart;
+        int indexDepart;
         
         public ThreadJouer(long tempsDepart)
         {
             this.tempsDepart = tempsDepart;
+            indexDepart = -1;
+            int i = 0;
+            
+            while (i < tempsNoteJouer.size() && indexDepart == -1)
+            {
+                if (tempsNoteJouer.get(i) >= tempsDepart)
+                    indexDepart = i;
+                i++;
+            }
+            
+            if (indexDepart == -1)
+                indexDepart = tempsNoteJouer.size();
         }
         
         @Override
         public void run()
         {
             long tempsDepartNano = System.nanoTime();
-            tempsPartition = tempsDepart;
-            while (indexPartition < tempsNoteJouer.size() && partitionJouer)
+            long tempsPartition = tempsDepart;
+            int indexPartition = indexDepart;
+            
+            while (partitionJouer && tempsPartition < tempsTotal)
             {
                 tempsPartition = (System.nanoTime() - tempsDepartNano) / 1000000 + tempsDepart;
                 slider.setValue((int)tempsPartition);   
-                if (tempsPartition >= tempsNoteJouer.get(indexPartition) && partitionJouer)
+                
+                if (indexPartition < tempsNoteJouer.size())
                 {
-                    boolean repaint = false;
-                    System.out.println(tempsPartition);
-                    
-                    for (List<Note> liste: noteJouer)
+                    if (tempsPartition >= tempsNoteJouer.get(indexPartition) && partitionJouer)
                     {
-                        liste.get(indexPartition).commencerJouer();
-                        liste.get(indexPartition).arreterJouer();
-                    }
-                    
-                    for (List<Touche> liste: toucheSurbriller)
-                    {
-                        if (indexPartition > 0)
+                        boolean repaint = false;
+                        System.out.println(tempsPartition);
+
+                        for (List<Note> liste: noteJouer)
                         {
-                            Touche touchePrecedente = liste.get(indexPartition - 1);
-                            if (touchePrecedente != null)
+                            liste.get(indexPartition).commencerJouer();
+                            liste.get(indexPartition).arreterJouer();
+                        }
+
+                        for (List<Touche> liste: toucheSurbriller)
+                        {
+                            if (indexPartition > 0)
                             {
-                                touchePrecedente.setSurbrillance(false);
+                                Touche touchePrecedente = liste.get(indexPartition - 1);
+                                if (touchePrecedente != null)
+                                {
+                                    touchePrecedente.setSurbrillance(false);
+                                    repaint = true;
+                                }
+                            }
+
+                            Touche touche = liste.get(indexPartition);
+                            if (touche != null)
+                            {
+                                touche.setSurbrillance(true);
                                 repaint = true;
                             }
                         }
-                        
-                        Touche touche = liste.get(indexPartition);
-                        if (touche != null)
-                        {
-                            touche.setSurbrillance(true);
-                            repaint = true;
-                        }
+
+                        if (repaint)
+                            panneauAffichage.repaint();
+
+                        indexPartition++;
                     }
-                    
-                    if (repaint)
-                        panneauAffichage.repaint();
-                    
-                    indexPartition++;
                 }
             }
             
-            if(partitionJouer){
-                // Attente que la derniere touche finisse de jouer
-                while (tempsPartition < tempsTotal)
-                    tempsPartition = (System.nanoTime() - tempsDepartNano) / 1000000 + tempsDepart;
-
-                boolean repaint = false;
+            if (indexPartition > 0)
+            {
                 for (List<Touche> liste: toucheSurbriller)
                 {
-                    Touche touche = liste.get(liste.size() - 1);
-                    if (touche != null)
-                    {
-                        touche.setSurbrillance(false);
-                        repaint = true;
-                    }
+                    Touche touchePrecedente = liste.get(indexPartition - 1);
+                    if (touchePrecedente != null)
+                        touchePrecedente.setSurbrillance(false);
                 }
-                if (repaint)
-                    panneauAffichage.repaint();
-                partitionJouer = false;
-                tempsPartition = 0;
-                indexPartition = 0;
+                panneauAffichage.repaint();
             }
         }
     }

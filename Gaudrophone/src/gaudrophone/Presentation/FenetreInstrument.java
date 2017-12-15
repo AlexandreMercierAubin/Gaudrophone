@@ -771,6 +771,22 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         jLabel2.setText("Partition :");
 
+        sliderPartition.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderPartitionStateChanged(evt);
+            }
+        });
+        sliderPartition.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                sliderPartitionMousePressed(evt);
+            }
+        });
+        sliderPartition.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                sliderPartitionPropertyChange(evt);
+            }
+        });
+
         btnJouerPartition.setText("Jouer");
         btnJouerPartition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1944,6 +1960,27 @@ public class FenetreInstrument extends javax.swing.JFrame {
             controleur.pausePartition();
         }
     }//GEN-LAST:event_btnJouerPartitionActionPerformed
+
+    private void sliderPartitionPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_sliderPartitionPropertyChange
+        
+    }//GEN-LAST:event_sliderPartitionPropertyChange
+
+    private void sliderPartitionStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderPartitionStateChanged
+        if (sliderPartition.getValue() >= sliderPartition.getMaximum())
+        {
+            btnJouerPartition.setSelected(false);
+            btnJouerPartition.setText("Recommencer");
+        }
+        else if (!btnJouerPartition.isSelected())
+        {
+            btnJouerPartition.setText("Jouer");
+        }
+    }//GEN-LAST:event_sliderPartitionStateChanged
+
+    private void sliderPartitionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sliderPartitionMousePressed
+        if (btnJouerPartition.isSelected())
+            btnJouerPartition.doClick();
+    }//GEN-LAST:event_sliderPartitionMousePressed
    
     private void miImporterChansonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         controleur.importerPartition(panneauAffichage, sliderPartition);
