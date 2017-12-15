@@ -230,6 +230,12 @@ public class Partition {
                 i++;
             }
             
+            this.slider.setMaximum(tempsTotal);
+            this.slider.setMinimum(0);
+            this.slider.setValue((int)tempsPartition);
+            this.slider.setMajorTickSpacing((int)(tempsTotal / 5));
+            this.slider.setPaintTicks(true);
+            this.slider.setPaintLabels(true);
         }
         catch (Exception e){
             System.out.println(e);
@@ -242,6 +248,7 @@ public class Partition {
     
     public void jouerPartition(){
         partitionJouer = true;
+        tempsPartition = this.slider.getValue();
         Thread thread = new ThreadJouer(tempsPartition);
         thread.start();
     }
@@ -262,6 +269,7 @@ public class Partition {
             while (indexPartition < tempsNoteJouer.size() && partitionJouer)
             {
                 tempsPartition = (System.nanoTime() - tempsDepartNano) / 1000000 + tempsDepart;
+                slider.setValue((int)tempsPartition);   
                 if (tempsPartition >= tempsNoteJouer.get(indexPartition) && partitionJouer)
                 {
                     boolean repaint = false;
