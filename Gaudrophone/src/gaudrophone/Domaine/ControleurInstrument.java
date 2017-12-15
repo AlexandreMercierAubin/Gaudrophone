@@ -1,12 +1,10 @@
 package gaudrophone.Domaine;
 
+import gaudrophone.Domaine.Enums.EtatBoucle;
 import gaudrophone.Domaine.Generateur.GenerateurInstrument;
 import gaudrophone.Domaine.Instrument.Instrument;
 import gaudrophone.Domaine.Instrument.Touche;
 import gaudrophone.Domaine.Enums.ModeVisuel;
-import gaudrophone.Domaine.Instrument.Note;
-import gaudrophone.Domaine.Instrument.Son;
-import gaudrophone.Presentation.FenetreInstrument;
 import gaudrophone.Presentation.PanneauAffichage;
 import java.util.List;
 import java.awt.geom.Point2D;
@@ -102,9 +100,10 @@ public class ControleurInstrument {
         return null;
     }
     
-    public void enregistrerBoucle(int index){}
-    
-    public void finEnregistrerBoucle(int index){}
+    public EtatBoucle actionBoucle(int index)
+    {
+        return boucles.get(index).changerEtat();
+    }
     
     public void cliquerSouris(Point2D coordRelative)
     {
@@ -144,8 +143,11 @@ public class ControleurInstrument {
                 if(instrument.selectionnerTouche(coordRelative))
                 {
                     int indexTouche = instrument.getToucheSelectionee();
-                    instrument.getTouche(indexTouche).commencerJouer();
+                    Touche touche = instrument.getTouche(indexTouche);
+                    touche.commencerJouer();
                     toucheEnJeu=indexTouche;
+                    for (Boucle boucle: boucles)
+                        boucle.ajouterTouche(touche, true);
                 }
                 break;
                 
@@ -178,8 +180,11 @@ public class ControleurInstrument {
                 if(toucheEnJeu >= 0)
                 {
                     int indexTouche = instrument.getToucheSelectionee();
-                    instrument.getTouche(indexTouche).arreterJouer();
+                    Touche touche = instrument.getTouche(indexTouche);
+                    touche.arreterJouer();
                     toucheEnJeu=-1;
+                    for (Boucle boucle: boucles)
+                        boucle.ajouterTouche(touche, false);
                 }
                 break;
                 
@@ -215,9 +220,18 @@ public class ControleurInstrument {
                     if (indexTouche != toucheEnJeu)
                     {
                         if (toucheEnJeu >= 0)
-                            instrument.getTouche(toucheEnJeu).arreterJouer();
-                        instrument.getTouche(indexTouche).commencerJouer();
+                        {
+                            Touche toucheDeselectionnee = instrument.getTouche(toucheEnJeu);
+                            toucheDeselectionnee.arreterJouer();
+                            for (Boucle boucle: boucles)
+                                boucle.ajouterTouche(toucheDeselectionnee, false);
+                        }
+                        
+                        Touche toucheSelectionnee = instrument.getTouche(indexTouche);
+                        toucheSelectionnee.commencerJouer();
                         toucheEnJeu = indexTouche;
+                        for (Boucle boucle: boucles)
+                            boucle.ajouterTouche(toucheSelectionnee, true);
                     }
                 }
                 else

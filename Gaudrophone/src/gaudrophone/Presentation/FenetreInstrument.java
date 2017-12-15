@@ -9,6 +9,7 @@ import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.ControleurInstrument;
 import gaudrophone.Domaine.Dictionnaire.dictCouleur;
 import gaudrophone.Domaine.Dimension2D;
+import gaudrophone.Domaine.Enums.EtatBoucle;
 import gaudrophone.Domaine.Enums.Forme;
 import gaudrophone.Domaine.Enums.ModeVisuel;
 import gaudrophone.Domaine.Generateur.GenerateurGuitare;
@@ -194,8 +195,19 @@ public class FenetreInstrument extends javax.swing.JFrame {
         {
             String cle = "" + i;
             panneauAffichage.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(cle), cle);
-            panneauAffichage.getActionMap().put(cle, new ActionBoucle(controleur.getBoucle(i - 1), boutonsBoucle.get(i - 1)));
+            panneauAffichage.getActionMap().put(cle, new ActionBoucle(boutonsBoucle.get(i - 1)));
+            controleur.getBoucle(i - 1).setPanneauAffichage(panneauAffichage);
         }
+        
+        btnBoucle1.setBackground(Color.GRAY);
+        btnBoucle2.setBackground(Color.GRAY);
+        btnBoucle3.setBackground(Color.GRAY);
+        btnBoucle4.setBackground(Color.GRAY);
+        btnBoucle5.setBackground(Color.GRAY);
+        btnBoucle6.setBackground(Color.GRAY);
+        btnBoucle7.setBackground(Color.GRAY);
+        btnBoucle8.setBackground(Color.GRAY);
+        btnBoucle9.setBackground(Color.GRAY);
     }
     
     private void InstrumentUpdater()
@@ -753,20 +765,60 @@ public class FenetreInstrument extends javax.swing.JFrame {
         });
 
         btnBoucle2.setText("2");
+        btnBoucle2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBoucle2ActionPerformed(evt);
+            }
+        });
 
         btnBoucle3.setText("3");
+        btnBoucle3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBoucle3ActionPerformed(evt);
+            }
+        });
 
         btnBoucle4.setText("4");
+        btnBoucle4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBoucle4ActionPerformed(evt);
+            }
+        });
 
         btnBoucle5.setText("5");
+        btnBoucle5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBoucle5ActionPerformed(evt);
+            }
+        });
 
         btnBoucle6.setText("6");
+        btnBoucle6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBoucle6ActionPerformed(evt);
+            }
+        });
 
         btnBoucle7.setText("7");
+        btnBoucle7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBoucle7ActionPerformed(evt);
+            }
+        });
 
         btnBoucle8.setText("8");
+        btnBoucle8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBoucle8ActionPerformed(evt);
+            }
+        });
 
         btnBoucle9.setText("9");
+        btnBoucle9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBoucle9ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Partition :");
 
@@ -1885,8 +1937,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActifActionPerformed
 
     private void btnBoucle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoucle1ActionPerformed
-        
-        
+        EtatBoucle etat = controleur.actionBoucle(0);
+        btnBoucle1.setBackground(couleurBoutonBoucle(etat));
     }//GEN-LAST:event_btnBoucle1ActionPerformed
 
     private void cbTimbreMetronomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTimbreMetronomeActionPerformed
@@ -1941,7 +1993,62 @@ public class FenetreInstrument extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_btnJouerPartitionActionPerformed
+
+    private void btnBoucle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoucle2ActionPerformed
+        EtatBoucle etat = controleur.actionBoucle(1);
+        btnBoucle2.setBackground(couleurBoutonBoucle(etat));
+    }//GEN-LAST:event_btnBoucle2ActionPerformed
+
+    private void btnBoucle3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoucle3ActionPerformed
+        EtatBoucle etat = controleur.actionBoucle(2);
+        btnBoucle3.setBackground(couleurBoutonBoucle(etat));
+    }//GEN-LAST:event_btnBoucle3ActionPerformed
+
+    private void btnBoucle4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoucle4ActionPerformed
+        EtatBoucle etat = controleur.actionBoucle(3);
+        btnBoucle4.setBackground(couleurBoutonBoucle(etat));
+    }//GEN-LAST:event_btnBoucle4ActionPerformed
+
+    private void btnBoucle5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoucle5ActionPerformed
+        EtatBoucle etat = controleur.actionBoucle(4);
+        btnBoucle5.setBackground(couleurBoutonBoucle(etat));
+    }//GEN-LAST:event_btnBoucle5ActionPerformed
+
+    private void btnBoucle6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoucle6ActionPerformed
+        EtatBoucle etat = controleur.actionBoucle(5);
+        btnBoucle6.setBackground(couleurBoutonBoucle(etat));
+    }//GEN-LAST:event_btnBoucle6ActionPerformed
+
+    private void btnBoucle7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoucle7ActionPerformed
+        EtatBoucle etat = controleur.actionBoucle(6);
+        btnBoucle7.setBackground(couleurBoutonBoucle(etat));
+    }//GEN-LAST:event_btnBoucle7ActionPerformed
+
+    private void btnBoucle8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoucle8ActionPerformed
+        EtatBoucle etat = controleur.actionBoucle(7);
+        btnBoucle8.setBackground(couleurBoutonBoucle(etat));
+    }//GEN-LAST:event_btnBoucle8ActionPerformed
+
+    private void btnBoucle9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoucle9ActionPerformed
+        EtatBoucle etat = controleur.actionBoucle(8);
+        btnBoucle9.setBackground(couleurBoutonBoucle(etat));
+    }//GEN-LAST:event_btnBoucle9ActionPerformed
    
+    private Color couleurBoutonBoucle(EtatBoucle etat)
+    {
+        switch (etat)
+        {
+            case Enregistrer:
+                return Color.RED;
+                
+            case Jouer:
+                return Color.GREEN;
+                
+            default:
+                return Color.GRAY;
+        }
+    }
+    
     private void miImporterChansonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         controleur.importerPartition(panneauAffichage, sliderPartition);
     }
