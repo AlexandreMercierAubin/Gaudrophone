@@ -214,18 +214,14 @@ public class ControleurInstrument {
                 break;
             
             case Jouer:
+                Touche toucheAArreter = null;
                 if (instrument.selectionnerTouche(coordRelative))
                 {
                     int indexTouche = instrument.getToucheSelectionee();
                     if (indexTouche != toucheEnJeu)
                     {
                         if (toucheEnJeu >= 0)
-                        {
-                            Touche toucheDeselectionnee = instrument.getTouche(toucheEnJeu);
-                            toucheDeselectionnee.arreterJouer();
-                            for (Boucle boucle: boucles)
-                                boucle.ajouterTouche(toucheDeselectionnee, false);
-                        }
+                            toucheAArreter = instrument.getTouche(toucheEnJeu);
                         
                         Touche toucheSelectionnee = instrument.getTouche(indexTouche);
                         toucheSelectionnee.commencerJouer();
@@ -235,7 +231,18 @@ public class ControleurInstrument {
                     }
                 }
                 else
+                {
+                    if (toucheEnJeu >= 0)
+                        toucheAArreter = instrument.getTouche(toucheEnJeu);
                     toucheEnJeu = -1;
+                }
+                
+                if (toucheAArreter != null)
+                {
+                    toucheAArreter.arreterJouer();
+                    for (Boucle boucle: boucles)
+                        boucle.ajouterTouche(toucheAArreter, false);
+                }
         }
         
         return toucheEnDeplacement;
