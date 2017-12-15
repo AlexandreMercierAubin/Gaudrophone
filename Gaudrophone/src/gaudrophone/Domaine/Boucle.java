@@ -11,7 +11,6 @@ public class Boucle {
     List<Boolean> listeEnJeu;
     EtatBoucle etat;
     Thread thread;
-    boolean threadRun;
     long tempsDebutEnregistrement;
     long tempsFinEnregistrement;
     PanneauAffichage panneauAffichage;
@@ -26,7 +25,6 @@ public class Boucle {
     
     private void jouer()
     {
-        threadRun = true;
         thread = new ThreadJouer();
         thread.start();
     }
@@ -36,13 +34,13 @@ public class Boucle {
         public void run()
         {
             Touche toucheAArreter = null;
-            while (threadRun)
+            while (etat == EtatBoucle.Jouer)
             {
                 int index = 0;
                 long tempsDepart = System.nanoTime();
                 long tempsActuel = System.nanoTime() - tempsDepart;
                 
-                while (threadRun && tempsActuel <= tempsFinEnregistrement)
+                while (etat == EtatBoucle.Jouer && tempsActuel <= tempsFinEnregistrement)
                 {
                     tempsActuel = System.nanoTime() - tempsDepart;
                     if (index < listeTemps.size())
@@ -82,11 +80,6 @@ public class Boucle {
         }
     }
     
-    private void arreter()
-    {
-        threadRun = false;
-    }
-    
     public void ajouterTouche(Touche touche, boolean enJeu)
     {
         if (etat == EtatBoucle.Enregistrer)
@@ -120,7 +113,6 @@ public class Boucle {
                 
             case Jouer:
                 etat = EtatBoucle.Inactif;
-                arreter();
         }
         
         return etat;
