@@ -229,11 +229,12 @@ public class Partition {
                 }
                 i++;
             }
-            
+                   
+            this.slider.repaint();
             this.slider.setMaximum(tempsTotal);
             this.slider.setMinimum(0);
             this.slider.setValue((int)tempsPartition);
-            this.slider.setMajorTickSpacing((int)(tempsTotal / 5));
+            this.slider.setMajorTickSpacing((int)(tempsTotal / 5));            
             this.slider.setPaintTicks(true);
             this.slider.setPaintLabels(true);
         }
