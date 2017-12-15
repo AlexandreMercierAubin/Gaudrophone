@@ -7,6 +7,7 @@ import gaudrophone.Domaine.Enums.ModeVisuel;
 import gaudrophone.Domaine.Instrument.Note;
 import gaudrophone.Domaine.Instrument.Son;
 import gaudrophone.Presentation.FenetreInstrument;
+import gaudrophone.Presentation.PanneauAffichage;
 import java.util.List;
 import java.awt.geom.Point2D;
 import java.io.File;
@@ -16,6 +17,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
+import javax.swing.JSlider;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class ControleurInstrument {
@@ -28,11 +30,13 @@ public class ControleurInstrument {
     boolean toucheEnDeplacement;
     int toucheEnJeu;
     double echelleAffichage;
+    String textePartitionAffichage;
     
     public ControleurInstrument()
     {
         instrument = new Instrument();
         metronome = new Metronome();
+        partition = null;
         toucheEnDeplacement = false;
         toucheEnJeu=-1;
         modeVisuel=ModeVisuel.Ajouter;
@@ -49,6 +53,10 @@ public class ControleurInstrument {
     {
         return instrument;
     }
+
+    public Partition getPartition() {
+        return partition;
+    }   
     
     public void nouvelInstrument()
     {
@@ -65,9 +73,25 @@ public class ControleurInstrument {
         echelleAffichage = echelle;
     }
     
-    public void importerPartition(){}
+    public void importerPartition(PanneauAffichage panneauAffichage, JSlider slider){
+        partition = new Partition(panneauAffichage, slider);
+                
+        JFileChooser fc = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Musique Gaudrophone (.txt)", "txt");
+        fc.setFileFilter(filter);
+        fc.setDialogTitle("Spécifier le fichier de partition à importer");
+        int returnVal = fc.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            partition.chemin = fc.getSelectedFile().getAbsolutePath();
+        }
+        partition.lirePartition(instrument.getTimbre(), instrument.getTouches());
+    }
     
-    public void jouerPartition(){}
+    public String jouerPartition(){
+        partition.jouerPartition();
+        String textePartition = partition.getTextePartition();
+        return textePartition;
+    }
     
     public Boucle getBoucle(int index)
     {

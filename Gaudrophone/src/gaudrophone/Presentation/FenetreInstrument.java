@@ -531,9 +531,8 @@ public class FenetreInstrument extends javax.swing.JFrame {
         btnBoucle8 = new javax.swing.JButton();
         btnBoucle9 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jSlider2 = new javax.swing.JSlider();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        sliderPartition = new javax.swing.JSlider();
+        btnJouerPartition = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
@@ -654,6 +653,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
         splitAffichage.setLeftComponent(panneauAffichage);
 
         txtMessage.setColumns(20);
+        txtMessage.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         txtMessage.setRows(5);
         plTextMessage.setViewportView(txtMessage);
 
@@ -770,9 +770,12 @@ public class FenetreInstrument extends javax.swing.JFrame {
 
         jLabel2.setText("Partition :");
 
-        jToggleButton1.setText("jToggleButton1");
-
-        jToggleButton2.setText("jToggleButton2");
+        btnJouerPartition.setText("Jouer");
+        btnJouerPartition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJouerPartitionActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Instrument :");
 
@@ -809,7 +812,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
                             .addComponent(lblTimbreMetronome, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbTimbreMetronome, 0, 177, Short.MAX_VALUE)
+                            .addComponent(cbTimbreMetronome, 0, 152, Short.MAX_VALUE)
                             .addComponent(spinFrequenceMetronome)
                             .addComponent(spinPersistanceMetronome)
                             .addComponent(spinOctaveMetronome)
@@ -833,18 +836,15 @@ public class FenetreInstrument extends javax.swing.JFrame {
                         .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBoucle6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnBoucle3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jSlider2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plGeneralLayout.createSequentialGroup()
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(sliderPartition, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(plGeneralLayout.createSequentialGroup()
                         .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(lblMetronome)
                             .addComponent(lbBoucles)
                             .addComponent(jLabel2))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnJouerPartition, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(jSeparator5)
         );
@@ -921,11 +921,9 @@ public class FenetreInstrument extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sliderPartition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(plGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
-                    .addComponent(jToggleButton2))
+                .addComponent(btnJouerPartition)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(275, 275, 275))
@@ -1247,10 +1245,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
                         .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(checkAfficheNom))
                 .addGap(13, 13, 13)
-                .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCleReliee)
-                    .addComponent(txtCleReliee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkAfficheCle))
+                .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkAfficheCle)
+                    .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblCleReliee)
+                        .addComponent(txtCleReliee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(plToucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblForme)
@@ -1384,6 +1383,11 @@ public class FenetreInstrument extends javax.swing.JFrame {
         menuFichier.add(miImporter);
 
         miImporterChanson.setText("Importer chanson");
+        miImporterChanson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miImporterChansonActionPerformed(evt);
+            }
+        });
         menuFichier.add(miImporterChanson);
 
         miEnregistrer.setText("Enregistrer");
@@ -1907,10 +1911,14 @@ public class FenetreInstrument extends javax.swing.JFrame {
         switch(index){
             case 0:{
                 controleur.getInstrument().setTimbre(1);
+                if(controleur.getPartition() != null)
+                    controleur.getPartition().updateTimbre(1);
                 break;
             }
             case 1:{
                 controleur.getInstrument().setTimbre(25);
+                if(controleur.getPartition() != null)
+                    controleur.getPartition().updateTimbre(25);
                 break;
             }
         }
@@ -1919,7 +1927,25 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private void cbFormeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFormeActionPerformed
         
     }//GEN-LAST:event_cbFormeActionPerformed
+
+    private void btnJouerPartitionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJouerPartitionActionPerformed
+        if (btnJouerPartition.isSelected())
+        {
+            String partition = controleur.jouerPartition();
+            txtMessage.setWrapStyleWord(false);
+            txtMessage.setLineWrap(false);
+            txtMessage.setText(partition);
+        }
+        else
+        {
+            
+        }
+    }//GEN-LAST:event_btnJouerPartitionActionPerformed
    
+    private void miImporterChansonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        controleur.importerPartition(panneauAffichage, sliderPartition);
+    }
+
     private void miEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {
         controleur.sauvegarderInstrument();
     }
@@ -2018,6 +2044,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JButton btnBoucle9;
     private javax.swing.JButton btnEffacer;
     private javax.swing.JButton btnEnregistrerTouche;
+    private javax.swing.JToggleButton btnJouerPartition;
     private javax.swing.JButton btnParcourirFichierAudio;
     private javax.swing.JButton btnParcourirImage;
     private javax.swing.JButton btnTestSon;
@@ -2041,9 +2068,6 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSlider jSlider2;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JLabel lbBoucles;
     private javax.swing.JLabel lblBleu;
     private javax.swing.JLabel lblBleuBordure;
@@ -2101,6 +2125,7 @@ public class FenetreInstrument extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbFichierAudio;
     private javax.swing.JRadioButton rbImage;
     private javax.swing.JRadioButton rbSon;
+    private javax.swing.JSlider sliderPartition;
     private javax.swing.JSplitPane spGaudrophone;
     private javax.swing.JScrollPane spGeneral;
     private javax.swing.JScrollPane spTouche;
