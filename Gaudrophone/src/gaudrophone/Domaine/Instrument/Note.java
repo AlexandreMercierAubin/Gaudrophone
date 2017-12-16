@@ -105,32 +105,6 @@ public class Note extends Son implements Serializable{
         }
     }
     
-//    public void jouerMuet(){
-//        javax.sound.midi.Instrument instruments[], instr;
-//            int noInstrument = timbreInstrument;
-//
-//            // Permet de préciser que l'instrument commence a émettre un son
-//            jouerSon = true;
-//
-//            try{            
-//                synthesizer.open();
-//                instruments = synthesizer.getLoadedInstruments();
-//                instr = instruments[noInstrument];
-//                Patch patch = instr.getPatch();
-//
-//                channels = synthesizer.getChannels();
-//                channels[0].programChange(patch.getBank(),patch.getProgram());
-//                channels[0].noteOn(10, 0);
-//                channels[0].noteOff(10, 0);
-//                synthesizer.close();
-//                
-//            }
-//            catch (Exception e)
-//            {
-//                e.printStackTrace();
-//            }
-//    }
-    
     public void initialiserSynthesizer()
     {
         try
