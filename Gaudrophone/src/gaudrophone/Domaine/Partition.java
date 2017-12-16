@@ -25,6 +25,7 @@ public class Partition {
     PanneauAffichage panneauAffichage;
     JSlider slider;
     boolean partitionJouer;
+    boolean muet;
     
     public Partition(PanneauAffichage panneauAffichage, JSlider slider)
     {
@@ -294,10 +295,13 @@ public class Partition {
                         boolean repaint = false;
                         System.out.println(tempsPartition);
 
-                        for (List<Note> liste: noteJouer)
+                        if (!muet)
                         {
-                            liste.get(indexPartition).commencerJouer();
-                            liste.get(indexPartition).arreterJouer();
+                            for (List<Note> liste: noteJouer)
+                            {
+                                liste.get(indexPartition).commencerJouer();
+                                liste.get(indexPartition).arreterJouer();
+                            }
                         }
 
                         for (List<Touche> liste: toucheSurbriller)
@@ -413,4 +417,7 @@ public class Partition {
         return textePartition;
     }
     
+    public void setMuet(boolean muet) {
+        this.muet = muet;
+    }
 }

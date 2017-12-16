@@ -242,7 +242,7 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="697" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="691" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -336,6 +336,7 @@
                               <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
                               <Component id="jSeparator3" alignment="0" max="32767" attributes="0"/>
                               <Component id="jSeparator4" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jSeparator5" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -366,7 +367,7 @@
                                           </Group>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="cbTimbreMetronome" alignment="0" pref="152" max="32767" attributes="0"/>
+                                              <Component id="cbTimbreMetronome" alignment="0" pref="158" max="32767" attributes="0"/>
                                               <Component id="spinFrequenceMetronome" alignment="0" max="32767" attributes="0"/>
                                               <Component id="spinPersistanceMetronome" alignment="0" max="32767" attributes="0"/>
                                               <Component id="spinOctaveMetronome" alignment="0" max="32767" attributes="0"/>
@@ -407,11 +408,14 @@
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="btnJouerPartition" alignment="1" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="btnJouerPartition" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnMuet" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jSeparator5" alignment="0" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -500,10 +504,13 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="sliderPartition" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnJouerPartition" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="btnMuet" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnJouerPartition" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                   <Component id="jSeparator5" min="-2" pref="10" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="275" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="326" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -769,6 +776,14 @@
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator5">
                         </Component>
+                        <Component class="javax.swing.JToggleButton" name="btnMuet">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Muet"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMuetActionPerformed"/>
+                          </Events>
+                        </Component>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -821,7 +836,7 @@
                                                   </Group>
                                                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="1" attributes="0">
-                                                      <Component id="spinVert" alignment="1" pref="103" max="32767" attributes="0"/>
+                                                      <Component id="spinVert" alignment="1" pref="109" max="32767" attributes="0"/>
                                                       <Component id="spinRouge" alignment="1" max="32767" attributes="0"/>
                                                       <Component id="spinBleu" alignment="1" max="32767" attributes="0"/>
                                                   </Group>
