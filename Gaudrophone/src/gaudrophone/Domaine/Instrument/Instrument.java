@@ -77,6 +77,28 @@ public class Instrument implements Serializable{
     {
         return getTouche(toucheSelectionee);
     }
+    public boolean retirerTouche(int index)
+    {
+        if(index>=touches.size())
+        {
+            return false;
+        }
+        
+        if (index == toucheSelectionee)
+            toucheSelectionee = -1;
+        
+        touches.remove(index);
+        
+        return true;
+    }
+    
+    public void replacerToucheDessus()
+    {
+        Touche touche = touches.get(toucheSelectionee);
+        touches.remove(toucheSelectionee);
+        touches.add(touche);
+        toucheSelectionee=touches.size()-1;
+    }
     
     public int getNombreTouches()
     {
@@ -92,10 +114,8 @@ public class Instrument implements Serializable{
         //inserer sa position
         Touche toucheAjoutee = touches.get(touches.size()-1);
         toucheAjoutee.getApparence().setPosition(position);
-        selectionnerTouche(position);
         
-        //ajouter les points dans Path2D selon la dim du constructeur d'apparence
-        ApparenceTouche apparence= toucheAjoutee.getApparence();
+        selectionnerTouche(position);
         
         return toucheAjoutee;
     }
@@ -193,26 +213,5 @@ public class Instrument implements Serializable{
         this.chemin = chemin;
     }
     
-    public boolean retirerTouche(int index)
-    {
-        if(index>=touches.size())
-        {
-            return false;
-        }
-        
-        if (index == toucheSelectionee)
-            toucheSelectionee = -1;
-        
-        touches.remove(index);
-        
-        return true;
-    }
-    
-    public void replacerToucheDessus()
-    {
-        Touche touche = touches.get(toucheSelectionee);
-        touches.remove(toucheSelectionee);
-        touches.add(touche);
-        toucheSelectionee=touches.size()-1;
-    }
+
 }

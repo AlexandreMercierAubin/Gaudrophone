@@ -14,7 +14,7 @@ public enum NomNote {
     ASharp(10),
     B(11);
     
-    private int numNote;
+    private final int numNote;
 
     NomNote(int numNote) {
         this.numNote = numNote;

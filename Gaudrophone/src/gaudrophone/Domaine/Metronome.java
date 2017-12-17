@@ -1,37 +1,47 @@
 package gaudrophone.Domaine;
+import gaudrophone.Domaine.Enums.NomNote;
 import gaudrophone.Domaine.Instrument.Note;
 import gaudrophone.Domaine.Instrument.Son;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class Metronome {
-    Son son;
+    Note son;
     int frequence;
     int timbre;
-    Thread metronome;
+    Timer metronome;
+    Note note;
+    TimerTask tache;
     boolean metronomeActif;
-
+    
     
     public Metronome()
     {
-        timbre=0;
-        frequence=60;
-        son=new Note(timbre);
+        metronomeActif=false;
+        timbre=115;
+        frequence=1000;
+        note = new Note(timbre);
+        note.setOctave(4);
+        note.setPersistance(500);
+        note.setNom(NomNote.C);
+        son=note;
         
-        Thread metronome = new Thread() 
+        preparerTimer();
+    }
+    
+    void preparerTimer()
+    {
+        metronome = new Timer(true);
+        tache = new TimerTask()
         {
+            @Override
             public void run() 
             {
-                while(metronomeActif)
-                {
-                    jouerSon();
-                    try 
-                    {
-                       Thread.sleep(frequence);
-                    } catch (Exception e) {
-                       System.out.println(e);
-                    }
-                    
-                }
+
+                jouerSon();
+                
             }
         };
     }
@@ -39,26 +49,29 @@ public class Metronome {
     void jouerSon()
     {
         son.commencerJouer();
+        son.arreterJouer();
     }
     
     public void arreter()
     {
+        metronome.cancel();
+        metronome.purge();
+        preparerTimer();
         metronomeActif=false;
     }
     
     public void demarrer()
     {
         metronomeActif=true;
-        metronome.start();
-
+        metronome.scheduleAtFixedRate(tache,0,frequence);
     }
     
-    public Son getSon()
+    public Note getNote()
     {
         return son;
     }
     
-    public void setSon(Son valeur)
+    public void setNote(Note valeur)
     {
         son = valeur;
     }
@@ -71,15 +84,21 @@ public class Metronome {
     public void setTimbre(int timbre)
     {
         this.timbre=timbre;
-        son = new Note(timbre);
+        son.setTimbreInstrument(timbre);
 
     }
     
     public int getFrequence() {
+        //(metronome)
         return frequence;
     }
 
     public void setFrequence(int frequence) {
         this.frequence = frequence;
+        if(metronomeActif)
+        {
+            arreter();
+            demarrer();
+        }
     }
 }
