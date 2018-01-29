@@ -1,0 +1,10 @@
+Le Gaudrophone à été réalisé dans le cadre du cours 
+Génie Logiciel Orienté Objet.
+
+Développeurs:
+Alexandre Mercier-Aubin
+Alexandre Venables
+Émile Gélinas
+Samuel Baillargeon
+
+2017
